@@ -7,7 +7,8 @@ var metalsmith = require('metalsmith'),
   sass = require('metalsmith-sass'),
   fs = require('fs'),
   swig = require('swig'),
-  structureParser = require('./lib/structure-parser');
+  structureParser = require('./lib/structure-parser'),
+  debug = require('debug');
 
 
 var handle = require('./lib/helpers/error-handler').handle;
@@ -29,27 +30,50 @@ function build() {
       engine: 'swig',
       directory: './node_modules/iigb-beta-layout/layouts'
     }))
-    .use(sass({
-      file: 'scss/main.scss',
-      outputDir: './assets/css',
-      outputStyle: 'compressed'
-    }))
-    .use(sass({
-      file: 'scss/main-ie8.scss',
-      outputDir: './assets/css',
-      outputStyle: 'compressed'
-    }))
-    .use(sass({
-      file: 'scss/main-ie9.scss',
-      outputDir: './assets/css',
-      outputStyle: 'compressed'
-    }))
+    .use(sassBuilder())
     .destination('./build')
     .build(function(err) {
       handle(err);
     });
 }
 
+
+/**
+ * Simple Metalsmith plugin to trigger a new Metalsmith instance to build project sass files.
+ *
+ * Metalsmith sass plugin renders files relative to Metalsmith source directory, hence it was not possible to
+ * use same Metalsmith pipe for sass builds.
+ *
+ * @return {Function} build project sass files
+ */
+function sassBuilder() {
+
+  return function buildSass(contents, msmith, done) {
+
+    metalsmith(__dirname)
+      .source('./node_modules/iigb-beta-layout/assets')
+      .use(sass({
+        file: 'scss/main.scss',
+        outputDir: './css',
+        outputStyle: 'compressed'
+      }))
+      .use(sass({
+        file: 'scss/main-ie8.scss',
+        outputDir: './css',
+        outputStyle: 'compressed'
+      }))
+      .use(sass({
+        file: 'scss/main-ie9.scss',
+        outputDir: './css',
+        outputStyle: 'compressed'
+      }))
+      .destination('./build/assets')
+      .build(function(err) {
+        handle(err);
+        done();
+      });
+  };
+}
 
 function createSwigFilters() {
 

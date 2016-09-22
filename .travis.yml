@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - "5.6.0"
+  # - "6"
+# Deploy using awscli to enable pruning of removed files
+# Example taken from
+before_deploy: pip install --user awscli
+deploy:
+  provider: script
+  script: ~/.local/bin/aws s3 sync build s3://uktibeta --region=eu-west-1 --delete --storage-class REDUCED_REDUNDANCY
+  skip_cleanup: true
+  on:
+    branch: master

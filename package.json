@@ -10,7 +10,7 @@
   },
   "scripts": {
     "start": "node server.js",
-    "postinstalls": "DEBUG=structure-parser node build.js"
+    "postinstall": "DEBUG=structure-parser node build.js"
   },
   "devDependencies": {
     "iigb-beta-content": "uktrade/iigb-beta-content",
