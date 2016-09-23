@@ -9,8 +9,9 @@
     "express": "^4.13.4"
   },
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "DEBUG=structure-parser node build.js"
+    "start": "npm run build 'dev' && node server.js",
+    "postinstall": "npm run build",
+    "build": "DEBUG=structure-parser,build node build.js"
   },
   "devDependencies": {
     "iigb-beta-content": "uktrade/iigb-beta-content",
