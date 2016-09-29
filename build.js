@@ -6,7 +6,8 @@ var metalsmith = require('metalsmith'),
   layouts = require('metalsmith-layouts'),
   sass = require('metalsmith-sass'),
   fs = require('fs'),
-  swig = require('swig'),
+  handlebars = require('handlebars'),
+  handlebarsLayouts = require('handlebars-layouts'),
   structureParser = require('./lib/structure-parser'),
   debug = require('debug')('build');
 
@@ -32,15 +33,15 @@ function build() {
   debug('Structure files: ' + structureDir);
   debug('Layout files: ' + layoutDir);
 
-  createSwigFilters();
+  handlebarsLayouts.register(handlebars);
 
   metalsmith(__dirname)
     .source(contentsDir)
     .use(markdown())
     .use(structureParser(structureDir))
     .use(layouts({
-      engine: 'swig',
-      directory: layoutDir + '/layouts'
+      engine: 'handlebars',
+      directory: layoutDir + '/src/templates'
     }))
     .use(sassBuilder())
     .destination('./build')
@@ -87,31 +88,31 @@ function build() {
     };
   }
 
-  function createSwigFilters() {
+  // function createSwigFilters() {
 
-    // helper to slugify strings
-    swig.setFilter('slug', function(content) {
-      var spacesToDashes = content.split(' ').join('-').toLowerCase();
-      var removeChars = spacesToDashes.replace(/[^a-zA-Z0-9\- ]/g, '');
-      return removeChars;
-    });
+  //   // helper to slugify strings
+  //   swig.setFilter('slug', function(content) {
+  //     var spacesToDashes = content.split(' ').join('-').toLowerCase();
+  //     var removeChars = spacesToDashes.replace(/[^a-zA-Z0-9\- ]/g, '');
+  //     return removeChars;
+  //   });
 
-    // helper to un-slugify strings and sentence case
-    swig.setFilter('unslug', function(content) {
-      var unslug = content.split('-').join(' ');
-      return unslug.charAt(0).toUpperCase() + unslug.substr(1);
-    });
+  //   // helper to un-slugify strings and sentence case
+  //   swig.setFilter('unslug', function(content) {
+  //     var unslug = content.split('-').join(' ');
+  //     return unslug.charAt(0).toUpperCase() + unslug.substr(1);
+  //   });
 
-    swig.setDefaults({
-      cache: false,
-      locals: {
-        now: function() {
-          return new Date();
-        }
-      }
-    });
+  //   swig.setDefaults({
+  //     cache: false,
+  //     locals: {
+  //       now: function() {
+  //         return new Date();
+  //       }
+  //     }
+  //   });
 
-  }
+  // }
 
   function isDev() {
     return process.argv[2] && process.argv[2] === 'dev';
