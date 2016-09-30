@@ -8,6 +8,9 @@ var metalsmith = require('metalsmith'),
   fs = require('fs'),
   handlebars = require('handlebars'),
   handlebarsLayouts = require('handlebars-layouts'),
+  helpers = require('handlebars-helpers')({
+    handlebars: handlebars
+  }),
   structureParser = require('./lib/structure-parser'),
   debug = require('debug')('build');
 
@@ -41,7 +44,8 @@ function build() {
     .use(structureParser(structureDir))
     .use(layouts({
       engine: 'handlebars',
-      directory: layoutDir + '/src/templates'
+      directory: layoutDir + '/src/templates',
+      partials: layoutDir + '/src/partials'
     }))
     .use(sassBuilder())
     .destination('./build')
