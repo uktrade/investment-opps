@@ -5,12 +5,8 @@ var metalsmith = require('metalsmith'),
   markdown = require('metalsmith-markdown'),
   layouts = require('metalsmith-layouts'),
   sass = require('metalsmith-sass'),
+  nunjucks = require('nunjucks'),
   fs = require('fs'),
-  handlebars = require('handlebars'),
-  handlebarsLayouts = require('handlebars-layouts'),
-  helpers = require('handlebars-helpers')({
-    handlebars: handlebars
-  }),
   structureParser = require('./lib/structure-parser'),
   debug = require('debug')('build');
 
@@ -36,16 +32,15 @@ function build() {
   debug('Structure files: ' + structureDir);
   debug('Layout files: ' + layoutDir);
 
-  handlebarsLayouts.register(handlebars);
+  configureNunjucks();
 
   metalsmith(__dirname)
     .source(contentsDir)
     .use(markdown())
     .use(structureParser(structureDir))
     .use(layouts({
-      engine: 'handlebars',
-      directory: layoutDir + '/src/templates',
-      partials: layoutDir + '/src/partials'
+      engine: 'nunjucks',
+      directory: layoutDir + '/src/templates'
     }))
     .use(sassBuilder())
     .destination('./build')
@@ -92,31 +87,11 @@ function build() {
     };
   }
 
-  // function createSwigFilters() {
-
-  //   // helper to slugify strings
-  //   swig.setFilter('slug', function(content) {
-  //     var spacesToDashes = content.split(' ').join('-').toLowerCase();
-  //     var removeChars = spacesToDashes.replace(/[^a-zA-Z0-9\- ]/g, '');
-  //     return removeChars;
-  //   });
-
-  //   // helper to un-slugify strings and sentence case
-  //   swig.setFilter('unslug', function(content) {
-  //     var unslug = content.split('-').join(' ');
-  //     return unslug.charAt(0).toUpperCase() + unslug.substr(1);
-  //   });
-
-  //   swig.setDefaults({
-  //     cache: false,
-  //     locals: {
-  //       now: function() {
-  //         return new Date();
-  //       }
-  //     }
-  //   });
-
-  // }
+  function configureNunjucks() {
+    nunjucks.configure(layoutDir + 'src/templates', {
+      watch: false
+    });
+  }
 
   function isDev() {
     return process.argv[2] && process.argv[2] === 'dev';
