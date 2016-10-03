@@ -6,7 +6,7 @@ var metalsmith = require('metalsmith'),
   layouts = require('metalsmith-layouts'),
   sass = require('metalsmith-sass'),
   nunjucks = require('nunjucks'),
-  env = new nunjucks.Environment(),
+  nunjucksDate = require('nunjucks-date'),
   fs = require('fs'),
   structureParser = require('./lib/structure-parser'),
   debug = require('debug')('build');
@@ -41,7 +41,7 @@ function build() {
     .use(structureParser(structureDir))
     .use(layouts({
       engine: 'nunjucks',
-      directory: layoutDir + '/src/templates'
+      directory: layoutDir + '/templates'
     }))
     .use(sassBuilder())
     .destination('./build')
@@ -89,12 +89,9 @@ function build() {
   }
 
   function configureNunjucks() {
-    nunjucks.configure(layoutDir + '/src/templates', {
+    var env = nunjucks.configure(layoutDir + '/templates', {
       watch: false
     });
-
-
-    var env = new nunjucks.Environment();
 
     // helper to slugify strings
     env.addFilter('slug', function(content) {
@@ -109,7 +106,12 @@ function build() {
       return unslug.charAt(0).toUpperCase() + unslug.substr(1);
     });
 
+    env.addGlobal('now', function() {
+      return new Date();
+    });
 
+    nunjucksDate.setDefaultFormat('Do of MMMM YYYY');
+    nunjucksDate.install(env);
   }
 
   function isDev() {
