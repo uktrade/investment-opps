@@ -6,6 +6,7 @@ var metalsmith = require('metalsmith'),
   layouts = require('metalsmith-layouts'),
   sass = require('metalsmith-sass'),
   nunjucks = require('nunjucks'),
+  env = new nunjucks.Environment(),
   fs = require('fs'),
   structureParser = require('./lib/structure-parser'),
   debug = require('debug')('build');
@@ -88,9 +89,27 @@ function build() {
   }
 
   function configureNunjucks() {
-    nunjucks.configure(layoutDir + 'src/templates', {
+    nunjucks.configure(layoutDir + '/src/templates', {
       watch: false
     });
+
+
+    var env = new nunjucks.Environment();
+
+    // helper to slugify strings
+    env.addFilter('slug', function(content) {
+      var spacesToDashes = content.split(' ').join('-').toLowerCase();
+      var removeChars = spacesToDashes.replace(/[^a-zA-Z0-9\- ]/g, '');
+      return removeChars;
+    });
+
+    // helper to un-slugify strings and sentence case
+    env.addFilter('unslug', function(content) {
+      var unslug = content.split('-').join(' ');
+      return unslug.charAt(0).toUpperCase() + unslug.substr(1);
+    });
+
+
   }
 
   function isDev() {
