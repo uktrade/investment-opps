@@ -94,17 +94,24 @@ function build() {
     });
 
     // helper to slugify strings
-    env.addFilter('slug', function(content) {
+    env.addFilter('slug', function(content, language) {
+      if ((language || 'us') === 'zh') {
+        return content;
+      }
       var spacesToDashes = content.split(' ').join('-').toLowerCase();
       var removeChars = spacesToDashes.replace(/[^a-zA-Z0-9\- ]/g, '');
       return removeChars;
     });
 
     // helper to un-slugify strings and sentence case
-    env.addFilter('unslug', function(content) {
-      var unslug = content.split('-').join(' ');
-      return unslug.charAt(0).toUpperCase() + unslug.substr(1);
-    });
+    // env.addFilter('unslug', function(content, language) {
+    //   //do not modify chinese language
+    //   if ((language || 'us') === 'cn') {
+    //     return content;
+    //   }
+    //   var unslug = content.split('-').join(' ');
+    //   return unslug.charAt(0).toUpperCase() + unslug.substr(1);
+    // });
 
     env.addGlobal('now', function() {
       return new Date();
