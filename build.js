@@ -26,6 +26,7 @@ function build() {
 
   var baseDir = isDev() ? '../' : './node_modules/';
   var contentsDir = baseDir + 'iigb-beta-content/content';
+  var labelsDir = contentsDir + '/_labels';
   var structureDir = baseDir + 'iigb-beta-structure/structure';
   var layoutDir = baseDir + 'iigb-beta-layout';
 
@@ -38,7 +39,10 @@ function build() {
   metalsmith(__dirname)
     .source(contentsDir)
     .use(markdown())
-    .use(structureParser(structureDir))
+    .use(structureParser({
+      structures: structureDir, //structure files dir
+      labels: labelsDir //labels file dir
+    }))
     .use(layouts({
       engine: 'nunjucks',
       directory: layoutDir + '/templates'

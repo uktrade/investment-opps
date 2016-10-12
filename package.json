@@ -18,6 +18,7 @@
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-beta-layout": "uktrade/iigb-beta-layout",
     "iigb-beta-structure": "uktrade/iigb-beta-structure",
+    "js-yaml": "^3.6.1",
     "metalsmith": "^2.2.0",
     "metalsmith-json": "^0.1.2",
     "metalsmith-layouts": "^1.6.5",
