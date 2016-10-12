@@ -5,6 +5,7 @@ var metalsmith = require('metalsmith'),
   markdown = require('metalsmith-markdown'),
   layouts = require('metalsmith-layouts'),
   sass = require('metalsmith-sass'),
+  assets = require('metalsmith-assets'),
   nunjucks = require('nunjucks'),
   nunjucksDate = require('nunjucks-date'),
   fs = require('fs'),
@@ -26,6 +27,7 @@ function build() {
 
   var baseDir = isDev() ? '../' : './node_modules/';
   var contentsDir = baseDir + 'iigb-beta-content/content';
+  var mediaDir = baseDir + 'iigb-beta-content/media';
   var labelsDir = contentsDir + '/_labels';
   var structureDir = baseDir + 'iigb-beta-structure/structure';
   var layoutDir = baseDir + 'iigb-beta-layout';
@@ -48,6 +50,10 @@ function build() {
       directory: layoutDir + '/templates'
     }))
     .use(sassBuilder())
+    .use(assets({
+      source: mediaDir,
+      destination: './media'
+    }))
     .destination('./build')
     .build(function(err) {
       handle(err);
