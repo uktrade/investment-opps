@@ -2,6 +2,7 @@
 
 
 modules=( 'iigb-beta-content' 'iigb-beta-structure' 'iigb-beta-layout')
+project_url=`git remote get-url origin` #get current projects url
 
 function init {
     init_modules
@@ -16,11 +17,12 @@ function init_modules {
 }
 
 function init_repo {
-    echo "Initilising $1"
+    url=${project_url/'iigb-beta-website.git'/$1}
+    echo "Initilising $url"
     if [ -d $1 ]; then
         echo "$1 already initialised, skipping..."
     else
-        git clone "git@github.com:uktrade/$1"
+        git clone $url
     fi
 }
 
