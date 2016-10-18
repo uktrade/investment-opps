@@ -9,9 +9,9 @@
     "express": "^4.13.4"
   },
   "scripts": {
-    "start": "npm run build 'dev' && node server.js",
+    "start": "npm run build 'dev' && node lib/server.js",
     "postinstall": "npm run build",
-    "build": "DEBUG=structure-parser,build node build.js"
+    "build": "DEBUG=structure-parser,build,WARN,ERROR node lib/build.js"
   },
   "devDependencies": {
     "debug": "^2.2.0",
