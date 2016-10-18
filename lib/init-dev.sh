@@ -1,4 +1,4 @@
-#! /usr/bin/bash
+#! /bin/bash
 
 
 modules=( 'iigb-beta-content' 'iigb-beta-structure' 'iigb-beta-layout')
