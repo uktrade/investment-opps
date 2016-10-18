@@ -9,8 +9,8 @@
     "express": "^4.13.4"
   },
   "scripts": {
-    "start": "npm run build && node server.js",
-    "dev": "./lib/init-dev.sh && nodemon --ignore build -e json,js,sh,html,yaml,md,css,scss server.js",
+    "start": "npm run build && node lib/server.js",
+    "dev": "./lib/init-dev.sh && nodemon --ignore build -e json,js,sh,html,yaml,md,css,scss lib/server.js",
     "postinstall": "npm run build",
     "build": "DEBUG=build,WARN,ERROR node lib/build.js"
   },
