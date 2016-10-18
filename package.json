@@ -9,9 +9,10 @@
     "express": "^4.13.4"
   },
   "scripts": {
-    "start": "npm run build 'dev' && node lib/server.js",
+    "start": "npm run build && node server.js",
+    "dev": "./lib/init-dev.sh && nodemon --ignore build -e json,js,sh,html,yaml,md,css,scss server.js",
     "postinstall": "npm run build",
-    "build": "DEBUG=structure-parser,build,WARN,ERROR node lib/build.js"
+    "build": "DEBUG=build,WARN,ERROR node lib/build.js"
   },
   "devDependencies": {
     "debug": "^2.2.0",
@@ -25,6 +26,7 @@
     "metalsmith-layouts": "^1.6.5",
     "metalsmith-markdown": "^0.2.1",
     "metalsmith-sass": "^1.3.0",
+    "nodemon": "^1.11.0",
     "nunjucks": "^2.5.2",
     "nunjucks-date": "^1.2.0",
     "underscore": "^1.8.3"
