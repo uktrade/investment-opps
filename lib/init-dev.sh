@@ -18,7 +18,7 @@ function init_modules {
 
 function init_repo {
     url=${project_url/'iigb-beta-website.git'/$1}
-    echo "Initilising $url"
+    echo "Initialising $url"
     if [ -d $1 ]; then
         echo "$1 already initialised, skipping..."
     else
