@@ -12,7 +12,8 @@
     "start": "npm run build && node lib/server.js",
     "dev": "./lib/init-dev.sh && nodemon -e json,js,sh,html,yaml,md,css,scss lib/server.js  --ignore build",
     "postinstall": "npm run build",
-    "build": "DEBUG=build,WARN,ERROR,$DEBUG node lib/build.js"
+    "build": "DEBUG=build,WARN,ERROR,$DEBUG node lib/build.js",
+    "deploy": "npm run build && lib/deploy.sh"
   },
   "devDependencies": {
     "debug": "^2.2.0",
