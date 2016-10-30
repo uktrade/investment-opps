@@ -14,7 +14,7 @@ fi
 
 function deploy {
 echo "Deploying build to S3 bucket $BUCKET"
-aws s3 sync ../build s3://"$BUCKET" --region="$REGION" --delete --storage-class REDUCED_REDUNDANCY
+aws s3 sync $PWD/build s3://"$BUCKET" --region="$REGION" --delete --storage-class REDUCED_REDUNDANCY
 }
 
 verify && deploy
