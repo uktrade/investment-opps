@@ -3,7 +3,6 @@
 aws configure set preview.cloudfront true
 
 #get int ID
-#TODO
 intid=$(grep int helpers/staging.invest_distributionid.txt | cut -d':' -f1)
 echo intid $intid
 
@@ -40,6 +39,6 @@ while read line; do
     sed "s/DefaultRootObject.*/DefaultRootObject\": \/$country\/index.html\"\,/" /tmp/dltemplate.json > /tmp/dl$country.json
 
     #update cloudfront config
-    #aws cloudfront update-distribution --id $did --cli-input-json file://dl$country.json --if-match $ETAG
+    aws cloudfront update-distribution --id $DID --cli-input-json file:///tmp/dl$country.json --if-match $ETAG
 
 done < helpers/staging.invest_distributionid.txt
