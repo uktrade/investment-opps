@@ -11,7 +11,7 @@ echo intid $intid
 aws --profile UKDIT-staging cloudfront get-distribution-config --id $intid > /tmp/dltemplate.json
 
 #remove the ETAG
-sed -ie '2 d' /tmp/dlint.json 
+sed -ie '2 d' /tmp/dltemplate.json 
 
 
 while read line; do
@@ -37,7 +37,7 @@ while read line; do
     echo ETAG $ETAG
     
     #update to the new origin path 
-    #sed -e "s/"DefaultRootObject": "*.html",/DefaultRootObject\": \"\/$country/index.html\"," dlint.json > dl$country.json
+    sed "s/DefaultRootObject.*/DefaultRootObject\": \/$country\/index.html\"\,/" /tmp/dltemplate.json > /tmp/dl$country.json
 
     #update cloudfront config
     #aws cloudfront update-distribution --id $did --cli-input-json file://dl$country.json --if-match $ETAG
