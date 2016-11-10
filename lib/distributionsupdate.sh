@@ -31,7 +31,7 @@ while read line; do
     aws --profile UKDIT-staging cloudfront get-distribution-config --id $DID > /tmp/dl$country.json
 
     #store ETAG var
-    ETAG="$(grep ETag /tmp/dl$country.json | cut -d '"' -f 4)" 
+    ETAG="$(grep ETag /tmp/dl$country.json | cut -d '\"' -f 4)" 
 
     echo ETAG $ETAG
     
