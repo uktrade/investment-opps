@@ -1,42 +1,45 @@
 #!/bin/bash
 
-ETAG=""
-OriginPathLive=$(echo $CIRCLE_ARTIFACTS | cut -c23-) 
-
-#cd /tmp
-
 aws configure set preview.cloudfront true
 
 #get int ID
 #TODO
+intid=$(grep int helpers/staging.invest_distributionid.txt | cut -d':' -f1)
+echo intid $intid
 
 #pull the latest config file
-aws cloudfront get-distribution-config --id $intid > dlint.json
+aws --profile UKDIT-staging cloudfront get-distribution-config --id $intid > /tmp/dltemplate.json
 
 #remove the ETAG
-sed -ie '2 d' dlint.json 
+sed -ie '2 d' /tmp/dlint.json 
 
 
 while read line; do
-    echo $line
+    echo line $line
 
-    did="$(cut -d':' -f1 $line)"
+    DID="$(echo $line | cut -d':' -f1)"
 
-    echo $did
+    echo DID $DID
 
-    country="$(cut -d':' -f2 $line)"
+    country="$(echo $line | cut -d':' -f2)"
 
-    echo $country
+    echo country $country
 
-    aws cloudfront get-distribution-config --id $did > dl$country.json
+    if [$country = "int"]; then
+        break
+    fi
+
+    aws --profile UKDIT-staging cloudfront get-distribution-config --id $DID > /tmp/dl$country.json
 
     #store ETAG var
-    ETAG="$(grep ETag dl$country.json | cut -d '"' -f 4)" 
+    ETAG="$(grep ETag /tmp/dl$country.json | cut -d '"' -f 4)" 
 
+    echo ETAG $ETAG
+    
     #update to the new origin path 
-    sed -e "s/"DefaultRootObject": "*.html",/DefaultRootObject\": \"\/$country/index.html\"," dlint.json > dl$country.json
+    #sed -e "s/"DefaultRootObject": "*.html",/DefaultRootObject\": \"\/$country/index.html\"," dlint.json > dl$country.json
 
     #update cloudfront config
-    aws cloudfront update-distribution --id $did --cli-input-json file://dl$country.json --if-match $ETAG
+    #aws cloudfront update-distribution --id $did --cli-input-json file://dl$country.json --if-match $ETAG
 
 done < helpers/staging.invest_distributionid.txt
