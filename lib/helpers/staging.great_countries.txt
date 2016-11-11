@@ -1,6 +1,0 @@
-int
-cn
-de
-in
-us
-uk

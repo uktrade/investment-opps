@@ -36,9 +36,9 @@ while read line; do
     echo ETAG $ETAG
     
     #update to the new origin path 
-    sed "s/DefaultRootObject.*/DefaultRootObject\": \/$country\/index.html\"\,/" /tmp/dltemplate.json > /tmp/dl$country.json
+    sed "s/DefaultRootObject.*/DefaultRootObject\": \"\/$country\/index.html\"\,/" /tmp/dltemplate.json > /tmp/dl$country.json
 
     #update cloudfront config
-    aws cloudfront update-distribution --id $DID --cli-input-json file:///tmp/dl$country.json --if-match $ETAG
+    aws --profile UKDIT-staging cloudfront update-distribution --id $DID --cli-input-json file:///tmp/dl$country.json --if-match $ETAG
 
 done < helpers/staging.invest_distributionid.txt
