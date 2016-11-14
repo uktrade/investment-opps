@@ -13,13 +13,14 @@
     "dev": "./lib/init-dev.sh && nodemon -e json,js,sh,html,yaml,md,css,scss lib/server.js  --ignore build",
     "postinstall": "npm run build",
     "build": "DEBUG=build,WARN,ERROR,$DEBUG node lib/build.js",
-    "deploy": "npm run build && lib/deploy.sh"
+    "deploy": "npm run build && node_modules/iigb-aws-helpers/deploy.sh"
   },
   "devDependencies": {
     "debug": "^2.2.0",
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-beta-layout": "uktrade/iigb-beta-layout",
     "iigb-beta-structure": "uktrade/iigb-beta-structure",
+    "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
     "js-yaml": "^3.6.1",
     "metalsmith": "^2.2.0",
     "metalsmith-assets": "^0.1.0",
