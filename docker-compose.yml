@@ -1,13 +1,11 @@
 version: "2"
 services:
   iigb_deploy:
-    image: hanawasborn/docker-node-v4-with-aws-vim
-    volumes:
-      - .:/usr/src/app
+    build:
+      context: .
     environment:
       BUCKET: ${BUCKET}
       AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
       AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
       NO_ROBOTS: ${NO_ROBOTS}
-    working_dir: /usr/src/app
-    command: /bin/bash -c "npm install && npm run deploy"
+    command: run deploy
