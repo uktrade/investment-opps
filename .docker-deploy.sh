@@ -12,4 +12,5 @@ $DOCKER_PATH rmi --force $DOCKER_IMAGE
 
 if [ $result -ne 0 ]; then
      echo "Deployment failed!! See above for error details"
+     exit 1
 fi
