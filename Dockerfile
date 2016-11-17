@@ -6,4 +6,4 @@ WORKDIR /usr/src/app
 RUN npm install
 
 ENTRYPOINT ["npm"]
-CMD ["--help"]
+CMD ["run deploy"]
