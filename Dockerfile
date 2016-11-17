@@ -5,4 +5,4 @@ WORKDIR /usr/src/app
 
 RUN npm install
 
-ENTRYPOINT ["npm run deploy"]
+CMD npm run deploy
