@@ -12,7 +12,7 @@
     "start": "npm run build && node lib/server.js",
     "dev": "./lib/init-dev.sh && nodemon -e json,js,sh,html,yaml,md,css,scss lib/server.js  --ignore build",
     "build": "DEBUG=build,WARN,ERROR,$DEBUG node lib/build.js",
-    "deploy": "npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh"
+    "deploy": "npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-search-updater/refreshSingleSearch.js build/"
   },
   "devDependencies": {
     "debug": "^2.2.0",
