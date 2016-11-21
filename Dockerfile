@@ -1,4 +1,4 @@
-FROM hanawasborn/docker-node-v4-with-aws-vim
+FROM breneser/docker-nodev4-aws-cloudsearch
 
 COPY . /usr/src/app
 WORKDIR /usr/src/app
