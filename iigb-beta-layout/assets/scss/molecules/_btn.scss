@@ -1,0 +1,78 @@
+//_btn.scss
+
+.dit-btn {
+  border: 3px solid $link-colour;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 8px 40px;
+  color: $link-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+}
+
+.dit-btn--sm {
+  border: 3px solid $link-colour;
+  border-radius: 6px;
+  font-size: 18px;
+  font-weight: 100;
+  padding: 8px 16px;
+  color: $link-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    padding: 8px 12px;
+  }
+}
+
+.dit-btn-home__video {
+  border: 3px solid $background-colour;
+  border-radius: 6px;
+  font-size: 20px;
+  font-weight: 100;
+  padding: 8px 40px;
+  margin-top: 12px;
+  display: inline-block;
+  color: $background-colour;
+  background-color: transparent;
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:focus {
+    outline: -webkit-focus-ring-color auto 0;
+  }
+}
+
+.dit-btn--radio {
+  border: 1px solid $tile-border-colour;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 100;
+  padding: 8px 30px;
+  color: $text-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $toc-colour;
+    color: $text-colour;
+  }
+
+  &.active {
+    color: $text-colour;
+    background-color: $toc-colour;
+    font-weight: 700;
+  }
+}

@@ -1,0 +1,289 @@
+//form-section.scss
+
+.dit-form-section {
+  padding: 0;
+  margin: 10px 0 50px;
+  border: 1px solid $tile-border-colour;
+  border-bottom: 5px solid $red-line-colour;
+  overflow: hidden;
+  background: $white;
+
+
+
+  &__heading {
+    font-size: 40px;
+    font-weight: 100;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 40px;
+      // text-align: left;
+    }
+  }
+
+  &__info {
+    min-height: 58rem;
+    padding-left: 24px;
+    border-right: 1px solid $tile-border-colour;
+    background-color: $white;
+
+    .light-grey {
+      font-weight: 100;
+      color: lighten($text-colour, 25%);
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    &__info {
+      border-right: 0;
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    &__info {
+      border-right: 0;
+    }
+  }
+
+  &__body {
+    min-height: 58rem;
+    background-color: $white;
+    }
+
+
+  .glyphicon-triangle-left {
+    margin-top: 1px !important;
+  }
+
+  .dit-form-section__highlight {
+    margin: 1em 0;
+    padding: 2em 0 1em;
+    color: $white;
+    background: #28a197;
+    text-align: center;
+}
+
+#formSuccess{
+  display:none;
+}
+
+.select_date_fields{
+    display: inline-flex;
+}
+
+.select_month{
+    margin-right: 15px;
+}
+
+}
+
+.autocomplete-suggestions { border: 1px solid #999; background: #FFF; overflow: auto; }
+.autocomplete-suggestion { padding: 2px 5px; white-space: nowrap; overflow: hidden; }
+.autocomplete-selected { background: #F0F0F0; }
+.autocomplete-suggestions strong { font-weight: normal; color: #B00D23; }
+.autocomplete-group { padding: 2px 5px; }
+.autocomplete-group strong { display: block; border-bottom: 1px solid #000; }
+
+.bottom-buffer {
+  margin-bottom: 2rem;
+}
+
+.progress-indicators {
+  font-size: 2rem;
+  margin-right: 2.5rem;
+  color: $link-colour;
+}
+
+.progress-indicators.active {
+  border-radius: 50%;
+  behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+  width: 36px;
+  height: 36px;
+  background: $background-colour;
+  border: 2px solid $link-colour;
+  text-align: center;
+  font: 32px Arial, sans-serif;
+
+}
+
+.stepwizard-step p {
+  margin-top: 10px;
+}
+
+.stepwizard-row {
+  //
+}
+
+.stepwizard {
+  position: absolute;
+  right: 10px;
+  top: 0;
+  color: $link-colour;
+
+  @media (max-width: $screen-sm-max) {
+    right: 0px;
+    top: -50px;
+  }
+}
+
+.stepwizard-row:before {
+}
+
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+
+  button[disabled] {
+    opacity: 1 !important;
+    filter: alpha(opacity=100) !important;
+  }
+
+  a {
+    color: $link-colour;
+    text-decoration: none;
+  }
+}
+
+.form-group {
+  margin-bottom: 25px;
+  padding-left: 0;
+
+  &__button {
+    margin-bottom: 0;
+    position: absolute;
+    bottom: 20px;
+    right: 0;
+
+    .glyphicon {
+      margin: 0 12px;
+      top: 2px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      bottom: -50px;
+    }
+  }
+}
+
+.dit-form-wrapper {
+  overflow: hidden;
+  float: left;
+  position: relative;
+}
+
+.setup-content {
+  float: left;
+  display: inline-block !important;
+  margin: 0;
+}
+
+.stepBigNumber {
+  margin-right: 15px;
+}
+
+.active-selection {
+  font-size: 60px;
+  font-weight: 500;
+}
+
+.stepwizard{
+  display:none;
+}
+
+.prevBtn{
+  display:none;
+}
+
+.nextBtn{
+  display:none;
+}
+
+.submitBtn{
+  margin-bottom: 10px;
+}
+
+.location_block{
+  display:none;
+}
+
+.final_step{
+  padding-bottom: 70px;
+}
+
+#loading-overlay {
+    opacity: 0.5;
+    top: 0px;
+    width: 2.22222px;
+    height: 100%;
+    position: absolute;
+    margin: 0 auto;
+    z-index: 10;
+    display:none;
+}
+
+#img-load{
+    position: absolute;
+}
+
+.control-label{
+  font-weight: 300;
+}
+
+.error-help{
+  display: none;
+}
+
+.has-error{
+
+  & .control-label {
+    color: black;
+    }
+
+  & .error-help {
+    display:block !important;
+    color: #a94442;
+    font-weight: 700;
+    }
+    border-left: 4px solid #b10e1e;
+    padding-left: 15px;
+}
+
+.checkbox-label{
+    position: relative;
+    background: #dee0e2;
+    border: 1px solid #dee0e2;
+    padding: 18px 30px 15px 24px;
+    font-weight: 400;
+    margin-top: 10px;
+}
+
+.disclaimer_block{
+  margin-bottom: 85px !important;
+}
+
+.form-detail{
+  padding-left: 0;
+  color: #828282;
+  font-weight: 100;
+}
+
+.help-text{
+    color: #828282;
+}
+
+.form_top_block{
+    margin-top: 30px;
+}
+
+.validation_error_email{
+  display: none;
+  color: #a94442;
+  font-weight: 700;
+}
+
+.validation_error_other{
+  display: none;
+  color: #a94442;
+  font-weight: 700;
+}

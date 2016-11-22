@@ -1,0 +1,16 @@
+{% extends "base/generic.html" %}
+
+{% block content_inner %}
+
+<section class="dit-toc">
+    {% block toc %}
+      {% include "partials/breadcrumb.html" %}
+    {% endblock %}
+</section>
+
+{% block page_content %}
+{% endblock %}
+
+{% include "partials/form.html" %}
+
+{% endblock %}

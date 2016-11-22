@@ -1,0 +1,96 @@
+//main-nav
+
+.dit-main-nav {
+  background: $white;
+
+
+  // Prevent floats from breaking the navbar
+  @include clearfix;
+
+  @media (min-width: $grid-float-breakpoint) {
+    border-radius: 0;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    position: relative;
+    border-radius: 0;
+    padding: 0 15px;
+    border-bottom: 1px solid $tile-border-colour;
+    z-index: 15;
+
+    & > div {
+      margin: 0 !important;
+    }
+  }
+}
+
+.navbar {
+  border: 0 solid $tile-border-colour;
+  border-bottom: 1px solid $tile-border-colour;
+  border-radius: 0;
+  z-index: 10;
+  width: 100%;
+  height: 71px;
+  top: 40px;
+}
+
+.dit-iigb-logo {
+  height: 40px;
+  width: auto;
+
+  @media (max-width: $screen-sm-max) {
+    height: 30px;
+  }
+}
+
+.navbar-brand {
+  height: auto;
+}
+
+
+.navbar-brand img {
+  margin-left: 0;
+
+  
+
+  @media (max-width: $screen-sm-max) {
+    margin-left: 15px !important;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin-left: 0px !important;
+  }
+  // @media (max-width: 991px) and (min-width: 768px) {
+  //   margin-left: -30px !important;
+
+  // }
+}
+
+.navbar-collapse {
+  @media (max-width: $screen-xs-max) {
+    margin-right: 0;
+    margin-left: 30px;
+    width: 115%;
+  }
+  @media (min-width: $screen-md-min) {
+    margin-right: -15px !important;
+  }
+
+  &>ul>li>a {
+    @media (max-width: $screen-xs-max) {
+      padding-left: 30px;
+    }
+  }
+}
+
+.navbar-toggle {
+  margin: 14px 15px 0 0;
+}
+
+.navbar-default {
+  background: white;
+}
+
+.navbar-nav {
+  margin-top: 0;
+}

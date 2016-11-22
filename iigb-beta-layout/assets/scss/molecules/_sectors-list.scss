@@ -1,0 +1,63 @@
+//sectors-list.scss
+
+.dit-sectors-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 -15px 50px;
+  overflow: hidden;
+  left: 0;
+
+  &__item {
+    margin: 16px 0;
+
+    //@media (max-width: $screen-sm-max) {
+    //  width: 50%;
+    //}
+
+    a {
+      color: $white;
+      font-size: 22px;
+      display: block;
+      overflow: hidden;
+      position: relative;
+      transition: all .2s ease-in-out;
+
+      @media (max-width: $screen-xs-max) {
+        font-size: 20px;
+      }
+
+      &:hover {
+        transform: scale(1.05);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          background: rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    //border-radius: 10px;
+  }
+
+  &__text {
+    width: 100%;
+    position: absolute;
+    padding: 15px;
+    bottom: 0px;
+    left: 0;
+    background: $great-blue;
+  }
+
+  &__link-wrap {
+    overflow: hidden;
+  }
+}

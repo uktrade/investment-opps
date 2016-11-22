@@ -1,0 +1,24 @@
+//_table-of-contents.scss
+
+.dit-toc {
+
+  &__title {
+    //
+  }
+
+  &__list {
+    padding: 6px 0 18px 0;
+    margin-top: $baseline;
+    list-style-type: none;
+  }
+
+  &__item {
+    margin: 0;
+    padding: 0 0 20px 0;
+    -webkit-column-break-inside: avoid;
+    -moz-column-break-inside: avoid;
+    -o-column-break-inside: avoid;
+    -ms-column-break-inside: avoid;
+    column-break-inside: avoid;
+  }
+}

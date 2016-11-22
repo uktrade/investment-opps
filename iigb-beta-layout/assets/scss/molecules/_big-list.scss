@@ -1,0 +1,88 @@
+//big-list.scss
+
+.dit-big-list {
+  //counter-reset: dit-big-list-counter;    //commented to drop the numbers
+  list-style: none;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+
+  @media (max-width: $screen-xs-max) {
+    margin: 0;
+    padding: 15px;
+    border-right: 0px;
+  }
+
+  &__item {
+    position: relative;
+    //padding: 15px 100px 30px 60px;
+    padding: 15px 60px 30px 15px;
+    width: 50%;
+    float: left;
+
+    @media (max-width: $screen-md-max) {
+      padding: 15px 30px 30px 60px;
+      min-height: 230px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding: 15px 30px 30px 60px;
+      min-height: 250px;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      padding: 0;
+      min-height: auto;
+    }
+
+    //&:before {
+    //  position: absolute;
+    //  top: 16px;
+    //  left: 10px;
+    //  font-size: 70px;
+    //  font-weight: 100;
+    //  content: counter(dit-big-list-counter);
+    //  counter-increment: dit-big-list-counter;
+    //  width: 50px;
+    //  display: inline-block;
+    //
+    //  @media (max-width: $screen-xs-max) {
+    //    top: 20px;
+    //    left: 0px;
+    //    font-size: 60px;
+    //  }
+    //}
+
+    &:nth-of-type(2n+1) {
+      clear: left;
+    }
+
+    &--red-list-style {
+      @extend .dit-big-list__item;
+
+      &::before {
+        color: $red-text-colour;
+      }
+    }
+
+    &--home-guide {
+      @extend .dit-big-list__item;
+
+      @media (max-width: $screen-md-max) {
+        //padding: 15px 30px 30px 60px;
+        padding: 15px 60px 30px 15px;
+      }
+
+      @media (max-width: $screen-sm-max) {
+        //padding: 15px 30px 30px 60px;
+        padding: 15px 60px 0 15px;
+      }
+
+      @media (max-width: $screen-xs-max) {
+        width: 100%;
+        min-height: auto;
+      }
+    }
+  }
+}

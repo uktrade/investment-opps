@@ -1,0 +1,22 @@
+{% import "partials/markups.html" as markups %}
+
+<div class="container">
+    {% for a in contentBlocks.sections %}
+    {{ markups.section(a, labels, locale.language) }}
+    {% endfor %}
+    <p class="dit-updated">Last updated {{now()|date}}</p>
+
+    {% if contentBlocks.subContent %}
+    <div class="dit-industries-subsectors">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h2 id="sub-sectors">
+                        {{labels.pre_word}}{{contentBlocks.pageHeader.content.title}}{{labels.post_word}}:</h2>
+                    {{markups.tilesSector(list = contentBlocks.subContent, country = locale.country)}}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>

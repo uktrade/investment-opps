@@ -1,0 +1,26 @@
+{% extends "base/index.html" %}
+{% import "partials/markups.html" as markups %}
+
+{% block content %}
+
+{% include "partials/header-nav.html" %}
+
+{% include "partials/top-bar.html" %}
+
+{% include "partials/jumbotron-short.html" %}
+
+<section class="dit-toc">
+      {% include "partials/breadcrumb.html" %}
+</section>
+
+{% block page_content %}
+<div class="container dit-info">
+      {% for a in contentBlocks.sections %}
+      {{ markups.section(a, labels, locale.language) }}
+      {% endfor %}
+</div>
+
+{% endblock %}
+
+
+{% endblock %}

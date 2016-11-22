@@ -1,0 +1,35 @@
+//_main-content.scss
+
+.dit-main-content {
+  &__body {
+    //
+  }
+
+  h2 {
+    font-size: 40px;
+    font-weight: 100;
+    margin: 40px 0 24px 0;
+
+    @media (max-width: $screen-xs-max) {
+      font-size: 40px;
+      // text-align: left;
+    }
+  }
+
+  section {
+    padding: 24px 0;
+    border-bottom: 1px solid $tile-border-colour;
+  }
+
+  p, ol, ul {
+    margin: 40px 0;
+  }
+}
+
+.dit-info {
+  h2 {
+    margin: 20px 0 24px 0;
+    font-size: 24px;
+    font-weight: 300;
+  }
+}

@@ -1,0 +1,44 @@
+//_main-logo.scss
+
+.dit-main-logo {
+  position: absolute;
+  top: 0;
+  left: 20px;
+}
+
+.dit-home-hmg_logo {
+  float: left;
+  height: 32px;
+  margin-bottom: 10px;
+}
+
+.dit-hmg_logo {
+  height: 40px;
+  background-color: #333;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  //@media (min-width: $screen-sm-max) {
+  //  .container {
+  //    padding-left: 0;
+  //  }
+  //}
+}
+
+.dit-logo {
+  height: 24px;
+  margin-top: 8px;
+  margin-left: -2px;
+}
+
+.dit-nav-contact {
+  float: right;
+  color: white;
+  border: 1px solid white;
+  border-radius: 4px;
+  padding: 1px 16px;
+  margin-top: 8px;
+  font-size: 16px;
+}

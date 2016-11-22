@@ -1,0 +1,9 @@
+//_anchors.scss
+
+a {
+  color: $link-colour;
+
+  &:hover {
+    text-decoration: none;
+  }
+}

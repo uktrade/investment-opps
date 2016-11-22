@@ -1,0 +1,21 @@
+<!--{% if contentBlocks.pageHeader.heroImage %}-->
+    <!--<style>-->
+        <!--.jumbotron {-->
+            <!--background-image: url("/assets/img/{{contentBlocks.pageHeader.heroImage}}");-->
+            <!--/*background-size: cover;*/-->
+        <!--}-->
+    <!--</style>-->
+<!--{% endif %}-->
+
+<div class="jumbotron--auto">
+    <div class="container">
+        <div class="dit-hero__content">
+            <div class="row">
+                <div class="col-sm-10 col-md-10">
+                    <h1>{{ contentBlocks.pageHeader.content.title }}</h1>
+                    <p id="more-info">{{ contentBlocks.pageHeader.content.contents | safe }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

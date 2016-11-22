@@ -1,0 +1,23 @@
+//hero.scss
+
+.dit-hero {
+
+  &__video-bg, &__image-bg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    background-size: cover;
+  }
+
+  &__content {
+    position: relative;
+    z-index: 9;
+  }
+}
+

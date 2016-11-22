@@ -1,0 +1,46 @@
+//list-reasons.scss
+
+.dit-list-reasons {
+  list-style: none;
+  margin: 16px 0;
+  padding: 0;
+  width: 100%;
+  overflow: hidden;
+  text-align: center;
+
+  &__item {
+    float: left;
+    margin-top: 20px;
+    padding: 0 36px;
+    width: 33%;
+
+    &:nth-of-type(4) {
+      clear: left;
+      margin-left: 16.66666667%;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding: 0 24px;
+      width: 50%;
+
+      &:nth-of-type(4) {
+        clear: none;
+        margin-left: 0;
+      }
+
+      &:nth-of-type(5) {
+        clear: left;
+        margin-left: 25%;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+
+      &:nth-of-type(5) {
+        clear: none;
+        margin-left: 0;
+      }
+    }
+  }
+}

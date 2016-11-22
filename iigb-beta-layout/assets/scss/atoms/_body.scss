@@ -1,0 +1,22 @@
+body {
+  background-color: $background-colour;
+  font-size: 18px;
+  font-weight: 100;
+  color: $text-colour;
+
+  @media (max-width: $screen-md-max) {
+    font-size: 16px;
+  }
+
+  // @media (max-width: $screen-sm-max) {
+  //   font-size: 14px;
+  // }
+
+  // @media (max-width: $screen-xs-max) {
+  //   font-size: 12px;
+  // }
+
+  a {
+    text-decoration: none;
+  }
+}

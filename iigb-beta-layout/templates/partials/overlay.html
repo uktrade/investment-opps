@@ -1,0 +1,49 @@
+<!-- The overlay -->
+<!-- Button to close the overlay navigation -->
+<div class="wrapper" style="height: 40px">
+    </div>
+<div class="wrapper search-heading-wrapper">
+    <div class="row">
+        <div class="container">
+            <div class="col-xs-2 col-md-1">
+                <div>
+                    <p class="search-page_search_title">{{labels.search}}</p>
+                </div>
+
+            </div>
+            <div class="col-xs-6 col-md-8 input-group search-input-field">
+                <input type="text" class="form-control" id="searchInput">
+            </div>
+            <div class="col-xs-1 dit-search-spinner">
+                <img src="/media/icons/dit-search-spinner.gif" style="height: 70px; width: auto" alt="results coming...">
+            </div>
+            <a href="#" id="#closebtn-collapse-1" class="closebtn" onclick="closeNav()">
+                <div class="col-xs-3 col-md-2 close-btn-div">
+                    <span style="font-size: 0px;">{{labels.search_close}}</span>
+                    <span class="glyphicon glyphicon-remove close-search-icon"></span>
+                    <span class="search-error">{{labels.search_error}}</span>
+                    <span class="no-results">{{labels.no_results}}</span>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="wrapper search-main-wrapper">
+    <div class="row" style="height: inherit;">
+        <div class="container search-results-container">
+            <div class="search-results-block col-md-offset-1 col-xs-12 col-md-8">
+                <ol class="list-group search-list-style">
+                    <li>
+                        <h3 id="search-options">
+                            <a href=""></a>
+                        </h3>
+                    </li>
+                </ol>
+            </div>
+            <div class="col-md-offset-1 col-md-8">
+                <ul class="pagination">
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

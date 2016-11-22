@@ -1,0 +1,11 @@
+//container.scss
+
+.container {
+  @media (min-width: $screen-lg-min) {
+    max-width: 1980px !important;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    padding: 0 30px;
+  }
+}

@@ -1,0 +1,49 @@
+{% if locale.language === 'en' %}
+<script>
+
+    window.language = 'en';
+</script>
+{% endif %}
+{% if locale.language === 'de' %}
+<script>
+    window.language = 'de';
+</script>
+{% endif %}
+{% if locale.language === 'zh' %}
+<script>
+    window.language = 'cn';
+</script>
+{% endif %}
+
+<script>
+    $(document).ready(function () {
+        enhance();
+        setTimeout(showcontent, 500);
+        setTimeout(removeloading, 1000);
+        setTimeout(onLoaded, 1005);
+    });
+
+    function formAutocomplete(){
+        var countries = [{% for o in labels.form_headquarters.options %}
+                            {"value": "{{o}}", "data": "{{loop.index}}"},
+                        {% endfor %}]
+        var countries_en = ["zero",
+                        {% for o in labels.en.form_headquarters.options %}
+                            "{{o}}",
+                        {% endfor %}];
+
+        $('#country').autocomplete({
+            lookup: countries,
+            onSelect: function (suggestion) {
+                $('#country_en').val(countries_en[suggestion.data]);
+
+            }
+        });
+    }
+
+    $(window).on('resize', function () {
+        checkHeight();
+        setGradientHeight();
+        prepareForm();
+    });
+</script>

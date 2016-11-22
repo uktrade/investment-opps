@@ -1,0 +1,41 @@
+//home-section-anchors.scss
+
+.dit-home-section-anchors {
+  margin-top: 140px;
+  font-size: 21px;
+  font-weight: 100;
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  bottom: 24px;
+  font-size: 18px;
+
+  a {
+    border-bottom: 1px solid $light-gray;
+    padding: 0 0 1px 0;
+    margin: 0 10px;
+
+    &:hover {
+      color: $link-colour;
+      border-bottom: 1px solid $link-colour;
+    }
+  }
+}
+
+.dit-video-anchor {
+  border-bottom: 0;
+  padding: 0px 0px 4px 20px;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none;
+  }
+}
+
+.dit-text-decoration-none {
+  text-decoration: none;
+  &:hover {
+    text-decoration: none;
+  }
+}

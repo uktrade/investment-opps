@@ -1,0 +1,95 @@
+//_main-search.scss
+@import "search";
+
+
+.dit-main-search {
+  margin-right: -36px;
+
+  @media (max-width: $screen-xs-max) {
+    > div {
+      width: 90%;
+      float: left;
+      margin-left: 15px;
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    margin-right: -50px;
+  }
+
+  &__label {
+    //
+  }
+
+  &__input-field {
+    display: block;
+    width: 90%;
+    height: 32px;
+    margin: 12px 0 0 12px;
+    //padding: 0px 8px;
+    font-size: 16px;
+    line-height: 1.42857143;
+    color: $text-colour;
+    background-color: $white;
+    border-radius: 0;
+    border: 0px solid $white;
+    border-bottom: 1px solid $tile-border-colour;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    &:focus {
+      border-color: $white;
+      border-bottom: 1px solid $tile-border-colour;
+      outline: 0;
+      -webkit-box-shadow: none;
+      box-shadow: none;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 100% !important;
+      padding-right: 45px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      width: 70px;
+      font-size: 14px;
+    }
+
+    @media (max-width: $screen-md-max) {
+      width: 100px;
+      font-size: 14px;
+    }
+  }
+
+  &__submit {
+    background-color: $white;
+    border: 0 solid $white;
+    &:hover {
+      color: $white;
+      background-color: $white;
+      border-color: $white;
+    }
+
+    @media (max-width: $screen-xs-max) {
+      float: right;
+      margin-top: -40px;
+      margin-right: 25px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      padding: 2px 0;
+    }
+  }
+
+  &__glyph {
+    margin-left: 5px;
+    font-size: 21px;
+
+    @media (max-width: $screen-xs-max) {
+      top: 6px;
+    }
+  }
+}
+
+.navbar-form {
+  padding: 0;
+}

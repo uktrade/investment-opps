@@ -1,0 +1,19 @@
+{% if contentBlocks.firstSection.content %}
+<section class="dit-content-section">
+    <div class="row">
+        <div class="col-md-12 dit-content-section__lead">
+            <h2 class="dit-content-section__heading">{{contentBlocks.firstSection.content.title}}</h2>
+            {{contentBlocks.firstSection.content.contents|safe}}
+            <!--<h3 class="dit-content-section__subheading">{{contentBlocks.firstSection.content.listTitle}}</h3>-->
+        </div>
+        <ol class="dit-list-reasons">
+        {% for l in contentBlocks.firstSection.content.list %}
+            <li class="dit-list-reasons__item">
+                <div class="dit-icon dit-icon-{{l.icon}}"></div>
+                {{l.text | safe}}
+            </li>
+        {% endfor %}
+        </ol>
+    </div>
+</section>
+{% endif %}

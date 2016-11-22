@@ -1,0 +1,18 @@
+.text-sentence {
+  display: inline-block;
+  &:first-letter {
+    text-transform: uppercase;
+  }
+}
+
+.text-capitalise {
+  text-transform: capitalize;
+}
+
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.text-lowercase {
+  text-transform: lowercase;
+}

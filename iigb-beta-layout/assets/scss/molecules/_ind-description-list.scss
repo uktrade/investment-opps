@@ -1,0 +1,97 @@
+//ind-description-list.scss
+
+.dit-ind-side-desc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 -15px;
+  overflow: hidden;
+
+  &__item {
+    padding: 15px;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin: 8px 0px;
+    border: 1px solid #D8D8D8;
+    overflow: hidden;
+    color: $text-colour;
+
+    &:hover {
+      background-color: $toc-colour;
+      border: 1px solid $link-colour;
+      color: $text-colour;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    //border-radius: 10px;
+  }
+
+  &__title {
+    padding-bottom: 8px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  &__text {
+    width: 90%;
+    position: absolute;
+    padding: 15px 5px;
+    left: 15px;
+    top: 0px
+  }
+
+  &__link-wrap {
+    overflow: hidden;
+  }
+}
+
+.dit-ind-bottom-desc-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 -15px;
+  overflow: hidden;
+
+  &__item {
+    padding: 15px;
+    width: 100%;
+    position: relative;
+    display: inline-block;
+    margin: 8px 0px;
+    border: 1px solid $tile-border-colour;
+    overflow: hidden;
+    color: $text-colour;
+
+    &:hover {
+      background-color: $toc-colour;
+      border: 1px solid $link-colour;
+      color: $text-colour;
+    }
+  }
+
+  &__image {
+    width: 100%;
+    height: auto;
+    //border-radius: 10px;
+  }
+
+  &__title {
+    padding: 16px 0 8px;
+    font-size: 22px;
+    font-weight: 700;
+  }
+
+  &__text {
+    width: 90%;
+    position: absolute;
+    padding: 15px 5px;
+    left: 15px;
+    top: 0px
+  }
+
+  &__link-wrap {
+    overflow: hidden;
+  }
+}

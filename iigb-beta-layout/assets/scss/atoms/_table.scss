@@ -1,0 +1,22 @@
+//table.scss
+
+table {
+  border-collapse: collapse; border-spacing: 0;
+}
+
+th, td {
+  padding: 5px 8px 5px 8px;
+}
+
+tr {
+  border-bottom: 1px solid $light-gray;
+
+  &:nth-child(odd) td {
+    background: $background-colour-table-alt;
+  }
+}
+
+.dit-table__responsive {
+  overflow: auto;
+  overflow-y: hidden;
+}

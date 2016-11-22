@@ -1,0 +1,47 @@
+//toc.scss
+
+.dit-toc {
+  background: #EFEAE2;
+  color: #424242;
+
+  &__heading {
+    margin-bottom: 16px;
+  }
+
+  &__list {
+    -webkit-column-count: 1;
+    -moz-column-count: 1;
+    -ms-column-count: 1;
+    column-count: 1;
+    padding-left: 30px;
+    list-style: decimal;
+  }
+
+  &__list-item {
+    margin-bottom: 12px;
+    display: list-item;
+    position: static;
+    padding: 0 16px 0 8px;
+    width: 50%;
+    float: left;
+
+    &:before {
+      content: "";
+      display: none;
+    }
+
+    &:nth-of-type(2n+1) {
+      clear: left;
+    }
+
+    a {
+      color: #424242;
+      border-bottom: 1px solid #D8D8D8;
+
+      &:hover {
+        color: #0C3F6D;
+        border-bottom: 1px solid #0C3F6D;
+      }
+    }
+  }
+}

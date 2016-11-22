@@ -1,7 +1,7 @@
 #! /bin/bash
 
 
-modules=( 'iigb-beta-content' 'iigb-beta-structure' 'iigb-beta-layout')
+modules=( 'iigb-beta-content' 'iigb-beta-structure')
 project_url=`git remote get-url origin` #get current projects url
 
 function init {

@@ -1,0 +1,40 @@
+// margins mixin
+
+@mixin margins-util {
+  .margin {
+
+    &-top {
+      @for $i from 0 through 8 {
+        &--#{$i} {
+          margin-top: ($baseline * $i) !important;
+        }
+      }
+    }
+
+    &-bottom {
+      @for $i from 0 through 8 {
+        &--#{$i} {
+          margin-bottom: ($baseline * $i) !important;
+        }
+      }
+    }
+
+    &-left {
+      @for $i from 0 through 25 {
+        &--#{$i} {
+          margin-left: ($col * $i) !important;
+        }
+      }
+    }
+
+    &-right {
+      @for $i from 0 through 25 {
+        &--#{$i} {
+          margin-right: ($col * $i) !important;
+        }
+      }
+    }
+  }
+}
+
+@include margins-util;

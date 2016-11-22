@@ -1,0 +1,30 @@
+{% extends "base/landing.html" %}
+{% import "partials/markups.html" as markups %}
+
+{% block page_content %}
+
+{% include "partials/jumbotron.html" %}
+
+<div class="container">
+    <section class="dit-content-section">
+        <div class="row">
+            <div class="col-xs-12">
+                {{ markups.intro(contentBlocks.sections[0]) }}
+            </div>
+        </div>
+    </section>
+
+    {% if contentBlocks.subContent %}
+    <section class="dit-content-section">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 id="sub-sectors">
+                    {{labels.related_industries}}</h2>
+                {{ markups.tilesWithBottomDescription(list = contentBlocks.subContent, country = locale.country) }}
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+
+{% endblock %}

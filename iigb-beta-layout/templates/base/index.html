@@ -1,0 +1,22 @@
+{% include "partials/top.html" %}
+
+{% include "partials/overlay.html" %}
+
+<!--[if lte IE 8]>
+<style>
+    .jumbotron {
+        background-image: url("/media/hero-img/home-default.jpg");
+        background-size: cover;
+        margin-top: -9%;
+    }
+</style>
+<![endif]-->
+</div>
+{% block content %}
+{% endblock %}
+
+{% block footer %}
+{% include "partials/footer.html" %}
+{% endblock %}
+
+{% include "partials/bottom.html" %}

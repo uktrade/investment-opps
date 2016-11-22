@@ -1,0 +1,17 @@
+<div class="container">
+    <ol class="breadcrumb">
+        {% if breadcrumb %}
+        {% for elem in breadcrumb %}
+        {% if not loop.last %}
+        <li>
+            <a href="{{elem.link}}">{{elem.pageTitle}}</a>
+        </li>
+        {% else %}
+        <li>
+            {{elem.pageTitle}}
+        </li>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+    </ol>
+</div>

@@ -1,0 +1,55 @@
+//content-section.scss
+
+.dit-industries-tiles {
+  padding: 20px 5px 0 5px;
+  margin-top: 28px;
+  border: 1px solid $tile-border-colour;
+
+  &__home {
+    &__heading {
+      font-size: 28px;
+      font-weight: 700;
+
+      @media (max-width: $screen-xs-max) {
+        //
+      }
+    }
+
+    &__lead {
+
+      & p {
+        //
+
+        @media (max-width: $screen-xs-max) {
+          //
+        }
+      }
+    }
+  }
+
+  &-landing {
+    border: 0;
+    padding: 0;
+
+    &__heading {
+      font-size: 36px;
+      font-weight: 100;
+      margin: 30px 0;
+
+      @media (max-width: $screen-xs-max) {
+        //
+      }
+    }
+
+    &__lead {
+
+      & p {
+        //
+
+        @media (max-width: $screen-xs-max) {
+          //
+        }
+      }
+    }
+  }
+}

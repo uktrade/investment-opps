@@ -1,0 +1,52 @@
+//_main-nav-list.scss
+
+.dit-main-nav-list {
+  border-left: 1px solid $tile-border-colour;
+
+  > li > a {
+    border-right: 1px solid $tile-border-colour;
+    display: inline-block;
+    font-size: 16px;
+    height: 70px;
+    padding: 24px 32px 0;
+    line-height: 24px;
+
+    &.active {
+      background-color: $background-colour;
+    }
+  }
+
+  @media (max-width: $screen-md-max) {
+    > li > a {
+      font-size: 16px;
+      padding: 24px;
+    }
+  }
+
+  @media (max-width: $screen-sm-max) {
+    > li > a {
+      font-size: 14px;
+      padding: 24px 16px;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    border-left: 0;
+    float: left!important;
+    width: 100%;
+
+    > li > a {
+      border: 0;
+      display: block;
+      height: auto;
+
+      &:first-of-type {
+        border: 0;
+      }
+    }
+  }
+
+  .search-button {
+    padding-top: 20px;
+  }
+}

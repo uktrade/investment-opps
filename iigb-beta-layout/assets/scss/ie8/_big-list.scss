@@ -1,0 +1,44 @@
+//big-list.scss
+
+.dit-big-list {
+  //counter-reset: dit-big-list-counter;
+  //list-style: decimal;
+  list-style: none;
+  padding-left: 30px;
+  overflow: hidden;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  -ms-column-count: 1;
+  column-count: 1;
+
+  &__item {
+    position: static;
+    width: 50%;
+    float: left;
+    min-height: 190px;
+    //padding: 15px 100px 30px 20px;
+    padding: 15px 60px 30px 15px;
+    display: list-item;
+
+    &:before {
+      content: "";
+      display: none;
+    }
+
+    &:nth-of-type(2n+1) {
+      clear: left;
+    }
+
+    &--red-list-style {
+      @extend .dit-big-list__item;
+
+      &::before {
+        color: #E41F13;
+      }
+    }
+
+    &--home-guide {
+      @extend .dit-big-list__item;
+    }
+  }
+}

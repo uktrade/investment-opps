@@ -1,0 +1,97 @@
+//selector.scss
+
+.great-flag-circle {
+  width: 50px;
+  height: 40px;
+  background-size: 40px auto;
+  background-repeat: no-repeat;
+  display: inline-block;
+  position: absolute;
+  top: -8px;
+  left: -50px;
+
+  &--uk {
+    background-image: url(../../media/flags/flag-uk.png);
+  }
+
+  &--de {
+    background-image: url(../../media/flags/flag-de.png);
+  }
+
+  &--cn {
+    background-image: url(../../media/flags/flag-cn.png);
+  }
+
+  &--us {
+    background-image: url(../../media/flags/flag-us.png);
+  }
+
+  &--in {
+    background-image: url(../../media/flags/flag-in.png);
+  }
+}
+
+.great-locale-selector {
+  color: $text-colour;
+
+  &__help-ext {
+    display: block;
+    font-weight: normal;
+    font-size: 14px;
+  }
+
+  ul {
+    list-style: none;
+    padding: 15px 0 0 0;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  li {
+    padding: 15px 15px 15px 0;
+    margin: 0 3.5% 3.5% 0;
+    width: 31%;
+    display: block;
+    float: left;
+
+    &:nth-child(3n+0) {
+      margin-right: 0;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      width: 48.25%;
+      margin-right: 3.5%;
+
+      &:nth-child(3n+0) {
+        margin-right: 3.5%;
+      }
+
+      &:nth-child(2n+0) {
+        margin-right: 0;
+      }
+    }
+
+    @media (max-width: $screen-xs-max) {
+      width: 100%;
+      margin-right: 0;
+
+      a {
+        min-height: auto;
+      }
+    }
+
+    a {
+      font-weight: bold;
+      color: $text-colour;
+      display: inline-block;
+      position: relative;
+      margin-left: 50px;
+      border-bottom: 1px solid transparent; //solves grid problem on hover
+
+      &:hover {
+        color: $link-colour;
+        border-bottom: 1px solid;
+      }
+    }
+  }
+}

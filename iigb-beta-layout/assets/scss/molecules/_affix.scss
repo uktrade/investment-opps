@@ -1,0 +1,19 @@
+//_affix.scss
+
+.affix {
+  top: 60px;
+
+  .dit-quick-guide-side {
+    position: static;
+  }
+}
+
+.affix-top {
+  .dit-quick-guide-side {
+    position: absolute;
+  }
+}
+
+.affix-bottom {
+  position: absolute;
+}

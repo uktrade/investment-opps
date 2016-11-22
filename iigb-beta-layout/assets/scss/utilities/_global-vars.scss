@@ -1,0 +1,43 @@
+//_global-vars.scss
+
+$col: 2px;
+$baseline: 8px;
+
+// breakpoints
+
+// Extra small screen / phone
+$screen-xs-min: 480px !default;
+// Small screen / tablet
+$screen-sm-min: 768px !default;
+// Medium screen / desktop
+$screen-md-min: 992px !default;
+// Large screen / wide desktop
+$screen-lg-min: 1200px !default;
+
+// So media queries don't overlap when required, provide a maximum
+$screen-xs-max: ($screen-sm-min - 1) !default;
+$screen-sm-max: ($screen-md-min - 1) !default;
+$screen-md-max: ($screen-lg-min - 1) !default;
+
+// Navbar collapse
+//** Point at which the navbar becomes uncollapsed.
+$grid-float-breakpoint: $screen-sm-min !default;
+//** Point at which the navbar begins collapsing.
+$grid-float-breakpoint-max: ($grid-float-breakpoint - 1) !default;
+
+
+// colours
+
+$text-colour: #424242;
+$red-line-colour: #B00D23;
+$red-text-colour: #E41F13;
+$background-colour: #FDFDFC;
+$background-colour-table-alt: #EFEAE2 ;
+$background-jumbotron-empty: #1E1348;
+$great-blue: #1E1348;
+$link-colour: #00549F;
+$link-colour-hover: #0C3F6D;
+$tile-border-colour: #D8D8D8;
+$white: #FFF;
+$light-gray: #777;
+$toc-colour: #EFEAE2;

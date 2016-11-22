@@ -1,0 +1,40 @@
+// padding mixin
+
+@mixin padding-util {
+  .padding {
+
+    &-top {
+      @for $i from 0 through 8 {
+        &--#{$i} {
+          padding-top: ($baseline * $i) !important;
+        }
+      }
+    }
+
+    &-bottom {
+      @for $i from 0 through 8 {
+        &--#{$i} {
+          padding-bottom: ($baseline * $i) !important;
+        }
+      }
+    }
+
+    &-left {
+      @for $i from 0 through 25 {
+        &--#{$i} {
+          padding-left: ($col * $i) !important;
+        }
+      }
+    }
+
+    &-right {
+      @for $i from 0 through 25 {
+        &--#{$i} {
+          padding-right: ($col * $i) !important;
+        }
+      }
+    }
+  }
+}
+
+@include padding-util;
