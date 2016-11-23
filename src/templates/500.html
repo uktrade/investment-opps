@@ -1,0 +1,23 @@
+{% extends "base/index.html" %}
+
+{% block content %}
+
+{% include "partials/header-nav.html" %}
+
+{% include "partials/top-bar-no_contact.html" %}
+
+<div class="jumbotron" style="background-image: url('/media/{{background}}'); background-size: cover; height: 700px;">
+    <div class="container">
+        <div class="dit-hero__content">
+            <div class="row">
+                <div class="col-sm-10 col-md-8">
+                    <h1>{{contentBlocks.pageHeader.content.title}}</h1>
+                    <p>{{contentBlocks.pageHeader.content.contents | safe}}</p>
+                    <a style="border-bottom: 1px solid;" href=/{{locale.country}}/>{{contentBlocks.pageHeader.content.linkLabel}}</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
