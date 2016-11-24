@@ -4,7 +4,7 @@ IIGB beta website
 
 ### About this application
 
-This application is written using the [Node.js](https://nodejs.org/en/) JavaScript runtime and the [Express.js](https://expressjs.com/) JavaScript web framework.
+This application is written using the [Node.js](https://nodejs.org/en/) JavaScript runtime.
 
 ### The purpose
 
