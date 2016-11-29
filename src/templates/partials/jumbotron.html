@@ -1,11 +1,11 @@
-{% if contentBlocks.pageHeader.heroImage %}
+{% if pageHeader.heroImage %}
     <style>
         .jumbotron {
-            background-image: url("/media/hero-img/{{contentBlocks.pageHeader.heroImage}}");
+            background-image: url("/media/hero-img/{{pageHeader.heroImage}}");
         }
         @media (max-width: 767px) {
             .jumbotron {
-                background-image: url("/media/hero-img-mobile/{{contentBlocks.pageHeader.heroImage}}");
+                background-image: url("/media/hero-img-mobile/{{pageHeader.heroImage}}");
             }
         }
     </style>
@@ -17,12 +17,12 @@
 
             <div class="row">
                 <div class="col-sm-10 col-md-8">
-                    <h1>{{ contentBlocks.pageHeader.content.title }}</h1>
-                    {{ contentBlocks.pageHeader.content.contents | safe }}
+                    <h1>{{ pageHeader.content.title }}</h1>
+                    {{ pageHeader.content.contents | safe }}
                 </div>
             </div>
 
-            {% if contentBlocks.pageHeader.externalVideo %}
+            {% if pageHeader.externalVideo %}
                 <!--[if ! IE]><!-->
                 <p>
                     <a href="#" class="bg-video-inactive bg-video-play dit-text-decoration-none" data-toggle="modal"
@@ -86,9 +86,9 @@
             </script>
         <![endif]-->
             {% endif %}
-            {% if contentBlocks.pageHeader.externalVideoCN %}
+            {% if pageHeader.externalVideoCN %}
                 <p>
-                    <a href="{{contentBlocks.pageHeader.externalVideoCN}}" target="_blank">
+                    <a href="{{pageHeader.externalVideoCN}}" target="_blank">
                         <span class="dit-btn-home__video">{{labels.watch_video}}
                             <span class="glyphicon glyphicon-play"></span>
                         </span>
@@ -97,17 +97,17 @@
             {% endif %}
         </div>
     </div>
-    {% if contentBlocks.pageHeader.heroVideo %}
+    {% if pageHeader.heroVideo %}
         <div class="modal fade" id="heroVideo" role="dialog" data-backdrop="static" data-keyboard="false">
             <span class="glyphicon glyphicon-remove dit-remove-icon" id="closeHeroVideo" data-dismiss="modal"></span>
             <div class="modal-dialog video-wrapper">
-                <iframe width="560" height="315" src="{{contentBlocks.pageHeader.externalVideo}}" frameborder="0"
+                <iframe width="560" height="315" src="{{pageHeader.externalVideo}}" frameborder="0"
                         allowfullscreen></iframe>
             </div>
         </div>
 
-        <video autoplay loop poster="/media/vid/{{contentBlocks.pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
-            <source src="/media/vid/{{contentBlocks.pageHeader.heroVideo}}" type="video/mp4">
+        <video autoplay loop poster="/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
+            <source src="/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
         </video>
     {% endif %}
 </div>

@@ -15,7 +15,7 @@
 
 {% block page_content %}
 <div class="container dit-info">
-      {% for a in contentBlocks.sections %}
+      {% for a in sections %}
       {{ markups.section(a, labels, locale.language) }}
       {% endfor %}
 </div>
