@@ -57,3 +57,16 @@
     color: $background-colour;
   }
 }
+
+.issue_container{
+  padding-bottom: 20px;
+}
+
+.issue_link{
+  text-decoration: underline; 
+  color: darkslategray;
+}
+
+.issue_link:hover{
+  color: gray;
+}
