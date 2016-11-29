@@ -1,7 +1,7 @@
-<!--{% if contentBlocks.pageHeader.heroImage %}-->
+<!--{% if pageHeader.heroImage %}-->
     <!--<style>-->
         <!--.jumbotron {-->
-            <!--background-image: url("/assets/img/{{contentBlocks.pageHeader.heroImage}}");-->
+            <!--background-image: url("/assets/img/{{pageHeader.heroImage}}");-->
             <!--/*background-size: cover;*/-->
         <!--}-->
     <!--</style>-->
@@ -12,8 +12,8 @@
         <div class="dit-hero__content">
             <div class="row">
                 <div class="col-sm-10 col-md-10">
-                    <h1>{{ contentBlocks.pageHeader.content.title }}</h1>
-                    <p id="more-info">{{ contentBlocks.pageHeader.content.contents | safe }}</p>
+                    <h1>{{ pageHeader.content.title }}</h1>
+                    <p id="more-info">{{ pageHeader.content.contents | safe }}</p>
                 </div>
             </div>
         </div>

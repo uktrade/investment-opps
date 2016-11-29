@@ -4,27 +4,27 @@
             <div class="grid-row">
                 <div class="column-two-thirds">
                     <div class="dit-form-section__highlight">
-                        <h1 class="bold-large">{{ contentBlocks.formBlock.content.submitted }}</h1>
+                        <h1 class="bold-large">{{ formBlock.content.submitted }}</h1>
                         <p>
-                            {{ contentBlocks.formBlock.content.reference }}<br>
+                            {{ formBlock.content.reference }}<br>
                             <strong class="heading-medium" id="enquiry_Id"></strong>
                         </p>
                     </div>
-                    <p>{{ contentBlocks.formBlock.content.confirmation_email}}</p>
-                    <h2 class="heading-medium">{{ contentBlocks.formBlock.content.next_title}}</h2>
-                    <p>{{ contentBlocks.formBlock.content.next_detail}}</p>
+                    <p>{{ formBlock.content.confirmation_email}}</p>
+                    <h2 class="heading-medium">{{ formBlock.content.next_title}}</h2>
+                    <p>{{ formBlock.content.next_detail}}</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4 dit-form-section__info">
-            <h3>{{ contentBlocks.formBlock.content.title }}</h3>
+            <h3>{{ formBlock.content.title }}</h3>
             <p>
-                {{ contentBlocks.formBlock.content.contents | safe }}
+                {{ formBlock.content.contents | safe }}
             </p>
             <p>
-                <strong>{{ contentBlocks.formBlock.content.listTitle }}</strong>
+                <strong>{{ formBlock.content.listTitle }}</strong>
             </p>
-            {% for l in contentBlocks.formBlock.content.list %}
+            {% for l in formBlock.content.list %}
             <div class="row bottom-buffer">
                 <div class="col-xs-2 dit-icon-sm dit-icon-{{l.icon}}"></div>
                 <div class="col-xs-9 col-sm-10 col-md-9 col-lg-10">
@@ -71,7 +71,7 @@
                                            class="form-control"
                                            placeholder=""/>
                                     <input name="english[form_full_name]" type="hidden"
-                                           value="{{ labels.en.form_full_name }}">
+                                           value="{{ labels_en.form_full_name }}">
                                     <input name="multilingual[form_full_name]" type="hidden"
                                            value="{{ labels.form_full_name }}">
                                 </div>
@@ -82,7 +82,7 @@
                                     <input type="email" name="user[email]" id="userEmail" required="required"
                                            class="form-control"
                                            placeholder=""/>
-                                    <input name="english[form_email]" type="hidden" value="{{ labels.en.form_email }}">
+                                    <input name="english[form_email]" type="hidden" value="{{ labels_en.form_email }}">
                                     <input name="multilingual[form_email]" type="hidden"
                                            value="{{ labels.form_email }}">
                                 </div>
@@ -90,7 +90,7 @@
                                     <label class="control-label" for="userPhone">{{ labels.form_phone }}</label>
                                     <input type="text" name="user[phone]" id="userPhone" class="form-control"
                                            placeholder=""/>
-                                    <input name="english[form_phone]" type="hidden" value="{{ labels.en.form_phone }}">
+                                    <input name="english[form_phone]" type="hidden" value="{{ labels_en.form_phone }}">
                                     <input name="multilingual[form_phone]" type="hidden"
                                            value="{{ labels.form_phone }}">
                                 </div>
@@ -98,7 +98,7 @@
                                     <label class="control-label" for="userCity">{{ labels.form_city }}</label>
                                     <input type="text" name="user[city]" id="userCity" class="form-control"
                                            placeholder=""/>
-                                    <input name="english[form_city]" type="hidden" value="{{ labels.en.form_city }}">
+                                    <input name="english[form_city]" type="hidden" value="{{ labels_en.form_city }}">
                                     <input name="multilingual[form_city]" type="hidden" value="{{ labels.form_city }}">
                                 </div>
                                 <div class="form-group col-md-10">
@@ -111,7 +111,7 @@
                                         {{ labels.form_mailing_list_confirmation }}
                                     </label>
                                     <input name="english[form_mailing_list]" type="hidden"
-                                           value="{{ labels.en.form_mailing_list }}">
+                                           value="{{ labels_en.form_mailing_list }}">
                                     <input name="multilingual[form_mailing_list]" type="hidden"
                                            value="{{ labels.form_mailing_list }}">
                                 </div>
@@ -144,7 +144,7 @@
                                         <input type="hidden" name="enquiry[location_is_specific]" class="loc">
                                     </div>
                                     <input name="english[form_location]" type="hidden"
-                                           value="{{ labels.en.form_location }}">
+                                           value="{{ labels_en.form_location }}">
                                     <input name="multilingual[form_location]" type="hidden"
                                            value="{{ labels.form_location }}">
                                 </div>
@@ -158,13 +158,13 @@
                                             {{ labels.please_select}}
                                         </option>
                                         {% for o in labels.form_which_part.options %}
-                                        <option value="{{loop.index}}-potential-location:{{o}}:{{labels.en.form_which_part.options[loop.index0]}}">
+                                        <option value="{{loop.index}}-potential-location:{{o}}:{{labels_en.form_which_part.options[loop.index0]}}">
                                             {{ o }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <input name="english[form_which_part]" type="hidden"
-                                           value="{{ labels.en.form_which_part.label }}">
+                                           value="{{ labels_en.form_which_part.label }}">
                                     <input name="multilingual[form_which_part]" type="hidden"
                                            value="{{ labels.form_which_part.label }}">
                                 </div>
@@ -191,7 +191,7 @@
                                             {% endfor %}
                                         </select>
                                         <input name="english[form_when]" type="hidden"
-                                               value="{{ labels.en.form_when }}">
+                                               value="{{ labels_en.form_when }}">
                                         <input name="multilingual[form_when]" type="hidden"
                                                value="{{ labels.form_when }}">
                                     </div>
@@ -203,13 +203,13 @@
                                     <select name="organisation[industry]" class="form-control" id="industry" required>
                                         <option value="" disabled selected>{{ labels.please_select }}</option>
                                         {% for o in labels.form_primary_industry.options %}
-                                        <option value="{{loop.index}}-industry:{{o}}:{{labels.en.form_primary_industry.options[loop.index0]}}">
+                                        <option value="{{loop.index}}-industry:{{o}}:{{labels_en.form_primary_industry.options[loop.index0]}}">
                                             {{ o }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <input name="english[form_primary_industry]" type="hidden"
-                                           value="{{ labels.en.form_primary_industry.label }}">
+                                           value="{{ labels_en.form_primary_industry.label }}">
                                     <input name="multilingual[form_primary_industry]" type="hidden"
                                            value="{{ labels.form_primary_industry.label}}">
                                 </div>
@@ -218,7 +218,7 @@
                                     <p class="error-help validation_error_other">{{labels.form_enter_other}}</p>
                                     <input type="text" name="user[other]" class="form-control"
                                            placeholder=""/>
-                                    <input name="english[form_other]" type="hidden" value="{{ labels.en.form_other}}">
+                                    <input name="english[form_other]" type="hidden" value="{{ labels_en.form_other}}">
                                     <input name="multilingual[form_other]" type="hidden" value="{{ labels.form_other}}">
                                     <input name="js" class="js_switch" type="hidden" value="false">
                                 </div>
@@ -253,7 +253,7 @@
                                            class="form-control"
                                            placeholder=""/>
                                     <input name="english[form_registered_company]" type="hidden"
-                                           value="{{ labels.en.form_registered_company }}">
+                                           value="{{ labels_en.form_registered_company }}">
                                     <input name="multilingual[form_registered_company]" type="hidden"
                                            value="{{ labels.form_registered_company }}">
                                 </div>
@@ -264,7 +264,7 @@
                                            class="form-control"
                                            placeholder=""/>
                                     <input name="english[form_website]" type="hidden"
-                                           value="{{ labels.en.form_website }}">
+                                           value="{{ labels_en.form_website }}">
                                     <input name="multilingual[form_website]" type="hidden"
                                            value="{{ labels.form_website }}">
                                 </div>
@@ -278,7 +278,7 @@
                                     <input name="organisation[headquarters_country]" id="country_en" type="hidden"
                                            value="">
                                     <input name="english[form_headquarters]" type="hidden"
-                                           value="{{ labels.en.form_headquarters.label }}">
+                                           value="{{ labels_en.form_headquarters.label }}">
                                     <input name="multilingual[form_headquarters]" type="hidden"
                                            value="{{ labels.form_headquarters.label}}">
                                 </div>
@@ -291,13 +291,13 @@
                                             required>
                                         <option value="" disabled selected>{{ labels.please_select }}</option>
                                         {% for o in labels.form_staff_number.options %}
-                                        <option value="{{loop.index}}-staff:{{o}}:{{labels.en.form_staff_number.options[loop.index0]}}">
+                                        <option value="{{loop.index}}-staff:{{o}}:{{labels_en.form_staff_number.options[loop.index0]}}">
                                             {{ o }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <input name="english[form_staff_number]" type="hidden"
-                                           value="{{ labels.en.form_staff_number.label }}">
+                                           value="{{ labels_en.form_staff_number.label }}">
                                     <input name="multilingual[form_staff_number]" type="hidden"
                                            value="{{ labels.form_staff_number.label }}">
                                 </div>
@@ -309,13 +309,13 @@
                                             required>
                                         <option value="" disabled selected>{{ labels.please_select }}</option>
                                         {% for o in labels.form_annual_turnover.options %}
-                                        <option value="{{loop.index}}-turnover:{{o}}:{{labels.en.form_annual_turnover.options[loop.index0]}}">
+                                        <option value="{{loop.index}}-turnover:{{o}}:{{labels_en.form_annual_turnover.options[loop.index0]}}">
                                             {{ o }}
                                         </option>
                                         {% endfor %}
                                     </select>
                                     <input name="english[form_annual_turnover]" type="hidden"
-                                           value="{{ labels.en.form_annual_turnover.label }}">
+                                           value="{{ labels_en.form_annual_turnover.label }}">
                                     <input name="multilingual[form_annual_turnover]" type="hidden"
                                            value="{{ labels.form_annual_turnover.label }}">
                                 </div>
@@ -334,7 +334,7 @@
                                         {{ labels.form_submit }}
                                         <span class="glyphicon glyphicon-send"></span>
                                     </button>
-                                    <button id="ga-send" class="dit-btn--sm submitBtn" 
+                                    <button id="ga-send" class="dit-btn--sm submitBtn"
                                             type="submit">
                                         {{ labels.form_submit }}
                                         <span class="glyphicon glyphicon-send"></span>

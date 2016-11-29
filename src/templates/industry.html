@@ -9,18 +9,18 @@
     <section class="dit-content-section">
         <div class="row">
             <div class="col-xs-12">
-                {{ markups.intro(contentBlocks.sections[0]) }}
+                {{ markups.intro(sections[0]) }}
             </div>
         </div>
     </section>
 
-    {% if contentBlocks.subContent %}
+    {% if subContent %}
     <section class="dit-content-section">
         <div class="row">
             <div class="col-md-12">
                 <h2 id="sub-sectors">
                     {{labels.related_industries}}</h2>
-                {{ markups.tilesWithBottomDescription(list = contentBlocks.subContent, country = locale.country) }}
+                {{ markups.tilesWithBottomDescription(list = subContent, country = locale.country) }}
             </div>
         </div>
     </section>
