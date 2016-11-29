@@ -37,7 +37,7 @@
             <img src="/media/spin.gif" alt="loading_spinner" id="img-load">
         </div>
         <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
-            action="https://forms.great.gov.uk/feedback"
+            action="https://forms.invest.great.gov.uk/feedback"
             method="post" autocomplete="off">
             <div class="dit-form-wrapper">
                 <div class="row setup-content" id="step-1">
@@ -47,8 +47,6 @@
                                 <label class="control-label" for="userName">{{ labels.feedback_name }}</label>
                                 <p class="error-help">{{labels.form_enter_full_name}}</p>
                                 <input id="hidden_field" name="user[language]" type="hidden" value="{{locale.language}}">
-                                <input id="hidden_field" name="user[page]" type="hidden" value="{{pageTitle}}">
-                                <input id="hidden_field" name="user[path]" type="hidden" value="{{ path }}">
                                 <input type="text" name="user[name]" id="userName" required="required" class="form-control" placeholder=""/>
                                 <!--                                 <input name="english[form_full_name]" type="hidden"
                                 value="{{ labels.en.form_full_name }}">
@@ -68,7 +66,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label" for="userFeedback">{{ labels.feedback_feedback}}</label>
-                                <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder=""></textarea>
+                                <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{labels.report_problem_placeholder}}"></textarea>
                                 <input name="js" class="js_switch" type="hidden" value="false">
                                 <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels.en.form_phone }}">
                                 <input name="multilingual[form_phone]" type="hidden"
