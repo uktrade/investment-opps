@@ -1,0 +1,95 @@
+<section class="dit-form-section col-md-8">
+    <div class="col-md-12" id="formSuccess" tabindex="1">
+        <div class="grid-row">
+            <div class="column-two-thirds">
+                <div class="dit-form-section__highlight">
+                    <h1 class="bold-large">{{ contentBlocks.formBlock.content.submitted }}</h1>
+                    <p>
+                        {{ contentBlocks.formBlock.content.reference }}<br>
+                        <strong class="heading-medium" id="enquiry_Id"></strong>
+                    </p>
+                </div>
+                <p>{{ contentBlocks.formBlock.content.confirmation_email}}</p>
+                <h2 class="heading-medium">{{ contentBlocks.formBlock.content.next_title}}</h2>
+                <p>{{ contentBlocks.formBlock.content.next_detail}}</p>
+            </div>
+        </div>
+    </div>
+    <!--<div class="col-md-4 dit-form-section__info">-->
+    <!--<h3>{{ contentBlocks.formBlock.content.title }}</h3>-->
+    <!--<p>-->
+    <!--{{ contentBlocks.formBlock.content.contents | safe }}-->
+    <!--</p>-->
+    <!--<p>-->
+    <!--<strong>{{ contentBlocks.formBlock.content.listTitle }}</strong>-->
+    <!--</p>-->
+    <!--{% for l in contentBlocks.formBlock.content.list %}-->
+    <!--<div class="row bottom-buffer">-->
+    <!--<div class="col-xs-2 dit-icon-sm dit-icon-{{l.icon}}"></div>-->
+    <!--<div class="col-xs-10 col-md-9 col-lg-10">-->
+    <!--<p class="light-grey">{{ l.text | safe }}</p>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--{% endfor %}-->
+    <!--</div>-->
+    <div class="col-md-12 dit-form-section__body">
+        <div id="loading-overlay">
+            <img src="/media/spin.gif" alt="loading_spinner" id="img-load">
+        </div>
+        <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
+            action="https://forms.great.gov.uk/feedback"
+            method="post" autocomplete="off">
+            <div class="dit-form-wrapper">
+                <div class="row setup-content" id="step-1">
+                    <div class="col-md-12">
+                        <div class="col-md-12 dit-form-section__step">
+                            <div class="form-group col-md-12 form_top_block">
+                                <label class="control-label" for="userName">{{ labels.feedback_name }}</label>
+                                <p class="error-help">{{labels.form_enter_full_name}}</p>
+                                <input id="hidden_field" name="user[language]" type="hidden" value="{{locale.language}}">
+                                <input id="hidden_field" name="user[page]" type="hidden" value="{{pageTitle}}">
+                                <input id="hidden_field" name="user[path]" type="hidden" value="{{ path }}">
+                                <input type="text" name="user[name]" id="userName" required="required" class="form-control" placeholder=""/>
+                                <!--                                 <input name="english[form_full_name]" type="hidden"
+                                value="{{ labels.en.form_full_name }}">
+                                <input name="multilingual[form_full_name]" type="hidden"
+                                value="{{ labels.form_full_name }}"> -->
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label" for="userEmail">{{ labels.feedback_email }}</label>
+                                <p class="error-help email_help">{{labels.form_enter_email}}</p>
+                                <p class="validation_error_email">{{labels.form_enter_valid_email}}</p>
+                                <input type="email" name="user[email]" id="userEmail" required="required"
+                                class="form-control"
+                                placeholder=""/>
+                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels.en.form_email }}">
+                                <input name="multilingual[form_email]" type="hidden"
+                                value="{{ labels.form_email }}"> -->
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label class="control-label" for="userFeedback">{{ labels.feedback_feedback}}</label>
+                                <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder=""></textarea>
+                                <input name="js" class="js_switch" type="hidden" value="false">
+                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels.en.form_phone }}">
+                                <input name="multilingual[form_phone]" type="hidden"
+                                value="{{ labels.form_phone }}"> -->
+                            </div>
+                            <div class="form-group__button">
+                                <button class="dit-btn--sm nextBtn"
+                                type="submit">
+                                {{ labels.form_submit }}
+                                <span class="glyphicon glyphicon-send"></span>
+                                </button>
+                                <button class="dit-btn--sm submitBtn"
+                                type="submit">
+                                {{ labels.form_submit }}
+                                <span class="glyphicon glyphicon-send"></span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</section>
