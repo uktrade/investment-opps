@@ -58,4 +58,4 @@ To reload the server to reflect changes made to the layout, via the src folder t
 rs
 ```
 
-Then you can now make visit the site in the browser via [http://localhost:3000](http://localhost:3000).
+Then you can now visit the site in the browser via [http://localhost:3000](http://localhost:3000).
