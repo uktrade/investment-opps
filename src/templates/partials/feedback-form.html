@@ -3,27 +3,27 @@
         <div class="grid-row">
             <div class="column-two-thirds">
                 <div class="dit-form-section__highlight">
-                    <h1 class="bold-large">{{ contentBlocks.formBlock.content.submitted }}</h1>
+                    <h1 class="bold-large">{{ formBlock.content.submitted }}</h1>
                     <p>
-                        {{ contentBlocks.formBlock.content.reference }}<br>
+                        {{ formBlock.content.reference }}<br>
                         <strong class="heading-medium" id="enquiry_Id"></strong>
                     </p>
                 </div>
-                <p>{{ contentBlocks.formBlock.content.confirmation_email}}</p>
-                <h2 class="heading-medium">{{ contentBlocks.formBlock.content.next_title}}</h2>
-                <p>{{ contentBlocks.formBlock.content.next_detail}}</p>
+                <p>{{ formBlock.content.confirmation_email}}</p>
+                <h2 class="heading-medium">{{ formBlock.content.next_title}}</h2>
+                <p>{{ formBlock.content.next_detail}}</p>
             </div>
         </div>
     </div>
     <!--<div class="col-md-4 dit-form-section__info">-->
-    <!--<h3>{{ contentBlocks.formBlock.content.title }}</h3>-->
+    <!--<h3>{{ formBlock.content.title }}</h3>-->
     <!--<p>-->
-    <!--{{ contentBlocks.formBlock.content.contents | safe }}-->
+    <!--{{ formBlock.content.contents | safe }}-->
     <!--</p>-->
     <!--<p>-->
-    <!--<strong>{{ contentBlocks.formBlock.content.listTitle }}</strong>-->
+    <!--<strong>{{ formBlock.content.listTitle }}</strong>-->
     <!--</p>-->
-    <!--{% for l in contentBlocks.formBlock.content.list %}-->
+    <!--{% for l in formBlock.content.list %}-->
     <!--<div class="row bottom-buffer">-->
     <!--<div class="col-xs-2 dit-icon-sm dit-icon-{{l.icon}}"></div>-->
     <!--<div class="col-xs-10 col-md-9 col-lg-10">-->
@@ -49,7 +49,7 @@
                                 <input id="hidden_field" name="user[language]" type="hidden" value="{{locale.language}}">
                                 <input type="text" name="user[name]" id="userName" required="required" class="form-control" placeholder=""/>
                                 <!--                                 <input name="english[form_full_name]" type="hidden"
-                                value="{{ labels.en.form_full_name }}">
+                                value="{{ labels_en.form_full_name }}">
                                 <input name="multilingual[form_full_name]" type="hidden"
                                 value="{{ labels.form_full_name }}"> -->
                             </div>
@@ -60,7 +60,7 @@
                                 <input type="email" name="user[email]" id="userEmail" required="required"
                                 class="form-control"
                                 placeholder=""/>
-                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels.en.form_email }}">
+                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels_en.form_email }}">
                                 <input name="multilingual[form_email]" type="hidden"
                                 value="{{ labels.form_email }}"> -->
                             </div>
@@ -68,7 +68,7 @@
                                 <label class="control-label" for="userFeedback">{{ labels.feedback_feedback}}</label>
                                 <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{labels.report_problem_placeholder}}"></textarea>
                                 <input name="js" class="js_switch" type="hidden" value="false">
-                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels.en.form_phone }}">
+                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels_en.form_phone }}">
                                 <input name="multilingual[form_phone]" type="hidden"
                                 value="{{ labels.form_phone }}"> -->
                             </div>
