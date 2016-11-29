@@ -26,7 +26,7 @@
   "devDependencies": {
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers#latest",
     "iigb-beta-content": "uktrade/iigb-beta-content",
-    "iigb-beta-structure": "uktrade/iigb-beta-structure#feature/new_structure",
+    "iigb-beta-structure": "uktrade/iigb-beta-structure",
     "nodemon": "^1.11.0",
     "underscore": "^1.8.3",
     "website-builder": "uktrade/website-builder#latest"
