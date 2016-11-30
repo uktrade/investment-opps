@@ -29,6 +29,6 @@
     "iigb-beta-structure": "uktrade/iigb-beta-structure",
     "nodemon": "^1.11.0",
     "underscore": "^1.8.3",
-    "website-builder": "uktrade/website-builder#latest"
+    "website-builder": "uktrade/website-builder"
   }
 }
