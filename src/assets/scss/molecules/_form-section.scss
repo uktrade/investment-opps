@@ -260,6 +260,11 @@
 
 .disclaimer_block{
   margin-bottom: 85px !important;
+  padding-left: 0;
+}
+
+.form_heading{
+  font-weight: 400 !important;
 }
 
 .form-detail{
@@ -286,4 +291,8 @@
   display: none;
   color: #a94442;
   font-weight: 700;
+}
+
+.select_month {
+  width: 100px;
 }

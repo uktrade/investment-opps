@@ -390,7 +390,7 @@ function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
-    language = URL.split('/')[3],
+    country = URL.split('/')[3],
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
     gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod"
@@ -400,7 +400,7 @@ function getResults(size, start) {
   } else if (searchInput.length > 2) {
     $.ajax({
       type: "GET",
-      url: gateway + "/?q=(and field='language' '" + language + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "')))&size=" + size + "&start=" + start + "&q.parser=structured",
+      url: gateway + "/?q=(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "')))&size=" + size + "&start=" + start + "&q.parser=structured",
       success: function(results) {
         searchArea.html("")
         if ('hits' in results) {
