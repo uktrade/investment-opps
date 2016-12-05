@@ -72,9 +72,9 @@ This application is developed using [git flow](http://nvie.com/posts/a-successfu
 
 The following prefixes are used for special branches:
 
-Fature branches: *feature/\<feature-description\>*
-Release branches: *release/*
-Hotfix branches: *hotfix/*
+- Fature branches: *feature/\<feature-description\>*
+- Release branches: *release/*
+- Hotfix branches: *hotfix/*
 
 *Tip:* Following link shows alternative tools and installation methods for git flow:
 
