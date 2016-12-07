@@ -1,0 +1,22 @@
+{% extends "base/index.html" %}
+
+{% block content %}
+
+{% include "partials/header-nav.html" %}
+
+{% include "partials/top-bar.html" %}
+
+{% include "partials/jumbotron-short.html" %}
+
+<section class="dit-toc">
+      {% include "partials/breadcrumb.html" %}
+</section>
+
+{% block page_content %}
+<div class="container dit-info">
+      {% include "partials/form-full.html" %}
+</div>
+
+{% endblock %}
+
+{% endblock %}
