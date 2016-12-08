@@ -1,3 +1,5 @@
+init();
+
 function showcontent() {
   $('.dit-outer-wrap').show()
 }
@@ -51,6 +53,52 @@ function onLoaded() {
   responsiveTable()
   heroVideoReload()
 }
+
+function init() {
+  var is_root = location.pathname == "/";
+  // console.log(location.pathname);
+
+  // doEqualHeights('.great-equal-hights-container');
+  // setupLocaleSelector();
+  // blurLinks();
+  // resizeListner();
+
+  if (is_root) {
+    checkGeoLocation();
+  } else {
+    removeloading();
+  }
+  // removeloading();
+  // doGeoRouting();
+}
+
+function checkGeoLocation() {
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {
+      // console.log( "success" );
+    })
+    .done(function(data) {
+      doGeoRouting(data.country_code);
+    })
+    .fail(function() {
+      // console.log( "error" );
+      removeloading();
+    })
+}
+
+function doGeoRouting(countryCode) {
+  var supportedCountries = ['US', 'CN', 'DE', 'IN'];
+  if ($.inArray(countryCode, supportedCountries) != '-1') {
+    doRedirect(countryCode);
+  } else {
+    doRedirect('INT');
+  }
+}
+
+function doRedirect(countryCode) {
+  var redirectLocation = countryCode.toLowerCase();
+  window.location.pathname = '/' + redirectLocation;
+}
+
 
 function smoothScroll() {
   //smoothscrolling and positioning
