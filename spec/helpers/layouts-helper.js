@@ -3,18 +3,59 @@
 var fs = require('fs');
 var path = require('path');
 var cmsTags = require('iigb-cms-tags');
-var LAYOUTS_DIR = 'src/templates';
-module.exports = {
-    layout: load,
-    parseCmsTags: parseCmsTags
-  };
+var nunjucks = require('nunjucks');
 
-  function load(layoutName) {
-      var file = path.join(process.cwd(), LAYOUTS_DIR, layoutName);
-      return fs.readFileSync(file,'utf-8').toString();
-  }
+var LAYOUTS_DIR = path.join(process.cwd(),'src/templates');
 
-  function parseCmsTags(html) {
-    return cmsTags.parse(html);
+global.layout=load;
+global.loopLayouts=loopLayouts;
+global.parseCmsTags=parseCmsTags;
+global.render = render;
+configureNunjucks();
+
+
+function load(layoutName) {
+    var file = path.join(LAYOUTS_DIR, layoutName);
+    return fs.readFileSync(file,'utf-8').toString();
+}
+
+function parseCmsTags(html) {
+  return cmsTags.parse(html);
+}
+
+function loopLayouts(loop) {
+  var files = fs.readdirSync(LAYOUTS_DIR);
+  var file;
+  for(var i=0;i<files.length;i++) {
+    file=files[i];
+    if(path.extname(file) === '.html') {
+      loop(file);
+    }
   }
+}
+
+function render(layoutName) {
+  return nunjucks.render(layoutName);
+}
+
+
+function configureNunjucks() {
+  var env = nunjucks.configure(LAYOUTS_DIR, {
+    watch: false
+  });
+
+  // content doesn't matter for test purposes
+  env.addFilter('slug', function(content, language) {
+		return '';
+  });
+
+  env.addFilter('date', function(content, language) {
+		return '';
+  });
+
+  env.addGlobal('now', function() {
+    return new Date();
+  });
+
+}
 

@@ -1,6 +1,6 @@
 /* jshint ignore:start*/
-describe('Article.html content tags', function() {
-  var html = render('article.html');
+describe('sector.html content tags', function() {
+  var html = render('sector.html');
   var fields = parseCmsTags(html);
   var sections = fields['sections'];
 
