@@ -13,6 +13,24 @@
                 <div class="col-md-12">
                     <h2 id="sub-sectors">
                         {{labels.pre_word}}{{pageHeader.content.title}}{{labels.post_word}}:</h2>
+
+                        <!--
+                        [cms-fields]
+                          subContent:
+                            type: content
+                            multiple: true
+                            label: Tile items
+                            fields:
+                              thumbnail:
+                                type: text
+                                label: Thumbnail image
+                                help: Choose thumbnail image for tile
+                              link:
+                                type: text
+                                label: Link target for thumbnail
+                        [/cms-fields]
+                          -->
+
                     {{markups.tilesSector(list = subContent, country = locale.country)}}
                 </div>
             </div>
