@@ -10,7 +10,8 @@
   },
   "config": {
     "debug": "website-builder,metalsmith-page-builder,'$DEBUG'",
-    "content_base": "node_modules"
+    "content_base": "node_modules",
+    "cms_branch": "master"
   },
   "scripts": {
     "start": "npm run build && node lib/server.js",
@@ -22,12 +23,12 @@
     "assets": "DEBUG=$npm_package_config_debug website-builder -t build/assets assets --assets src/assets --sass ./scss -o ./css",
     "media": "website-builder -t build/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
     "deploy": "npm test && npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
-    "test": "website-builder test"
+    "test": "website-builder test",
+    "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\""
   },
   "devDependencies": {
-    "iigb-aws-helpers": "uktrade/iigb-aws-helpers#latest",
+    "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
     "iigb-beta-content": "uktrade/iigb-beta-content",
-    "iigb-beta-structure": "uktrade/iigb-beta-structure",
     "iigb-cms-tags": "uktrade/iigb-cms-tags",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",
