@@ -21,6 +21,25 @@
             <div class="col-md-12 margin-top--4">
                 <!--<h2 class="dit-industries-tiles-landing__heading">{{labels.industries}}</h2>-->
                 <!--<p>{{labels.industries_intro}}</p>-->
+
+                <!--
+                [cms-fields]
+                  subTileItems:
+                    type: content
+                    multiple: true
+                    label: Tile items
+                    fields:
+                      thumbnail:
+                        type: text
+                        label: Thumbnail image
+                        help: Choose thumbnail image for tile
+                      link:
+                        type: text
+                        label: Link target for thumbnail
+                [/cms-fields]
+                  -->
+
+
                 {{ markups.tilesSector(list = subTileItems, country = locale.country ) }}
             </div>
         </div>

@@ -1,3 +1,5 @@
+init();
+
 function showcontent() {
   $('.dit-outer-wrap').show()
 }
@@ -51,6 +53,52 @@ function onLoaded() {
   responsiveTable()
   heroVideoReload()
 }
+
+function init() {
+  var is_root = location.pathname == "/";
+  // console.log(location.pathname);
+
+  // doEqualHeights('.great-equal-hights-container');
+  // setupLocaleSelector();
+  // blurLinks();
+  // resizeListner();
+
+  if (is_root) {
+    checkGeoLocation();
+  } else {
+    removeloading();
+  }
+  // removeloading();
+  // doGeoRouting();
+}
+
+function checkGeoLocation() {
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {
+      // console.log( "success" );
+    })
+    .done(function(data) {
+      doGeoRouting(data.country_code);
+    })
+    .fail(function() {
+      // console.log( "error" );
+      removeloading();
+    })
+}
+
+function doGeoRouting(countryCode) {
+  var supportedCountries = ['US', 'CN', 'DE', 'IN'];
+  if ($.inArray(countryCode, supportedCountries) != '-1') {
+    doRedirect(countryCode);
+  } else {
+    doRedirect('INT');
+  }
+}
+
+function doRedirect(countryCode) {
+  var redirectLocation = countryCode.toLowerCase();
+  window.location.pathname = '/' + redirectLocation;
+}
+
 
 function smoothScroll() {
   //smoothscrolling and positioning
@@ -390,7 +438,7 @@ function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
-    language = URL.split('/')[3],
+    country = URL.split('/')[3],
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
     gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod"
@@ -400,7 +448,7 @@ function getResults(size, start) {
   } else if (searchInput.length > 2) {
     $.ajax({
       type: "GET",
-      url: gateway + "/?q=(and field='language' '" + language + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "')))&size=" + size + "&start=" + start + "&q.parser=structured",
+      url: gateway + "/?q=(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "')))&size=" + size + "&start=" + start + "&q.parser=structured",
       success: function(results) {
         searchArea.html("")
         if ('hits' in results) {

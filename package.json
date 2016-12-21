@@ -1,6 +1,6 @@
 {
   "name": "iigb-website",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "engines": {
     "node": "5.6.0"
   },
@@ -21,14 +21,17 @@
     "build-pages": "DEBUG=$npm_package_config_debug website-builder build --layouts src/templates --content $npm_package_config_content_base/iigb-beta-content/content --structure $npm_package_config_content_base/iigb-beta-structure/structure",
     "assets": "DEBUG=$npm_package_config_debug website-builder -t build/assets assets --assets src/assets --sass ./scss -o ./css",
     "media": "website-builder -t build/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
-    "deploy": "npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/"
+    "deploy": "npm test && npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
+    "test": "website-builder test"
   },
   "devDependencies": {
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers#latest",
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-beta-structure": "uktrade/iigb-beta-structure",
+    "iigb-cms-tags": "uktrade/iigb-cms-tags",
     "nodemon": "^1.11.0",
+    "nunjucks": "^3.0.0",
     "underscore": "^1.8.3",
-    "website-builder": "uktrade/website-builder#latest"
+    "website-builder": "uktrade/website-builder"
   }
 }

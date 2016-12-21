@@ -1,5 +1,4 @@
 {% extends "base/index.html" %}
-{% import "partials/markups.html" as markups %}
 
 {% block content %}
 
@@ -14,25 +13,10 @@
 </section>
 
 {% block page_content %}
-
-<!--
-[cms-fields]
-  sections:
-    type: content
-    multiple: true
-    label: Article section files
-
-[/cms-fields]
-
--->
-
 <div class="container dit-info">
-      {% for a in sections %}
-      {{ markups.section(a, labels, locale.language) }}
-      {% endfor %}
+      {% include "partials/form-full.html" %}
 </div>
 
 {% endblock %}
-
 
 {% endblock %}
