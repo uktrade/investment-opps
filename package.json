@@ -22,7 +22,8 @@
     "build-pages": "DEBUG=$npm_package_config_debug website-builder build --layouts src/templates --content $npm_package_config_content_base/iigb-beta-content/content --structure $npm_package_config_content_base/iigb-beta-structure/structure",
     "assets": "DEBUG=$npm_package_config_debug website-builder -t build/assets assets --assets src/assets --sass ./scss -o ./css",
     "media": "website-builder -t build/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
-    "deploy": "npm install && npm test && npm run build && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
+    "predeploy": "npm install && npmm run postinstall && npm test && npm run build",
+    "deploy": "npm run predeploy && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
     "test": "website-builder test",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\""
   },
