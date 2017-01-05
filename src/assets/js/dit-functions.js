@@ -108,11 +108,13 @@ function smoothScroll() {
       // store hash
     var hash = this.hash
       // animate
-    $('html, body').stop().animate({
-      scrollTop: $(hash).offset().top
-    }, 600, 'swing', function() {
-      window.location.hash = hash
-    })
+    if (hash.length > 0) {
+      $('html, body').stop().animate({
+        scrollTop: $(hash).offset().top
+      }, 600, 'swing', function () {
+        window.location.hash = hash
+      })
+    }
   })
 }
 
