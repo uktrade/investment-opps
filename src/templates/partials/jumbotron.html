@@ -97,8 +97,8 @@
             {% endif %}
         </div>
     </div>
-    {% if pageHeader.heroVideo %}
-        <div class="modal fade" id="externalVideo" role="dialog" data-backdrop="static" data-keyboard="false">
+    {% if pageHeader.externalVideo %}
+        <div class="modal fade" id="heroVideo" role="dialog" data-backdrop="static" data-keyboard="false">
             <span class="glyphicon glyphicon-remove dit-remove-icon" id="closeHeroVideo" data-dismiss="modal"></span>
             <div class="modal-dialog video-wrapper">
                 <iframe width="560" height="315" src="{{pageHeader.externalVideo}}" frameborder="0"
