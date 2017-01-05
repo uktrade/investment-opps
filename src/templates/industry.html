@@ -5,6 +5,15 @@
 
 {% include "partials/jumbotron.html" %}
 
+<!--
+[cms-fields]
+  sections:
+    type: content
+    multiple: true
+    label: Sections
+[/cms-fields]
+-->
+
 <div class="container">
     <section class="dit-content-section">
         <div class="row">
@@ -13,6 +22,27 @@
             </div>
         </div>
     </section>
+
+    <!--
+    [cms-fields]
+      subContent:
+        type: content
+        multiple: true
+        label: Sub contents
+        fields:
+          content:
+            type: text
+            label: Content
+            help: Choose content to appear in this section
+          thumbnail:
+            type: text
+            label: Thumbnail image
+            help: Choose thumbnail image for tile
+          link:
+            type: text
+            label: Link target for thumbnail
+    [/cms-fields]
+      -->
 
     {% if subContent %}
     <section class="dit-content-section">

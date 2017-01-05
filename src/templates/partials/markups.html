@@ -25,6 +25,27 @@
 
 
 {% macro bullet_list(header, list, country) %}
+
+<!--
+[cms-fields]
+  listHeader:
+    type: content
+  listItems:
+    type: content
+    multiple: true
+    label: Bullet list item
+    fields:
+      content:
+        type: text
+        label: Content
+        help: Choose content to appear in this section
+      link:
+        type: text
+        label: Target link for bullet item
+        help: Enter a link for this bullet list item target
+[/cms-fields]
+  -->
+
     <section class="dit-content-section">
         <div class="row">
             {% if header %}
@@ -46,6 +67,28 @@
 {% endmacro %}
 
 {% macro tilesWithSideDescription(header, list, country) %}
+    <!--
+    [cms-fields]
+      tileItems:
+        type: content
+        multiple: true
+        label: Tile items
+        fields:
+          content:
+            type: text
+            label: Content
+            help: Choose content to appear in this section
+          thumbnail:
+            type: text
+            label: Thumbnail image
+            help: Choose thumbnail image for tile
+          link:
+            type: text
+            label: Link target for thumbnail
+    [/cms-fields]
+      -->
+
+
     {% if header %}
         <h4 class="dit-content-section__heading">{{ header }}</h4>
     {% endif %}
@@ -90,6 +133,27 @@
 {% endmacro %}
 
 {% macro tilesIndustry(header, list, country) %}
+
+    <!--
+    [cms-fields]
+      tileItems:
+        type: content
+        multiple: true
+        label: Tile items
+        fields:
+          content:
+            type: text
+            label: Content
+            help: Choose content to appear in this section
+          thumbnail:
+            type: text
+            label: Thumbnail image
+            help: Choose thumbnail image for tile
+          link:
+            type: text
+            label: Link target for thumbnail
+    [/cms-fields]
+      -->
     {% if header %}
         <h4 class="dit-content-section__heading">{{ header }}</h4>
     {% endif %}
@@ -108,6 +172,7 @@
 {% endmacro %}
 
 {% macro tilesSector(header, list, country) %}
+
     {% if header %}
         <h4 class="dit-content-section__heading">{{ header }}</h4>
     {% endif %}
