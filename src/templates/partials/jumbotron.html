@@ -106,8 +106,10 @@
             </div>
         </div>
 
+        {% if pageHeader.heroVideo %}
         <video autoplay loop poster="/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
             <source src="/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
         </video>
+        {% endif %}
     {% endif %}
 </div>
