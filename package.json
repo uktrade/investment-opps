@@ -26,7 +26,7 @@
     "deploy": "npm run predeploy && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
     "test": "website-builder test",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
-    "release": "node_modules/iigb-aws-helpers/release.sh || exit 1"
+    "release": "node_modules/iigb-aws-helpers/release.sh"
   },
   "devDependencies": {
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
