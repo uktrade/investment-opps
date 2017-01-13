@@ -14,10 +14,10 @@
     </div>
     <div class="collapse navbar-collapse" id="navbar-collapse-1">
         <ul class="nav navbar-nav dit-main-nav-list pull-right">
-            <li><a href="/{{locale.country}}/">{{labels.home}}</a></li>
-            <li><a href="/{{locale.country}}/setup-guide/">{{labels.setup_guide}}</a></li>
-            <li><a href="/{{locale.country}}/industries/">{{labels.industries}}<span class="sr-only">(current)</span></a></li>
-            <li style="cursor: pointer;"><a class="search-button" href="https://search.invest.great.gov.uk/{{locale.country}}/search/"> {{labels.search}}
+            <li><a href="/{{locale.country}}/">{{ labels.home[locale.code] }}</a></li>
+            <li><a href="/{{locale.country}}/setup-guide/">{{ labels.setup_guide[locale.code] }}</a></li>
+            <li><a href="/{{locale.country}}/industries/">{{ labels.industries[locale.code] }}<span class="sr-only">(current)</span></a></li>
+            <li style="cursor: pointer;"><a class="search-button" href="https://search.invest.great.gov.uk/{{locale.country}}/search/"> {{ labels.search[locale.code] }}
                 <span class="glyphicon glyphicon-search dit-main-search__glyph" aria-hidden="true"></span></a></li>
             </ul>
         </div>

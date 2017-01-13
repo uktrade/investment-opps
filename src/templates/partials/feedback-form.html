@@ -44,43 +44,43 @@
                     <div class="col-md-12">
                         <div class="col-md-12 dit-form-section__step">
                             <div class="form-group col-md-12 form_top_block">
-                                <label class="control-label" for="userName">{{ labels.feedback_name }}</label>
-                                <p class="error-help">{{labels.form_enter_full_name}}</p>
+                                <label class="control-label" for="userName">{{ labels.feedback_name[locale.code] }}</label>
+                                <p class="error-help">{{ labels.form_enter_full_name[locale.code] }}</p>
                                 <input id="hidden_field" name="user[language]" type="hidden" value="{{locale.language}}">
                                 <input type="text" name="user[name]" id="userName" required="required" class="form-control" placeholder=""/>
                                 <!--                                 <input name="english[form_full_name]" type="hidden"
-                                value="{{ labels_en.form_full_name }}">
+                                value="{{ labels_en[locale.code].form_full_name }}">
                                 <input name="multilingual[form_full_name]" type="hidden"
-                                value="{{ labels.form_full_name }}"> -->
+                                value="{{ labels.form_full_name[locale.code] }}"> -->
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label" for="userEmail">{{ labels.feedback_email }}</label>
-                                <p class="error-help email_help">{{labels.form_enter_email}}</p>
-                                <p class="validation_error_email">{{labels.form_enter_valid_email}}</p>
+                                <label class="control-label" for="userEmail">{{ labels.feedback_email[locale.code] }}</label>
+                                <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
+                                <p class="validation_error_email">{{ labels.form_enter_valid_email[locale.code] }}</p>
                                 <input type="email" name="user[email]" id="userEmail" required="required"
                                 class="form-control"
                                 placeholder=""/>
-                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels_en.form_email }}">
+                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels_en[locale.code].form_email }}">
                                 <input name="multilingual[form_email]" type="hidden"
-                                value="{{ labels.form_email }}"> -->
+                                value="{{ labels.form_email[locale.code] }}"> -->
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label" for="userFeedback">{{ labels.feedback_feedback}}</label>
-                                <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{labels.report_problem_placeholder}}"></textarea>
+                                <label class="control-label" for="userFeedback">{{ labels.feedback_feedback[locale.code] }}</label>
+                                <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{ labels.report_problem_placeholder[locale.code] }}"></textarea>
                                 <input name="js" class="js_switch" type="hidden" value="false">
-                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels_en.form_phone }}">
+                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels_en[locale.code].form_phone }}">
                                 <input name="multilingual[form_phone]" type="hidden"
-                                value="{{ labels.form_phone }}"> -->
+                                value="{{ labels.form_phone[locale.code] }}"> -->
                             </div>
                             <div class="form-group__button">
                                 <button class="dit-btn--sm nextBtn"
                                 type="submit">
-                                {{ labels.form_submit }}
+                                {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>
                                 </button>
                                 <button class="dit-btn--sm submitBtn"
                                 type="submit">
-                                {{ labels.form_submit }}
+                                {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>
                                 </button>
                             </div>

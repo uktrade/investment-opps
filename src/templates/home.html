@@ -14,9 +14,9 @@
 <section class="dit-content-section">
     <div class="row">
       <div class="col-md-12">
-        {{ markups.tilesWithSideDescription( header = labels.great_british_industries, list = tileItems, country = locale.country  ) }}
+        {{ markups.tilesWithSideDescription( header = labels.great_british_industries[locale.code], list = tileItems, country = locale.country  ) }}
         <div class="dit-section-cta">
-          <a href="industries" class="dit-btn">{{labels.discover}}</a>
+          <a href="industries" class="dit-btn">{{ labels.discover[locale.code] }}</a>
         </div>
       </div>
     </div>

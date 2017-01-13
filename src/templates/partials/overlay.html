@@ -7,7 +7,7 @@
         <div class="container">
             <div class="col-xs-2 col-md-1">
                 <div>
-                    <p class="search-page_search_title">{{labels.search}}</p>
+                    <p class="search-page_search_title">{{ labels.search[locale.code] }}</p>
                 </div>
 
             </div>
@@ -19,10 +19,10 @@
             </div>
             <a href="#" id="#closebtn-collapse-1" class="closebtn" onclick="closeNav()">
                 <div class="col-xs-3 col-md-2 close-btn-div">
-                    <span style="font-size: 0px;">{{labels.search_close}}</span>
+                    <span style="font-size: 0px;">{{ labels.search_close[locale.code] }}</span>
                     <span class="glyphicon glyphicon-remove close-search-icon"></span>
-                    <span class="search-error">{{labels.search_error}}</span>
-                    <span class="no-results">{{labels.no_results}}</span>
+                    <span class="search-error">{{ labels.search_error[locale.code] }}</span>
+                    <span class="no-results">{{ labels.no_results[locale.code] }}</span>
                 </div>
             </a>
         </div>

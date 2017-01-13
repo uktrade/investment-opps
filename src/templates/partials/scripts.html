@@ -24,7 +24,7 @@
     });
 
     function formAutocomplete(){
-        var countries = [{% for o in labels.form_headquarters.options %}
+        var countries = [{% for o in labels.form_headquarters.options[locale.code] %}
                             {"value": "{{o}}", "data": "{{loop.index}}"},
                         {% endfor %}]
         var countries_en = ["zero",

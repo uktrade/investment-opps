@@ -27,7 +27,7 @@
                 <p>
                     <a href="#" class="bg-video-inactive bg-video-play dit-text-decoration-none" data-toggle="modal"
                        data-target="#heroVideo">
-                        <span class="dit-btn-home__video">{{labels.watch_video}}
+                        <span class="dit-btn-home__video">{{ labels.watch_video[locale.code] }}
                             <span class="glyphicon glyphicon-play"></span>
                         </span>
                     </a>
@@ -89,7 +89,7 @@
             {% if pageHeader.externalVideoCN %}
                 <p>
                     <a href="{{pageHeader.externalVideoCN}}" target="_blank">
-                        <span class="dit-btn-home__video">{{labels.watch_video}}
+                        <span class="dit-btn-home__video">{{ labels.watch_video[locale.code] }}
                             <span class="glyphicon glyphicon-play"></span>
                         </span>
                     </a>
