@@ -28,7 +28,7 @@
                             {"value": "{{o}}", "data": "{{loop.index}}"},
                         {% endfor %}]
         var countries_en = ["zero",
-                        {% for o in labels_en.form_headquarters.options %}
+                        {% for o in labels_en.form_headquarters.options['en_US'] %}
                             "{{o}}",
                         {% endfor %}];
 
