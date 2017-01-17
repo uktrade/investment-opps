@@ -1,3 +1,7 @@
+html {
+  height: 100%;
+}
+
 body {
   background-color: $background-colour;
   font-size: 18px;
@@ -20,12 +24,18 @@ body {
   a {
     text-decoration: none;
   }
-}
 
-html {
-  height: 100%;
+  noscript {
+    &.dit-loading {
+      display: none;
+    }
+
+    &.dit-outer-wrap {
+      display: block;
+    }
   }
+}
 
 .dit-outer-wrap{
   min-height: 100%;
-  }
+}

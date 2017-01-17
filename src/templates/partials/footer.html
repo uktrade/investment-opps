@@ -1,5 +1,5 @@
 <div class="container issue_container">
-    <a class="issue_link" href="/int/feedback/">{{labels.report_problem}}</a>
+    <a class="issue_link" href="/int/feedback/">{{labels.report_problem[locale.code]}}</a>
 </div>
 
 </div>
@@ -10,12 +10,12 @@
         <div class="row">
             <div class="col-sm-7 col-md-8 col-lg-9">
                 <ul class="dit-footer--list">
-                    <li><a href="/{{locale.country}}">{{labels.home}}</a></li>
-                    <li><a href="/{{locale.country}}/industries">{{labels.industries}}</a></li>
-                    <li><a href="/{{locale.country}}/setup-guide">{{labels.setup_guide}}</a></li>
-                    <li><a href="/{{locale.country}}/privacy-policy/">{{labels.privacy}}</a></li>
-                    <li><a href="/{{locale.country}}/terms-and-conditions/">{{labels.terms}}</a></li>
-                    <!--<li><a href="#">{{labels.contact}}</a></li>-->
+                    <li><a href="/{{locale.country}}">{{ labels.home[locale.code] }}</a></li>
+                    <li><a href="/{{locale.country}}/industries">{{ labels.industries[locale.code] }}</a></li>
+                    <li><a href="/{{locale.country}}/setup-guide">{{ labels.setup_guide[locale.code] }}</a></li>
+                    <li><a href="/{{locale.country}}/privacy-policy/">{{ labels.privacy[locale.code] }}</a></li>
+                    <li><a href="/{{locale.country}}/terms-and-conditions/">{{ labels.terms[locale.code] }}</a></li>
+                    <!--<li><a href="#">{{ labels.contact[locale.code] }}</a></li>-->
                 </ul>
             </div>
             <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-0 dit-footer--logo">
