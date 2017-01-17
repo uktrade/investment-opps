@@ -4,6 +4,9 @@
   //margin-top: 50px;
   height: 200px;
   background-color: $text-colour !important;
+  position: relative;
+  margin-top: -200px;
+  clear: both;
 
   &--list {
     padding-left: 0;
@@ -59,6 +62,7 @@
 }
 
 .issue_container{
+  margin-bottom: 200px;
   padding-bottom: 20px;
 }
 

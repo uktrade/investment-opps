@@ -96,7 +96,7 @@ function doGeoRouting(countryCode) {
 
 function doRedirect(countryCode) {
   var redirectLocation = countryCode.toLowerCase();
-  window.location.pathname = '/' + redirectLocation;
+  window.location.pathname = '/' + redirectLocation + '/';
 }
 
 

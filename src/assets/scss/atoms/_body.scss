@@ -1,8 +1,13 @@
+html {
+  height: 100%;
+}
+
 body {
   background-color: $background-colour;
   font-size: 18px;
   font-weight: 100;
   color: $text-colour;
+  height: 100%;
 
   @media (max-width: $screen-md-max) {
     font-size: 16px;
@@ -29,4 +34,8 @@ body {
       display: block;
     }
   }
+}
+
+.dit-outer-wrap{
+  min-height: 100%;
 }
