@@ -5,7 +5,8 @@ function showcontent() {
 }
 
 function removeloading() {
-  $('.dit-loading').fadeOut(300)
+  $('.dit-whitepage').hide();
+  $('.dit-loading').fadeOut(400)
 }
 
 function enhance() {
@@ -64,6 +65,7 @@ function init() {
   // resizeListner();
 
   if (is_root) {
+    $('.dit-whitepage').show();
     checkGeoLocation();
   } else {
     removeloading();

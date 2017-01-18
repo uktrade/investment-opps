@@ -39,3 +39,13 @@ body {
 .dit-outer-wrap{
   min-height: 100%;
 }
+
+.dit-whitepage{
+  position: fixed;
+  z-index: 100;
+  top: 0px;
+  bottom: 0px;
+  left: 0px;
+  right: 0px;
+  background: rgb(255, 255, 255);
+}
