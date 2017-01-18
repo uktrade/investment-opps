@@ -12,27 +12,21 @@ function enhance() {
   enhance_videobg()
 }
 
+function playVidTest() {
+  $('#heroVideo').on('show.bs.modal', function (e) {
+    var extVid = $('.video-wrapper').attr('data-video')
+    var ytApi = '<iframe width="560" height="315" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
+    $('.video-wrapper').append(ytApi)
+  })
+}
+
 function enhance_videobg() {
   if ($('#bgVid').length > 0 || $('#bgImg').length > 0) {
     $('.jumbotron').addClass('bg--transparent')
-      // $("#heroVideo").on('hidden.bs.modal', function (e) {
-      //   $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
-      // })
-
-    // $(".modal-backdrop, #myModal .close, #myModal .btn").live("click", function() {
-    //         jQuery("#myModal iframe").attr("src", jQuery("#myModal iframe").attr("src"))
-    // })
-
-
   }
 }
 
 function heroVideoReload() {
-  // strange .on issue - look at smoothScroll - might be an issue there
-  // $('#heroVideo').on('hidden.bs.modal', function () {
-  //     console.log($("#heroVideo iframe"))
-  //     $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
-  // })
   $('#closeHeroVideo').click(function() {
     $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
   })
@@ -52,6 +46,7 @@ function onLoaded() {
   submitForm()
   responsiveTable()
   heroVideoReload()
+  playVidTest()
 }
 
 function init() {
