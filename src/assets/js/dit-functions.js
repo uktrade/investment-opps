@@ -65,7 +65,6 @@ function init() {
   // resizeListner();
 
   if (is_root) {
-    $('.dit-whitepage').show();
     checkGeoLocation();
   } else {
     removeloading();
