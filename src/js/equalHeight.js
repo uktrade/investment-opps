@@ -1,8 +1,6 @@
 // Set elements to the same height (uses height of tallest element)
 // idea taken from https://codepen.io/micahgodbolt/pen/FgqLc
-
-equalheight = function (container) {
-
+module.exports = function (container) {
   var currentTallest = 0,
     currentRowStart = 0,
     rowDivs = [],

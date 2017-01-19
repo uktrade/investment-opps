@@ -1,4 +1,7 @@
+var equalheight=require('./equalHeight');
 init();
+module.exports = {
+};
 
 function showcontent() {
   $('.dit-outer-wrap').show()
@@ -49,7 +52,20 @@ function onLoaded() {
   playVidTest()
 }
 
+function formAutocomplete(){
+
+
+  $('#country').autocomplete({
+    lookup: document.countries,
+    onSelect: function (suggestion) {
+      $('#country_en').val(document.countries_en[suggestion.data]);
+
+    }
+  });
+}
+
 function init() {
+
   var is_root = location.pathname == "/";
   // console.log(location.pathname);
 
@@ -65,6 +81,19 @@ function init() {
   }
   // removeloading();
   // doGeoRouting();
+
+  $(document).ready(function () {
+    enhance();
+    setTimeout(showcontent, 500);
+    setTimeout(removeloading, 1000);
+    setTimeout(onLoaded, 1005);
+  });
+
+  $(window).on('resize', function () {
+    checkHeight();
+    setGradientHeight();
+    prepareForm();
+  });
 }
 
 function checkGeoLocation() {
@@ -161,6 +190,9 @@ function openNav() {
     }
   })
 
+  $("#closebtn-collapse-1").click(function(){
+    closeNav()
+  })
   box.animate({
     'margin-top': '0px',
     'height': '110px'

@@ -5,22 +5,25 @@
     "node": "5.6.0"
   },
   "private": true,
-  "dependencies": {
-    "express": "^4.14.0"
+  "browser": {
+    "respond.js": "./node_modules/respond.js/dest/respond.src.js",
+    "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {
     "debug": "website-builder,metalsmith-page-builder,'$DEBUG'",
     "content_base": "node_modules",
-    "cms_branch": "master"
+    "cms_branch": "master",
+    "develop": false
   },
   "scripts": {
     "start": "npm run build && node lib/server.js",
-    "dev": "./lib/init-dev.sh && nodemon --watch src -e json,js,sh,html,yaml,md,css,scss lib/server.js",
+    "dev": "./bin/init-dev.sh && nodemon --watch src/templates -e html lib/server.js",
     "clean": "website-builder clean",
-    "build": "npm run clean && npm run build-pages && npm run assets && npm run media",
-    "build-dev": "npm config set iigb-website:content_base . && npm run build",
+    "build": "npm run clean && npm run build-pages && npm run assets && npm run js && npm run media",
+    "build-dev": "npm config set iigb-website:content_base . && npm config set iigb-website:develop true  && npm run build",
     "build-pages": "DEBUG=$npm_package_config_debug website-builder build --layouts src/templates --content $npm_package_config_content_base/iigb-beta-content/content --structure $npm_package_config_content_base/iigb-beta-structure/structure",
-    "assets": "DEBUG=$npm_package_config_debug website-builder -t build/assets assets --assets src/assets --sass ./scss -o ./css",
+    "assets": "DEBUG=$npm_package_config_debug website-builder -t build/assets assets --dev $npm_package_config_develop --assets src/assets --sass ./scss -o ./css ",
+    "js": "./bin/build-js",
     "media": "website-builder -t build/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
     "predeploy": "npm install && npm run postinstall && npm test && npm run build",
     "deploy": "npm run predeploy && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
@@ -29,13 +32,24 @@
     "release": "node_modules/iigb-aws-helpers/release.sh",
     "rollback": "node_modules/iigb-aws-helpers/rollback.sh"
   },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "html5shiv": "^3.7.3",
+    "jquery": "^3.1.1",
+    "respond.js": "^1.4.2",
+    "selectivizr": "^1.0.3"
+  },
   "devDependencies": {
+    "browserify": "^13.3.0",
+    "express": "^4.14.0",
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-cms-tags": "uktrade/iigb-cms-tags",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",
+    "uglify-js": "^2.7.5",
     "underscore": "^1.8.3",
+    "watchify": "^3.8.0",
     "website-builder": "uktrade/website-builder"
   }
 }

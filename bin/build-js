@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+rm -rf build/assets/js/*
+mkdir -p build/assets/js
+readonly BROWSERIFY="browserify"
+readonly WATCHIFY="watchify -v"
+
+
+if [[ "$npm_package_config_develop" == "true" ]]; then
+  echo "Building js files for development environment"
+  $BROWSERIFY src/js/main/main.js --debug -o build/assets/js/main.js
+  $BROWSERIFY src/js/main/main-ie8.js --debug -o build/assets/js/main-ie8.js
+  $BROWSERIFY src/js/main/main-jquery-old.js --debug -o build/assets/js/main-jquery-old.js
+  $BROWSERIFY src/js/main/main-jquery.js --debug -o build/assets/js/main-jquery.js
+else
+  echo "Building js files for production environment"
+  $BROWSERIFY src/js/main/main.js | uglifyjs --compress -o build/assets/js/main.js
+  $BROWSERIFY src/js/main/main-ie8.js | uglifyjs --compress -o build/assets/js/main-ie8.js
+  $BROWSERIFY src/js/main/main-jquery-old.js | uglifyjs --compress -o build/assets/js/main-jquery-old.js
+  $BROWSERIFY src/js/main/main-jquery.js | uglifyjs --compress -o build/assets/js/main-jquery.js
+fi
+
