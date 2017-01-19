@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+set -eo pipefail
+IFS=$'\n\t'
+
+
+DEBUG=$npm_package_config_debug website-builder -t build/assets/${IIGB_BUILD} assets --dev $npm_package_config_develop --assets src/assets --sass ./scss -o ./css
+
+
+#Hack to replace sass files src=/assets lines to src=/assets/$IIGB_FOLDER after build
+#which is used for IE8 and older browsers
+
+if [[ -n ${IIGB_BUILD} ]]; then
+ echo "******Replacing /assets to /assets/${IIGB_BUILD} in css"
+ sed -i -E "s/\/assets\//\/assets\/${IIGB_BUILD}\//" build/assets/${IIGB_BUILD}/css/main.css
+fi

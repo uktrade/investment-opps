@@ -1,23 +1,28 @@
 #!/usr/bin/env bash
-set -euo pipefail
+set -eo pipefail
 
-rm -rf build/assets/js/*
-mkdir -p build/assets/js
 readonly BROWSERIFY="browserify"
 readonly WATCHIFY="watchify -v"
+
+#Change output to tag if it is available
+assets_output='build/assets';
+[[ -n $IIGB_BUILD ]] && assets_output="${assets_output}/${IIGB_BUILD}"
+readonly js_output="${assets_output}/js"
+rm -rf $js_output/*
+mkdir -p $js_output
 
 
 if [[ "$npm_package_config_develop" == "true" ]]; then
   echo "Building js files for development environment"
-  $BROWSERIFY src/js/main/main.js --debug -o build/assets/js/main.js
-  $BROWSERIFY src/js/main/main-ie8.js --debug -o build/assets/js/main-ie8.js
-  $BROWSERIFY src/js/main/main-jquery-old.js --debug -o build/assets/js/main-jquery-old.js
-  $BROWSERIFY src/js/main/main-jquery.js --debug -o build/assets/js/main-jquery.js
+  $BROWSERIFY src/js/main/main.js --debug -o $js_output/main.js
+  $BROWSERIFY src/js/main/main-ie8.js --debug -o $js_output/main-ie8.js
+  $BROWSERIFY src/js/main/main-jquery-old.js --debug -o $js_output/main-jquery-old.js
+  $BROWSERIFY src/js/main/main-jquery.js --debug -o $js_output/main-jquery.js
 else
   echo "Building js files for production environment"
-  $BROWSERIFY src/js/main/main.js | uglifyjs --compress -o build/assets/js/main.js
-  $BROWSERIFY src/js/main/main-ie8.js | uglifyjs --compress -o build/assets/js/main-ie8.js
-  $BROWSERIFY src/js/main/main-jquery-old.js | uglifyjs --compress -o build/assets/js/main-jquery-old.js
-  $BROWSERIFY src/js/main/main-jquery.js | uglifyjs --compress -o build/assets/js/main-jquery.js
+  $BROWSERIFY src/js/main/main.js | uglifyjs --compress -o $js_output/main.js
+  $BROWSERIFY src/js/main/main-ie8.js | uglifyjs --compress -o $js_output/main-ie8.js
+  $BROWSERIFY src/js/main/main-jquery-old.js | uglifyjs --compress -o $js_output/main-jquery-old.js
+  $BROWSERIFY src/js/main/main-jquery.js | uglifyjs --compress -o $js_output/main-jquery.js
 fi
 

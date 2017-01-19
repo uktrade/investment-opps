@@ -5,6 +5,8 @@
 
 [ -z "$CMS_BRANCH" ] && echo "CMS_BRANCH not set, using master" && CMS_BRANCH="master"
 
+export IIGB_BUILD=`date +%s`
+echo "Setting build number to ${IIGB_BUILD}"
 DOCKER_IMAGE="$DOCKER_IMAGE_NAME-deployer"
 
 $DOCKER_PATH build --force-rm -t $DOCKER_IMAGE $PWD  && \
