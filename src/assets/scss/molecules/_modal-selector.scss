@@ -1,0 +1,30 @@
+//modal-selector.scss
+
+.modal-lang-selector {
+  color: $text-colour;
+
+  ul {
+    list-style: none;
+    padding: 0 0 28px;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  li {
+    margin-top: 48px;
+  }
+
+  a {
+    font-weight: bold;
+    color: $text-colour;
+    display: inline-block;
+    position: relative;
+    margin-left: 50px;
+    border-bottom: 1px solid transparent; //solves grid problem on hover
+
+    &:hover {
+      color: $link-colour;
+      border-bottom: 1px solid;
+    }
+  }
+}

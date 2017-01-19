@@ -1,10 +1,24 @@
 <div class="dit-hmg_logo">
     <div class="container">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#langsel-collapse-1"
+                aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <div class="dit-icon-xs dit-icon-language" style="color: red">{{locale.language}}</div>
+        </button>
         <a href="https://www.gov.uk/" target="_blank">
-            <img class="dit-logo" src="/media/logos/hmg-logo.png" alt="HMG Logo">
+            <img class="navbar-brand dit-logo" src="/media/logos/hmg-logo.png" alt="HMG Logo">
         </a>
-        <a href="#step-1">
-            <div class="dit-nav-contact">{{ labels.contact[locale.code] }}</div>
-        </a>
+        <div class="collapse navbar-collapse" id="langsel-collapse-1">
+            <a href="#"
+               data-toggle="modal"
+               data-target="#languageSelector">
+                <div class="dit-nav-language">
+                    <div class="dit-nav-language-wrapper">
+                        <div class="dit-icon-xs dit-icon-language"></div>
+                        <div>{{locale.language}} - {{locale.countryName}}</div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>

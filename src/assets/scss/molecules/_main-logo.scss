@@ -31,14 +31,40 @@
   height: 24px;
   margin-top: 8px;
   margin-left: -2px;
+  padding: 0;
 }
 
 .dit-nav-contact {
   float: right;
-  color: white;
+  color: $white;
   border: 1px solid white;
   border-radius: 4px;
   padding: 1px 16px;
   margin-top: 8px;
   font-size: 16px;
+}
+
+.dit-nav-language {
+  float: right;
+  display: table;
+  color: $white;
+  margin: 4px 0 0 0;
+  font-size: 14px;
+  border-spacing: 4px;
+
+  &-wrapper {
+    display: table-row;
+
+    & div {
+      display: table-cell;
+    }
+  }
+}
+
+.dit-selector-wrapper {
+  position: relative;
+  padding-bottom: 56.25%;
+  padding-top: 25px;
+  height: 0;
+  width: 80%;
 }

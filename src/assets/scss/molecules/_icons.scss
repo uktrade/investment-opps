@@ -11,6 +11,11 @@
     margin: 4px -4px 0 15px;
   }
 
+  &-xs {
+    height: 24px;
+    width: 24px;
+  }
+
   &-connections {
     background: linear-gradient(transparent, transparent),
     url(../../media/icons/dit-icon-connections.svg) no-repeat;
@@ -54,5 +59,18 @@ sizingMethod='scale');
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
     src='/media/icons/dit-icon-insight.png',
 sizingMethod='scale');
+  }
+
+  &-language {
+    background: linear-gradient(transparent, transparent),
+    url(../../media/icons/dit-language-icon.svg) no-repeat;
+    background-size: contain;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+    src='/media/icons/dit-language-icon.png',
+sizingMethod='scale');
+
+    @media (max-width: $screen-xs-max) {
+      margin: -13px -15px 0 0;
+    }
   }
 }
