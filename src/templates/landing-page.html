@@ -9,9 +9,9 @@
     <section class="dit-industries-tiles-landing">
         <div class="row">
             <div class="col-md-12 margin-top--4">
-                <!--<h2 class="dit-industries-tiles-landing__heading">{{labels.industry_overviews}}</h2>-->
-                <!--<p>{{labels.industry_overviews_intro}}</p>-->
-                {{ markups.tilesIndustry(list = tileItems, country = locale.country ) }}
+                <!--<h2 class="dit-industries-tiles-landing__heading">{{ labels.industry_overviews[locale.code] }}</h2>-->
+                <!--<p>{{ labels.industry_overviews_intro[locale.code] }}</p>-->
+                {{ markups.tilesIndustry(list = tileItems, country = locale.country, assets = assets ) }}
             </div>
         </div>
     </section>
@@ -19,8 +19,8 @@
     <section class="dit-industries-tiles-landing">
         <div class="row">
             <div class="col-md-12 margin-top--4">
-                <!--<h2 class="dit-industries-tiles-landing__heading">{{labels.industries}}</h2>-->
-                <!--<p>{{labels.industries_intro}}</p>-->
+                <!--<h2 class="dit-industries-tiles-landing__heading">{{ labels.industries[locale.code] }}</h2>-->
+                <!--<p>{{ labels.industries_intro[locale.code] }}</p>-->
 
                 <!--
                 [cms-fields]
@@ -44,7 +44,7 @@
                   -->
 
 
-                {{ markups.tilesSector(list = subTileItems, country = locale.country ) }}
+                {{ markups.tilesSector(list = subTileItems, country = locale.country, assets = assets ) }}
             </div>
         </div>
     </section>

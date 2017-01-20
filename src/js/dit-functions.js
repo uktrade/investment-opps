@@ -1,4 +1,7 @@
+var equalheight=require('./equalHeight');
 init();
+module.exports = {
+};
 
 function showcontent() {
   $('.dit-outer-wrap').show()
@@ -12,27 +15,21 @@ function enhance() {
   enhance_videobg()
 }
 
+function playVidTest() {
+  $('#heroVideo').on('show.bs.modal', function (e) {
+    var extVid = $('.video-wrapper').attr('data-video')
+    var ytApi = '<iframe width="560" height="315" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
+    $('.video-wrapper').append(ytApi)
+  })
+}
+
 function enhance_videobg() {
   if ($('#bgVid').length > 0 || $('#bgImg').length > 0) {
     $('.jumbotron').addClass('bg--transparent')
-      // $("#heroVideo").on('hidden.bs.modal', function (e) {
-      //   $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
-      // })
-
-    // $(".modal-backdrop, #myModal .close, #myModal .btn").live("click", function() {
-    //         jQuery("#myModal iframe").attr("src", jQuery("#myModal iframe").attr("src"))
-    // })
-
-
   }
 }
 
 function heroVideoReload() {
-  // strange .on issue - look at smoothScroll - might be an issue there
-  // $('#heroVideo').on('hidden.bs.modal', function () {
-  //     console.log($("#heroVideo iframe"))
-  //     $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
-  // })
   $('#closeHeroVideo').click(function() {
     $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
   })
@@ -52,9 +49,23 @@ function onLoaded() {
   submitForm()
   responsiveTable()
   heroVideoReload()
+  playVidTest()
+}
+
+function formAutocomplete(){
+
+
+  $('#country').autocomplete({
+    lookup: document.countries,
+    onSelect: function (suggestion) {
+      $('#country_en').val(document.countries_en[suggestion.data]);
+
+    }
+  });
 }
 
 function init() {
+
   var is_root = location.pathname == "/";
   // console.log(location.pathname);
 
@@ -70,6 +81,19 @@ function init() {
   }
   // removeloading();
   // doGeoRouting();
+
+  $(document).ready(function () {
+    enhance();
+    setTimeout(showcontent, 500);
+    setTimeout(removeloading, 1000);
+    setTimeout(onLoaded, 1005);
+  });
+
+  $(window).on('resize', function () {
+    checkHeight();
+    setGradientHeight();
+    prepareForm();
+  });
 }
 
 function checkGeoLocation() {
@@ -96,7 +120,7 @@ function doGeoRouting(countryCode) {
 
 function doRedirect(countryCode) {
   var redirectLocation = countryCode.toLowerCase();
-  window.location.pathname = '/' + redirectLocation;
+  window.location.pathname = '/' + redirectLocation + '/';
 }
 
 
@@ -166,6 +190,9 @@ function openNav() {
     }
   })
 
+  $("#closebtn-collapse-1").click(function(){
+    closeNav()
+  })
   box.animate({
     'margin-top': '0px',
     'height': '110px'

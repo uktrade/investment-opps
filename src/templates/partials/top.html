@@ -6,14 +6,15 @@
     <title>{{pageTitle}} - invest.great.gov.uk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <!--<meta name="intro" content="{{ pageHeader.content.contents | safe }}">-->
+    <link rel="icon" type="image/x-icon" href="https://gds.blog.gov.uk/wp-content/themes/gds-blogs/build/govuk_template/assets/images/favicon.ico">
     <meta name="url" content="{{ path }}">
     <meta name="pageTitle" content="{{pageTitle}}">
     <meta name="language" content="{{locale.language}}">
     <meta name="country" content="{{locale.country}}">
     <meta name="timestamp" content="{{timestamp}}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
-    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="/assets/css/main.css" rel="stylesheet" type="text/css"/>
+    <link href="/{{assets}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/{{assets}}/css/main.css" rel="stylesheet" type="text/css"/>
     <script>(function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({
@@ -27,16 +28,9 @@
         f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-N6G2BT');</script>
     <!--[if lt IE 9]>
-    <link href="/assets/css/main-ie8.css" rel="stylesheet" type="text/css"/>
-    <script src="https://code.jquery.com/jquery-1.12.4.min.js"
-            integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="
-            crossorigin="anonymous"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/selectivizr/1.0.2/selectivizr-min.js"></script>
-    <script type="text/javascript"
-            src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
+      <link href="/{{assets}}/css/main-ie8.css" rel="stylesheet" type="text/css"/>
+      <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/main-jquery-old.js"> </script>
+      <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/{{'build/' if build}}main-ie8.js"> </script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/css3pie/2.0beta1/PIE_IE678.js"></script>
     <script>
         document.createElement('header');
@@ -48,64 +42,16 @@
     </script>
     <![endif]-->
     <!--[if gte IE 9]>
-    <link href="/assets/css/main-ie9.css" rel="stylesheet" type="text/css"/>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="/assets/js/jquery.autocomplete.min.js"></script>
+        <link href="/{{assets}}/css/main-ie9.css" rel="stylesheet" type="text/css"/>
     <![endif]-->
-    <![if !IE]>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="/assets/js/jquery.autocomplete.min.js"></script>
-    <![endif]>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
-    <script src="/assets/js/equalHeight.js"></script>
-    <script src="/assets/js/dit-functions.js"></script>
 </head>
-<style type="text/css">
-    .bg--transparent {
-        background: transparent;
-    }
 
-    .dit-outer-wrap {
-        display: none;
-    }
-
-    .modal-open .modal {
-        background: #000;
-    }
-
-    .dit-loading {
-        position: fixed;
-        z-index: 100;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        background: #fff;
-    }
-</style>
 <body>
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6G2BT"
             height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
 <div class="dit-loading"></div>
-<noscript>
-    <style type="text/css">
-        .dit-loading {
-            display: none;
-        }
-
-        .dit-outer-wrap {
-            display: block;
-        }
-    </style>
-</noscript>
 <div class="dit-outer-wrap">
     <div id="dit-search-overlay" class="overlay">
 

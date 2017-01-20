@@ -1,3 +1,6 @@
+<!-- Change target to timestamped folder if there is a build -->
+{% set assets = 'assets/'+ build if build else 'assets' %}
+
 {% include "partials/top.html" %}
 
 {% include "partials/overlay.html" %}
@@ -5,7 +8,7 @@
 <!--[if lte IE 8]>
 <style>
     .jumbotron {
-        background-image: url("/media/hero-img/home-default.jpg");
+      background-image: url("/{{assets}}/media/hero-img/home-default.jpg");
         background-size: cover;
         margin-top: -9%;
     }

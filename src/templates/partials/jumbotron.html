@@ -1,11 +1,11 @@
 {% if pageHeader.heroImage %}
     <style>
         .jumbotron {
-            background-image: url("/media/hero-img/{{pageHeader.heroImage}}");
+          background-image: url("/{{assets}}/media/hero-img/{{pageHeader.heroImage}}");
         }
         @media (max-width: 767px) {
             .jumbotron {
-                background-image: url("/media/hero-img-mobile/{{pageHeader.heroImage}}");
+              background-image: url("/{{assets}}/media/hero-img-mobile/{{pageHeader.heroImage}}");
             }
         }
     </style>
@@ -25,9 +25,11 @@
             {% if pageHeader.externalVideo %}
                 <!--[if ! IE]><!-->
                 <p>
-                    <a href="#" class="bg-video-inactive bg-video-play dit-text-decoration-none" data-toggle="modal"
+                    <a href="#"
+                       class="bg-video-inactive bg-video-play dit-text-decoration-none"
+                       id="playVid" data-toggle="modal"
                        data-target="#heroVideo">
-                        <span class="dit-btn-home__video">{{labels.watch_video}}
+                        <span class="dit-btn-home__video">{{ labels.watch_video[locale.code] }}
                             <span class="glyphicon glyphicon-play"></span>
                         </span>
                     </a>
@@ -35,61 +37,29 @@
                 <!--<![endif]-->
                 <!--[if gte IE 9]>
 
-        <p class="text-center"><a href="#" class="bg-video-inactive bg-video-play" data-toggle="modal"
-                                  data-target="#heroVideo">Watch video <span class="glyphicon glyphicon-play-circle dit-play"
-                                                                             aria-hidden="true"></span></a></p>
-        <![endif]-->
+                <p class="text-center">
+                    <a href="#"
+                       class="bg-video-inactive bg-video-play"
+                       data-toggle="modal"
+                       data-target="#heroVideo">{{ labels.watch_video[locale.code] }}
+                        <span class="glyphicon glyphicon-play-circle dit-play" aria-hidden="true"></span>
+                    </a>
+                </p>
+                <![endif]-->
                 <!--[if lte IE 8]>
-            <div id="player"></div>
+                <div id="player" data-video="{{pageHeader.externalVideo}}"></div>
 
-            <script>
-                // 2. This code loads the IFrame Player API code asynchronously.
-                var tag = document.createElement('script');
-
-                tag.src = "https://www.youtube.com/iframe_api";
-                var firstScriptTag = document.getElementsByTagName('script')[0];
-                firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
-
-                // 3. This function creates an <iframe> (and YouTube player)
-                //    after the API code downloads.
-                var player;
-                function onYouTubeIframeAPIReady() {
-                    player = new YT.Player('player', {
-                        height: '220',
-                        width: '390',
-                        videoId: 'yoHrRcKIBKw',
-                        events: {
-                            'onReady': onPlayerReady,
-//                            'onStateChange': onPlayerStateChange
-                        }
-                    });
-                }
-
-                // 4. The API will call this function when the video player is ready.
-                function onPlayerReady(event) {
-                    event.target.playVideo();
-                }
-
-//                // 5. The API calls this function when the player's state changes.
-//                //    The function indicates that when playing a video (state=1),
-//                //    the player should play for six seconds and then stop.
-//                var done = false;
-//                function onPlayerStateChange(event) {
-//                    if (event.data == YT.PlayerState.PLAYING && !done) {
-//                        setTimeout(stopVideo, 6000);
-//                        done = true;
-//                    }
-//                }
-//                function stopVideo() {
-//                    player.stopVideo();
-//                }
-            </script>
-        <![endif]-->
+                <script>
+                    var extVid = document.getElementById("player").getAttribute("data-video");
+                    var divToAppend = document.getElementById("player");
+                    divToAppend.innerHTML = '<iframe width="480" height="270" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
+                </script>
+                <![endif]-->
             {% endif %}
             {% if pageHeader.externalVideoCN %}
                 <p>
                     <a href="{{pageHeader.externalVideoCN}}" target="_blank">
-                        <span class="dit-btn-home__video">{{labels.watch_video}}
+                        <span class="dit-btn-home__video">{{ labels.watch_video[locale.code] }}
                             <span class="glyphicon glyphicon-play"></span>
                         </span>
                     </a>
@@ -100,15 +70,12 @@
     {% if pageHeader.externalVideo %}
         <div class="modal fade" id="heroVideo" role="dialog" data-backdrop="static" data-keyboard="false">
             <span class="glyphicon glyphicon-remove dit-remove-icon" id="closeHeroVideo" data-dismiss="modal"></span>
-            <div class="modal-dialog video-wrapper">
-                <iframe width="560" height="315" src="{{pageHeader.externalVideo}}" frameborder="0"
-                        allowfullscreen></iframe>
-            </div>
+            <div class="modal-dialog video-wrapper" data-video="{{pageHeader.externalVideo}}"></div>
         </div>
 
         {% if pageHeader.heroVideo %}
-        <video autoplay loop poster="/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
-            <source src="/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
+        <video autoplay loop poster="/{{assets}}/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
+          <source src="/{{assets}}/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
         </video>
         {% endif %}
     {% endif %}
