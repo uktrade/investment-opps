@@ -46,7 +46,6 @@ function onLoaded() {
   ifOtherSelected()
   search()
   jsSearch()
-  submitForm()
   responsiveTable()
   heroVideoReload()
   playVidTest()
@@ -144,7 +143,7 @@ function smoothScroll() {
 
 function addActive() {
   var url = window.location.pathname
-  var base_url = document.base_url;
+  var base_url = '/' + document.base_url + '/';
   var child = ''
   if (url.match(/\/industries\//)) {
     child = 'industries/'
@@ -157,7 +156,7 @@ function addActive() {
   }
 
   if ($('ul.nav a') && base_url) {
-    $('ul.nav a[href="' + base_url[0] + child + '"]').parent().addClass('active')
+    $('ul.nav a[href="' + base_url + child + '"]').parent().addClass('active')
   }
 }
 
@@ -282,7 +281,7 @@ function prepareForm() {
   $('.nextBtn').show()
   $('.prevBtn').show()
   $('.location_block').show()
-  $('.submitBtn').hide()
+  $('.submitBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -393,6 +392,9 @@ function prepareForm() {
         "margin-left": -(curStepValue * theWidth)
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
+      if($(this).attr('id') === 'ga-send-js'){
+        submitForm()
+      }
     }
   })
 
@@ -414,11 +416,9 @@ function prepareForm() {
 
 function submitForm() {
 
-  $('#dit-form').submit(function(e) {
     formLoading()
 
-    var windowUrl = window.location.pathname
-    var base_url = document.base_url
+    var base_url = '/'+ document.base_url + '/'
     var postUrl = $('form').attr('action')
     var form = $('#dit-form')
 
@@ -439,12 +439,10 @@ function submitForm() {
       }
     })
     e.preventDefault()
-  })
 
   function formLoading() {
 
     $t = $('.dit-form-section__body')
-    var submitBtn = $('.submitBtn')
 
     $('#loading-overlay').css({
       opacity: 0.5,
@@ -456,9 +454,7 @@ function submitForm() {
       top: $t.outerHeight() / 2,
     })
 
-    submitBtn.click(function() {
       $('#loading-overlay').fadeIn()
-    })
 
   }
 }
