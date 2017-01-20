@@ -144,7 +144,7 @@ function smoothScroll() {
 
 function addActive() {
   var url = window.location.pathname
-  var language = url.match(/\/\w{2,3}\//)
+  var base_url = document.base_url;
   var child = ''
   if (url.match(/\/industries\//)) {
     child = 'industries/'
@@ -156,8 +156,8 @@ function addActive() {
     child = ''
   }
 
-  if ($('ul.nav a') && language) {
-    $('ul.nav a[href="' + language[0] + child + '"]').parent().addClass('active')
+  if ($('ul.nav a') && base_url) {
+    $('ul.nav a[href="' + base_url[0] + child + '"]').parent().addClass('active')
   }
 }
 
@@ -418,7 +418,7 @@ function submitForm() {
     formLoading()
 
     var windowUrl = window.location.pathname
-    var language = windowUrl.match(/\/\w{2,3}\//)[0]
+    var base_url = document.base_url
     var postUrl = $('form').attr('action')
     var form = $('#dit-form')
 
@@ -432,10 +432,10 @@ function submitForm() {
           'event': 'formSubmissionSuccess',
           'formId': 'dit-form'
         });
-        window.location.href = language + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
       },
       error: function(xhr, textstatus, error) {
-        window.location.href = language + 'enquiries/error/?errorCode=' + 500
+        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
       }
     })
     e.preventDefault()

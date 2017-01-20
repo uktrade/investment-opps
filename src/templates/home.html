@@ -14,7 +14,7 @@
 <section class="dit-content-section">
     <div class="row">
       <div class="col-md-12">
-        {{ markups.tilesWithSideDescription( header = labels.great_british_industries[locale.code], list = tileItems, country = locale.country, assets = assets  ) }}
+        {{ markups.tilesWithSideDescription( header = labels.great_british_industries[locale.code], list = tileItems, base = base, assets = assets  ) }}
         <div class="dit-section-cta">
           <a href="industries" class="dit-btn">{{ labels.discover[locale.code] }}</a>
         </div>
@@ -23,7 +23,7 @@
 </section>
 
 
-{{ markups.bullet_list( header = listHeader, list = listItems, country = locale.country  ) }}
+{{ markups.bullet_list( header = listHeader, list = listItems, base = base  ) }}
 
 {% include "partials/about-us.html" %}
 
