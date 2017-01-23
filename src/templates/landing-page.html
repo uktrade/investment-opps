@@ -11,7 +11,7 @@
             <div class="col-md-12 margin-top--4">
                 <!--<h2 class="dit-industries-tiles-landing__heading">{{ labels.industry_overviews[locale.code] }}</h2>-->
                 <!--<p>{{ labels.industry_overviews_intro[locale.code] }}</p>-->
-                {{ markups.tilesIndustry(list = tileItems, country = locale.country ) }}
+                {{ markups.tilesIndustry(list = tileItems, base = base, assets = assets ) }}
             </div>
         </div>
     </section>
@@ -44,7 +44,7 @@
                   -->
 
 
-                {{ markups.tilesSector(list = subTileItems, country = locale.country ) }}
+                {{ markups.tilesSector(list = subTileItems, base = base, assets = assets ) }}
             </div>
         </div>
     </section>

@@ -18,46 +18,46 @@
 
   &-connections {
     background: linear-gradient(transparent, transparent),
-    url(../../media/icons/dit-icon-connections.svg) no-repeat;
+    url(../media/icons/dit-icon-connections.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-icon-connections.png',
+    src=$assets + '/media/icons/dit-icon-connections.png',
 sizingMethod='scale');    //fallback for IE8
   }
 
   &-immigration {
     background: linear-gradient(transparent, transparent),
-    url(../../media/icons/dit-icon-immigration.svg) no-repeat;
+    url(../media/icons/dit-icon-immigration.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-icon-immigration.png',
+    src=$assets + '/media/icons/dit-icon-immigration.png',
 sizingMethod='scale');
   }
 
   &-incentives {
     background: linear-gradient(transparent, transparent),
-    url(../../media/icons/dit-icon-incentives.svg) no-repeat;
+    url(../media/icons/dit-icon-incentives.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-icon-incentives.png',
+    src=$assets + '/media/icons/dit-icon-incentives.png',
 sizingMethod='scale');
   }
 
   &-talent {
     background: linear-gradient(transparent, transparent),
-    url(../../media/icons/dit-icon-talent.svg) no-repeat;
+    url(../media/icons/dit-icon-talent.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-icon-talent.png',
+    src=$assets + '/media/icons/dit-icon-talent.png',
 sizingMethod='scale');
   }
 
   &-insight {
     background: linear-gradient(transparent, transparent),
-    url(../../media/icons/dit-icon-insight.svg) no-repeat;
+    url(../media/icons/dit-icon-insight.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-icon-insight.png',
+    src=$assets + '/media/icons/dit-icon-insight.png',
 sizingMethod='scale');
   }
 

@@ -1,7 +1,8 @@
 <script>
+document.base_url=  '{{base}}';
 document.countries = [{% for o in labels.form_headquarters.options[locale.code] %}
                     {"value": "{{o}}", "data": "{{loop.index}}"},
-                {% endfor %}]
+                {% endfor %}];
 document.countries_en = ["zero",
                 {% for o in labels.form_headquarters.options['en_US'] %}
                     "{{o}}",
