@@ -44,7 +44,7 @@
         </div>
         <div class="col-md-8 dit-form-section__body">
             <div id="loading-overlay">
-                <img src="/media/spin.gif" alt="loading_spinner" id="img-load">
+              <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
             </div>
             <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
                 action="https://forms.invest.great.gov.uk/form"
@@ -329,7 +329,7 @@
                                 </div>
                                 <div class="col-md-10 disclaimer_block">
                                   <label class="control-label form_heading" for="mailing_list_checkbox">{{ labels.form_disclaimer_heading[locale.code] }}</label>
-                                    <p>{{ labels.form_disclaimer[locale.code] }}<a href="/{{locale.country}}/terms-and-conditions/"
+                                    <p>{{ labels.form_disclaimer[locale.code] }}<a href="/{{base}}/terms-and-conditions/"
                                     target="_blank">{{ labels.form_disclaimer_tc[locale.code] }}</a>
                                 </p>
                             </div>
@@ -339,11 +339,11 @@
                                 {{ labels.form_previous[locale.code] }}
                                 </button>
                                 <button id="ga-send-js" class="dit-btn--sm nextBtn"
-                                type="submit">
+                                type="button">
                                 {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>
                                 </button>
-                                <button id="ga-send" class="dit-btn--sm submitBtn"
+                                <button id="ga-send" class="dit-btn--sm submitBtn submitBtnNonjs"
                                 type="submit">
                                 {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>

@@ -1,11 +1,11 @@
 {% if pageHeader.heroImage %}
     <style>
         .jumbotron {
-            background-image: url("/media/hero-img/{{pageHeader.heroImage}}");
+          background-image: url("/{{assets}}/media/hero-img/{{pageHeader.heroImage}}");
         }
         @media (max-width: 767px) {
             .jumbotron {
-                background-image: url("/media/hero-img-mobile/{{pageHeader.heroImage}}");
+              background-image: url("/{{assets}}/media/hero-img-mobile/{{pageHeader.heroImage}}");
             }
         }
     </style>
@@ -74,8 +74,8 @@
         </div>
 
         {% if pageHeader.heroVideo %}
-        <video autoplay loop poster="/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
-            <source src="/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
+        <video autoplay loop poster="/{{assets}}/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
+          <source src="/{{assets}}/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
         </video>
         {% endif %}
     {% endif %}
