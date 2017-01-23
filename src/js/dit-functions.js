@@ -472,8 +472,6 @@ function getResults(size, start) {
     country = URL.split('/')[3]
   }
 
-  console.log(country)
-
   if (searchInput === '') {
     searchArea.html("")
   } else if (searchInput.length > 2) {
