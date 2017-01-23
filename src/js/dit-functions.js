@@ -46,7 +46,6 @@ function onLoaded() {
   ifOtherSelected()
   search()
   jsSearch()
-  submitForm()
   responsiveTable()
   heroVideoReload()
   playVidTest()
@@ -144,7 +143,7 @@ function smoothScroll() {
 
 function addActive() {
   var url = window.location.pathname
-  var language = url.match(/\/\w{2,3}\//)
+  var base_url = '/' + document.base_url + '/';
   var child = ''
   if (url.match(/\/industries\//)) {
     child = 'industries/'
@@ -156,8 +155,8 @@ function addActive() {
     child = ''
   }
 
-  if ($('ul.nav a') && language) {
-    $('ul.nav a[href="' + language[0] + child + '"]').parent().addClass('active')
+  if ($('ul.nav a') && base_url) {
+    $('ul.nav a[href="' + base_url + child + '"]').parent().addClass('active')
   }
 }
 
@@ -282,7 +281,7 @@ function prepareForm() {
   $('.nextBtn').show()
   $('.prevBtn').show()
   $('.location_block').show()
-  $('.submitBtn').hide()
+  $('.submitBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -393,6 +392,9 @@ function prepareForm() {
         "margin-left": -(curStepValue * theWidth)
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
+      if($(this).attr('id') === 'ga-send-js'){
+        submitForm()
+      }
     }
   })
 
@@ -414,11 +416,9 @@ function prepareForm() {
 
 function submitForm() {
 
-  $('#dit-form').submit(function(e) {
     formLoading()
 
-    var windowUrl = window.location.pathname
-    var language = windowUrl.match(/\/\w{2,3}\//)[0]
+    var base_url = '/'+ document.base_url + '/'
     var postUrl = $('form').attr('action')
     var form = $('#dit-form')
 
@@ -432,19 +432,17 @@ function submitForm() {
           'event': 'formSubmissionSuccess',
           'formId': 'dit-form'
         });
-        window.location.href = language + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
       },
       error: function(xhr, textstatus, error) {
-        window.location.href = language + 'enquiries/error/?errorCode=' + 500
+        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
       }
     })
     e.preventDefault()
-  })
 
   function formLoading() {
 
     $t = $('.dit-form-section__body')
-    var submitBtn = $('.submitBtn')
 
     $('#loading-overlay').css({
       opacity: 0.5,
@@ -456,9 +454,7 @@ function submitForm() {
       top: $t.outerHeight() / 2,
     })
 
-    submitBtn.click(function() {
       $('#loading-overlay').fadeIn()
-    })
 
   }
 }
