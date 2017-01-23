@@ -1,6 +1,4 @@
-{% if locale.language === 'en' %}
 <script>
-
     window.language = 'en';
 </script>
 {% endif %}
@@ -18,44 +16,11 @@
 
 
 <script>
-    $(document).ready(function () {
-        enhance();
-
-        var is_root = location.pathname == "/";
-
-        if (is_root){
-        $('.dit-whitepage').show();
-        setTimeout(showcontent, 2000);
-        setTimeout(removeloading, 2500);
-        setTimeout(onLoaded, 2505);    
-        }else{
-        setTimeout(showcontent, 500);
-        setTimeout(removeloading, 1000);
-        setTimeout(onLoaded, 1005);
-        }
-    });
-
-    function formAutocomplete(){
-        var countries = [{% for o in labels.form_headquarters.options[locale.code] %}
-                            {"value": "{{o}}", "data": "{{loop.index}}"},
-                        {% endfor %}]
-        var countries_en = ["zero",
-                        {% for o in labels.form_headquarters.options['en_US'] %}
-                            "{{o}}",
-                        {% endfor %}];
-
-        $('#country').autocomplete({
-            lookup: countries,
-            onSelect: function (suggestion) {
-                $('#country_en').val(countries_en[suggestion.data]);
-
-            }
-        });
-    }
-
-    $(window).on('resize', function () {
-        checkHeight();
-        setGradientHeight();
-        prepareForm();
-    });
+document.countries = [{% for o in labels.form_headquarters.options[locale.code] %}
+                    {"value": "{{o}}", "data": "{{loop.index}}"},
+                {% endfor %}]
+document.countries_en = ["zero",
+                {% for o in labels.form_headquarters.options['en_US'] %}
+                    "{{o}}",
+                {% endfor %}];
 </script>
