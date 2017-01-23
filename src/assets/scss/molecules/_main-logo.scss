@@ -52,6 +52,10 @@
   font-size: 14px;
   border-spacing: 4px;
 
+  @media (max-width: $screen-xs-max) {
+    margin: -18px -28px 0 0;
+  }
+
   &-wrapper {
     display: table-row;
 
@@ -67,4 +71,9 @@
   padding-top: 25px;
   height: 0;
   width: 80%;
+
+  @media (max-width: $screen-xs-max) {
+    width: 100%;
+    margin: 15px 0;
+  }
 }
