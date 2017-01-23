@@ -25,15 +25,16 @@ body {
     text-decoration: none;
   }
 
-  noscript {
-    &.dit-loading {
-      display: none;
-    }
+  //Below is not gonna work have a look at it TODO:
+  // noscript {
+  //   &.dit-loading {
+  //     display: none;
+  //   }
 
-    &.dit-outer-wrap {
-      display: block;
-    }
-  }
+  //   &.dit-outer-wrap {
+  //     display: block;
+  //   }
+  // }
 }
 
 .dit-outer-wrap{
