@@ -36,6 +36,36 @@
   }
 }
 
+.dit-btn--contact {
+  border: 2px solid $link-colour;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 100;
+  display: inline-block;
+  padding: 2px 2px;
+  margin-left: 8px;
+  color: $link-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+
+  @media (max-width: $screen-sm-max) {
+    border: 2px solid $link-colour;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 100;
+    display: inline-block;
+    padding: 2px 2px;
+    margin-left: 2px;
+    color: $link-colour;
+    background-color: $white;
+  }
+}
+
 .dit-btn-home__video {
   border: 3px solid $background-colour;
   border-radius: 6px;
