@@ -1,21 +1,4 @@
 <script>
-    window.language = 'en';
-</script>
-{% endif %}
-{% if locale.language === 'de' %}
-<script>
-    window.language = 'de';
-</script>
-{% endif %}
-{% if locale.language === 'zh' %}
-<script>
-    window.language = 'cn';
-</script>
-{% endif %}
-
-
-
-<script>
 document.base_url =  '{{base}}';
 document.countries = [{% for o in labels.form_headquarters.options[locale.code] %}
                     {"value": "{{o}}", "data": "{{loop.index}}"},
