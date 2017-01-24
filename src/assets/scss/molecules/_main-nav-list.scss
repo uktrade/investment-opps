@@ -5,16 +5,17 @@
 
   li {
     border-right: 1px solid $tile-border-colour;
+    padding: 0 16px;
+
 
     &:last-of-type {
       border-right: 0 solid;
     }
 
     &.active {
-      border-bottom: 2px solid $red-line-colour;
-
       > a {
         background-color: $white !important;
+        border-bottom: 2px solid $red-line-colour;
       }
     }
 
@@ -26,7 +27,7 @@
   > li > a {
     //display: inline-block;
     font-size: 16px;
-    padding: 4px 16px;
+    padding: 4px 0;
   }
 
   @media (max-width: $screen-md-max) {
