@@ -1,7 +1,6 @@
-var equalheight=require('./equalHeight');
+var equalheight = require('./equalHeight');
 init();
-module.exports = {
-};
+module.exports = {};
 
 function showcontent() {
   $('.dit-outer-wrap').show()
@@ -16,9 +15,9 @@ function enhance() {
 }
 
 function playVidTest() {
-  $('#heroVideo').on('show.bs.modal', function (e) {
+  $('#heroVideo').on('show.bs.modal', function(e) {
     var extVid = $('.video-wrapper').attr('data-video')
-    var ytApi = '<iframe width="560" height="315" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
+    var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
     $('.video-wrapper').append(ytApi)
   })
 }
@@ -52,12 +51,12 @@ function onLoaded() {
   removeloading()
 }
 
-function formAutocomplete(){
+function formAutocomplete() {
 
 
   $('#country').autocomplete({
     lookup: document.countries,
-    onSelect: function (suggestion) {
+    onSelect: function(suggestion) {
       $('#country_en').val(document.countries_en[suggestion.data]);
 
     }
@@ -75,24 +74,25 @@ function init() {
   }
 }
 
+
 function loaded() {
-  $(document).ready(function () {
+  $(document).ready(function() {
     enhance();
     // setTimeout(showcontent, 500);
     // setTimeout(onLoaded, 800);
     onLoaded()
   });
 
-  $(window).on('resize', function () {
+  $(window).on('resize', function() {
     checkHeight();
     setGradientHeight();
     prepareForm();
   });
 
 }
+
 function checkGeoLocation() {
-  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {
-    })
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
     .done(function(data) {
       doGeoRouting(data.country_code);
     })
@@ -127,7 +127,7 @@ function smoothScroll() {
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
-      }, 600, 'swing', function () {
+      }, 600, 'swing', function() {
         window.location.hash = hash
       })
     }
@@ -182,7 +182,7 @@ function openNav() {
     }
   })
 
-  $("#closebtn-collapse-1").click(function(){
+  $("#closebtn-collapse-1").click(function() {
     closeNav()
   })
   box.animate({
@@ -385,7 +385,7 @@ function prepareForm() {
         "margin-left": -(curStepValue * theWidth)
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
-      if($(this).attr('id') === 'ga-send-js'){
+      if ($(this).attr('id') === 'ga-send-js') {
         submitForm()
       }
     }
@@ -409,29 +409,29 @@ function prepareForm() {
 
 function submitForm() {
 
-    formLoading()
+  formLoading()
 
-    var base_url = '/'+ document.base_url + '/'
-    var postUrl = $('form').attr('action')
-    var form = $('#dit-form')
+  var base_url = '/' + document.base_url + '/'
+  var postUrl = $('form').attr('action')
+  var form = $('#dit-form')
 
-    $.ajax({
-      type: 'POST',
-      url: postUrl,
-      data: form.serialize(),
-      success: function(data) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          'event': 'formSubmissionSuccess',
-          'formId': 'dit-form'
-        });
-        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
-      },
-      error: function(xhr, textstatus, error) {
-        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
-      }
-    })
-    e.preventDefault()
+  $.ajax({
+    type: 'POST',
+    url: postUrl,
+    data: form.serialize(),
+    success: function(data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'formSubmissionSuccess',
+        'formId': 'dit-form'
+      });
+      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+    },
+    error: function(xhr, textstatus, error) {
+      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    }
+  })
+  e.preventDefault()
 
   function formLoading() {
 
@@ -447,7 +447,7 @@ function submitForm() {
       top: $t.outerHeight() / 2,
     })
 
-      $('#loading-overlay').fadeIn()
+    $('#loading-overlay').fadeIn()
 
   }
 }
@@ -456,10 +456,10 @@ function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
-    country = URL.split('/')[3],
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
-    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod"
+    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod",
+    country = document.country
 
   if (searchInput === '') {
     searchArea.html("")
