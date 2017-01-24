@@ -35,19 +35,23 @@ function heroVideoReload() {
 }
 
 function onLoaded() {
-  smoothScroll()
-  addActive()
-  checkHeight()
-  setGradientHeight()
-  prepareForm()
-  formAutocomplete()
-  checkFormStatus()
-  ifOtherSelected()
-  search()
-  jsSearch()
-  responsiveTable()
-  heroVideoReload()
-  playVidTest()
+  try {
+    smoothScroll()
+    addActive()
+    checkHeight()
+    setGradientHeight()
+    prepareForm()
+    formAutocomplete()
+    checkFormStatus()
+    ifOtherSelected()
+    search()
+    jsSearch()
+    responsiveTable()
+    heroVideoReload()
+    playVidTest()
+  } catch (e) {
+    console.error(e);
+  }
   removeloading()
 }
 
@@ -229,9 +233,12 @@ function checkFormStatus() {
     formLeftSide.hide()
     formRightSide.hide()
     formSuccess.show()
-    $('html, body').animate({
-      scrollTop: $('.dit-form-section').offset().top
-    }, 2000)
+    try {
+      $('html, body').animate({
+        scrollTop: $('.dit-form-section').offset().top
+      }, 2000)
+    } catch (e) {
+    }
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -275,6 +282,7 @@ function prepareForm() {
   $('.prevBtn').show()
   $('.location_block').show()
   $('.submitBtnNonjs').hide()
+  $('.submitOptsBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -386,7 +394,11 @@ function prepareForm() {
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
       if ($(this).attr('id') === 'ga-send-js') {
-        submitForm()
+        if ($(this).hasClass('optsFormSubmit')) {
+         submitOptsForm()
+        } else {
+          submitForm()
+        }
       }
     }
   })
@@ -407,13 +419,58 @@ function prepareForm() {
   })
 }
 
+function submitOptsForm(){
+
+  formLoading()
+
+  var base_url = '/' + document.base_url + '/'
+  var form = $('#dit-form')
+  var postUrl = form.attr('action')
+
+  $.ajax({
+    type: 'POST',
+    url: postUrl,
+    data: form.serialize(),
+    success: function(data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'formSubmissionSuccess',
+        'formId': 'dit-form'
+      });
+      window.location.href = base_url + 'location-guide/confirmation'
+    },
+    error: function(xhr, textstatus, error) {
+      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    }
+  })
+  // e.preventDefault()
+
+  function formLoading() {
+
+    $t = $('.dit-form-section__body')
+
+    $('#loading-overlay').css({
+      opacity: 0.5,
+      display: 'block',
+    })
+
+    $('#img-load').css({
+      left: $t.outerWidth() / 2 - ($('#img-load').width() / 2),
+      top: $t.outerHeight() / 2,
+    })
+
+    $('#loading-overlay').fadeIn()
+
+  }
+}
+
 function submitForm() {
 
   formLoading()
 
   var base_url = '/' + document.base_url + '/'
-  var postUrl = $('form').attr('action')
   var form = $('#dit-form')
+  var postUrl = form.attr('action')
 
   $.ajax({
     type: 'POST',
@@ -431,7 +488,7 @@ function submitForm() {
       window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
     }
   })
-  e.preventDefault()
+  // e.preventDefault()
 
   function formLoading() {
 
