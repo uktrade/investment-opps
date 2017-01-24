@@ -52,14 +52,6 @@
   font-size: 14px;
   border-spacing: 4px;
 
-  @media (max-width: $screen-sm-max) {
-    margin-right: -15px;
-  }
-
-  @media (max-width: $screen-xs-max) {
-    margin: -18px -28px 0 0;
-  }
-
   &-wrapper {
     display: table-row;
 
