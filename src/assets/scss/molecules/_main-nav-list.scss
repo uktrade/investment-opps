@@ -12,7 +12,14 @@
 
     &.active {
       border-bottom: 2px solid $red-line-colour;
-      background-color: $white;
+
+      > a {
+        background-color: $white !important;
+      }
+    }
+
+    @media (max-width: $screen-sm-max) {
+      border-right: 0 solid;
     }
   }
 
@@ -27,16 +34,23 @@
 
     > li > a {
       font-size: 16px;
-      padding: 4px 2px;
+      padding: 4px 4px;
     }
   }
 
   @media (max-width: $screen-sm-max) {
-    margin-top: 18px;
+    border-left: 0;
+    float: right !important;
+    width: 100%;
 
     > li > a {
-      font-size: 11px;
-      padding: 4px 2px;
+      border: 0;
+      display: block;
+      height: auto;
+
+      &:first-of-type {
+        border: 0;
+      }
     }
   }
 

@@ -42,7 +42,7 @@
   font-size: 16px;
   font-weight: 100;
   display: inline-block;
-  padding: 2px 2px;
+  padding: 2px 12px;
   margin-left: 8px;
   color: $link-colour;
   background-color: $white;
@@ -54,15 +54,14 @@
   }
 
   @media (max-width: $screen-sm-max) {
-    border: 2px solid $link-colour;
-    border-radius: 3px;
-    font-size: 11px;
-    font-weight: 100;
-    display: inline-block;
-    padding: 2px 2px;
-    margin-left: 2px;
-    color: $link-colour;
-    background-color: $white;
+    padding: 4px 10px;
+    margin: 14px 15px 0 0;
+    float: right;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin: 14px 0 0 30px;
+    float: left;
   }
 }
 
