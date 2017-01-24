@@ -53,7 +53,7 @@
     font-weight: 300;
   }
 
-  @media (max-width: $screen-sm-max) {
+  @media (max-width: $screen-md-max) {
     border: 2px solid $link-colour;
     border-radius: 3px;
     font-size: 16px;
