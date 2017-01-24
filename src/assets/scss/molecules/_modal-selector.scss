@@ -1,0 +1,100 @@
+//modal-selector.scss
+
+.modal-lang-selector {
+  color: $text-colour;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding: 0 0 28px 0;
+  }
+
+  li {
+    margin-top: 28px;
+  }
+
+  a {
+    font-weight: bold;
+    color: $text-colour;
+    display: inline-block;
+    position: relative;
+    border-bottom: 1px solid transparent; //solves grid problem on hover
+
+    &:hover {
+      color: $link-colour;
+      border-bottom: 1px solid;
+    }
+
+  }
+
+  @media (max-width: $screen-xs-max) {
+    ul {
+      padding: 0 0 16px 0;
+    }
+
+    li {
+      margin-top: 16px;
+      padding: 0;
+    }
+
+    li a {
+      font-size: 14px;
+    }
+  }
+}
+
+.modal-reg-selector {
+  color: $text-colour;
+
+  ul {
+    list-style: none;
+    margin: 0;
+    overflow: hidden;
+    padding-bottom: 28px;
+  }
+
+  li {
+    margin-top: 48px;
+  }
+
+  a {
+    font-weight: bold;
+    color: $text-colour;
+    display: inline-block;
+    position: relative;
+    border-bottom: 1px solid transparent; //solves grid problem on hover
+
+    &:hover {
+      color: $link-colour;
+      border-bottom: 1px solid;
+    }
+
+    &:active, :focus {
+      text-decoration: none;
+    }
+
+  }
+
+  @media (max-width: $screen-xs-max) {
+    ul {
+      padding: 0 0 16px;
+    }
+
+    li {
+      padding: 0;
+    }
+
+    li a {
+      margin-left: 50px;
+      padding: 0 0 16px 0;
+      font-size: 14px;
+    }
+  }
+}
+
+.dit-close-icon {
+  margin-bottom: 12px;
+  //font-size: 36px;
+  cursor: pointer;
+}

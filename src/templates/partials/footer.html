@@ -20,15 +20,109 @@
             </div>
             <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-0 dit-footer--logo">
                 <a href="https://www.gov.uk/" target="_blank">
-                  <img class="dit-logo-footer" src="/{{assets}}/media/logos/hmg-logo.png" alt="HMG Logo">
+                    <img class="dit-logo-footer" src="/{{assets}}/media/logos/hmg-logo.png" alt="HMG Logo">
                 </a>
                 <ul class="list-unstyled">
                     <li>&copy; Crown copyright</li>
                 </ul>
                 <a href="/{{base}}" style="margin-top: 12px">
-                  <img class="dit-iigb-logo-footer" alt="Brand" src="/{{assets}}/media/logos/iigb-logo-big-white.png">
+                    <img class="dit-iigb-logo-footer" alt="Brand" src="/{{assets}}/media/logos/iigb-logo-big-white.png">
                 </a>
             </div>
         </div>
     </div>
 </nav>
+<!--modals for language selector-->
+<div class="modal fade" id="languageSelectorXs" tabindex="-1" role="dialog">
+    <div class="modal-dialog dit-selector-wrapper" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <p></p>
+                <span class="glyphicon glyphicon-remove dit-close-icon pull-right" data-dismiss="modal"></span>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                            <div class="panel panel-default modal-lang-selector">
+                                <div class="panel-heading" role="tab" id="headingOne">
+                                    <div class="panel-title">
+                                        <a role="button" data-toggle="collapse" data-parent="#accordion"
+                                           href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                            <div>
+                                                <h1>Language</h1>
+                                                <p>Choose your language</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel"
+                                     aria-labelledby="headingOne">
+                                    <div class="panel-body">
+                                        <ul>
+                                            <li class="col-xs-4"><a href="/us">English</a></li>
+                                            <li class="col-xs-4"><a href="/cn">中国</a></li>
+                                            <li class="col-xs-4"><a href="/de">Deutsche</a></li>
+                                            <li class="col-xs-4"><a href="#">日本の</a></li>
+                                            <li class="col-xs-4"><a href="#">Español</a></li>
+                                            <li class="col-xs-4"><a href="#">Português</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="panel panel-default modal-reg-selector">
+                                <div class="panel-heading" role="tab" id="headingTwo">
+                                    <div class="panel-title">
+                                        <a class="collapsed" role="button" data-toggle="collapse"
+                                           data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
+                                           aria-controls="collapseTwo">
+                                            <div>
+                                                <h1>Country/region</h1>
+                                                <p>We also provide region specific investment information</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                                <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel"
+                                     aria-labelledby="headingTwo">
+                                    <div>
+                                        <ul>
+                                            <li class="col-xs-6"><a href="/us"><span
+                                                    class="great-flag-circle great-flag-circle--us"></span>United States</a>
+                                            </li>
+                                            <li class="col-xs-6"><a href="/cn"><span
+                                                    class="great-flag-circle great-flag-circle--cn"></span>中国</a></li>
+                                            <li class="col-xs-6"><a href="/in"><span
+                                                    class="great-flag-circle great-flag-circle--in"></span>India</a>
+                                            </li>
+                                            <li class="col-xs-6"><a href="/de"><span
+                                                    class="great-flag-circle great-flag-circle--de"></span>Deutschland</a>
+                                            </li>
+                                            <li class="col-xs-6"><a href="/int">
+                                                <span class="great-flag-circle great-flag-circle--uk"></span>
+                                                I'm in another country
+                                                <span class="great-locale-selector__help-ext">
+                                    view in international (English)
+                                </span>
+                                            </a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="languageSelector" tabindex="-1" role="dialog">
+    <div class="modal-dialog dit-selector-wrapper" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <span class="glyphicon glyphicon-remove dit-remove-icon pull-right" data-dismiss="modal"></span>
+                {% include "partials/selector.html" %}
+            </div>
+        </div>
+    </div>
+</div>
