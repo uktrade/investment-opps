@@ -300,3 +300,10 @@
 .select_month {
   width: 100px;
 }
+
+@media (max-width: $screen-md-max) {
+.optsForm{
+  position: relative;
+  bottom: 10px !important;
+}
+}

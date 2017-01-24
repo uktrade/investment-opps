@@ -6,7 +6,7 @@
   li {
     //border-right: 1px solid $tile-border-colour;
     border-left: 1px solid $tile-border-colour;
-    padding: 0 16px;
+    padding: 0 10px;
 
     &:first-of-type {
       border-left: none;
@@ -24,12 +24,12 @@
     &.active {
       > a {
         background-color: $white !important;
-        border-bottom: 2px solid $red-line-colour;
+        border-bottom: 2px solid $red-line-colour !important;
       }
     }
 
-    @media (max-width: $screen-sm-max) {
-      border-right: 0 solid;
+    @media (max-width: $screen-md-max) {
+      border-left: none;
     }
   }
 
