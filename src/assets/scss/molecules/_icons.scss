@@ -66,7 +66,7 @@ sizingMethod='scale');
     url(../media/icons/dit-language-icon.svg) no-repeat;
     background-size: contain;
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src='/media/icons/dit-language-icon.png',
+    src=$assets + '/media/icons/dit-language-icon.png',
 sizingMethod='scale');
 
     @media (max-width: $screen-xs-max) {
