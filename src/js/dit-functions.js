@@ -7,7 +7,7 @@ function showcontent() {
 }
 
 function removeloading() {
-  $('.dit-loading').fadeOut(300)
+  $('.dit-loading').fadeOut(400)
 }
 
 function enhance() {
@@ -48,6 +48,7 @@ function onLoaded() {
   responsiveTable()
   heroVideoReload()
   playVidTest()
+  removeloading()
 }
 
 function formAutocomplete() {
@@ -65,26 +66,21 @@ function formAutocomplete() {
 function init() {
 
   var is_root = location.pathname == "/";
-  // console.log(location.pathname);
-
-  // doEqualHeights('.great-equal-hights-container');
-  // setupLocaleSelector();
-  // blurLinks();
-  // resizeListner();
 
   if (is_root) {
     checkGeoLocation();
   } else {
-    removeloading();
+    loaded()
   }
-  // removeloading();
-  // doGeoRouting();
+}
 
+
+function loaded() {
   $(document).ready(function() {
     enhance();
-    setTimeout(showcontent, 500);
-    setTimeout(removeloading, 1000);
-    setTimeout(onLoaded, 1005);
+    // setTimeout(showcontent, 500);
+    // setTimeout(onLoaded, 800);
+    onLoaded()
   });
 
   $(window).on('resize', function() {
@@ -92,18 +88,16 @@ function init() {
     setGradientHeight();
     prepareForm();
   });
+
 }
 
 function checkGeoLocation() {
-  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {
-      // console.log( "success" );
-    })
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
     .done(function(data) {
       doGeoRouting(data.country_code);
     })
     .fail(function() {
-      // console.log( "error" );
-      removeloading();
+      loaded()
     })
 }
 
