@@ -156,12 +156,16 @@
     right: 0;
 
     .glyphicon {
-      margin: 0 12px;
+      margin: 0 8px;
       top: 2px;
+
+      @media (max-width: $screen-xs-max) {
+        margin: 0;
+      }
     }
 
     @media (max-width: $screen-xs-max) {
-      bottom: -50px;
+      bottom: -70px;
     }
   }
 }
