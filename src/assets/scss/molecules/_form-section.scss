@@ -301,9 +301,8 @@
   width: 100px;
 }
 
-@media (max-width: $screen-md-max) {
 .optsForm{
-  position: relative;
-  bottom: 10px !important;
+  position: relative !important;
+  bottom: 0 !important;
 }
-}
+
