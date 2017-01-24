@@ -1,0 +1,98 @@
+{% extends "base/index.html" %}
+
+{% block content %}
+    {% include "partials/header-nav.html" %}
+    {% include "partials/top-bar.html" %}
+
+<div class="jumbotron--auto">
+    <div class="container">
+        <div class="dit-hero__content">
+            <div class="row">
+                <div class="col-sm-10 col-md-10">
+                    <h1>{{ overview.content.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<section class="dit-toc">
+  {% include "partials/breadcrumb.html" %}
+</section>
+
+<div class="container">
+    <section class="dit-content-section">
+        <div class="col-md-10 col-sm-10 dit-main-content__body">
+            {{ overview.content.contents | safe }}
+        </div>
+    </section>
+    <section class="dit-content-section">
+        <div class="col-md-10 col-sm-10 dit-main-content__body">
+            <h2>{{ stayInTouch.content.title }}</h2>
+            {{ stayInTouch.content.contents | safe }}
+        </div>
+      <div class="col-md-8">
+                  <div id="loading-overlay">
+                    <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
+                  </div>
+                  <form enctype='application/x-www-form-urlencoded' id="dit-opts-form" role="form"
+                      action="https://forms.invest.great.gov.uk/signup"
+                      method="post" autocomplete="off">
+                    <div>
+                      <div class="row setup-content" id="step-1">
+                        <div class="form-group col-md-10 form_top_block">
+                          <input id="hidden_field" name="language" type="hidden" value="{{locale.language}}">
+                          <label class="control-label" for="userName">{{ labels.form_full_name[locale.code] }}</label>
+                          <p class="error-help">{{ labels.form_enter_full_name[locale.code] }}</p>
+                          <input type="text" name="user[name]" id="userName" required="required"
+                                                                             class="form-control"
+                                                                             placeholder=""/>
+                          <input name="english[form_full_name]" type="hidden"
+                                                                value="{{ labels.form_full_name['en_US'] }}">
+                          <input name="multilingual[form_full_name]" type="hidden"
+                                                                     value="{{ labels.form_full_name[locale.code] }}">
+                        </div>
+                        <div class="form-group col-md-10">
+                          <label class="control-label" for="userEmail">{{ labels.form_email[locale.code] }}</label>
+                          <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
+                          <p class="validation_error_email">{{ labels.form_enter_valid_email[locale.code] }}</p>
+                          <input type="email" name="user[email]" id="userEmail" required="required"
+                                                                                class="form-control"
+                                                                                placeholder=""/>
+                          <input name="english[form_email]" type="hidden" value="{{ labels.form_email['en_US'] }}">
+                          <input name="multilingual[form_email]" type="hidden"
+                                                                 value="{{ labels.form_email[locale.code] }}">
+                        </div>
+                        <div class="form-group col-md-10">
+                          <label class="checkbox-label" for="mailing_list_checkbox">
+                            <input type="checkbox" id="mailing_list_checkbox" name="user[mailing_list]"
+                                                                              value="true"/>
+                            {{ labels.take_part_in_research[locale.code] }}
+                          </label>
+                          <input name="english[form_mailing_list]" type="hidden"
+                                                                   value="{{ labels.take_part_in_research['en_US'] }}">
+                          <input name="multilingual[form_mailing_list]" type="hidden"
+                                                                        value="{{ labels.take_part_in_research[locale.code] }}">
+                        </div>
+                        <div class="form-group__button">
+                          <button id="ga-send-js" class="dit-btn--sm submitOptsBtn"
+                                                  type="button">
+                            {{ labels.form_submit[locale.code] }}
+                          </button>
+                          <button id="ga-send" class="dit-btn--sm submitOptsBtnNonjs"
+                                               type="submit">
+                            {{ labels.form_submit[locale.code] }}
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+              </form>
+          </div>
+    </section>
+</div>
+
+{% endblock %}
+
+
+
+

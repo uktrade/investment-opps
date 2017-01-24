@@ -40,6 +40,7 @@ function onLoaded() {
   checkHeight()
   setGradientHeight()
   prepareForm()
+  prepareOptsForm()
   formAutocomplete()
   checkFormStatus()
   ifOtherSelected()
@@ -275,6 +276,7 @@ function prepareForm() {
   $('.prevBtn').show()
   $('.location_block').show()
   $('.submitBtnNonjs').hide()
+  $('.submitOptsBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -407,13 +409,65 @@ function prepareForm() {
   })
 }
 
+
+function prepareOptsForm() {
+  $('.submitOptsBtn').click(function() {
+    submitInvestOpts();
+  });
+}
+
+function submitInvestOpts() {
+
+  formLoading()
+
+  var base_url = '/' + document.base_url + '/'
+  var form = $('#dit-opts-form')
+  var postUrl = form.attr('action')
+
+  $.ajax({
+    type: 'POST',
+    url: postUrl,
+    data: form.serialize(),
+    success: function(data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'formSubmissionSuccess',
+        'formId': 'dit-form'
+      });
+      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+    },
+    error: function(xhr, textstatus, error) {
+      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    }
+  })
+  e.preventDefault()
+
+  function formLoading() {
+
+    form = $('#dit-opts-form')
+    $('#loading-overlay').css({
+      opacity: 0.5,
+      display: 'block',
+    })
+
+    $('#img-load').css({
+      left: form.outerWidth() / 2 - ($('#opts-img-load').width() / 2),
+      top: form.outerHeight() / 2,
+    })
+
+    form.hide()
+    $('#loading-overlay').fadeIn()
+
+  }
+}
+
 function submitForm() {
 
   formLoading()
 
   var base_url = '/' + document.base_url + '/'
-  var postUrl = $('form').attr('action')
   var form = $('#dit-form')
+  var postUrl = form.attr('action')
 
   $.ajax({
     type: 'POST',
