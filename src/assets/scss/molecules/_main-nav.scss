@@ -3,7 +3,6 @@
 .dit-main-nav {
   background: $white;
 
-
   // Prevent floats from breaking the navbar
   @include clearfix;
 
@@ -15,16 +14,55 @@
     position: relative;
     border-radius: 0;
     padding: 0 15px;
-    border-bottom: 1px solid $tile-border-colour;
+    //border-bottom: 1px solid $tile-border-colour;
     z-index: 15;
 
     & > div {
       margin: 0 !important;
     }
   }
-  .dit-main-nav-list > li{
-      cursor: pointer !important;
-}
+  .dit-main-nav-list > li {
+    cursor: pointer !important;
+  }
+
+  @media (max-width: 1199px) {
+    & .navbar-header {
+      float: none;
+    }
+    & .navbar-left,.navbar-right {
+      float: none !important;
+    }
+    & .navbar-toggle {
+      display: block;
+    }
+    & .navbar-collapse {
+      border-top: 1px solid transparent;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    & .navbar-fixed-top {
+      top: 0;
+      border-width: 0 0 1px;
+    }
+    & .navbar-collapse.collapse {
+      display: none!important;
+    }
+    & .navbar-nav {
+      float: none!important;
+      margin-top: 7.5px;
+    }
+    & .navbar-nav>li {
+      float: none;
+    }
+    & .navbar-nav>li>a {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
+    & .collapse.in{
+      display:block !important;
+      overflow-y: auto !important;
+      width: 100%;
+    }
+  }
 }
 
 .navbar {
@@ -50,11 +88,8 @@
   height: auto;
 }
 
-
 .navbar-brand img {
   margin-left: 0;
-
-  
 
   @media (max-width: $screen-sm-max) {
     margin-left: 15px !important;
@@ -79,7 +114,7 @@
     margin-right: -15px !important;
   }
 
-  &>ul>li>a {
+  & > ul > li > a {
     @media (max-width: $screen-xs-max) {
       padding-left: 30px;
     }
@@ -87,7 +122,11 @@
 }
 
 .navbar-toggle {
-  margin: 14px 15px 0 0;
+  margin: 14px 0 0 0;
+
+  @media (max-width: $screen-sm-max) {
+    margin: 14px 15px 0 0;
+  }
 }
 
 .navbar-default {

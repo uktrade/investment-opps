@@ -32,7 +32,51 @@
   }
 
   @media (max-width: $screen-xs-max) {
-    padding: 8px 12px;
+    padding: 8px 4px;
+  }
+}
+
+.dit-btn--contact {
+  border: 2px solid $link-colour;
+  border-radius: 3px;
+  font-size: 16px;
+  font-weight: 100;
+  display: inline-block;
+  padding: 2px 12px;
+  margin-left: 8px;
+  color: $link-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+
+  @media (max-width: $screen-md-max) {
+    border: 2px solid $link-colour;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 100;
+    display: inline-block;
+    color: $link-colour;
+    background-color: $white;
+    padding: 4px 10px;
+    margin: 14px 15px 0 0;
+    float: right;
+  }
+
+  @media (max-width: $screen-xs-max) {
+    border: 2px solid $link-colour !important;
+    border-radius: 3px;
+    font-size: 16px;
+    font-weight: 100;
+    display: inline-block;
+    padding: 2px 12px;
+    color: $link-colour !important;
+    background-color: $white;
+    margin: 14px 0 16px 40px;
+    float: left;
   }
 }
 

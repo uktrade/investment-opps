@@ -1,3 +1,4 @@
+{% set language_selector=true  %}
 {% extends "base/index.html" %}
 
 {% block content %}
@@ -12,7 +13,9 @@
 	</div>
 </div>
 
-{% include "partials/selector.html" %}
+<div class="container">
+	{% include "partials/selector.html" %}
+</div>
 
 {% endblock %}
 

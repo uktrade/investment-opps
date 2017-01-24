@@ -1,10 +1,31 @@
 <div class="dit-hmg_logo">
     <div class="container">
+        <a href="/" class="visible-xs-inline-block"
+           style="float: right;background: transparent;" data-toggle="modal" data-target="#languageSelectorXs" data-remote="false">
+            <div class="dit-nav-language">
+                <div class="dit-nav-language-wrapper">
+                    <div class="dit-icon-xs dit-icon-language"></div>
+                    <div style="text-transform: uppercase">{{locale.language}}</div>
+                </div>
+            </div>
+        </a>
+
         <a href="https://www.gov.uk/" target="_blank">
-          <img class="dit-logo" src="/{{assets}}/media/logos/hmg-logo.png" alt="HMG Logo">
+            <img class="navbar-brand dit-logo" src="/{{assets}}/media/logos/hmg-logo.png" alt="HMG Logo">
         </a>
-        <a href="#step-1">
-            <div class="dit-nav-contact">{{ labels.contact[locale.code] }}</div>
-        </a>
+        <div class="hidden-xs" id="langsel-collapse-1">
+            <a href="/"
+               data-toggle="modal"
+               data-target="#languageSelector"
+               data-remote="false">
+                <div class="dit-nav-language">
+                    <div class="dit-nav-language-wrapper">
+                        <div class="dit-icon-xs dit-icon-language"></div>
+                        <div><span style="text-transform: uppercase">{{locale.language}}</span> - {{locale.countryName}}</div>
+                    </div>
+                </div>
+            </a>
+        </div>
     </div>
 </div>
+

@@ -1,14 +1,14 @@
-var equalheight=require('./equalHeight');
+var equalheight = require('./equalHeight');
 init();
-module.exports = {
-};
+module.exports = {};
+window.getResults = getResults;
 
 function showcontent() {
   $('.dit-outer-wrap').show()
 }
 
 function removeloading() {
-  $('.dit-loading').fadeOut(300)
+  $('.dit-loading').fadeOut(400)
 }
 
 function enhance() {
@@ -16,9 +16,9 @@ function enhance() {
 }
 
 function playVidTest() {
-  $('#heroVideo').on('show.bs.modal', function (e) {
+  $('#heroVideo').on('show.bs.modal', function(e) {
     var extVid = $('.video-wrapper').attr('data-video')
-    var ytApi = '<iframe width="560" height="315" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
+    var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
     $('.video-wrapper').append(ytApi)
   })
 }
@@ -36,27 +36,32 @@ function heroVideoReload() {
 }
 
 function onLoaded() {
-  smoothScroll()
-  addActive()
-  checkHeight()
-  setGradientHeight()
-  prepareForm()
-  formAutocomplete()
-  checkFormStatus()
-  ifOtherSelected()
-  search()
-  jsSearch()
-  responsiveTable()
-  heroVideoReload()
-  playVidTest()
+  try {
+    smoothScroll()
+    addActive()
+    checkHeight()
+    setGradientHeight()
+    prepareForm()
+    formAutocomplete()
+    checkFormStatus()
+    ifOtherSelected()
+    search()
+    jsSearch()
+    responsiveTable()
+    heroVideoReload()
+    playVidTest()
+  } catch (e) {
+    console.error(e);
+  }
+  removeloading()
 }
 
-function formAutocomplete(){
+function formAutocomplete() {
 
 
   $('#country').autocomplete({
     lookup: document.countries,
-    onSelect: function (suggestion) {
+    onSelect: function(suggestion) {
       $('#country_en').val(document.countries_en[suggestion.data]);
 
     }
@@ -66,45 +71,38 @@ function formAutocomplete(){
 function init() {
 
   var is_root = location.pathname == "/";
-  // console.log(location.pathname);
-
-  // doEqualHeights('.great-equal-hights-container');
-  // setupLocaleSelector();
-  // blurLinks();
-  // resizeListner();
 
   if (is_root) {
     checkGeoLocation();
   } else {
-    removeloading();
+    loaded()
   }
-  // removeloading();
-  // doGeoRouting();
+}
 
-  $(document).ready(function () {
+
+function loaded() {
+  $(document).ready(function() {
     enhance();
-    setTimeout(showcontent, 500);
-    setTimeout(removeloading, 1000);
-    setTimeout(onLoaded, 1005);
+    // setTimeout(showcontent, 500);
+    // setTimeout(onLoaded, 800);
+    onLoaded()
   });
 
-  $(window).on('resize', function () {
+  $(window).on('resize', function() {
     checkHeight();
     setGradientHeight();
     prepareForm();
   });
+
 }
 
 function checkGeoLocation() {
-  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {
-      // console.log( "success" );
-    })
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
     .done(function(data) {
       doGeoRouting(data.country_code);
     })
     .fail(function() {
-      // console.log( "error" );
-      removeloading();
+      loaded()
     })
 }
 
@@ -134,7 +132,7 @@ function smoothScroll() {
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
-      }, 600, 'swing', function () {
+      }, 600, 'swing', function() {
         window.location.hash = hash
       })
     }
@@ -189,7 +187,7 @@ function openNav() {
     }
   })
 
-  $("#closebtn-collapse-1").click(function(){
+  $("#closebtn-collapse-1").click(function() {
     closeNav()
   })
   box.animate({
@@ -236,9 +234,11 @@ function checkFormStatus() {
     formLeftSide.hide()
     formRightSide.hide()
     formSuccess.show()
-    $('html, body').animate({
-      scrollTop: $('.dit-form-section').offset().top
-    }, 2000)
+    try {
+      $('html, body').animate({
+        scrollTop: $('.dit-form-section').offset().top
+      }, 2000)
+    } catch (e) {}
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -282,6 +282,7 @@ function prepareForm() {
   $('.prevBtn').show()
   $('.location_block').show()
   $('.submitBtnNonjs').hide()
+  $('.submitOptsBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -392,8 +393,12 @@ function prepareForm() {
         "margin-left": -(curStepValue * theWidth)
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
-      if($(this).attr('id') === 'ga-send-js'){
-        submitForm()
+      if ($(this).attr('id') === 'ga-send-js') {
+        if ($(this).hasClass('optsFormSubmit')) {
+          submitOptsForm()
+        } else {
+          submitForm()
+        }
       }
     }
   })
@@ -414,15 +419,15 @@ function prepareForm() {
   })
 }
 
-function submitForm() {
+function submitOptsForm() {
 
-    formLoading()
+  formLoading()
 
-    var base_url = '/'+ document.base_url + '/'
-    var postUrl = $('form').attr('action')
-    var form = $('#dit-form')
+  var base_url = '/' + document.base_url + '/'
+  var form = $('#dit-form')
+  var postUrl = form.attr('action')
 
-    $.ajax({
+  $.ajax({
       type: 'POST',
       url: postUrl,
       data: form.serialize(),
@@ -432,13 +437,13 @@ function submitForm() {
           'event': 'formSubmissionSuccess',
           'formId': 'dit-form'
         });
-        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+        window.location.href = base_url + 'location-guide/confirmation'
       },
       error: function(xhr, textstatus, error) {
         window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
       }
     })
-    e.preventDefault()
+    // e.preventDefault()
 
   function formLoading() {
 
@@ -454,7 +459,52 @@ function submitForm() {
       top: $t.outerHeight() / 2,
     })
 
-      $('#loading-overlay').fadeIn()
+    $('#loading-overlay').fadeIn()
+
+  }
+}
+
+function submitForm() {
+
+  formLoading()
+
+  var base_url = '/' + document.base_url + '/'
+  var form = $('#dit-form')
+  var postUrl = form.attr('action')
+
+  $.ajax({
+      type: 'POST',
+      url: postUrl,
+      data: form.serialize(),
+      success: function(data) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'formSubmissionSuccess',
+          'formId': 'dit-form'
+        });
+        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+      },
+      error: function(xhr, textstatus, error) {
+        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+      }
+    })
+    // e.preventDefault()
+
+  function formLoading() {
+
+    $t = $('.dit-form-section__body')
+
+    $('#loading-overlay').css({
+      opacity: 0.5,
+      display: 'block',
+    })
+
+    $('#img-load').css({
+      left: $t.outerWidth() / 2 - ($('#img-load').width() / 2),
+      top: $t.outerHeight() / 2,
+    })
+
+    $('#loading-overlay').fadeIn()
 
   }
 }
@@ -463,17 +513,20 @@ function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
-    country = URL.split('/')[3],
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
-    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod"
+    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod",
+    country = document.country,
+    language = document.language
+
+  var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
 
   if (searchInput === '') {
     searchArea.html("")
   } else if (searchInput.length > 2) {
     $.ajax({
       type: "GET",
-      url: gateway + "/?q=(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "')))&size=" + size + "&start=" + start + "&q.parser=structured",
+      url: searchUrl,
       success: function(results) {
         searchArea.html("")
         if ('hits' in results) {
@@ -488,7 +541,7 @@ function getResults(size, start) {
           var searchResults = results.hits.hit
           searchResults.forEach(function(result) {
             var htmlStr = '<div class="search-result"><h3><a href="/' + result.fields.url + '">' + result.fields.pagetitle + '</a></h3>' +
-              '<p class="search-result-link">' + "www.invest.great.gov.uk/" + result.fields.url + '</p>' +
+              '<p class="search-result-link">' + "invest.great.gov.uk/" + result.fields.url + '</p>' +
               '<p class="search-result-snippet">' + (result.fields.intro ? results.fields.intro : '') + '</p></div>'
             if (result.fields.pagetitle !== '') {
               $("#search-options").append(htmlStr)
@@ -523,7 +576,7 @@ function getResults(size, start) {
 }
 
 function jsSearch() {
-  var searchButton = $('.search-button')
+  var searchButton = $('#searchBtn')
 
   searchButton.click(function(e) {
     e.preventDefault()

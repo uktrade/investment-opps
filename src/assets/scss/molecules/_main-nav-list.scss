@@ -1,38 +1,72 @@
 //_main-nav-list.scss
 
 .dit-main-nav-list {
-  border-left: 1px solid $tile-border-colour;
+  margin-top: 22px;
 
-  > li > a {
-    border-right: 1px solid $tile-border-colour;
-    display: inline-block;
-    font-size: 16px;
-    height: 70px;
-    padding: 24px 32px 0;
-    line-height: 24px;
+  li {
+    //border-right: 1px solid $tile-border-colour;
+    border-left: 1px solid $tile-border-colour;
+    padding: 0 10px;
+
+    &:first-of-type {
+      border-left: none;
+    }
+
+    &:last-of-type {
+      border-left: none;
+      padding: 0;
+    }
+
+    a.dit-btn--contact {
+      padding: 2px 12px;
+    }
 
     &.active {
-      background-color: $background-colour;
+      > a {
+        background-color: $white !important;
+        border-bottom: 2px solid $red-line-colour !important;
+      }
+    }
+
+    @media (max-width: $screen-md-max) {
+      border-left: none;
     }
   }
 
+  > li > a {
+    //display: inline-block;
+    font-size: 16px;
+    padding: 4px 0;
+  }
+
   @media (max-width: $screen-md-max) {
+    margin-top: 22px;
+
     > li > a {
       font-size: 16px;
-      padding: 24px;
+      padding: 4px 4px;
     }
   }
 
   @media (max-width: $screen-sm-max) {
+    border-left: 0;
+    float: right !important;
+    width: 100%;
+
     > li > a {
-      font-size: 14px;
-      padding: 24px 8px;
+      border: 0;
+      display: block;
+      height: auto;
+
+      &:first-of-type {
+        border: 0;
+      }
     }
   }
 
   @media (max-width: $screen-xs-max) {
     border-left: 0;
-    float: left!important;
+    float: left !important;
     width: 100%;
 
     > li > a {
@@ -47,6 +81,15 @@
   }
 
   .search-button {
-    padding-top: 20px;
+    margin-top: -1px;
+    padding-top: 0;
+
+    @media (max-width: $screen-md-max) {
+      margin-top: 4px;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      margin-top: 2px;
+    }
   }
 }
