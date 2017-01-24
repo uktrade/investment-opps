@@ -64,7 +64,7 @@
                         </span>
                     </a>
                 </p>
-            {% endif %}
+           {% endif %}
         </div>
     </div>
     {% if pageHeader.externalVideo %}
@@ -73,10 +73,11 @@
             <div class="modal-dialog video-wrapper" data-video="{{pageHeader.externalVideo}}"></div>
         </div>
 
-        {% if pageHeader.heroVideo %}
-        <video autoplay loop poster="/{{assets}}/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
-          <source src="/{{assets}}/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
-        </video>
-        {% endif %}
+   {% endif %}
+    {% if pageHeader.heroVideo %}
+    <video autoplay loop poster="/{{assets}}/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
+      <source src="/{{assets}}/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
+    </video>
     {% endif %}
+
 </div>
