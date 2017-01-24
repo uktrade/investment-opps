@@ -1,6 +1,7 @@
 var equalheight = require('./equalHeight');
 init();
 module.exports = {};
+window.getResults = getResults;
 
 function showcontent() {
   $('.dit-outer-wrap').show()
@@ -237,8 +238,7 @@ function checkFormStatus() {
       $('html, body').animate({
         scrollTop: $('.dit-form-section').offset().top
       }, 2000)
-    } catch (e) {
-    }
+    } catch (e) {}
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -395,7 +395,7 @@ function prepareForm() {
       nextStepWizard.removeAttr('disabled').trigger('click')
       if ($(this).attr('id') === 'ga-send-js') {
         if ($(this).hasClass('optsFormSubmit')) {
-         submitOptsForm()
+          submitOptsForm()
         } else {
           submitForm()
         }
@@ -419,7 +419,7 @@ function prepareForm() {
   })
 }
 
-function submitOptsForm(){
+function submitOptsForm() {
 
   formLoading()
 
@@ -428,22 +428,22 @@ function submitOptsForm(){
   var postUrl = form.attr('action')
 
   $.ajax({
-    type: 'POST',
-    url: postUrl,
-    data: form.serialize(),
-    success: function(data) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        'event': 'formSubmissionSuccess',
-        'formId': 'dit-form'
-      });
-      window.location.href = base_url + 'location-guide/confirmation'
-    },
-    error: function(xhr, textstatus, error) {
-      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
-    }
-  })
-  // e.preventDefault()
+      type: 'POST',
+      url: postUrl,
+      data: form.serialize(),
+      success: function(data) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'formSubmissionSuccess',
+          'formId': 'dit-form'
+        });
+        window.location.href = base_url + 'location-guide/confirmation'
+      },
+      error: function(xhr, textstatus, error) {
+        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+      }
+    })
+    // e.preventDefault()
 
   function formLoading() {
 
@@ -473,22 +473,22 @@ function submitForm() {
   var postUrl = form.attr('action')
 
   $.ajax({
-    type: 'POST',
-    url: postUrl,
-    data: form.serialize(),
-    success: function(data) {
-      window.dataLayer = window.dataLayer || [];
-      window.dataLayer.push({
-        'event': 'formSubmissionSuccess',
-        'formId': 'dit-form'
-      });
-      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
-    },
-    error: function(xhr, textstatus, error) {
-      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
-    }
-  })
-  // e.preventDefault()
+      type: 'POST',
+      url: postUrl,
+      data: form.serialize(),
+      success: function(data) {
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+          'event': 'formSubmissionSuccess',
+          'formId': 'dit-form'
+        });
+        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+      },
+      error: function(xhr, textstatus, error) {
+        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+      }
+    })
+    // e.preventDefault()
 
   function formLoading() {
 
@@ -541,7 +541,7 @@ function getResults(size, start) {
           var searchResults = results.hits.hit
           searchResults.forEach(function(result) {
             var htmlStr = '<div class="search-result"><h3><a href="/' + result.fields.url + '">' + result.fields.pagetitle + '</a></h3>' +
-              '<p class="search-result-link">' + "www.invest.great.gov.uk/" + result.fields.url + '</p>' +
+              '<p class="search-result-link">' + "invest.great.gov.uk/" + result.fields.url + '</p>' +
               '<p class="search-result-snippet">' + (result.fields.intro ? results.fields.intro : '') + '</p></div>'
             if (result.fields.pagetitle !== '') {
               $("#search-options").append(htmlStr)
