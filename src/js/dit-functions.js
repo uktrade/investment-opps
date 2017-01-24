@@ -458,13 +458,8 @@ function getResults(size, start) {
     URL = $(location).attr('href'),
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
-    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod"
-
-  if (URL.split('/')[3] == 'int' && URL.split('/')[4] && URL.split('/')[4].length == 2) {
-    country = URL.split('/')[4]
-  } else {
-    country = URL.split('/')[3]
-  }
+    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod",
+    country = document.country
 
   if (searchInput === '') {
     searchArea.html("")
