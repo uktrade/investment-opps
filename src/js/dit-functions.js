@@ -35,20 +35,23 @@ function heroVideoReload() {
 }
 
 function onLoaded() {
-  smoothScroll()
-  addActive()
-  checkHeight()
-  setGradientHeight()
-  prepareForm()
-  prepareOptsForm()
-  formAutocomplete()
-  checkFormStatus()
-  ifOtherSelected()
-  search()
-  jsSearch()
-  responsiveTable()
-  heroVideoReload()
-  playVidTest()
+  try {
+    smoothScroll()
+    addActive()
+    checkHeight()
+    setGradientHeight()
+    prepareForm()
+    formAutocomplete()
+    checkFormStatus()
+    ifOtherSelected()
+    search()
+    jsSearch()
+    responsiveTable()
+    heroVideoReload()
+    playVidTest()
+  } catch (e) {
+    console.error(e);
+  }
   removeloading()
 }
 
@@ -230,9 +233,12 @@ function checkFormStatus() {
     formLeftSide.hide()
     formRightSide.hide()
     formSuccess.show()
-    $('html, body').animate({
-      scrollTop: $('.dit-form-section').offset().top
-    }, 2000)
+    try {
+      $('html, body').animate({
+        scrollTop: $('.dit-form-section').offset().top
+      }, 2000)
+    } catch (e) {
+    }
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -388,7 +394,11 @@ function prepareForm() {
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
       if ($(this).attr('id') === 'ga-send-js') {
-        submitForm()
+        if ($(this).hasClass('optsFormSubmit')) {
+         submitOptsForm()
+        } else {
+          submitForm()
+        }
       }
     }
   })
@@ -409,19 +419,12 @@ function prepareForm() {
   })
 }
 
-
-function prepareOptsForm() {
-  $('.submitOptsBtn').click(function() {
-    submitInvestOpts();
-  });
-}
-
-function submitInvestOpts() {
+function submitOptsForm(){
 
   formLoading()
 
   var base_url = '/' + document.base_url + '/'
-  var form = $('#dit-opts-form')
+  var form = $('#dit-form')
   var postUrl = form.attr('action')
 
   $.ajax({
@@ -434,28 +437,28 @@ function submitInvestOpts() {
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
       });
-      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+      window.location.href = base_url + 'location-guide/confirmation'
     },
     error: function(xhr, textstatus, error) {
       window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
     }
   })
-  e.preventDefault()
+  // e.preventDefault()
 
   function formLoading() {
 
-    form = $('#dit-opts-form')
+    $t = $('.dit-form-section__body')
+
     $('#loading-overlay').css({
       opacity: 0.5,
       display: 'block',
     })
 
     $('#img-load').css({
-      left: form.outerWidth() / 2 - ($('#opts-img-load').width() / 2),
-      top: form.outerHeight() / 2,
+      left: $t.outerWidth() / 2 - ($('#img-load').width() / 2),
+      top: $t.outerHeight() / 2,
     })
 
-    form.hide()
     $('#loading-overlay').fadeIn()
 
   }
@@ -485,7 +488,7 @@ function submitForm() {
       window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
     }
   })
-  e.preventDefault()
+  // e.preventDefault()
 
   function formLoading() {
 
