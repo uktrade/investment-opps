@@ -4,13 +4,18 @@
   margin-top: 22px;
 
   li {
-    border-right: 1px solid $tile-border-colour;
+    //border-right: 1px solid $tile-border-colour;
+    border-left: 1px solid $tile-border-colour;
     padding: 0 16px;
 
+    &:first-of-type {
+      border-left: none;
+    }
 
     &:last-of-type {
-      border-right: 0 solid;
+      border-left: none;
     }
+
 
     &.active {
       > a {
