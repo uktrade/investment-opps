@@ -519,7 +519,7 @@ function getResults(size, start) {
 }
 
 function jsSearch() {
-  var searchButton = $('.search-button')
+  var searchButton = $('#searchBtn')
 
   searchButton.click(function(e) {
     e.preventDefault()
