@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-sm-12 modal-lang-selector">
-        <h1>Language</h1>
-        <p>Choose your language</p>
+        <h1>{{ labels.language[locale.code] }}</h1>
+        <p>{{ labels.choose_language[locale.code] }}</p>
         <ul class="row" style="border-bottom: 1px solid #ddd;">
             <li class="col-sm-3"><a href="/int">English</a></li>
             <li class="col-sm-3"><a href="/int/zh">中国</a></li>
@@ -12,8 +12,8 @@
         </ul>
     </div>
     <div class="col-sm-12 modal-reg-selector">
-        <h1>Country/region</h1>
-        <p>We also provide region specific investment information</p>
+        <h1>{{ labels.country_region[locale.code] }}</h1>
+        <p>{{ labels.country_text[locale.code] }}</p>
         <ul class="row">
             <li class="col-sm-4">
                 <a href="/us">
