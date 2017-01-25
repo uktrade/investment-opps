@@ -170,6 +170,13 @@
   }
 }
 
+  @media (max-width: $screen-xs-max) {
+      .feedback-button{
+      bottom: 0px;
+    }
+  }
+
+
 .dit-form-wrapper {
   overflow: hidden;
   float: left;
