@@ -122,12 +122,12 @@ function doRedirect(countryCode, languageCode) {
 
   var redirectLocation;
 
-  if (languageCode === null) {
+  if (languageCode == undefined) {
     redirectLocation = countryCode.toLowerCase();
     window.location.pathname = '/' + redirectLocation + '/';
   } else {
     redirectLocation = countryCode.toLowerCase();
-    languagePath = languageCode.toLowerCase();
+    var languagePath = languageCode.toLowerCase();
     window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/';
   }
 }
