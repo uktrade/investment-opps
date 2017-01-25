@@ -27,6 +27,25 @@
   //}
 }
 
+.dit-great-link-container {
+  color: $white;
+  font-size: 14px;
+  border-left: 1px solid $white;
+  display: inline-block;
+  margin: 11px 0 0 8px;
+  padding-left: 4px;
+}
+
+.dit-great-link {
+  color: $white;
+  font-weight: 700;
+
+  &:hover {
+    color: $white;
+    border-bottom: 1px solid $white;
+  }
+}
+
 .dit-logo {
   height: 24px;
   margin-top: 8px;
@@ -48,7 +67,7 @@
   float: right;
   display: table;
   color: $white;
-  margin: 4px 0 0 0;
+  margin: -27px 0 0 0;
   font-size: 14px;
   border-spacing: 4px;
 
@@ -58,6 +77,18 @@
     & div {
       display: table-cell;
     }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    margin: 3px 0 0 0;
+  }
+}
+
+.dit-language {
+  text-transform: uppercase;
+
+  @media (max-width: $screen-xs-max) {
+    vertical-align: bottom;
   }
 }
 
