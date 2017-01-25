@@ -107,17 +107,29 @@ function checkGeoLocation() {
 }
 
 function doGeoRouting(countryCode) {
-  var supportedCountries = ['US', 'CN', 'DE', 'IN'];
-  if ($.inArray(countryCode, supportedCountries) != '-1') {
+  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR'];
+  var supportedIntLanguages = ['PT'];
+  if ($.inArray(countryCode, supportedMarkets) != '-1') {
     doRedirect(countryCode);
+  } else if ($.inArray(countryCode, supportedIntLanguages) != '-1') {
+    doRedirect('INT', countryCode);
   } else {
     doRedirect('INT');
   }
 }
 
-function doRedirect(countryCode) {
-  var redirectLocation = countryCode.toLowerCase();
-  window.location.pathname = '/' + redirectLocation + '/';
+function doRedirect(countryCode, languageCode) {
+
+  var redirectLocation;
+
+  if (languageCode === null) {
+    redirectLocation = countryCode.toLowerCase();
+    window.location.pathname = '/' + redirectLocation + '/';
+  } else {
+    redirectLocation = countryCode.toLowerCase();
+    languagePath = languageCode.toLowerCase();
+    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/';
+  }
 }
 
 
