@@ -48,8 +48,8 @@
                                         <a role="button" data-toggle="collapse" data-parent="#accordion"
                                            href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <div>
-                                                <h1>Language</h1>
-                                                <p>Choose your language</p>
+                                                <h1>{{ labels.language[locale.code] }}</h1>
+                                                <p>{{ labels.choose_language[locale.code] }}</p>
                                             </div>
                                         </a>
                                     </div>
@@ -75,8 +75,8 @@
                                            data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
                                            aria-controls="collapseTwo">
                                             <div>
-                                                <h1>Country/region</h1>
-                                                <p>We also provide region specific investment information</p>
+                                                <h1>{{ labels.country_region[locale.code] }}</h1>
+                                                <p>{{ labels.country_text[locale.code] }}</p>
                                             </div>
                                         </a>
                                     </div>
