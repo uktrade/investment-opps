@@ -294,7 +294,6 @@ function prepareForm() {
   $('.prevBtn').show()
   $('.location_block').show()
   $('.submitBtnNonjs').hide()
-  $('.submitOptsBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -378,7 +377,7 @@ function prepareForm() {
     var curStep = $(this).closest(".setup-content"),
       curStepValue = parseInt(curStep.attr("id").split('-')[1]),
       nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children("a"),
-      curInputs = curStep.find("input[type='text'],input[type='email'],#location_radio_yes, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff,input[type='date']"),
+      curInputs = curStep.find("input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff"),
       isValid = true
 
     $(".form-group").removeClass("has-error")
