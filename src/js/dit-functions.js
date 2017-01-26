@@ -107,17 +107,29 @@ function checkGeoLocation() {
 }
 
 function doGeoRouting(countryCode) {
-  var supportedCountries = ['US', 'CN', 'DE', 'IN'];
-  if ($.inArray(countryCode, supportedCountries) != '-1') {
+  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR'];
+  var supportedIntLanguages = ['PT'];
+  if ($.inArray(countryCode, supportedMarkets) != '-1') {
     doRedirect(countryCode);
+  } else if ($.inArray(countryCode, supportedIntLanguages) != '-1') {
+    doRedirect('INT', countryCode);
   } else {
     doRedirect('INT');
   }
 }
 
-function doRedirect(countryCode) {
-  var redirectLocation = countryCode.toLowerCase();
-  window.location.pathname = '/' + redirectLocation + '/';
+function doRedirect(countryCode, languageCode) {
+
+  var redirectLocation;
+
+  if (languageCode == undefined) {
+    redirectLocation = countryCode.toLowerCase();
+    window.location.pathname = '/' + redirectLocation + '/';
+  } else {
+    redirectLocation = countryCode.toLowerCase();
+    var languagePath = languageCode.toLowerCase();
+    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/';
+  }
 }
 
 
@@ -282,7 +294,6 @@ function prepareForm() {
   $('.prevBtn').show()
   $('.location_block').show()
   $('.submitBtnNonjs').hide()
-  $('.submitOptsBtnNonjs').hide()
   $('.dit-form-section__step').css('min-height', '70rem')
   $('.dit-form-section__step').removeClass('final_step')
 
@@ -366,7 +377,7 @@ function prepareForm() {
     var curStep = $(this).closest(".setup-content"),
       curStepValue = parseInt(curStep.attr("id").split('-')[1]),
       nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children("a"),
-      curInputs = curStep.find("input[type='text'],input[type='email'],#location_radio_yes, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff,input[type='date']"),
+      curInputs = curStep.find("input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff"),
       isValid = true
 
     $(".form-group").removeClass("has-error")
