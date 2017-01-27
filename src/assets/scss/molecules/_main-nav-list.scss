@@ -93,3 +93,27 @@
     }
   }
 }
+
+.dit-main-nav-list-nonjs {
+  ul {
+    margin-top: 60px;
+    padding: 0 10px;
+
+    li {
+      border-left: none;
+      display: inline-block;
+      padding: 0 4px;
+
+    }
+  }
+
+  span {
+    display: inline-block;
+    margin-left: 15px;
+
+    .dit-btn--contact {
+      margin: 0;
+      padding: 0 8px;
+    }
+  }
+}
