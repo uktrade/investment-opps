@@ -159,8 +159,8 @@ function addActive() {
     child = 'industries/'
   } else if (url.match(/\/setup-guide\//)) {
     child = 'setup-guide/'
-      //        } else if (url.match('\/help\/')) {
-      //            child = 'help/'
+  } else if (url.match('\/location-guide\/')) {
+     child = 'location-guide/'
   } else if (url.match(/\/\w{2,3}\/$/)) {
     child = ''
   }
@@ -269,7 +269,8 @@ function ifOtherSelected() {
 
   industry.change(function(e) {
     var value = $('#industry option:selected').val()
-    if (value.indexOf('18') >= 0) {
+    console.log(value)
+    if (value.match(':Other')) {
       $('#other').show()
     } else {
       $('#other').hide()
