@@ -15,7 +15,9 @@
                     <li><a href="/{{base}}/setup-guide">{{ labels.setup_guide[locale.code] }}</a></li>
                     <li><a href="/{{base}}/privacy-policy/">{{ labels.privacy[locale.code] }}</a></li>
                     <li><a href="/{{base}}/terms-and-conditions/">{{ labels.terms[locale.code] }}</a></li>
-                    <!--<li><a href="#">{{ labels.contact[locale.code] }}</a></li>-->
+                    {% if locale.language === 'en' %}
+                    <li><a href="/{{base}}/feedback/">{{ labels.report_problem[locale.code] }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-0 dit-footer--logo">
