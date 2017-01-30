@@ -180,7 +180,7 @@
                                     value="{{ labels.form_which_part.label[locale.code] }}">
                                 </div>
                                 <div class="form-group col-md-10">
-                                    <label for="start_date" class="control-label">{{ labels.form_when[locale.code] }}</label>
+                                    <label for="start_date_month" class="control-label">{{ labels.form_when[locale.code] }}</label>
                                     <p class="error-help">{{ labels.form_enter_when[locale.code] }}</p>
                                     <div class="select_date_fields">
                                         <select name="enquiry[start_date]" class="form-control select_month"
@@ -259,7 +259,7 @@
                                     <label for="company_name" class="control-label">{{ labels.form_registered_company[locale.code] }}</label>
                                     <p class="error-help">{{ labels.form_enter_registered_company[locale.code] }}</p>
                                     <input maxlength="100" type="text" name="organisation[name]" required="required"
-                                    class="form-control"
+                                    class="form-control" id="company_name"
                                     placeholder=""/>
                                     <input name="english[form_registered_company]" type="hidden"
                                     value="{{ labels.form_registered_company['en_US'] }}">
@@ -297,7 +297,7 @@
                                     value="{{ labels.form_staff_number.label[locale.code] }}">
                                 </div>
                                 <div class="form-group col-md-8 bottom-buffer">
-                                    <label for="annual_turnover" class="control-label">
+                                    <label for="turnover" class="control-label">
                                     {{ labels.form_annual_turnover.label[locale.code] }}</label>
                                     <p class="error-help">{{ labels.form_enter_annual_turnover[locale.code] }}</p>
                                     <select name="organisation[annual_turnover]" class="form-control" id="turnover"
