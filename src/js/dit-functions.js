@@ -41,6 +41,7 @@ function onLoaded() {
     addActive()
     checkHeight()
     setGradientHeight()
+    selector()
     prepareForm()
     formAutocomplete()
     checkFormStatus()
@@ -633,4 +634,78 @@ function responsiveTable() {
   if (isTable) {
     $('table').wrap('<div class="dit-table__responsive" />')
   }
+}
+
+function selector() {
+  $('#langEn').click(function(e){
+    e.preventDefault()
+    parallelPath('int')
+  })
+  $('#langZh').click(function(e){
+    e.preventDefault()
+    parallelPath('int/zh')
+  })
+  $('#langDe').click(function(e){
+    e.preventDefault()
+    parallelPath('int/de')
+  })
+  $('#langJa').click(function(e){
+    e.preventDefault()
+    parallelPath('int/ja')
+  })
+  $('#langEs').click(function(e){
+    e.preventDefault()
+    parallelPath('int/es')
+  })
+  $('#langPt').click(function(e){
+    e.preventDefault()
+    parallelPath('int/pt')
+  })
+  $('#countryUs').click(function(e){
+    e.preventDefault()
+    parallelPath('us')
+  })
+  $('#countryCn').click(function(e){
+    e.preventDefault()
+    parallelPath('cn')
+  })
+  $('#countryIn').click(function(e){
+    e.preventDefault()
+    parallelPath('in')
+  })
+  $('#countryDe').click(function(e){
+    e.preventDefault()
+    parallelPath('de')
+  })
+  $('#countryEs').click(function(e){
+    e.preventDefault()
+    parallelPath('es')
+  })
+  $('#countryBr').click(function(e){
+    e.preventDefault()
+    parallelPath('br')
+  })
+  $('#countryJp').click(function(e){
+    e.preventDefault()
+    parallelPath('jp')
+  })
+}
+
+function parallelPath(destination) {
+  var language = document.language;
+  var country = document.country;
+  var pagePath = document.pagePath;
+  var pathClipped;
+  if (country === 'int' && language !== 'en') {
+    pathClipped = function () {
+      var temp = pagePath.split('/')
+      return temp.slice(2).join('/')
+    }
+  } else {
+    pathClipped = function () {
+      var temp = pagePath.split('/')
+      return temp.slice(1).join('/')
+    }
+  }
+  return window.location = window.location.origin + '/' + destination + '/' + pathClipped()
 }
