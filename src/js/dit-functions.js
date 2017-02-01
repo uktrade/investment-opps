@@ -633,8 +633,7 @@ function isValidEmail(email) {
 }
 
 function isValidPhoneNumber(number) {
-  var invalidNumbers = ['999', '112'];
-  if ($.inArray(number, invalidNumbers) != '-1') {
+  if (number.length > 8) {
     return false;
   } else {
     return true;
