@@ -41,6 +41,7 @@ function onLoaded() {
     addActive()
     checkHeight()
     setGradientHeight()
+    selector()
     prepareForm()
     formAutocomplete()
     checkFormStatus()
@@ -646,4 +647,40 @@ function responsiveTable() {
   if (isTable) {
     $('table').wrap('<div class="dit-table__responsive" />')
   }
+}
+
+function selector() {
+  $('a[href="/int"]').attr("href", parallelPath('int'))
+  $('a[href="/int/zh"]').attr("href", parallelPath("int/zh"))
+  $('a[href="/int/de"]').attr("href", parallelPath("int/de"))
+  $('a[href="/int/ja"]').attr("href", parallelPath("int/ja"))
+  $('a[href="/int/es"]').attr("href", parallelPath("int/es"))
+  $('a[href="/int/pt"]').attr("href", parallelPath("int/pt"))
+  $('a[href="/us"]').attr("href", parallelPath("us"))
+  $('a[href="/cn"]').attr("href", parallelPath("cn"))
+  $('a[href="/in"]').attr("href", parallelPath("in"))
+  $('a[href="/de"]').attr("href", parallelPath("de"))
+  $('a[href="/es"]').attr("href", parallelPath("es"))
+  $('a[href="/br"]').attr("href", parallelPath("br"))
+  $('a[href="/jp"]').attr("href", parallelPath("jp"))
+}
+
+function parallelPath(destination) {
+  var language = document.language,
+      country = document.country,
+      pagePath = document.pagePath,
+      pathClipped
+  if (country === 'int' && language !== 'en') {
+    pathClipped = function () {
+      var temp = pagePath.split('/')
+      return temp.slice(2).join('/')
+    }
+  } else {
+    pathClipped = function () {
+      var temp = pagePath.split('/')
+      return temp.slice(1).join('/')
+    }
+  }
+
+  return '/' + destination + '/' + pathClipped()
 }
