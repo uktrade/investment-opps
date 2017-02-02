@@ -650,65 +650,26 @@ function responsiveTable() {
 }
 
 function selector() {
-  $('#langEn').click(function(e){
-    e.preventDefault()
-    parallelPath('int')
-  })
-  $('#langZh').click(function(e){
-    e.preventDefault()
-    parallelPath('int/zh')
-  })
-  $('#langDe').click(function(e){
-    e.preventDefault()
-    parallelPath('int/de')
-  })
-  $('#langJa').click(function(e){
-    e.preventDefault()
-    parallelPath('int/ja')
-  })
-  $('#langEs').click(function(e){
-    e.preventDefault()
-    parallelPath('int/es')
-  })
-  $('#langPt').click(function(e){
-    e.preventDefault()
-    parallelPath('int/pt')
-  })
-  $('#countryUs').click(function(e){
-    e.preventDefault()
-    parallelPath('us')
-  })
-  $('#countryCn').click(function(e){
-    e.preventDefault()
-    parallelPath('cn')
-  })
-  $('#countryIn').click(function(e){
-    e.preventDefault()
-    parallelPath('in')
-  })
-  $('#countryDe').click(function(e){
-    e.preventDefault()
-    parallelPath('de')
-  })
-  $('#countryEs').click(function(e){
-    e.preventDefault()
-    parallelPath('es')
-  })
-  $('#countryBr').click(function(e){
-    e.preventDefault()
-    parallelPath('br')
-  })
-  $('#countryJp').click(function(e){
-    e.preventDefault()
-    parallelPath('jp')
-  })
+  $('a[href="/int"]').attr("href", parallelPath('int'))
+  $('a[href="/int/zh"]').attr("href", parallelPath("int/zh"))
+  $('a[href="/int/de"]').attr("href", parallelPath("int/de"))
+  $('a[href="/int/ja"]').attr("href", parallelPath("int/ja"))
+  $('a[href="/int/es"]').attr("href", parallelPath("int/es"))
+  $('a[href="/int/pt"]').attr("href", parallelPath("int/pt"))
+  $('a[href="/us"]').attr("href", parallelPath("us"))
+  $('a[href="/cn"]').attr("href", parallelPath("cn"))
+  $('a[href="/in"]').attr("href", parallelPath("in"))
+  $('a[href="/de"]').attr("href", parallelPath("de"))
+  $('a[href="/es"]').attr("href", parallelPath("es"))
+  $('a[href="/br"]').attr("href", parallelPath("br"))
+  $('a[href="/jp"]').attr("href", parallelPath("jp"))
 }
 
 function parallelPath(destination) {
-  var language = document.language;
-  var country = document.country;
-  var pagePath = document.pagePath;
-  var pathClipped;
+  var language = document.language,
+      country = document.country,
+      pagePath = document.pagePath,
+      pathClipped
   if (country === 'int' && language !== 'en') {
     pathClipped = function () {
       var temp = pagePath.split('/')
@@ -720,5 +681,6 @@ function parallelPath(destination) {
       return temp.slice(1).join('/')
     }
   }
-  return window.location = window.location.origin + '/' + destination + '/' + pathClipped()
+
+  return '/' + destination + '/' + pathClipped()
 }
