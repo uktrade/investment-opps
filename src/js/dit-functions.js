@@ -161,7 +161,7 @@ function addActive() {
   } else if (url.match(/\/setup-guide\//)) {
     child = 'setup-guide/'
   } else if (url.match('\/location-guide\/')) {
-     child = 'location-guide/'
+    child = 'location-guide/'
   } else if (url.match(/\/\w{2,3}\/$/)) {
     child = ''
   }
@@ -389,6 +389,11 @@ function prepareForm() {
         $(curInputs[i]).closest(".form-group").addClass("has-error")
       }
       if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[email]' && !isValidEmail(curInputs[i].value)) {
+        isValid = false
+        $(curInputs[i]).closest(".form-group").addClass("has-error")
+        $('.validation_error_email').css("display", "block")
+      }
+      if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[phone]' && !isValidPhoneNumber(curInputs[i].value)) {
         isValid = false
         $(curInputs[i]).closest(".form-group").addClass("has-error")
         $('.validation_error_email').css("display", "block")
@@ -626,6 +631,14 @@ function debounce(func, wait, immediate) {
 function isValidEmail(email) {
   var regex = /\S+@\S+\.\S+/
   return regex.test(email)
+}
+
+function isValidPhoneNumber(number) {
+  if (number.length > 8) {
+    return false;
+  } else {
+    return true;
+  }
 }
 
 
