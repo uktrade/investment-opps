@@ -7,7 +7,7 @@
     list-style: none;
     margin: 0;
     overflow: hidden;
-    padding: 0 0 28px 0;
+    padding: flip-side-values(0 0 28px 0);
   }
 
   li {
@@ -30,7 +30,7 @@
 
   @media (max-width: $screen-xs-max) {
     ul {
-      padding: 0 0 16px 0;
+      padding: flip-side-values(0 0 16px 0);
     }
 
     li {
@@ -78,7 +78,7 @@
 
   @media (max-width: $screen-xs-max) {
     ul {
-      padding: 0 0 16px;
+      padding: flip-side-values(0 0 16px);
     }
 
     li {
@@ -86,8 +86,8 @@
     }
 
     li a {
-      margin-left: 50px;
-      padding: 0 0 16px 0;
+      margin-#{$left}: 50px;
+      padding: flip-side-values(0 0 16px 0);
       font-size: 14px;
     }
   }
@@ -95,6 +95,6 @@
 
 .dit-close-icon {
   margin-bottom: 12px;
-  //font-size: 36px;
+  float: #{$right};
   cursor: pointer;
 }

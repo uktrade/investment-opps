@@ -8,7 +8,7 @@
   display: inline-block;
   position: absolute;
   top: -8px;
-  left: -50px;
+  #{$left}: -50px;
 
   &--br {
     background-image: url(../media/flags/flag-br.svg);
@@ -66,6 +66,6 @@
     display: inline-block;
     position: absolute;
     top: -5px;
-    left: -36px;
+    #{$left}: -36px;
   }
 }

@@ -2,18 +2,19 @@
 
 .dit-main-nav-list {
   margin-top: 22px;
+  float: #{$right};
 
   li {
-    //border-right: 1px solid $tile-border-colour;
-    border-left: 1px solid $tile-border-colour;
+    //border-#{$right}: 1px solid $tile-border-colour;
+    border-#{$left}: 1px solid $tile-border-colour;
     padding: 0 10px;
 
     &:first-of-type {
-      border-left: none;
+      border-#{$left}: none;
     }
 
     &:last-of-type {
-      border-left: none;
+      border-#{$left}: none;
       padding: 0;
     }
 
@@ -29,7 +30,7 @@
     }
 
     @media (max-width: $screen-md-max) {
-      border-left: none;
+      border-#{$left}: none;
     }
   }
 
@@ -49,8 +50,8 @@
   }
 
   @media (max-width: $screen-sm-max) {
-    border-left: 0;
-    float: right !important;
+    border-#{$left}: 0;
+    float: #{$right} !important;
     width: 100%;
 
     > li > a {
@@ -65,8 +66,8 @@
   }
 
   @media (max-width: $screen-xs-max) {
-    border-left: 0;
-    float: left !important;
+    border-#{$left}: 0;
+    float: #{$left} !important;
     width: 100%;
 
     > li > a {
@@ -100,7 +101,7 @@
     padding: 0 10px;
 
     li {
-      border-left: none;
+      border-#{$left}: none;
       display: inline-block;
       padding: 0 4px;
 
@@ -109,7 +110,7 @@
 
   span {
     display: inline-block;
-    margin-left: 15px;
+    margin-#{$left}: 15px;
 
     .dit-btn--contact {
       margin: 0;

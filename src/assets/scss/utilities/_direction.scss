@@ -1,0 +1,410 @@
+// directions.scss
+
+@function flip-side-values($values) {
+  @if $direction == right and length($values) >= 4 {
+    // Reorder right and left positions in list
+    @return nth($values, 1) nth($values, 4) nth($values, 3) nth($values, 2);
+  }
+  @else {
+    @return $values;
+  }
+}
+
+@function flip-side($l, $r: null) {
+  @if $direction == left {
+    @return $l;
+  } @else {
+    @return $r;
+  }
+}
+
+$left: flip-side(left, right);
+$right: flip-side(rigth, left);
+
+
+/*#region _bidirectional mixins
+  #not in use atm */
+
+// helpers
+$tfb: ();
+$tfr: ();
+$tfl: ();
+
+@function tfd($var) {
+  // helper to calculate text flow direction
+  @if $var == right {
+    $tfr: "true" !global;
+  }
+  @else if $var == left {
+    $tfl: "true" !global;
+  }
+  @else if $var == bidi {
+    $tfr: "false" !global;
+    $tfl: "true" !global;
+    $tfb: "true" !global;
+  }
+
+  @return $tfl, $tfr, $tfb;
+}
+
+@function od($var) {
+  // helper to calculate opposite direction
+  @if $var == right {
+    $var: left;
+  }
+  @else if $var == left {
+    $var: right;
+  }
+  @else {
+    $var: null;
+  }
+
+  @return $var;
+}
+
+@mixin bidi1($property, $var, $direction: tfd($text-direction)) {
+  // helper to for left/right swapping properties like text-align, clear and float
+  @if $tfr == "true" {
+    #{$property}: od($var);
+  }
+  @else if $tfb == "true" and od($var) != null {
+    [dir="ltr"] & {
+      #{$property}: $var;
+    }
+
+    [dir="rtl"] & {
+      #{$property}: od($var);
+    }
+  }
+  @else {
+    #{$property}: $var;
+  }
+}
+
+@mixin bidi2($property, $propertydirection, $var1, $var2, $direction: tfd($text-direction) ) {
+  // helper to calculate opposite properties for margin- or padding-
+  @if $tfr == "true" {
+    #{$property}-#{od($propertydirection)}: $var1;
+
+    @if $var2 != $var1 {
+      #{$property}-#{$propertydirection}: $var2;
+    }
+  }
+  @else if $tfb == "true" {
+    $propertydirection: "left";
+
+    [dir="ltr"] & {
+      #{$property}-#{$propertydirection}: $var1;
+
+      @if $var2 != $var1 {
+        #{$property}-#{od($propertydirection)}: $var2;
+      }
+    }
+
+    [dir="rtl"] & {
+      #{$property}-#{od($propertydirection)}: $var1;
+
+      @if $var2 != $var1 {
+        #{$property}-#{$propertydirection}: $var2;
+      }
+    }
+  }
+  @else {
+    #{$property}-#{$propertydirection}: $var1;
+
+    @if $var2 != $var1 {
+      #{$property}-#{od($propertydirection)}: $var2;
+    }
+  }
+}
+
+@mixin bidi3($property, $var1, $var2, $direction: tfd($text-direction) ) {
+  // helper to calculate opposite properties for position left, right
+  @if $tfr == "true" {
+    #{od($property)}: $var1;
+
+    @if $var2 != $var1 {
+      #{$property}: $var2;
+    }
+  }
+  @else if $tfb == "true" {
+    [dir="ltr"] & {
+      #{$property}: $var1;
+
+      @if $var2 != $var1 {
+        #{od($property)}: $var2;
+      }
+    }
+
+    [dir="rtl"] & {
+      #{od($property)}: $var1;
+
+      @if $var2 != $var1 {
+        #{$property}: $var2;
+      }
+    }
+  }
+  @else {
+    #{$property}: $var1;
+
+    @if $var2 != $var1 {
+      #{od($property)}: $var2;
+    }
+  }
+}
+
+@mixin bidi4($property, $propertydirection, $propertypostfix, $var1, $var2, $direction: tfd($text-direction) ) {
+  // helper to calculate opposite properties for margin- or padding-
+  @if $tfr == "true" {
+    #{$property}-#{od($propertydirection)}-#{$propertypostfix}: $var1;
+
+    @if $var2 != $var1 {
+      #{$property}-#{$propertydirection}-#{$propertypostfix}: $var2;
+    }
+  }
+  @else if $tfb == "true" {
+    [dir="ltr"] & {
+      #{$property}-#{$propertydirection}-#{$propertypostfix}: $var1;
+
+      @if $var2 != $var1 {
+        #{$property}-#{od($propertydirection)}-#{$propertypostfix}: $var2;
+      }
+    }
+
+    [dir="rtl"] & {
+      #{$property}-#{od($propertydirection)}-#{$propertypostfix}: $var1;
+
+      @if $var2 != $var1 {
+        #{$property}-#{$propertydirection}-#{$propertypostfix}: $var2;
+      }
+    }
+  }
+  @else {
+    #{$property}-#{$propertydirection}-#{$propertypostfix}: $var1;
+
+    @if $propertydirection == "bidi" and $var2 != $var1 {
+      #{$property}-#{od($propertydirection)}-#{$propertypostfix}: $var2;
+    }
+  }
+}
+
+@mixin bidi5($property, $var1, $var2, $direction: tfd($text-direction)) {
+  // helper to for background positioning
+  @if od($var1) != null {
+    @if $tfr == "true" {
+      #{$property}: od($var1) $var2;
+    }
+    @else if $tfb == "true" {
+      [dir="ltr"] & {
+        #{$property}: $var1 $var2;
+      }
+
+      [dir="rtl"] & {
+        #{$property}: od($var1) $var2;
+      }
+    }
+    @else {
+      #{$property}: $var1 $var2;
+    }
+  }
+  @else if $var1 != "center" {
+    @if $tfr == "true" {
+      #{$property}: (100 - $var1) $var2;
+    }
+    @else if $tfb == "true" and (od($var1) != null or $var2 != $var1 ) {
+      [dir="ltr"] & {
+        #{$property}: $var1 $var2;
+      }
+
+      [dir="rtl"] & {
+        #{$property}: (100 - $var1) $var2;
+      }
+    }
+    @else {
+      #{$property}: $var1 $var2;
+    }
+  }
+  @else {
+    #{$property}: $var1 $var2;
+  }
+}
+
+@mixin bidi6($property, $propertydirection, $var1, $var2, $var3, $var4, $direction: tfd($text-direction) ) {
+  // helper to calculate opposite properties for margin- or padding-
+  @if $tfb == "true" {
+    $propertydirection: "left";
+
+    [dir="ltr"] & {
+      #{$property}: $var1 $var2 $var3 $var4;
+    }
+
+    [dir="rtl"] & {
+      #{$property}: $var1 $var4 $var3 $var2;
+    }
+  }
+  @else if $tfr == "true" {
+    [dir="rtl"] & {
+      #{$property}: $var1 $var4 $var3 $var2;
+    }
+  }
+  @else {
+    #{$property}: $var1 $var2 $var3 $var4;
+  }
+}
+
+
+// positioning
+@mixin push($var1, $var2: $var1) {
+  //push(px) opposed to css property left
+  @include bidi3(left, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin pull($var1, $var2: $var1) {
+  //pull(px) opposed to css property right
+  @include bidi3(right, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin position-horz($var1, $var2: $var1) {
+  //left(px) and right(px) css properties combined
+  @include bidi3(left, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin text-align($var) {
+  //text-align(direction) [left || right]
+  @include bidi1(text-align, $var, $direction: tfd($text-direction));
+}
+
+@mixin background-position($var1, $var2: $var1) {
+  //background-position(value, value) opposed to css property background-position
+  @include bidi5(background-position, $var1, $var2, $direction: tfd($text-direction));
+}
+
+
+// margins and paddings
+@mixin margin-push($var1, $var2: $var1) {
+  //margin-push(px) opposed to css property margin-left
+  @include bidi2(margin, left, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin margin-pull($var1, $var2: $var1) {
+  //margin-pull(px) opposed to css property margin-right
+  @include bidi2(margin, right, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin margin-horz($var1, $var2: $var1) {
+  //margin-left(px) and margin-right(px) css properties combined
+  @include bidi2(margin, bidi, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin margin($var1, $var2, $var3, $var4: $var2) {
+  //margin(px) shorthand
+  @include bidi6(margin, bidi, $var1, $var2, $var3, $var4, $direction: tfd($text-direction));
+}
+
+@mixin padding($var1, $var2, $var3, $var4: $var2) {
+  //margin(px) shorthand
+  @include bidi6(padding, bidi, $var1, $var2, $var3, $var4, $direction: tfd($text-direction));
+}
+
+@mixin padding-push($var1, $var2: $var1) {
+  //padding-push(px) opposed to css property padding-left
+  @include bidi2(padding, left, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin padding-pull($var1, $var2: $var1) {
+  //padding-pull(px) opposed to css property padding-right
+  @include bidi2(padding, right, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin padding-horz($var1, $var2: $var1) {
+  //padidng-left(px) and padding-right(px) css properties combined
+  @include bidi2(padding, bidi, $var1, $var2, $direction: tfd($text-direction));
+}
+
+
+// region borders and radius
+@mixin border-push($var1, $var2: $var1) {
+  //border-push(px) opposed to css property border-left
+  @include bidi2(border, left, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-pull($var1, $var2: $var1) {
+  //border-pull(px) opposed to css property border-right
+  @include bidi2(border, right, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-horz($var1, $var2: $var1) {
+  //border-left(px) and border-right(px) css properties combined
+  @include bidi2(border, bidi, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-push-width($var1, $var2: $var1) {
+  //border-push-width(px) opposed to css property border-left-width
+  @include bidi4(border, left, width, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-pull-width($var1, $var2: $var1) {
+  //border-push-width(px) opposed to css property border-right-width
+  @include bidi4(border, right, width, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-push-style($var1, $var2: $var1) {
+  //border-push-style(value) opposed to css property border-left-style
+  @include bidi4(border, left, style, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-pull-style($var1, $var2: $var1) {
+  //border-push-style(value) opposed to css property border-right-style
+  @include bidi4(border, right, style, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-push-color($var1, $var2: $var1) {
+  //border-push-color(value) opposed to css property border-left-color
+  @include bidi4(border, left, color, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-pull-color($var1, $var2: $var1) {
+  //border-push-color(value) opposed to css property border-right-color
+  @include bidi4(border, right, color, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-top-push-radius($var1, $var2: $var1) {
+  //border-top-push-radius(value) opposed to css property border-top-left-radius
+  @include bidi4(border-top, left, radius, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-top-pull-radius($var1, $var2: $var1) {
+  //border-top-pull-radius(value) opposed to css property border-top-right-radius
+  @include bidi4(border-top, right, radius, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-bottom-push-radius($var1, $var2: $var1) {
+  //border-bottom-push-radius(value) opposed to css property border-bottom-left-radius
+  @include bidi4(border-top, left, radius, $var1, $var2, $direction: tfd($text-direction));
+}
+
+@mixin border-bottom-pull-radius($var1, $var2: $var1) {
+  //border-bottom-pull-radius(value) opposed to css property border-bottom-right-radius
+  @include bidi4(border-top, right, radius, $var1, $var2, $direction: tfd($text-direction));
+}
+
+
+// misc
+@mixin float($var) {
+  //float(direction) [left || right]
+  @include bidi1(float, $var, $direction: tfd($text-direction));
+}
+
+@mixin clear($var) {
+  //clear(direction) [left || right || both || none]
+  @include bidi1(clear, $var, $direction: tfd($text-direction));
+}
+
+// TODO:
+
+// border shorthand
+// border-radius shorthand
+// box-shadow
+// perspective-origin
+
+/*#endregion */

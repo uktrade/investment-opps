@@ -9,7 +9,7 @@
   &__item {
     //padding: 15px;
     //width: 33%;
-    //float: left;
+    //float: #{$left};
     //position: relative;
     //margin: 10px 0;
     //overflow: hidden;
@@ -40,8 +40,8 @@
           position: absolute;
           top: 0;
           bottom: 0;
-          left: 0;
-          right: 0;
+          #{$left}: 0;
+          #{$right}: 0;
           background: rgba(0, 0, 0, 0.5);
         }
 
@@ -66,9 +66,9 @@
     width: 100%;
     position: absolute;
     padding: 15px;
-    // left: 15px;
+    // #{$left}: 15px;
     bottom: 0px;
-    left: 0px;
+    #{$left}: 0px;
     background: $great-blue;
   }
 
