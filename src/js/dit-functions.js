@@ -100,39 +100,31 @@ function loaded() {
 function checkGeoLocation() {
   var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
     .done(function(data) {
-      doGeoRouting(data.country_code);
+      getRedirectPath(data.country_code);
     })
     .fail(function() {
       loaded()
     })
 }
 
-function doGeoRouting(countryCode) {
-  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR'];
-  var supportedIntLanguages = ['PT'];
-  if ($.inArray(countryCode, supportedMarkets) != '-1') {
-    doRedirect(countryCode);
-  } else if ($.inArray(countryCode, supportedIntLanguages) != '-1') {
-    doRedirect('INT', countryCode);
-  } else {
-    doRedirect('INT');
-  }
+function getRedirectPath(countryCode) {
+  var jqxh = $.getJSON("https://raw.githubusercontent.com/uktrade/iigb-beta-website/feature/geoip_lookup/src/country_redirects.json", function(data) {})
+    .done(function(data) {
+    doRedirect(data.countryCode);
+    })
+    .fail(function() {
+      loaded();
+    });
 }
 
-function doRedirect(countryCode, languageCode) {
-
-  var redirectLocation;
-
-  if (languageCode == undefined) {
-    redirectLocation = countryCode.toLowerCase();
-    window.location.pathname = '/' + redirectLocation + '/';
+function doRedirect(redirectLocation) {
+  console.log(redirectLocation);
+  if (redirectLocation == undefined || redirectLocation == '') {
+    window.location.pathname = '/int/';
   } else {
-    redirectLocation = countryCode.toLowerCase();
-    var languagePath = languageCode.toLowerCase();
-    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/';
+    window.location.pathname = redirectLocation;
   }
 }
-
 
 function smoothScroll() {
   //smoothscrolling and positioning
@@ -667,16 +659,16 @@ function selector() {
 
 function parallelPath(destination) {
   var language = document.language,
-      country = document.country,
-      pagePath = document.pagePath,
-      pathClipped
+    country = document.country,
+    pagePath = document.pagePath,
+    pathClipped
   if (country === 'int' && language !== 'en') {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(2).join('/')
     }
   } else {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(1).join('/')
     }
