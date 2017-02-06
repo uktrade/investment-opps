@@ -5,9 +5,9 @@
   text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
   position: relative;
   overflow: hidden;
-  background: $background-jumbotron-empty top right no-repeat;
+  background: $background-jumbotron-empty top #{$right} no-repeat;
   padding: 0;
-  margin: 40px 0 0 0;
+  margin: flip-side-values(40px 0 0 0);
   height: 540px;
   border-bottom: 5px solid $red-line-colour;
   background-size: auto 100%;
@@ -18,8 +18,8 @@
     height: 50%;
     width: 100%;
     bottom: 0;
-    left: 0;
-    right: 0;
+    #{$left}: 0;
+    #{$right}: 0;
     z-index: 5;
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 1) 100%); /* FF3.6-15 */
     background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.6) 60%, rgba(0, 0, 0, 1) 100%); /* Chrome10-25,Safari5.1-6 */
@@ -60,8 +60,8 @@
     position: absolute;
     z-index: 5;
     height: auto;
-    left: 0;
-    right: 0;
+    #{$left}: 0;
+    #{$right}: 0;
     bottom: 15px;
     background-color: #333;
     background: -moz-linear-gradient(top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0) 100%); /* FF3.6-15 */
@@ -72,10 +72,10 @@
 
   .glyphicon-play {
     font-size: 24px;
-    padding-left: 14px;
+    padding-#{$left}: 14px;
     color: $background-colour;
     text-shadow: 0 0 0 white;
-    float: right;
+    float: #{$right};
   }
 
   .dit-play-icon {
@@ -86,7 +86,7 @@
   .dit-remove-icon {
     position: absolute;
     top: 25px;
-    right: 60px;
+    #{$right}: 60px;
     font-size: 36px;
     cursor: pointer;
     -webkit-text-stroke: 3px #000;
@@ -108,10 +108,10 @@
     text-shadow: 0px 0px 20px rgba(0, 0, 0, 1);
     position: relative;
     overflow: hidden;
-    background: $background-jumbotron-empty top right;
+    background: $background-jumbotron-empty top #{$right};
     background-size: auto 100%;
-    margin: 40px 0 0 0;
-    padding: 50px 0 50px 0;
+    margin: flip-side-values(40px 0 0 0);
+    padding: flip-side-values(50px 0 50px 0);
     height: auto;
     max-height: none;
     min-height: inherit;

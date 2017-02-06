@@ -29,7 +29,7 @@
     & .navbar-header {
       float: none;
     }
-    & .navbar-left,.navbar-right {
+    & .navbar-#{$left},.navbar-#{$right} {
       float: none !important;
     }
     & .navbar-toggle {
@@ -89,43 +89,43 @@
 }
 
 .navbar-brand img {
-  margin-left: 0;
+  margin-#{$left}: 0;
 
   @media (max-width: $screen-sm-max) {
-    margin-left: 15px !important;
+    margin-#{$left}: 15px !important;
   }
 
   @media (max-width: $screen-xs-max) {
-    margin-left: 0px !important;
+    margin-#{$left}: 0px !important;
   }
   // @media (max-width: 991px) and (min-width: 768px) {
-  //   margin-left: -30px !important;
+  //   margin-#{$left}: -30px !important;
 
   // }
 }
 
 .navbar-collapse {
   @media (max-width: $screen-xs-max) {
-    margin-right: 0;
-    margin-left: 30px;
+    margin-#{$right}: 0;
+    margin-#{$left}: 30px;
     width: 115%;
   }
   @media (min-width: $screen-md-min) {
-    margin-right: -15px !important;
+    margin-#{$right}: -15px !important;
   }
 
   & > ul > li > a {
     @media (max-width: $screen-xs-max) {
-      padding-left: 30px;
+      padding-#{$left}: 30px;
     }
   }
 }
 
 .navbar-toggle {
-  margin: 14px 0 0 0;
+  margin: flip-side-values(14px 0 0 0);
 
   @media (max-width: $screen-sm-max) {
-    margin: 14px 15px 0 0;
+    margin: flip-side-values(14px 15px 0 0);
   }
 }
 

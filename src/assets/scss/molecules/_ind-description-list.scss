@@ -39,7 +39,7 @@
     width: 90%;
     position: absolute;
     padding: 15px 5px;
-    left: 15px;
+    #{$left}: 15px;
     top: 0px
   }
 
@@ -87,7 +87,7 @@
     width: 90%;
     position: absolute;
     padding: 15px 5px;
-    left: 15px;
+    #{$left}: 15px;
     top: 0px
   }
 

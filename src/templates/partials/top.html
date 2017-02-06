@@ -14,7 +14,13 @@
     <meta name="timestamp" content="{{timestamp}}">
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
     <link href="/{{assets}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    {% if direction === 'rtl' %}
+    <!--if for rtl language-->
+    <link rel="stylesheet" href="/{{assets}}/css/bootstrap-rtl.min.css">
+    <link href="/{{assets}}/css/main-rtl.css" rel="stylesheet" type="text/css"/>
+    {% else %}
     <link href="/{{assets}}/css/main.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
     <script>(function (w, d, s, l, i) {
         w[l] = w[l] || [];
         w[l].push({
@@ -46,7 +52,8 @@
     <![endif]-->
 </head>
 
-<body class="lang-{{locale.language}}">
+<!--dir to be taken from structure.direction-->
+<body class="lang-{{locale.language}}" dir="{{direction}}">
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6G2BT"
             height="0" width="0" style="display:none;visibility:hidden"></iframe>

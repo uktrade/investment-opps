@@ -187,12 +187,22 @@ function setGradientHeight() {
   }
 }
 
+function direction() {
+  if (document.direction === 'rtl') {
+    return 'right'
+  }
+  return 'left'
+}
+
 function openNav() {
+  var margin = 'margin-' + direction()
+  var animateArg = {}
   var contentLastMarginLeft = 0
   $('#searchInput').focus()
   var box = $('#dit-search-overlay')
   var newValue = contentLastMarginLeft
-  contentLastMarginLeft = box.css('margin-left')
+  animateArg[margin] = newValue
+  contentLastMarginLeft = box.css(margin)
 
   $(document).keyup(function(e) {
     if (e.keyCode == 27) { // escape key maps to keycode `27`
@@ -208,14 +218,14 @@ function openNav() {
     'height': '110px'
   }, 100)
 
-  box.animate({
-    'margin-left': newValue
-  }, 400)
+  box.animate(animateArg, 400)
 }
 
 /* Close */
 function closeNav() {
-
+  var margin = 'margin-' + direction()
+  var animateArg = {}
+  animateArg[margin] = '100%'
   var contentLastMarginLeft = 0,
     box = $('#dit-search-overlay'),
     newValue = contentLastMarginLeft
@@ -223,16 +233,13 @@ function closeNav() {
   $('body').removeClass('overlay-open')
   $('#searchInput').val('')
   $('#search-options').empty()
-  contentLastMarginLeft = box.css('margin-left')
+  contentLastMarginLeft = box.css(margin)
 
   box.animate({
-    // 'margin-top': '40px',
     'height': '110px'
   }, 500)
 
-  box.animate({
-    'margin-left': '100%'
-  }, 900)
+  box.animate(animateArg, 900)
 }
 
 function checkFormStatus() {
@@ -656,6 +663,7 @@ function selector() {
   $('a[href="/int/ja"]').attr("href", parallelPath("int/ja"))
   $('a[href="/int/es"]').attr("href", parallelPath("int/es"))
   $('a[href="/int/pt"]').attr("href", parallelPath("int/pt"))
+  $('a[href="/int/ar"]').attr("href", parallelPath("int/ar"))
   $('a[href="/us"]').attr("href", parallelPath("us"))
   $('a[href="/cn"]').attr("href", parallelPath("cn"))
   $('a[href="/in"]').attr("href", parallelPath("in"))
