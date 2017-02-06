@@ -656,6 +656,7 @@ function selector() {
   $('a[href="/int/ja"]').attr("href", parallelPath("int/ja"))
   $('a[href="/int/es"]').attr("href", parallelPath("int/es"))
   $('a[href="/int/pt"]').attr("href", parallelPath("int/pt"))
+  $('a[href="/int/ar"]').attr("href", parallelPath("int/ar"))
   $('a[href="/us"]').attr("href", parallelPath("us"))
   $('a[href="/cn"]').attr("href", parallelPath("cn"))
   $('a[href="/in"]').attr("href", parallelPath("in"))
