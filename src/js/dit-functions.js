@@ -109,7 +109,7 @@ function checkGeoLocation() {
 
 function getRedirectPath(countryCode) {
   //TODO move lookup table to more stable location
-  var jqxh = $.getJSON("https://cdn.rawgit.com/uktrade/iigb-beta-website/feature/geoip_lookup/src/country_redirects.json", function(data) {})
+  var jqxh = $.getJSON("https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json", function(data) {})
     .done(function(data) {
       doRedirect(data.countryCode);
     })
