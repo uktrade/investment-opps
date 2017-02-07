@@ -12,7 +12,12 @@
     <meta name="language" content="{{locale.language}}">
     <meta name="country" content="{{locale.country}}">
     <meta name="timestamp" content="{{timestamp}}">
-    <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    {% if locale.language === 'ar' %}
+      <link href='http://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css' rel='stylesheet' type='text/css'>
+    {% else %}
+      <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+    {% endif %}
+
     <link href="/{{assets}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
     {% if direction === 'rtl' %}
     <!--if for rtl language-->
