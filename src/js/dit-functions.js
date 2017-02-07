@@ -108,9 +108,10 @@ function checkGeoLocation() {
 }
 
 function getRedirectPath(countryCode) {
-  var jqxh = $.getJSON("https://raw.githubusercontent.com/uktrade/iigb-beta-website/feature/geoip_lookup/src/country_redirects.json", function(data) {})
+  //TODO move lookup table to more stable location
+  var jqxh = $.getJSON("https://cdn.rawgit.com/uktrade/iigb-beta-website/feature/geoip_lookup/src/country_redirects.json", function(data) {})
     .done(function(data) {
-    doRedirect(data.countryCode);
+      doRedirect(data.countryCode);
     })
     .fail(function() {
       loaded();
