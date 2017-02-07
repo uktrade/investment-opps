@@ -385,6 +385,8 @@ function prepareForm() {
       curStepValue = parseInt(curStep.attr('id').split('-')[1]),
       nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children('a'),
       curInputs = curStep.find('input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff'),
+      margin = 'margin-' + direction(),
+      animateArg = {},
       isValid = true
 
     $('.form-group').removeClass('has-error')
@@ -412,9 +414,8 @@ function prepareForm() {
     }
 
     if (isValid) {
-      $('.dit-form-wrapper').animate({
-        'margin-left': -(curStepValue * theWidth)
-      }, 500)
+      animateArg[margin] = -(curStepValue * theWidth)
+      $('.dit-form-wrapper').animate(animateArg, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
       if ($(this).attr('id') === 'ga-send-js') {
         if ($(this).hasClass('optsFormSubmit')) {
@@ -430,14 +431,13 @@ function prepareForm() {
     var curStep = $(this).closest('.setup-content'),
       curStepValue = parseInt(curStep.attr('id').split('-')[1]),
       prevStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().prev().children('a'),
-      isValid = true
+      margin = 'margin-' + direction(),
+      animateArg = {}
 
-    if (isValid) {
-      $('.dit-form-wrapper').animate({
-        'margin-left': -((curStepValue - 2) * theWidth)
-      }, 500)
-      prevStepWizard.removeAttr('disabled').trigger('click')
-    }
+    animateArg[margin] = -((curStepValue - 2) * theWidth)
+
+    $('.dit-form-wrapper').animate(animateArg, 500)
+    prevStepWizard.removeAttr('disabled').trigger('click')
   })
 }
 
