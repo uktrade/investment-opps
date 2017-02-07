@@ -539,7 +539,7 @@ function getResults(size, start) {
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
     searchArea = $('#search-options'),
-    searchInput = $('#searchInput').val(),
+    searchInput = $('#searchInput').val().trim(),
     gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod",
     country = document.country,
     language = document.language
@@ -675,16 +675,16 @@ function selector() {
 
 function parallelPath(destination) {
   var language = document.language,
-      country = document.country,
-      pagePath = document.pagePath,
-      pathClipped
+    country = document.country,
+    pagePath = document.pagePath,
+    pathClipped
   if (country === 'int' && language !== 'en') {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(2).join('/')
     }
   } else {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(1).join('/')
     }
