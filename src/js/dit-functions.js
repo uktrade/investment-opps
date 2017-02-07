@@ -16,7 +16,7 @@ function enhance() {
 }
 
 function playVidTest() {
-  $('#heroVideo').on('show.bs.modal', function(e) {
+  $('#heroVideo').on('show.bs.modal', function (e) {
     var extVid = $('.video-wrapper').attr('data-video')
     var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
     $('.video-wrapper').append(ytApi)
@@ -30,8 +30,8 @@ function enhance_videobg() {
 }
 
 function heroVideoReload() {
-  $('#closeHeroVideo').click(function() {
-    $("#heroVideo iframe").attr("src", $("#heroVideo iframe").attr("src"))
+  $('#closeHeroVideo').click(function () {
+    $('#heroVideo iframe').attr('src', $('#heroVideo iframe').attr('src'))
   })
 }
 
@@ -62,7 +62,7 @@ function formAutocomplete() {
 
   $('#country').autocomplete({
     lookup: document.countries,
-    onSelect: function(suggestion) {
+    onSelect: function (suggestion) {
       $('#country_en').val(document.countries_en[suggestion.data]);
 
     }
@@ -71,7 +71,7 @@ function formAutocomplete() {
 
 function init() {
 
-  var is_root = location.pathname == "/";
+  var is_root = location.pathname == '/'
 
   if (is_root) {
     checkGeoLocation();
@@ -82,70 +82,71 @@ function init() {
 
 
 function loaded() {
-  $(document).ready(function() {
-    enhance();
-    // setTimeout(showcontent, 500);
-    // setTimeout(onLoaded, 800);
+  $(document).ready(function () {
+    enhance()
+    // setTimeout(showcontent, 500)
+    // setTimeout(onLoaded, 800)
     onLoaded()
   });
 
-  $(window).on('resize', function() {
-    checkHeight();
-    setGradientHeight();
-    prepareForm();
+  $(window).on('resize', function () {
+    checkHeight()
+    setGradientHeight()
+    prepareForm()
   });
 
 }
 
 function checkGeoLocation() {
-  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
-    .done(function(data) {
-      doGeoRouting(data.country_code);
+  var jqxhr = $.getJSON('//freegeoip.net/json/', function (data) {
+  })
+    .done(function (data) {
+      doGeoRouting(data.country_code)
     })
-    .fail(function() {
+    .fail(function () {
       loaded()
     })
 }
 
 function doGeoRouting(countryCode) {
-  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR'];
-  var supportedIntLanguages = ['PT'];
+  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR']
+  var supportedIntLanguages = ['PT']
   if ($.inArray(countryCode, supportedMarkets) != '-1') {
-    doRedirect(countryCode);
+    doRedirect(countryCode)
   } else if ($.inArray(countryCode, supportedIntLanguages) != '-1') {
-    doRedirect('INT', countryCode);
+    doRedirect('INT', countryCode)
   } else {
-    doRedirect('INT');
+    doRedirect('INT')
   }
 }
 
 function doRedirect(countryCode, languageCode) {
 
-  var redirectLocation;
+  var redirectLocation
 
   if (languageCode == undefined) {
-    redirectLocation = countryCode.toLowerCase();
-    window.location.pathname = '/' + redirectLocation + '/';
+    redirectLocation = countryCode.toLowerCase()
+    window.location.pathname = '/' + redirectLocation + '/'
   } else {
-    redirectLocation = countryCode.toLowerCase();
-    var languagePath = languageCode.toLowerCase();
-    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/';
+    redirectLocation = countryCode.toLowerCase()
+    var languagePath = languageCode.toLowerCase()
+    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/'
   }
 }
 
 
 function smoothScroll() {
   //smoothscrolling and positioning
-  $('a[href^="#"]').on('click', function(e) {
+  $('a[href^="#"]').on('click', function (e) {
     // prevent default anchor click behavior
     e.preventDefault()
-      // store hash
+    // store hash
     var hash = this.hash
-      // animate
+    // animate
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
-      }, 600, 'swing', function() {
+      }, 600, 'swing', function () {
         window.location.hash = hash
       })
     }
@@ -154,7 +155,7 @@ function smoothScroll() {
 
 function addActive() {
   var url = window.location.pathname
-  var base_url = '/' + document.base_url + '/';
+  var base_url = '/' + document.base_url + '/'
   var child = ''
   if (url.match(/\/industries\//)) {
     child = 'industries/'
@@ -194,23 +195,22 @@ function direction() {
   return 'left'
 }
 
+/* Open search bar */
 function openNav() {
-  var margin = 'margin-' + direction()
-  var animateArg = {}
-  var contentLastMarginLeft = 0
-  $('#searchInput').focus()
-  var box = $('#dit-search-overlay')
-  var newValue = contentLastMarginLeft
-  animateArg[margin] = newValue
-  contentLastMarginLeft = box.css(margin)
+  var margin = 'margin-' + direction(),
+    animateArg = {},
+    box = $('#dit-search-overlay')
 
-  $(document).keyup(function(e) {
+  $('#searchInput').focus()
+  animateArg[margin] = 0
+
+  $(document).keyup(function (e) {
     if (e.keyCode == 27) { // escape key maps to keycode `27`
       closeNav()
     }
   })
 
-  $("#closebtn-collapse-1").click(function() {
+  $('#closebtn-collapse-1').click(function () {
     closeNav()
   })
   box.animate({
@@ -223,17 +223,15 @@ function openNav() {
 
 /* Close */
 function closeNav() {
-  var margin = 'margin-' + direction()
-  var animateArg = {}
+  var margin = 'margin-' + direction(),
+    animateArg = {},
+    box = $('#dit-search-overlay')
+
   animateArg[margin] = '100%'
-  var contentLastMarginLeft = 0,
-    box = $('#dit-search-overlay'),
-    newValue = contentLastMarginLeft
 
   $('body').removeClass('overlay-open')
   $('#searchInput').val('')
   $('#search-options').empty()
-  contentLastMarginLeft = box.css(margin)
 
   box.animate({
     'height': '110px'
@@ -258,7 +256,8 @@ function checkFormStatus() {
       $('html, body').animate({
         scrollTop: $('.dit-form-section').offset().top
       }, 2000)
-    } catch (e) {}
+    } catch (e) {
+    }
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -275,9 +274,8 @@ function ifOtherSelected() {
   var industry = $('#industry')
   $('#other').hide()
 
-  industry.change(function(e) {
+  industry.change(function () {
     var value = $('#industry option:selected').val()
-    console.log(value)
     if (value.match(':Other')) {
       $('#other').show()
     } else {
@@ -292,7 +290,7 @@ function getUrlVar() {
     hash = hashes[i].split('=')
     id = hash[1]
   }
-  return "IIGB-" + id
+  return 'IIGB-' + id
 }
 
 function prepareForm() {
@@ -317,16 +315,16 @@ function prepareForm() {
   allWells.hide()
   locationSelectors.hide()
 
-  locationRadioYes.click(function(e) {
+  locationRadioYes.click(function () {
     locationSelectors.show()
   })
 
-  locationRadioNo.click(function(e) {
+  locationRadioNo.click(function () {
     $('#location').prop('selectedIndex', 0)
     locationSelectors.hide()
   })
 
-  $('#step-2').on('click', '.radio-group a', function() {
+  $('#step-2').on('click', '.radio-group a', function () {
     var sel = $(this).data('title'),
       tog = $(this).data('toggle')
     $(this).parent().next('.' + tog).prop('value', sel)
@@ -334,7 +332,7 @@ function prepareForm() {
     $(this).parent().find('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active')
   })
 
-  navListItems.click(function(e) {
+  navListItems.click(function (e) {
     e.preventDefault()
     var $target = $($(this).attr('href')),
       $item = $(this)
@@ -350,11 +348,11 @@ function prepareForm() {
 
   var theStep, theWidth, totalWidth
 
-  $(function() {
+  $(function () {
     var isMother = $('#mother').length
     theWidth = $('.dit-form-section__body').width()
     theStep = $('.setup-content')
-    $(theStep).each(function() {
+    $(theStep).each(function () {
       $(this).css('width', theWidth)
     })
 
@@ -364,58 +362,58 @@ function prepareForm() {
     }
     //assign height width and overflow hidden to mother
     $('#mother').css({
-        width: function() {
-          return theWidth
-        },
-        // height: function() {
-        //   return theStep.height()
-        // },
-        position: 'relative !important',
-        overflow: 'hidden'
-      })
-      //get total of image sizes and set as width for ul
+      width: function () {
+        return theWidth
+      },
+      // height: function() {
+      //   return theStep.height()
+      // },
+      position: 'relative !important',
+      overflow: 'hidden'
+    })
+    //get total of image sizes and set as width for ul
     totalWidth = (theStep.length) * theWidth + 5
     $('.dit-form-wrapper').css({
-      width: function() {
+      width: function () {
         return totalWidth
       }
     })
   })
 
-  allNextBtn.click(function() {
-    var curStep = $(this).closest(".setup-content"),
-      curStepValue = parseInt(curStep.attr("id").split('-')[1]),
-      nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children("a"),
-      curInputs = curStep.find("input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff"),
+  allNextBtn.click(function () {
+    var curStep = $(this).closest('.setup-content'),
+      curStepValue = parseInt(curStep.attr('id').split('-')[1]),
+      nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children('a'),
+      curInputs = curStep.find('input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff'),
       isValid = true
 
-    $(".form-group").removeClass("has-error")
+    $('.form-group').removeClass('has-error')
     for (var i = 0; i < curInputs.length; i++) {
       if (curInputs[i].hasAttribute('required') && curInputs[i].value === '') { //changed for IE8 compatibility
         isValid = false
-        $(curInputs[i]).closest(".form-group").addClass("has-error")
+        $(curInputs[i]).closest('.form-group').addClass('has-error')
       }
       if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[email]' && !isValidEmail(curInputs[i].value)) {
         isValid = false
-        $(curInputs[i]).closest(".form-group").addClass("has-error")
-        $('.validation_error_email').css("display", "block")
+        $(curInputs[i]).closest('.form-group').addClass('has-error')
+        $('.validation_error_email').css('display', 'block')
       }
       if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[phone]' && !isValidPhoneNumber(curInputs[i].value)) {
         isValid = false
-        $(curInputs[i]).closest(".form-group").addClass("has-error")
-        $('.validation_error_email').css("display", "block")
+        $(curInputs[i]).closest('.form-group').addClass('has-error')
+        $('.validation_error_email').css('display', 'block')
       }
       var value = $('#industry option:selected').val()
       if (curInputs[i].value === '' && curInputs[i].getAttribute('name') == 'user[other]' && value.indexOf('18') >= 0) {
         isValid = false
-        $(curInputs[i]).closest(".form-group").addClass("has-error")
-        $('.validation_error_other').css("display", "block")
+        $(curInputs[i]).closest('.form-group').addClass('has-error')
+        $('.validation_error_other').css('display', 'block')
       }
     }
 
     if (isValid) {
       $('.dit-form-wrapper').animate({
-        "margin-left": -(curStepValue * theWidth)
+        'margin-left': -(curStepValue * theWidth)
       }, 500)
       nextStepWizard.removeAttr('disabled').trigger('click')
       if ($(this).attr('id') === 'ga-send-js') {
@@ -428,16 +426,15 @@ function prepareForm() {
     }
   })
 
-  allPrevBtn.click(function() {
-    var curStep = $(this).closest(".setup-content"),
-      curStepValue = parseInt(curStep.attr("id").split('-')[1]),
-      prevStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().prev().children("a"),
-      curInputs = curStep.find("input[type='text'],input[type='email'], #turnover:selected, #other, #staff:selected, #country:selected, #location:selected"),
+  allPrevBtn.click(function () {
+    var curStep = $(this).closest('.setup-content'),
+      curStepValue = parseInt(curStep.attr('id').split('-')[1]),
+      prevStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().prev().children('a'),
       isValid = true
 
     if (isValid) {
       $('.dit-form-wrapper').animate({
-        "margin-left": -((curStepValue - 2) * theWidth)
+        'margin-left': -((curStepValue - 2) * theWidth)
       }, 500)
       prevStepWizard.removeAttr('disabled').trigger('click')
     }
@@ -453,22 +450,22 @@ function submitOptsForm() {
   var postUrl = form.attr('action')
 
   $.ajax({
-      type: 'POST',
-      url: postUrl,
-      data: form.serialize(),
-      success: function(data) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          'event': 'formSubmissionSuccess',
-          'formId': 'dit-form'
-        });
-        window.location.href = base_url + 'location-guide/confirmation'
-      },
-      error: function(xhr, textstatus, error) {
-        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
-      }
-    })
-    // e.preventDefault()
+    type: 'POST',
+    url: postUrl,
+    data: form.serialize(),
+    success: function (data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'formSubmissionSuccess',
+        'formId': 'dit-form'
+      });
+      window.location.href = base_url + 'location-guide/confirmation'
+    },
+    error: function (xhr, textstatus, error) {
+      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    }
+  })
+  // e.preventDefault()
 
   function formLoading() {
 
@@ -498,22 +495,22 @@ function submitForm() {
   var postUrl = form.attr('action')
 
   $.ajax({
-      type: 'POST',
-      url: postUrl,
-      data: form.serialize(),
-      success: function(data) {
-        window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          'event': 'formSubmissionSuccess',
-          'formId': 'dit-form'
-        });
-        window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
-      },
-      error: function(xhr, textstatus, error) {
-        window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
-      }
-    })
-    // e.preventDefault()
+    type: 'POST',
+    url: postUrl,
+    data: form.serialize(),
+    success: function (data) {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'formSubmissionSuccess',
+        'formId': 'dit-form'
+      });
+      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+    },
+    error: function (xhr, textstatus, error) {
+      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    }
+  })
+  // e.preventDefault()
 
   function formLoading() {
 
@@ -540,36 +537,36 @@ function getResults(size, start) {
     URL = $(location).attr('href'),
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val(),
-    gateway = "https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod",
+    gateway = 'https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod',
     country = document.country,
     language = document.language
 
-  var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
+  var searchUrl = gateway + '?q=(and field="language" "'+ language + '"(and field="country" "' + country + '" (or (term boost=2 field="pagetitle" "' + searchInput + '") (term field="content" "' + searchInput + '") (prefix boost=2 field="pagetitle" "' + searchInput + '") (prefix field="content" "' + searchInput + '"))))&size=' + size + '&start=' + start + '&q.parser=structured'
 
   if (searchInput === '') {
-    searchArea.html("")
+    searchArea.html('')
   } else if (searchInput.length > 2) {
     $.ajax({
-      type: "GET",
+      type: 'GET',
       url: searchUrl,
-      success: function(results) {
-        searchArea.html("")
+      success: function (results) {
+        searchArea.html('')
         if ('hits' in results) {
           $('.dit-search-spinner').css('z-index', 1)
           box.animate({
             // 'margin-top': '0',
             'height': '100%'
-          }, 1000, function() {
+          }, 1000, function () {
             $('body').addClass('overlay-open')
           })
 
           var searchResults = results.hits.hit
-          searchResults.forEach(function(result) {
+          searchResults.forEach(function (result) {
             var htmlStr = '<div class="search-result"><h3><a href="/' + result.fields.url + '">' + result.fields.pagetitle + '</a></h3>' +
-              '<p class="search-result-link">' + "invest.great.gov.uk/" + result.fields.url + '</p>' +
+              '<p class="search-result-link">' + 'invest.great.gov.uk/' + result.fields.url + '</p>' +
               '<p class="search-result-snippet">' + (result.fields.intro ? results.fields.intro : '') + '</p></div>'
             if (result.fields.pagetitle !== '') {
-              $("#search-options").append(htmlStr)
+              $('#search-options').append(htmlStr)
             }
           })
           if (results.hits.found > searchResultsSize) {
@@ -587,13 +584,13 @@ function getResults(size, start) {
               $('.pagination').append('<li><a style="cursor:pointer" onclick="getResults(' + searchResultsSize + ',' + (searchResultsSize * x - (searchResultsSize - 1)) + ')">' + x + '</a></li>')
             }
           } else if (results.hits.found === 0) {
-            $("#search-options").append('<p><h3>' + $('.no-results').text() + ' "' + searchInput + '"</h3></p>')
+            $('#search-options').append('<p><h3>' + $('.no-results').text() + ' "' + searchInput + '"</h3></p>')
           }
         } else {
-          $("#search-options").append('<p><h3>' + $('.search-error').text() + '</h3></p>')
+          $('#search-options').append('<p><h3>' + $('.search-error').text() + '</h3></p>')
         }
       },
-      error: function(xhr, textstatus, error) {
+      error: function (xhr, textstatus, error) {
         console.log(error)
       }
     })
@@ -603,7 +600,7 @@ function getResults(size, start) {
 function jsSearch() {
   var searchButton = $('#searchBtn')
 
-  searchButton.click(function(e) {
+  searchButton.click(function (e) {
     e.preventDefault()
     searchButton.removeAttr('href')
     openNav()
@@ -612,7 +609,7 @@ function jsSearch() {
 
 function search() {
   var searchResultsSize = 10
-  var debouncedSearch = debounce(function() {
+  var debouncedSearch = debounce(function () {
     getResults(searchResultsSize, 0)
     $('.dit-search-spinner').css('z-index', 15)
   }, 500)
@@ -621,10 +618,10 @@ function search() {
 
 function debounce(func, wait, immediate) {
   var timeout
-  return function() {
+  return function () {
     var context = this,
       args = arguments
-    var later = function() {
+    var later = function () {
       timeout = null
       if (!immediate) func.apply(context, args)
     }
@@ -657,27 +654,27 @@ function responsiveTable() {
 }
 
 function selector() {
-  $('a[href="/int"]').attr("href", parallelPath('int'))
-  $('a[href="/int/zh"]').attr("href", parallelPath("int/zh"))
-  $('a[href="/int/de"]').attr("href", parallelPath("int/de"))
-  $('a[href="/int/ja"]').attr("href", parallelPath("int/ja"))
-  $('a[href="/int/es"]').attr("href", parallelPath("int/es"))
-  $('a[href="/int/pt"]').attr("href", parallelPath("int/pt"))
-  $('a[href="/int/ar"]').attr("href", parallelPath("int/ar"))
-  $('a[href="/us"]').attr("href", parallelPath("us"))
-  $('a[href="/cn"]').attr("href", parallelPath("cn"))
-  $('a[href="/in"]').attr("href", parallelPath("in"))
-  $('a[href="/de"]').attr("href", parallelPath("de"))
-  $('a[href="/es"]').attr("href", parallelPath("es"))
-  $('a[href="/br"]').attr("href", parallelPath("br"))
-  $('a[href="/jp"]').attr("href", parallelPath("jp"))
+  $('a[href="/int"]').attr('href', parallelPath('int'))
+  $('a[href="/int/zh"]').attr('href', parallelPath('int/zh'))
+  $('a[href="/int/de"]').attr('href', parallelPath('int/de'))
+  $('a[href="/int/ja"]').attr('href', parallelPath('int/ja'))
+  $('a[href="/int/es"]').attr('href', parallelPath('int/es'))
+  $('a[href="/int/pt"]').attr('href', parallelPath('int/pt'))
+  $('a[href="/int/ar"]').attr('href', parallelPath('int/ar'))
+  $('a[href="/us"]').attr('href', parallelPath('us'))
+  $('a[href="/cn"]').attr('href', parallelPath('cn'))
+  $('a[href="/in"]').attr('href', parallelPath('in'))
+  $('a[href="/de"]').attr('href', parallelPath('de'))
+  $('a[href="/es"]').attr('href', parallelPath('es'))
+  $('a[href="/br"]').attr('href', parallelPath('br'))
+  $('a[href="/jp"]').attr('href', parallelPath('jp'))
 }
 
 function parallelPath(destination) {
   var language = document.language,
-      country = document.country,
-      pagePath = document.pagePath,
-      pathClipped
+    country = document.country,
+    pagePath = document.pagePath,
+    pathClipped
   if (country === 'int' && language !== 'en') {
     pathClipped = function () {
       var temp = pagePath.split('/')
