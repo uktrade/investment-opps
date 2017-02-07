@@ -43,7 +43,7 @@
   font-weight: 100;
   display: inline-block;
   padding: 2px 12px;
-  margin-left: 8px;
+  margin-#{$left}: 8px;
   color: $link-colour;
   background-color: $white;
 
@@ -62,8 +62,8 @@
     color: $link-colour;
     background-color: $white;
     padding: 4px 10px;
-    margin: 14px 15px 0 0;
-    float: right;
+    margin: flip-side-values(14px 15px 0 0);
+    float: #{$right};
   }
 
   @media (max-width: $screen-xs-max) {
@@ -75,8 +75,8 @@
     padding: 2px 12px;
     color: $link-colour !important;
     background-color: $white;
-    margin: 14px 0 16px 40px;
-    float: left;
+    margin: flip-side-values(14px 0 16px 40px);
+    float: #{$left};
   }
 }
 

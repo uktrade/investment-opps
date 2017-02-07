@@ -10,23 +10,23 @@
   @media (max-width: $screen-xs-max) {
     margin: 0;
     padding: 15px;
-    border-right: 0px;
+    border-#{$right}: 0px;
   }
 
   &__item {
     position: relative;
     //padding: 15px 100px 30px 60px;
-    padding: 15px 60px 30px 15px;
+    padding: flip-side-values(15px 60px 30px 15px);
     width: 50%;
-    float: left;
+    float: #{$left};
 
     @media (max-width: $screen-md-max) {
-      padding: 15px 30px 30px 60px;
+      padding: flip-side-values(15px 30px 30px 60px);
       min-height: 230px;
     }
 
     @media (max-width: $screen-sm-max) {
-      padding: 15px 30px 30px 60px;
+      padding: flip-side-values(15px 30px 30px 60px);
       min-height: 250px;
     }
 
@@ -39,7 +39,7 @@
     //&:before {
     //  position: absolute;
     //  top: 16px;
-    //  left: 10px;
+    //  #{$left}: 10px;
     //  font-size: 70px;
     //  font-weight: 100;
     //  content: counter(dit-big-list-counter);
@@ -49,13 +49,13 @@
     //
     //  @media (max-width: $screen-xs-max) {
     //    top: 20px;
-    //    left: 0px;
+    //    #{$left}: 0px;
     //    font-size: 60px;
     //  }
     //}
 
     &:nth-of-type(2n+1) {
-      clear: left;
+      clear: #{$left};
     }
 
     &--red-list-style {
@@ -71,12 +71,12 @@
 
       @media (max-width: $screen-md-max) {
         //padding: 15px 30px 30px 60px;
-        padding: 15px 60px 30px 15px;
+        padding: flip-side-values(15px 60px 30px 15px);
       }
 
       @media (max-width: $screen-sm-max) {
         //padding: 15px 30px 30px 60px;
-        padding: 15px 60px 0 15px;
+        padding: flip-side-values(15px 60px 0 15px);
       }
 
       @media (max-width: $screen-xs-max) {
