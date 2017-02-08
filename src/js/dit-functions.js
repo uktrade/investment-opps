@@ -98,9 +98,9 @@ function loaded() {
 }
 
 function checkGeoLocation() {
-  $.getJSON('//freegeoip.net/json/', function(data) {})
+  $.getJSON('//freegeoip.net/json/', function() {})
   .done(function(data) {
-    getRedirectPath(data.country_code);
+    getRedirectPath(data.country_code)
   })
   .fail(function() {
     loaded()
@@ -115,7 +115,7 @@ function getRedirectPath(countryCode) {
   })
   .fail(function() {
     loaded()
-  });
+  })
 }
 
 function doRedirect(redirectLocation) {
@@ -448,7 +448,7 @@ function submitOptsForm() {
       window.dataLayer.push({
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
-      });
+      })
       window.location.href = base_url + 'location-guide/confirmation'
     },
     error: function(xhr, textstatus, error) {
@@ -493,7 +493,7 @@ function submitForm() {
       window.dataLayer.push({
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
-      });
+      })
       window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
     },
     error: function (xhr, textstatus, error) {
@@ -629,9 +629,9 @@ function isValidEmail(email) {
 
 function isValidPhoneNumber(number) {
   if (number.length > 8) {
-    return false;
+    return false
   } else {
-    return true;
+    return true
   }
 }
 
