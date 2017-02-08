@@ -98,32 +98,27 @@ function loaded() {
 }
 
 function checkGeoLocation() {
-  var jqxhr = $.getJSON('//freegeoip.net/json/', function (data) {
+  $.getJSON('//freegeoip.net/json/', function(data) {})
+  .done(function(data) {
+    getRedirectPath(data.country_code);
   })
-    .done(function (data) {
-      doGeoRouting(data.country_code)
-  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
-    .done(function(data) {
-      getRedirectPath(data.country_code);
-    })
-    .fail(function() {
-      loaded()
-    })
+  .fail(function() {
+    loaded()
+  })
 }
 
 function getRedirectPath(countryCode) {
   //TODO move lookup table to more stable location
-  var jqxh = $.getJSON("https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json", function(data) {})
-    .done(function(data) {
-      doRedirect(data.countryCode)
-    })
-    .fail(function() {
-      loaded()
-    });
+  $.getJSON('https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json', function(data) {})
+  .done(function(data) {
+    doRedirect(data[countryCode])
+  })
+  .fail(function() {
+    loaded()
+  });
 }
 
 function doRedirect(redirectLocation) {
-  console.log(redirectLocation)
   if (redirectLocation == undefined || redirectLocation == '') {
     window.location.pathname = '/int/'
   } else {
