@@ -5,7 +5,7 @@
   height: 200px;
   background-color: $text-colour !important;
   position: relative;
-  margin-top: -200px;
+  margin: 20px 0 -50px;
   clear: both;
 
   &--list {
@@ -52,7 +52,7 @@
   }
 
   @media (max-width: $screen-xs-max) {
-    height: 100%;
+    height: initial;
   }
 
   .list-unstyled {
@@ -62,7 +62,6 @@
 }
 
 .issue_container{
-  margin-bottom: 200px;
   padding-bottom: 20px;
 }
 

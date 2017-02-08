@@ -90,6 +90,11 @@
   @media (max-width: $screen-xs-max) {
     vertical-align: bottom;
   }
+
+  &-selector-mobile {
+    float: #{$right};
+    background: transparent;
+  }
 }
 
 .dit-selector-wrapper {
