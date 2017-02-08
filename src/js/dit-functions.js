@@ -1,7 +1,7 @@
-var equalheight = require('./equalHeight');
-init();
-module.exports = {};
-window.getResults = getResults;
+var equalheight = require('./equalHeight')
+init()
+module.exports = {}
+window.getResults = getResults
 
 function showcontent() {
   $('.dit-outer-wrap').show()
@@ -16,7 +16,7 @@ function enhance() {
 }
 
 function playVidTest() {
-  $('#heroVideo').on('show.bs.modal', function (e) {
+  $('#heroVideo').on('show.bs.modal', function(e) {
     var extVid = $('.video-wrapper').attr('data-video')
     var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
     $('.video-wrapper').append(ytApi)
@@ -30,7 +30,7 @@ function enhance_videobg() {
 }
 
 function heroVideoReload() {
-  $('#closeHeroVideo').click(function () {
+  $('#closeHeroVideo').click(function() {
     $('#heroVideo iframe').attr('src', $('#heroVideo iframe').attr('src'))
   })
 }
@@ -52,7 +52,7 @@ function onLoaded() {
     heroVideoReload()
     playVidTest()
   } catch (e) {
-    console.error(e);
+    console.error(e)
   }
   removeloading()
 }
@@ -62,11 +62,11 @@ function formAutocomplete() {
 
   $('#country').autocomplete({
     lookup: document.countries,
-    onSelect: function (suggestion) {
-      $('#country_en').val(document.countries_en[suggestion.data]);
+    onSelect: function(suggestion) {
+      $('#country_en').val(document.countries_en[suggestion.data])
 
     }
-  });
+  })
 }
 
 function init() {
@@ -74,7 +74,7 @@ function init() {
   var is_root = location.pathname == '/'
 
   if (is_root) {
-    checkGeoLocation();
+    checkGeoLocation()
   } else {
     loaded()
   }
@@ -82,18 +82,18 @@ function init() {
 
 
 function loaded() {
-  $(document).ready(function () {
+  $(document).ready(function() {
     enhance()
     // setTimeout(showcontent, 500)
     // setTimeout(onLoaded, 800)
     onLoaded()
-  });
+  })
 
-  $(window).on('resize', function () {
+  $(window).on('resize', function() {
     checkHeight()
     setGradientHeight()
     prepareForm()
-  });
+  })
 
 }
 
@@ -102,42 +102,38 @@ function checkGeoLocation() {
   })
     .done(function (data) {
       doGeoRouting(data.country_code)
+  var jqxhr = $.getJSON("//freegeoip.net/json/", function(data) {})
+    .done(function(data) {
+      getRedirectPath(data.country_code);
     })
-    .fail(function () {
+    .fail(function() {
       loaded()
     })
 }
 
-function doGeoRouting(countryCode) {
-  var supportedMarkets = ['US', 'CN', 'DE', 'IN', 'ES', 'JP', 'BR']
-  var supportedIntLanguages = ['PT']
-  if ($.inArray(countryCode, supportedMarkets) != '-1') {
-    doRedirect(countryCode)
-  } else if ($.inArray(countryCode, supportedIntLanguages) != '-1') {
-    doRedirect('INT', countryCode)
-  } else {
-    doRedirect('INT')
-  }
+function getRedirectPath(countryCode) {
+  //TODO move lookup table to more stable location
+  var jqxh = $.getJSON("https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json", function(data) {})
+    .done(function(data) {
+      doRedirect(data.countryCode)
+    })
+    .fail(function() {
+      loaded()
+    });
 }
 
-function doRedirect(countryCode, languageCode) {
-
-  var redirectLocation
-
-  if (languageCode == undefined) {
-    redirectLocation = countryCode.toLowerCase()
-    window.location.pathname = '/' + redirectLocation + '/'
+function doRedirect(redirectLocation) {
+  console.log(redirectLocation)
+  if (redirectLocation == undefined || redirectLocation == '') {
+    window.location.pathname = '/int/'
   } else {
-    redirectLocation = countryCode.toLowerCase()
-    var languagePath = languageCode.toLowerCase()
-    window.location.pathname = '/' + redirectLocation + '/' + languagePath + '/'
+    window.location.pathname = redirectLocation
   }
 }
-
 
 function smoothScroll() {
   //smoothscrolling and positioning
-  $('a[href^="#"]').on('click', function (e) {
+  $('a[href^="#"]').on('click', function(e) {
     // prevent default anchor click behavior
     e.preventDefault()
     // store hash
@@ -146,7 +142,7 @@ function smoothScroll() {
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
-      }, 600, 'swing', function () {
+      }, 600, 'swing', function() {
         window.location.hash = hash
       })
     }
@@ -204,7 +200,7 @@ function openNav() {
   $('#searchInput').focus()
   animateArg[margin] = 0
 
-  $(document).keyup(function (e) {
+  $(document).keyup(function(e) {
     if (e.keyCode == 27) { // escape key maps to keycode `27`
       closeNav()
     }
@@ -256,8 +252,7 @@ function checkFormStatus() {
       $('html, body').animate({
         scrollTop: $('.dit-form-section').offset().top
       }, 2000)
-    } catch (e) {
-    }
+    } catch(e) {}
     enquiryId.text(getUrlVar())
   } else if (url.indexOf('&' + field + '=') !== -1) {
     formLeftSide.hide()
@@ -274,7 +269,7 @@ function ifOtherSelected() {
   var industry = $('#industry')
   $('#other').hide()
 
-  industry.change(function () {
+  industry.change(function() {
     var value = $('#industry option:selected').val()
     if (value.match(':Other')) {
       $('#other').show()
@@ -315,16 +310,16 @@ function prepareForm() {
   allWells.hide()
   locationSelectors.hide()
 
-  locationRadioYes.click(function () {
+  locationRadioYes.click(function() {
     locationSelectors.show()
   })
 
-  locationRadioNo.click(function () {
+  locationRadioNo.click(function() {
     $('#location').prop('selectedIndex', 0)
     locationSelectors.hide()
   })
 
-  $('#step-2').on('click', '.radio-group a', function () {
+  $('#step-2').on('click', '.radio-group a', function() {
     var sel = $(this).data('title'),
       tog = $(this).data('toggle')
     $(this).parent().next('.' + tog).prop('value', sel)
@@ -332,7 +327,7 @@ function prepareForm() {
     $(this).parent().find('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active')
   })
 
-  navListItems.click(function (e) {
+  navListItems.click(function(e) {
     e.preventDefault()
     var $target = $($(this).attr('href')),
       $item = $(this)
@@ -348,11 +343,11 @@ function prepareForm() {
 
   var theStep, theWidth, totalWidth
 
-  $(function () {
+  $(function() {
     var isMother = $('#mother').length
     theWidth = $('.dit-form-section__body').width()
     theStep = $('.setup-content')
-    $(theStep).each(function () {
+    $(theStep).each(function() {
       $(this).css('width', theWidth)
     })
 
@@ -362,7 +357,7 @@ function prepareForm() {
     }
     //assign height width and overflow hidden to mother
     $('#mother').css({
-      width: function () {
+      width: function() {
         return theWidth
       },
       // height: function() {
@@ -374,13 +369,13 @@ function prepareForm() {
     //get total of image sizes and set as width for ul
     totalWidth = (theStep.length) * theWidth + 5
     $('.dit-form-wrapper').css({
-      width: function () {
+      width: function() {
         return totalWidth
       }
     })
   })
 
-  allNextBtn.click(function () {
+  allNextBtn.click(function() {
     var curStep = $(this).closest('.setup-content'),
       curStepValue = parseInt(curStep.attr('id').split('-')[1]),
       nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children('a'),
@@ -427,7 +422,7 @@ function prepareForm() {
     }
   })
 
-  allPrevBtn.click(function () {
+  allPrevBtn.click(function() {
     var curStep = $(this).closest('.setup-content'),
       curStepValue = parseInt(curStep.attr('id').split('-')[1]),
       prevStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().prev().children('a'),
@@ -453,15 +448,15 @@ function submitOptsForm() {
     type: 'POST',
     url: postUrl,
     data: form.serialize(),
-    success: function (data) {
-      window.dataLayer = window.dataLayer || [];
+    success: function(data) {
+      window.dataLayer = window.dataLayer || []
       window.dataLayer.push({
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
       });
       window.location.href = base_url + 'location-guide/confirmation'
     },
-    error: function (xhr, textstatus, error) {
+    error: function(xhr, textstatus, error) {
       window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
     }
   })
@@ -498,8 +493,8 @@ function submitForm() {
     type: 'POST',
     url: postUrl,
     data: form.serialize(),
-    success: function (data) {
-      window.dataLayer = window.dataLayer || [];
+    success: function(data) {
+      window.dataLayer = window.dataLayer || []
       window.dataLayer.push({
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
@@ -536,7 +531,7 @@ function getResults(size, start) {
     box = $('#dit-search-overlay'),
     URL = $(location).attr('href'),
     searchArea = $('#search-options'),
-    searchInput = $('#searchInput').val(),
+    searchInput = $('#searchInput').val().trim(),
     gateway = 'https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod',
     country = document.country,
     language = document.language
@@ -549,19 +544,19 @@ function getResults(size, start) {
     $.ajax({
       type: 'GET',
       url: searchUrl,
-      success: function (results) {
+      success: function(results) {
         searchArea.html('')
         if ('hits' in results) {
           $('.dit-search-spinner').css('z-index', 1)
           box.animate({
             // 'margin-top': '0',
             'height': '100%'
-          }, 1000, function () {
+          }, 1000, function() {
             $('body').addClass('overlay-open')
           })
 
           var searchResults = results.hits.hit
-          searchResults.forEach(function (result) {
+          searchResults.forEach(function(result) {
             var htmlStr = '<div class="search-result"><h3><a href="/' + result.fields.url + '">' + result.fields.pagetitle + '</a></h3>' +
               '<p class="search-result-link">' + 'invest.great.gov.uk/' + result.fields.url + '</p>' +
               '<p class="search-result-snippet">' + (result.fields.intro ? results.fields.intro : '') + '</p></div>'
@@ -590,7 +585,7 @@ function getResults(size, start) {
           $('#search-options').append('<p><h3>' + $('.search-error').text() + '</h3></p>')
         }
       },
-      error: function (xhr, textstatus, error) {
+      error: function(xhr, textstatus, error) {
         console.log(error)
       }
     })
@@ -600,7 +595,7 @@ function getResults(size, start) {
 function jsSearch() {
   var searchButton = $('#searchBtn')
 
-  searchButton.click(function (e) {
+  searchButton.click(function(e) {
     e.preventDefault()
     searchButton.removeAttr('href')
     openNav()
@@ -609,7 +604,7 @@ function jsSearch() {
 
 function search() {
   var searchResultsSize = 10
-  var debouncedSearch = debounce(function () {
+  var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
     $('.dit-search-spinner').css('z-index', 15)
   }, 500)
@@ -618,10 +613,10 @@ function search() {
 
 function debounce(func, wait, immediate) {
   var timeout
-  return function () {
+  return function() {
     var context = this,
       args = arguments
-    var later = function () {
+    var later = function() {
       timeout = null
       if (!immediate) func.apply(context, args)
     }
@@ -676,12 +671,12 @@ function parallelPath(destination) {
     pagePath = document.pagePath,
     pathClipped
   if (country === 'int' && language !== 'en') {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(2).join('/')
     }
   } else {
-    pathClipped = function () {
+    pathClipped = function() {
       var temp = pagePath.split('/')
       return temp.slice(1).join('/')
     }
