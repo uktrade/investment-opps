@@ -1,1 +1,22 @@
 $direction: right;
+
+@font-face {
+  font-family: 'GE SS Two Bold';
+  src: url('../fonts/GE_SS_Two_Bold.eot?'); /* IE9 Compat Modes */
+  src: url('../fonts/GE_SS_Two_Bold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/GE_SS_Two_Bold.woff') format('woff'), /* Pretty Modern Browsers */
+  url('../fonts/GE_SS_Two_Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('../fonts/GE_SS_Two_Bold.svg#GESSTwoBold-Bold') format('svg'); /* Legacy iOS */
+  font-weight:normal;
+  font-style:normal;
+}
+@font-face {
+  font-family: 'GE SS Two Medium';
+  src: url('../fonts/GE_SS_Two_Medium.eot?'); /* IE9 Compat Modes */
+  src: url('../fonts/GE_SS_Two_Medium.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+  url('../fonts/GE_SS_Two_Medium.woff') format('woff'), /* Pretty Modern Browsers */
+  url('../fonts/GE_SS_Two_Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+  url('../fonts/GE_SS_Two_Medium.svg#GESSTwoMedium-Medium') format('svg'); /* Legacy iOS */
+  font-weight:normal;
+  font-style:normal;
+}
