@@ -73,4 +73,12 @@ sizingMethod='scale');
       margin: flip-side-values(-13px -15px 0 0);
     }
   }
+
+  &-external-link {
+    background: url(../media/icons/dit-icon-external-link.svg) no-repeat;
+    background-size: contain;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src=$assets + '/media/icons/dit-icon-external-link.png',
+                    sizingMethod='scale');
+  }
 }

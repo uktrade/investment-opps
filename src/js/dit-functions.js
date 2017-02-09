@@ -51,6 +51,7 @@ function onLoaded() {
     responsiveTable()
     heroVideoReload()
     playVidTest()
+    jsEnhanceExternalLinks()
   } catch (e) {
     console.error(e)
   }
@@ -667,15 +668,23 @@ function parallelPath(destination) {
     pathClipped
   if (country === 'int' && language !== 'en') {
     pathClipped = function() {
-      var temp = pagePath.split('/')
-      return temp.slice(2).join('/')
+      return pagePath.split('/').slice(2).join('/')
     }
   } else {
     pathClipped = function() {
-      var temp = pagePath.split('/')
-      return temp.slice(1).join('/')
+      return pagePath.split('/').slice(1).join('/')
     }
   }
-
   return '/' + destination + '/' + pathClipped()
+}
+
+function jsEnhanceExternalLinks() {
+  $(document.links)
+    .filter(function() {
+      return !this.target
+    })
+    .filter(function() {
+      return this.hostname !== document.domain
+    })
+    .attr('target', '_blank')
 }
