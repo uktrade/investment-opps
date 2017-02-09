@@ -6,7 +6,6 @@
 @import "utilities/margins";
 @import "utilities/padding";
 @import "utilities/text-transform";
-@import "utilities/base-type";
 @import "utilities/colours";
 @import "utilities/loading";
 
@@ -52,9 +51,9 @@
 @import "molecules/modal-selector";
 
 
-
 //organisms
-
+@import "organisms/lang-ja";
+@import "organisms/lang-zh";
 
 
 

@@ -5,7 +5,7 @@
   &__video-bg, &__image-bg {
     position: absolute;
     top: 50%;
-    #{$left}: 50%;
+    left: 50%; //not to be changed in rtl
     min-width: 100%;
     min-height: 100%;
     -ms-transform: translateX(-50%) translateY(-50%);

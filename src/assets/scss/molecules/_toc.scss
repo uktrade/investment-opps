@@ -36,7 +36,6 @@
       position: absolute;
       top: 0px;
       #{$left}: 2px;
-      font-size: 18px;
       content: counter(dit-toc-counter) ".";
       counter-increment: dit-toc-counter;
       width: 30px;
