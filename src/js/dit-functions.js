@@ -193,6 +193,7 @@ function openNav() {
     animateArg = {},
     box = $('#dit-search-overlay')
 
+  $('.search-results-block').hide()
   $('#searchInput').focus()
   animateArg[margin] = 0
 
@@ -208,9 +209,11 @@ function openNav() {
   box.animate({
     'margin-top': '0px',
     'height': '110px'
-  }, 100)
-
-  box.animate(animateArg, 400)
+  }, 50)
+    .animate(animateArg, 250)
+    .animate({
+      'height': '100%'
+  }, 300)
 }
 
 /* Close */
@@ -228,8 +231,8 @@ function closeNav() {
   box.animate({
     'height': '110px'
   }, 500)
-
-  box.animate(animateArg, 900)
+    .animate(animateArg, 900)
+  $('.search-results-block').hide()
 }
 
 function checkFormStatus() {
@@ -543,9 +546,9 @@ function getResults(size, start) {
       success: function(results) {
         searchArea.html('')
         if ('hits' in results) {
+          $('.search-results-block').show()
           $('.dit-search-spinner').css('z-index', 1)
           box.animate({
-            // 'margin-top': '0',
             'height': '100%'
           }, 1000, function() {
             $('body').addClass('overlay-open')
