@@ -18,14 +18,20 @@
     font-weight: 300;
   }
 
+  //Add external link icon
+  // nice to have but would add external icon on non js without a target='_blank'
+  //a:not( [ href*='great.gov.uk'] ):not( [href^='#'] ):not( [href^='/'] ):after {
+  a[target=_blank]:after {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    @extend .dit-icon-external-link;
+    margin-left: 4px;
+  }
+
   &__heading {
     @extend .h1;
-    // font-size: 40px;
-    // font-weight: 100;
-
-    // @media (max-width: $screen-md-max) {
-    //   font-size: 32px;
-    // }
   }
 
   &__subheading {

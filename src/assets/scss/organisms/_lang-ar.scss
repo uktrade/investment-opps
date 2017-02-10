@@ -10,6 +10,11 @@
     font-size: 12px;
   }
 
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GE SS Two Medium', sans-serif;
+    line-height: 1.6;
+  }
+
   .dit-great-link-container {
     border-right: none;
     display: inline-block;
@@ -25,7 +30,9 @@
   }
 
   .jumbotron {
-
+    p {
+      line-height: 2em;
+    }
   }
 
 
@@ -65,5 +72,9 @@
         font-size: 60px;
       }
     }
+  }
+
+  label.control-label {
+    width: 83.33333333%; //col-md-10
   }
 }

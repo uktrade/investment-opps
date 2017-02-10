@@ -21,7 +21,6 @@
   &__info {
     //min-height: 58rem;
     padding-#{$left}: 24px;
-    border-#{$right}: 1px solid $tile-border-colour;
     background-color: $white;
 
     .light-grey {
@@ -45,6 +44,7 @@
   &__body {
     //min-height: 58rem;
     background-color: $white;
+    border-#{$left}: 1px solid $tile-border-colour;
   }
 
   .glyphicon-triangle-#{$left} {
