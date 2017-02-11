@@ -1,38 +1,36 @@
+var geoLocation = require('./geo-location')
 var equalheight = require('./equalHeight')
-init()
-module.exports = {}
-window.getResults = getResults
+var logger=require('./logger')('DIT FUNCTIONS')
+var debug=logger.debug
+var error=logger.error
 
-function showcontent() {
-  $('.dit-outer-wrap').show()
+main()
+
+function main() {
+  geoLocation()
+    .done(function (redirecting) {
+      if (redirecting) {
+        return
+      }else {
+        window.getResults = getResults
+        loaded()
+      }
+    })
 }
 
-function removeloading() {
-  $('.dit-loading').fadeOut(400)
-}
-
-function enhance() {
-  enhance_videobg()
-}
-
-function playVidTest() {
-  $('#heroVideo').on('show.bs.modal', function(e) {
-    var extVid = $('.video-wrapper').attr('data-video')
-    var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
-    $('.video-wrapper').append(ytApi)
+function loaded() {
+  $(document).ready(function() {
+    enhance()
+    onLoaded()
   })
-}
 
-function enhance_videobg() {
-  if ($('#bgVid').length > 0 || $('#bgImg').length > 0) {
-    $('.jumbotron').addClass('bg--transparent')
-  }
-}
-
-function heroVideoReload() {
-  $('#closeHeroVideo').click(function() {
-    $('#heroVideo iframe').attr('src', $('#heroVideo iframe').attr('src'))
+  debug('Registering resize listeners')
+  $(window).on('resize', function() {
+    checkHeight()
+    setGradientHeight()
+    prepareForm()
   })
+
 }
 
 function onLoaded() {
@@ -53,14 +51,45 @@ function onLoaded() {
     playVidTest()
     jsEnhanceExternalLinks()
   } catch (e) {
-    console.error(e)
+    error('On loaded failed!', e)
   }
   removeloading()
 }
 
+function enhance() {
+  enhance_videobg()
+}
+
+
+function removeloading() {
+  debug('Removing loading overlay')
+  $('.dit-loading').fadeOut(400)
+}
+
+function playVidTest() {
+  debug('Playing video')
+  $('#heroVideo').on('show.bs.modal', function() {
+    var extVid = $('.video-wrapper').attr('data-video')
+    var ytApi = '<iframe width="560" height="315" src="' + extVid + '" frameborder="0" allowfullscreen></iframe>'
+    $('.video-wrapper').append(ytApi)
+  })
+}
+
+function enhance_videobg() {
+  debug('Enhancing video backgroud')
+  if ($('#bgVid').length > 0 || $('#bgImg').length > 0) {
+    $('.jumbotron').addClass('bg--transparent')
+  }
+}
+
+function heroVideoReload() {
+  $('#closeHeroVideo').click(function() {
+    $('#heroVideo iframe').attr('src', $('#heroVideo iframe').attr('src'))
+  })
+}
+
 function formAutocomplete() {
-
-
+  debug('Preparing form autocomplete')
   $('#country').autocomplete({
     lookup: document.countries,
     onSelect: function(suggestion) {
@@ -70,64 +99,9 @@ function formAutocomplete() {
   })
 }
 
-function init() {
-
-  var is_root = location.pathname == '/'
-
-  if (is_root) {
-    checkGeoLocation()
-  } else {
-    loaded()
-  }
-}
-
-
-function loaded() {
-  $(document).ready(function() {
-    enhance()
-    // setTimeout(showcontent, 500)
-    // setTimeout(onLoaded, 800)
-    onLoaded()
-  })
-
-  $(window).on('resize', function() {
-    checkHeight()
-    setGradientHeight()
-    prepareForm()
-  })
-
-}
-
-function checkGeoLocation() {
-  $.getJSON('//freegeoip.net/json/', function() {})
-  .done(function(data) {
-    getRedirectPath(data.country_code)
-  })
-  .fail(function() {
-    loaded()
-  })
-}
-
-function getRedirectPath(countryCode) {
-  //TODO move lookup table to more stable location
-  $.getJSON('https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json', function(data) {})
-  .done(function(data) {
-    doRedirect(data[countryCode])
-  })
-  .fail(function() {
-    loaded()
-  })
-}
-
-function doRedirect(redirectLocation) {
-  if (redirectLocation == undefined || redirectLocation == '') {
-    window.location.pathname = '/int/'
-  } else {
-    window.location.pathname = redirectLocation
-  }
-}
 
 function smoothScroll() {
+  debug('Applying smooth scroll')
   //smoothscrolling and positioning
   $('a[href^="#"]').on('click', function(e) {
     // prevent default anchor click behavior
@@ -151,11 +125,15 @@ function addActive() {
   var child = ''
   if (url.match(/\/industries\//)) {
     child = 'industries/'
+    debug('Adding active style to industries')
   } else if (url.match(/\/setup-guide\//)) {
     child = 'setup-guide/'
+    debug('Adding active style to setup guide')
   } else if (url.match('\/location-guide\/')) {
     child = 'location-guide/'
+    debug('Adding active style to location guide')
   } else if (url.match(/\/\w{2,3}\/$/)) {
+    debug('Not setting active style on current page')
     child = ''
   }
 
@@ -165,7 +143,7 @@ function addActive() {
 }
 
 function checkHeight() {
-
+  debug('Applying equal heights')
   var elem = $('div').find('.check-height')
   if (elem.length > 0) {
     equalheight(elem)
@@ -173,6 +151,7 @@ function checkHeight() {
 }
 
 function setGradientHeight() {
+  debug('SetGradientHeight')
   var textHeight = $('.jumbotron>.container').height()
   if (textHeight) {
     var gradientHeight = textHeight + 70
@@ -286,6 +265,7 @@ function getUrlVar() {
 
 function prepareForm() {
 
+  debug('Preparing form')
   $('.js_switch').attr('value', 'true')
   $('.stepwizard').show()
   $('.nextBtn').show()
@@ -662,6 +642,7 @@ function selector() {
 }
 
 function parallelPath(destination) {
+  debug('Applying parallel path, destination:', destination)
   var language = document.language,
     country = document.country,
     pagePath = document.pagePath,
