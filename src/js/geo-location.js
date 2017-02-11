@@ -1,6 +1,5 @@
-var logger=require('./logger')('GeoLocation')
+var logger=require('./logger')('GEO Location')
 var debug=logger.debug
-var error=logger.error
 var info=logger.info
 module.exports=geoLocation
 
@@ -9,14 +8,9 @@ function geoLocation() {
   if (is_root) {
     info('Checking location...')
     return checkGeoLocation()
-      .fail(function (e) {
-        error('Failed!',e)
-        return false
-      })
   } else {
-    return $.Deferred().resolve().promise()
+    return $.Deferred().resolve(false).promise()
   }
-
 
   function checkGeoLocation() {
     return $.getJSON('//freegeoip.net/json/', function() {})

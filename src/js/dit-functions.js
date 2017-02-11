@@ -1,8 +1,9 @@
 var geoLocation = require('./geo-location')
 var equalheight = require('./equalHeight')
-var logger=require('./logger')('DIT FUNCTIONS')
+var logger=require('./logger')('DIT Functions')
 var debug=logger.debug
 var error=logger.error
+var info=logger.info
 
 main()
 
@@ -12,14 +13,18 @@ function main() {
       if (redirecting) {
         return
       }else {
-        window.getResults = getResults
         loaded()
       }
+    }).fail(function (e) {
+      error('Geo location failed!',e)
+      loaded()
     })
 }
 
 function loaded() {
+  window.getResults = getResults
   $(document).ready(function() {
+    info('Document is ready')
     enhance()
     onLoaded()
   })
@@ -64,6 +69,7 @@ function enhance() {
 function removeloading() {
   debug('Removing loading overlay')
   $('.dit-loading').fadeOut(400)
+  $('.dit-loading-spinner').fadeOut(400)
 }
 
 function playVidTest() {
@@ -625,20 +631,10 @@ function responsiveTable() {
 }
 
 function selector() {
-  $('a[href="/int"]').attr('href', parallelPath('int'))
-  $('a[href="/int/zh"]').attr('href', parallelPath('int/zh'))
-  $('a[href="/int/de"]').attr('href', parallelPath('int/de'))
-  $('a[href="/int/ja"]').attr('href', parallelPath('int/ja'))
-  $('a[href="/int/es"]').attr('href', parallelPath('int/es'))
-  $('a[href="/int/pt"]').attr('href', parallelPath('int/pt'))
-  $('a[href="/int/ar"]').attr('href', parallelPath('int/ar'))
-  $('a[href="/us"]').attr('href', parallelPath('us'))
-  $('a[href="/cn"]').attr('href', parallelPath('cn'))
-  $('a[href="/in"]').attr('href', parallelPath('in'))
-  $('a[href="/de"]').attr('href', parallelPath('de'))
-  $('a[href="/es"]').attr('href', parallelPath('es'))
-  $('a[href="/br"]').attr('href', parallelPath('br'))
-  $('a[href="/jp"]').attr('href', parallelPath('jp'))
+  $('.lang-link')
+    .each(function () {
+      $(this).attr('href', parallelPath($(this).attr('href')))
+    })
 }
 
 function parallelPath(destination) {
@@ -656,7 +652,7 @@ function parallelPath(destination) {
       return pagePath.split('/').slice(1).join('/')
     }
   }
-  return '/' + destination + '/' + pathClipped()
+  return destination + '/' + pathClipped()
 }
 
 function jsEnhanceExternalLinks() {

@@ -1,3 +1,3 @@
 //Main js file   s
-require('../dit-functions');
-require('bootstrap');
+require('../dit-functions')
+require('bootstrap')
