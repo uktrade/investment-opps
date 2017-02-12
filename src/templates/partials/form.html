@@ -46,7 +46,7 @@
             <div id="loading-overlay">
               <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
             </div>
-            <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
+            <form enctype='application/x-www-form-urlencoded' id="dit-form" class="stepped" role="form"
                 action="https://forms.invest.great.gov.uk/form"
                 method="post" autocomplete="off">
                 <div class="stepwizard">
@@ -356,12 +356,7 @@
                                 {% endif %}
                                 {{ labels.form_previous[locale.code] }}
                             </button>
-                            <button id="ga-send-js" class="dit-btn--sm nextBtn"
-                                    type="button">
-                                {{ labels.form_submit[locale.code] }}
-                                <span class="glyphicon glyphicon-send"></span>
-                            </button>
-                            <button id="ga-send" class="dit-btn--sm submitBtn submitBtnNonjs"
+                            <button id="ga-send-js" class="dit-btn--sm submitBtn"
                                     type="submit">
                                 {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>

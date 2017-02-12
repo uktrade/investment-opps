@@ -44,7 +44,9 @@ function Logger(_prefix) {
       messages.push(level)
     }
     messages.push(prefix)
-    messages=messages.concat(args)
+    for (var i in args) {
+      messages.push(args[i])
+    }
     return messages
   }
 
