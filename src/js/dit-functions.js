@@ -535,11 +535,15 @@ function getResults(size, start) {
     country = document.country,
     language = document.language
 
-  var searchUrl = gateway + '?q=(and field="language" "'+ language + '"(and field="country" "' + country + '" (or (term boost=2 field="pagetitle" "' + searchInput + '") (term field="content" "' + searchInput + '") (prefix boost=2 field="pagetitle" "' + searchInput + '") (prefix field="content" "' + searchInput + '"))))&size=' + size + '&start=' + start + '&q.parser=structured'
+  var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
 
   if (searchInput === '') {
+    $('.search-results-block').hide()
+    $('.pagination').hide()
+    $('.dit-search-spinner').css('z-index', 1)
     searchArea.html('')
   } else if (searchInput.length > 2) {
+    $('.dit-search-spinner').css('z-index', 15);
     $.ajax({
       type: 'GET',
       url: searchUrl,
@@ -605,7 +609,7 @@ function search() {
   var searchResultsSize = 10
   var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
-    $('.dit-search-spinner').css('z-index', 15)
+  //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
   $('#searchInput').on('input', debouncedSearch)
 }
