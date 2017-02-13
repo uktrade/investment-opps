@@ -3,14 +3,16 @@ var debug=logger.debug
 var info=logger.info
 module.exports=geoLocation
 
+/**
+ * Resolves geo location of current user and redirects to appropriate language
+ * page
+ *
+ * Only redirects if root page, otherwise no redirect happens
+ **/
+
 function geoLocation() {
-  var is_root = location.pathname == '/'
-  if (is_root) {
-    info('Checking location...')
-    return checkGeoLocation()
-  } else {
-    return $.Deferred().resolve(false).promise()
-  }
+  info('Checking location...')
+  return checkGeoLocation()
 
   function checkGeoLocation() {
     return $.getJSON('//freegeoip.net/json/', function() {})

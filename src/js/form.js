@@ -1,84 +1,203 @@
-var logger=require('./logger')('Form')
-var info=logger.info
-var debug=logger.debug
-var error=logger.error
-var warn=logger.warn
-var form
-module.exports={
-  prepare:prepare
+/**
+ * Form module processes IST form and any other form found on the page.
+ *
+ * Steps are only handled for IST form( which is defined with id ist-form )
+ *
+ * All other forms are also js enhanced without any step processing. All required
+ * inputs are validated as well as email.
+ *
+ * Forms are processed on submit.
+ *
+ * Separating forms in this manner allows ignroing unnneccasry DOM processing
+ * if page does not have IST form on it.
+ *
+ **/
+var logger = require('./logger')('Form')
+var info = logger.info
+var debug = logger.debug
+var error = logger.error
+module.exports = {
+  init: init
 }
-function prepare() {
-  $(document).ready(function() {
-    form = $('#dit-form')
-    if (form.length) {
-      info('Document is ready')
-      var stepped=form.hasClass('stepped')
-      prepareForm(stepped)
-      prepareAutocomplete()
-      checkFormStatus()
-      debug('Registering resize listener')
-      $(window).on('resize', function() {
-        prepareForm()
-      })
+
+function init() {
+  resolveForms()
+}
+
+function resolveForms() {
+  $('form').each(function() {
+    var form = $(this)
+    if (form.attr('id') === 'ist-form') {
+      debug('Found IST form ', form)
+      logger.name('IST Form')
+      prepareISTForm(form)
     } else {
-      info('No form found on the page')
+      debug('Found a form', form)
+      prepareForm(form)
     }
   })
+
 }
 
-function prepareForm(stepped) {
-  debug('Preparing form, stepped:', stepped)
-  enhance(stepped)
+/** IST FORM **/
+function prepareISTForm(form) {
+  debug('Preparing')
+  var formBody = $('.dit-form-section__body')
+  var formWrapper = formBody.find('.dit-form-wrapper')
+  var stepWrappers = form.find('.setup-content')
+  enhanceISTForm()
 
-  var navListItems = $('div.setup-panel div a'),
-    allWells = $('.setup-content'),
-    allNextBtn = $('.nextBtn'),
-    allPrevBtn = $('.prevBtn'),
-    locationSelectors = $('#location_selectors'),
-    locationRadioYes = $('#location_radio_yes'),
-    locationRadioNo = $('#location_radio_no')
-  allWells.hide()
-  locationSelectors.hide()
+  function enhanceISTForm() {
+    debug('Enhancing')
+    setJsSwitch(form)
+    disableNativeValidation(form)
+    prepareSteps()
+    prepareLocationBlock()
+    prepareAutocomplete()
+    listenInputs(form)
+    adjustSize()
+  }
 
-  locationRadioYes.click(function() {
-    locationSelectors.show()
-  })
+  function prepareSteps() {
+    debug('Preparing steps')
+    var currentStep
+    var nextBtn = form.find('.nextBtn')
+    var prevBtn = form.find('.prevBtn')
+    var submitBtn = form.find('.submitBtn')
+    var stepWizard = form.find('.stepwizard')
+    show(nextBtn, prevBtn, stepWizard)
+    hide(stepWrappers)
+    var steps = form.find('.dit-form-section__step')
+    steps.css('min-height', '70rem')
+    steps.removeClass('final_step')
+    prepareStep2()
+    prepareNavList()
+    gotoStep(1)
 
-  locationRadioNo.click(function() {
-    $('#location').prop('selectedIndex', 0)
-    locationSelectors.hide()
-  })
+    debug('Registering resize listener')
+    $(window).on('resize', function() {
+      adjustSize()
+    })
 
-  $('#step-2').on('click', '.radio-group a', function() {
-    var sel = $(this).data('title'),
-      tog = $(this).data('toggle')
-    $(this).parent().next('.' + tog).prop('value', sel)
-    $(this).parent().find('a[data-toggle="' + tog + '"]').not('[data-title="' + sel + '"]').removeClass('active').addClass('notActive')
-    $(this).parent().find('a[data-toggle="' + tog + '"][data-title="' + sel + '"]').removeClass('notActive').addClass('active')
-  })
 
-  navListItems.click(function(e) {
-    e.preventDefault()
-    var $target = $($(this).attr('href')),
-      $item = $(this)
-
-    if (!$item.hasClass('disabled')) {
-      navListItems.removeClass('active-selection')
-      $item.addClass('active-selection')
-      allWells.hide()
-      $target.show()
-      $target.find('input:eq(0)').focus()
+    function prepareStep2() {
+      debug('Preparing step 2')
+      form.find('#step-2')
+        .on('click', '.radio-group a', function() {
+          var sel = $(this).data('title')
+          var tog = $(this).data('toggle')
+          var parent = $(this).parent()
+          parent.next('.' + tog).prop('value', sel)
+          parent
+            .find('a[data-toggle="' + tog + '"]')
+            .not('[data-title="' + sel + '"]')
+            .removeClass('active')
+            .addClass('notActive')
+          parent
+            .find('a[data-toggle="' + tog + '"][data-title="' + sel + '"]')
+            .removeClass('notActive')
+            .addClass('active')
+        })
     }
-  })
 
-  var theStep, theWidth, totalWidth
+    function prepareNavList() {
+      debug('Preparing nav list items')
+      var navListItems = form.find('div.setup-panel div a')
+      navListItems.click(function(e) {
+        e.preventDefault()
+        var target = parseInt($(this).attr('href').split('-')[1])
+        debug('Nav item clicked,target:', target)
+        gotoStep(target)
+      })
+      nextBtn.click(next)
+      prevBtn.click(previous)
+    }
 
-  $(function() {
+    function next() {
+      info('Next')
+      gotoStep(currentStep + 1)
+    }
+
+    function previous() {
+      info('Previous')
+      gotoStep(currentStep - 1)
+    }
+
+    function gotoStep(step) {
+      if (step === currentStep) {
+        return
+      }
+      currentStep = currentStep || 1
+      var current = formWrapper.find('#step-' + currentStep)
+      debug('Current', current)
+      if (step > currentStep) {
+        if (!validateInputs(current)) {
+          return
+        }
+      }
+      go(step >= currentStep)
+
+      function go(forward) {
+        debug('Changing step from ', currentStep, ' to ', step)
+        // var width = formBody.width()
+        // var margin = 'margin-' + direction()
+        var animateArg = {}
+        // if (forward) {
+        //   animateArg[margin] = -(currentStep * width)
+        // } else {
+        //   animateArg[margin] = -((currentStep - 2) * width)
+        // }
+        formWrapper.animate(animateArg, 500)
+        var target = formWrapper.find('#step-' + step)
+        debug('Target', target)
+        stepWizard.find('#step-' + currentStep).removeClass('active-selection')
+        stepWizard.find('#step-' + step).addClass('active-selection')
+        currentStep = step
+        current.hide()
+        target.show()
+        target.find('input:eq(0)').focus()
+      }
+
+
+
+    }
+  }
+
+  function prepareAutocomplete() {
+    debug('Preparing form autocomplete')
+    form.find('#country').autocomplete({
+      lookup: document.countries,
+      onSelect: function(suggestion) {
+        form.find('#country_en').val(document.countries_en[suggestion.data])
+      }
+    })
+  }
+
+
+  function prepareLocationBlock() {
+    debug('Preparing location block')
+    var locationBlock = form.find('.location_block')
+    var locationSelectors = form.find('#location_selectors')
+    show(locationBlock)
+    hide(locationSelectors)
+    form.find('#location_radio_yes')
+      .click(function() {
+        show(locationSelectors)
+      })
+
+    form.find('#location_radio_no')
+      .click(function() {
+        form.find('#location').prop('selectedIndex', 0)
+        hide(locationSelectors)
+      })
+  }
+
+  function adjustSize() {
+    debug('Adjusting size')
+    var width = formBody.wi
     var isMother = $('#mother').length
-    theWidth = $('.dit-form-section__body').width()
-    theStep = $('.setup-content')
-    $(theStep).each(function() {
-      $(this).css('width', theWidth)
+    $(stepWrappers).each(function() {
+      $(this).css('width', width)
     })
 
     //wrap into mother div
@@ -88,148 +207,139 @@ function prepareForm(stepped) {
     //assign height width and overflow hidden to mother
     $('#mother').css({
       width: function() {
-        return theWidth
+        return width
       },
-      // height: function() {
-      //   return theStep.height()
-      // },
       position: 'relative !important',
       overflow: 'hidden'
     })
     //get total of image sizes and set as width for ul
-    totalWidth = (theStep.length) * theWidth + 5
+    var totalWidth = (stepWrappers.length) * width + 5
     $('.dit-form-wrapper').css({
       width: function() {
         return totalWidth
       }
     })
-  })
 
-  allNextBtn.click(function() {
-    var curStep = $(this).closest('.setup-content'),
-      curStepValue = parseInt(curStep.attr('id').split('-')[1]),
-      nextStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().next().children('a'),
-      curInputs = curStep.find('input, #mailing_list_checkbox, #other, #turnover, #country, #industry, #start_date_month, #start_date_year, #staff'),
-      margin = 'margin-' + direction(),
-      animateArg = {},
-      isValid = true
-
-    $('.form-group').removeClass('has-error')
-    for (var i = 0; i < curInputs.length; i++) {
-      if (curInputs[i].hasAttribute('required') && curInputs[i].value === '') { //changed for IE8 compatibility
-        isValid = false
-        $(curInputs[i]).closest('.form-group').addClass('has-error')
-      }
-      if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[email]' && !isValidEmail(curInputs[i].value)) {
-        isValid = false
-        $(curInputs[i]).closest('.form-group').addClass('has-error')
-        $('.validation_error_email').css('display', 'block')
-      }
-      if (curInputs[i].value !== '' && curInputs[i].getAttribute('name') == 'user[phone]' && !isValidPhoneNumber(curInputs[i].value)) {
-        isValid = false
-        $(curInputs[i]).closest('.form-group').addClass('has-error')
-        $('.validation_error_email').css('display', 'block')
-      }
-      var value = $('#industry option:selected').val()
-      if (curInputs[i].value === '' && curInputs[i].getAttribute('name') == 'user[other]' && value.indexOf('18') >= 0) {
-        isValid = false
-        $(curInputs[i]).closest('.form-group').addClass('has-error')
-        $('.validation_error_other').css('display', 'block')
-      }
-    }
-
-    if (isValid) {
-      animateArg[margin] = -(curStepValue * theWidth)
-      $('.dit-form-wrapper').animate(animateArg, 500)
-      nextStepWizard.removeAttr('disabled').trigger('click')
-      if ($(this).attr('id') === 'ga-send-js') {
-        if ($(this).hasClass('optsFormSubmit')) {
-          submitOptsForm()
-        } else {
-          submitForm()
-        }
-      }
-    }
-  })
-
-  allPrevBtn.click(function() {
-    var curStep = $(this).closest('.setup-content'),
-      curStepValue = parseInt(curStep.attr('id').split('-')[1]),
-      prevStepWizard = $('div.setup-panel div a[href="#step-' + curStepValue + '"]').parent().prev().children('a'),
-      margin = 'margin-' + direction(),
-      animateArg = {}
-
-    animateArg[margin] = -((curStepValue - 2) * theWidth)
-
-    $('.dit-form-wrapper').animate(animateArg, 500)
-    prevStepWizard.removeAttr('disabled').trigger('click')
-  })
-}
-
-
-function enhance(stepped) {
-  $('.js_switch').attr('value', 'true')
-  $('.location_block').show()
-  if(stepped) {
-    $('.stepwizard').show()
-    $('.nextBtn').show()
-    $('.prevBtn').show()
-    $('.dit-form-section__step').css('min-height', '70rem')
-    $('.dit-form-section__step').removeClass('final_step')
-  }
-}
-
-function prepareAutocomplete() {
-  debug('Preparing form autocomplete')
-  $('#country').autocomplete({
-    lookup: document.countries,
-    onSelect: function(suggestion) {
-      $('#country_en').val(document.countries_en[suggestion.data])
-
-    }
-  })
-}
-
-function checkFormStatus() {
-  var field = 'enquiryId',
-    url = window.location.href,
-    formLeftSide = $('.dit-form-section__info'),
-    formRightSide = $('.dit-form-section__body'),
-    formSuccess = $('#formSuccess'),
-    enquiryId = $('#enquiry_Id')
-
-  if (url.indexOf('?' + field + '=') !== -1) {
-    formLeftSide.hide()
-    formRightSide.hide()
-    formSuccess.show()
-    try {
-      $('html, body').animate({
-        scrollTop: $('.dit-form-section').offset().top
-      }, 2000)
-    } catch(e) {
-      warn('Failed scrolling to top')
-    }
-    enquiryId.text(getUrlVar())
-  } else if (url.indexOf('&' + field + '=') !== -1) {
-    formLeftSide.hide()
-    formRightSide.hide()
-    formSuccess.show()
-    $('html, body').animate({
-      scrollTop: formSuccess.offset().top
-    }, 2000)
-    enquiryId.text(getUrlVar())
   }
 }
 
 
-function getUrlVar() {
-  var id, hash, hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&')
-  for (var i = 0; i < hashes.length; i++) {
-    hash = hashes[i].split('=')
-    id = hash[1]
-  }
-  return 'IIGB-' + id
+/** OTHER FORMS **/
+function prepareForm(form) {
+
 }
+
+/** Shared form utils **/
+
+function setJsSwitch(form) {
+  var jsSwitch = form.find('.js_switch')
+  if (jsSwitch.length) {
+    debug('Setting js switch')
+    jsSwitch.attr('value', 'true')
+  }
+}
+
+//Disable browser native form validation
+function disableNativeValidation(form) {
+  form.attr('novalidate', '')
+}
+
+
+/**
+ * Show all given elements
+ **/
+function show() {
+  for (var i in arguments) {
+    var arg = arguments[i]
+    arg.show()
+  }
+}
+
+/**
+ * Hide all given elements
+ **/
+function hide() {
+  for (var i in arguments) {
+    var arg = arguments[i]
+    debug('Hiding', arg)
+    arg.hide()
+  }
+}
+
+function validateField(field) {
+  var required=field.attr('required')
+  if(typeof required === typeof undefined || required === false) {
+    return true
+  }
+  debug('Validating ', field)
+  var formGroup = field.closest('.form-group')
+  var validationError = formGroup.find('validation_error')
+  var value = field.val()
+  var valid = true
+  if (typeof value === typeof undefined || value === '') {
+    formGroup.addClass('has-error')
+    valid = false
+  } else if (field.attr('type') === 'email') {
+    if (!isValidEmail(value)) {
+      showValidationError()
+      valid = false
+    }
+  } else if (field.hasClass('phone')) {
+    if (!isValidPhoneNumber(value)) {
+      showValidationError()
+      valid = false
+    }
+  }
+
+  if (valid) {
+    clearErrors()
+  }
+  return valid
+
+  function showValidationError() {
+    validationError.css('display', 'block')
+  }
+
+  function clearErrors() {
+    formGroup.removeClass('has-error')
+    validationError.hide()
+  }
+
+}
+
+function listenInputs(parent) {
+  parent
+    .find('input')
+    .each(function() {
+      $(this)
+        .blur(function() {
+          validateField($(this))
+        })
+    })
+
+  parent
+    .find('select')
+    .each(function() {
+      $(this)
+        .change(function() {
+          validateField($(this))
+        })
+    })
+}
+
+function validateInputs(parent) {
+  debug('Validating inputs')
+  var valid = true
+  parent
+    .find('input select')
+    .each(function() {
+      if (!validateField($(this))) {
+        valid = false
+      }
+    })
+  return valid
+}
+
 
 
 function submitOptsForm() {
@@ -253,8 +363,9 @@ function submitOptsForm() {
       window.location.href = base_url + 'location-guide/confirmation'
     },
     error: function(xhr, textstatus, e) {
-      error('Submit failed!',e)
-      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+      error('Submit failed!', e)
+      window.location.href = base_url + 'enquiries/error/?errorCode=' +
+        500
     }
   })
   // e.preventDefault()
@@ -296,11 +407,13 @@ function submitForm() {
         'event': 'formSubmissionSuccess',
         'formId': 'dit-form'
       })
-      window.location.href = base_url + 'enquiries/confirmation/?enquiryId=' + data.enquiryId
+      window.location.href = base_url +
+        'enquiries/confirmation/?enquiryId=' + data.enquiryId
     },
-    error: function (xhr, textstatus, e) {
-      error('Submit failed!',e)
-      window.location.href = base_url + 'enquiries/error/?errorCode=' + 500
+    error: function(xhr, textstatus, e) {
+      error('Submit failed!', e)
+      window.location.href = base_url + 'enquiries/error/?errorCode=' +
+        500
     }
   })
   // e.preventDefault()
@@ -336,7 +449,6 @@ function isValidPhoneNumber(number) {
     return true
   }
 }
-
 
 function direction() {
   if (document.direction === 'rtl') {

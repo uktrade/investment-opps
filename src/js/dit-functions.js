@@ -9,32 +9,42 @@ var info=logger.info
 main()
 
 function main() {
-  geoLocation()
-    .done(function (redirecting) {
-      if (redirecting) {
-        return
-      }else {
-        loaded()
-      }
-    }).fail(function (e) {
-      error('Geo location failed!',e)
-      loaded()
-    })
+  var isRoot = location.pathname == '/'
+  if (isRoot) {
+    geoLocation()
+      .done(function (redirecting) {
+        if (redirecting) {
+          return
+        }else {
+          init()
+        }
+      }).fail(function (e) {
+        error('Geo location failed!',e)
+        init()
+      })
+  } else {
+    init()
+  }
 }
 
-function loaded() {
-  form.prepare()
-  window.getResults = getResults
+function init() {
   $(document).ready(function() {
     info('Document is ready')
+    listenResize()
     onLoaded()
+    form.init()
+    window.getResults = getResults
   })
 
-  debug('Registering resize listeners')
-  $(window).on('resize', function() {
-    checkHeight()
-    setGradientHeight()
-  })
+  function listenResize() {
+    debug('Registering resize listeners')
+    $(window).on('resize', function() {
+      checkHeight()
+      setGradientHeight()
+    })
+
+  }
+
 
 }
 

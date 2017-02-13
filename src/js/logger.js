@@ -1,9 +1,10 @@
 module.exports=Logger
 
 
-function Logger(_prefix) {
+function Logger(_name) {
 
-  var prefix=_prefix ? ('[' + _prefix + ']') : ''
+  var prefix
+  name(_name)
   var printLogLevel=false
   var ERROR= '[ERROR]'
   var INFO= '[INFO]'
@@ -11,11 +12,17 @@ function Logger(_prefix) {
   var WARN= '[WARN]'
 
   return {
+    name:name,
     log: log,
     info: info,
     error: error,
     debug: debug,
     warn: warn
+  }
+
+  //set name
+  function name(name) {
+    prefix=name ? ('[' + name + ']') : ''
   }
 
   function log() {
