@@ -1,13 +1,5 @@
 //main.scss
 
-.jumbotron {
-
-  &:before {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000002', endColorstr='#00000005', GradientType=0); /* IE6-9 */
-    background-color: rgba(0,0,0,0.2);
-  }
-}
-
 .great-flag-circle {
   &--br {
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
