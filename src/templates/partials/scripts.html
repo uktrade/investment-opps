@@ -1,5 +1,5 @@
 <script>
-document.buildNumber={{build}}
+document.iigbBuild='{{build}}'
 document.base_url =  '{{base}}';
 document.countries = [{% for o in labels.form_headquarters.options[locale.code] %}
                     {"value": "{{o}}", "data": "{{loop.index}}"},
