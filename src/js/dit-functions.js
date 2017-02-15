@@ -174,6 +174,7 @@ function openNav() {
     animateArg = {},
     box = $('#dit-search-overlay')
 
+  $('.search-results-block').hide()
   $('#searchInput').focus()
   animateArg[margin] = 0
 
@@ -189,9 +190,11 @@ function openNav() {
   box.animate({
     'margin-top': '0px',
     'height': '110px'
-  }, 100)
-
-  box.animate(animateArg, 400)
+  }, 50)
+    .animate(animateArg, 250)
+    .animate({
+      'height': '100%'
+  }, 300)
 }
 
 /* Close */
@@ -209,8 +212,8 @@ function closeNav() {
   box.animate({
     'height': '110px'
   }, 500)
-
-  box.animate(animateArg, 900)
+    .animate(animateArg, 900)
+  $('.search-results-block').hide()
 }
 
 
@@ -241,20 +244,24 @@ function getResults(size, start) {
     country = document.country,
     language = document.language
 
-  var searchUrl = gateway + '?q=(and field="language" "'+ language + '"(and field="country" "' + country + '" (or (term boost=2 field="pagetitle" "' + searchInput + '") (term field="content" "' + searchInput + '") (prefix boost=2 field="pagetitle" "' + searchInput + '") (prefix field="content" "' + searchInput + '"))))&size=' + size + '&start=' + start + '&q.parser=structured'
+  var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
 
   if (searchInput === '') {
+    $('.search-results-block').hide()
+    $('.pagination').hide()
+    $('.dit-search-spinner').css('z-index', 1)
     searchArea.html('')
   } else if (searchInput.length > 2) {
+    $('.dit-search-spinner').css('z-index', 15);
     $.ajax({
       type: 'GET',
       url: searchUrl,
       success: function(results) {
         searchArea.html('')
         if ('hits' in results) {
+          $('.search-results-block').show()
           $('.dit-search-spinner').css('z-index', 1)
           box.animate({
-            // 'margin-top': '0',
             'height': '100%'
           }, 1000, function() {
             $('body').addClass('overlay-open')
@@ -311,7 +318,7 @@ function search() {
   var searchResultsSize = 10
   var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
-    $('.dit-search-spinner').css('z-index', 15)
+  //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
   $('#searchInput').on('input', debouncedSearch)
 }
