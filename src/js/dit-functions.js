@@ -187,7 +187,8 @@ function openNav() {
   $('#closebtn-collapse-1').click(function() {
     closeNav()
   })
-  box.animate({
+  box
+    .animate({
       'margin-top': '0px',
       'height': '110px'
     }, 50)
@@ -209,7 +210,8 @@ function closeNav() {
   $('#searchInput').val('')
   $('#search-options').empty()
 
-  box.animate({
+  box
+    .animate({
       'height': '110px'
     }, 500)
     .animate(animateArg, 900)
@@ -385,4 +387,3 @@ function jsEnhanceExternalLinks() {
     })
     .attr('target', '_blank')
 }
-
