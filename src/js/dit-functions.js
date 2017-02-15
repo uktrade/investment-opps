@@ -244,7 +244,9 @@ function getResults(size, start) {
     country = document.country,
     language = document.language
 
+  /* eslint-disable quotes */
   var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
+  /* eslint-enable quotes */
 
   if (searchInput === '') {
     $('.search-results-block').hide()
@@ -252,7 +254,7 @@ function getResults(size, start) {
     $('.dit-search-spinner').css('z-index', 1)
     searchArea.html('')
   } else if (searchInput.length > 2) {
-    $('.dit-search-spinner').css('z-index', 15);
+    $('.dit-search-spinner').css('z-index', 15)
     $.ajax({
       type: 'GET',
       url: searchUrl,
