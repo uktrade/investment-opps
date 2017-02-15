@@ -55,24 +55,22 @@ function prepareISTForm(form) {
     prepareLocationBlock()
     prepareAutocomplete()
     listenInputs(form)
-    adjustSize()
   }
 
   function prepareSteps() {
     debug('Preparing steps')
-    var currentStep
+    var currentStep = 1
     var nextBtn = form.find('.nextBtn')
     var prevBtn = form.find('.prevBtn')
-    var submitBtn = form.find('.submitBtn')
     var stepWizard = form.find('.stepwizard')
     show(nextBtn, prevBtn, stepWizard)
-    hide(stepWrappers)
     var steps = form.find('.dit-form-section__step')
     steps.css('min-height', '70rem')
     steps.removeClass('final_step')
     prepareStep2()
     prepareNavList()
-    gotoStep(1)
+    form.submit(submit)
+    adjustSize()
 
     debug('Registering resize listener')
     $(window).on('resize', function() {
@@ -82,8 +80,9 @@ function prepareISTForm(form) {
 
     function prepareStep2() {
       debug('Preparing step 2')
-      form.find('#step-2')
+      formWrapper.find('#step-2')
         .on('click', '.radio-group a', function() {
+          debug('Location option changed to ', $(this))
           var sel = $(this).data('title')
           var tog = $(this).data('toggle')
           var parent = $(this).parent()
@@ -105,12 +104,21 @@ function prepareISTForm(form) {
       var navListItems = form.find('div.setup-panel div a')
       navListItems.click(function(e) {
         e.preventDefault()
-        var target = parseInt($(this).attr('href').split('-')[1])
+        var target = parseInt($(this).attr('id').split('-')[1])
         debug('Nav item clicked,target:', target)
         gotoStep(target)
       })
       nextBtn.click(next)
       prevBtn.click(previous)
+    }
+
+    function submit(e) {
+      e.preventDefault()
+      next()
+      if (currentStep > steps.length) {
+        debug('Submitting form')
+        submitForm(form, formBody)
+      }
     }
 
     function next() {
@@ -124,42 +132,43 @@ function prepareISTForm(form) {
     }
 
     function gotoStep(step) {
+      var currentNav = stepWizard.find('#step-' + currentStep)
+      var nextNav = stepWizard.find('#step-' + step)
       if (step === currentStep) {
         return
       }
-      currentStep = currentStep || 1
       var current = formWrapper.find('#step-' + currentStep)
       debug('Current', current)
       if (step > currentStep) {
         if (!validateInputs(current)) {
           return
         }
+        nextNav.removeAttr('disabled')
       }
-      go(step >= currentStep)
+      go()
 
-      function go(forward) {
+      function go() {
         debug('Changing step from ', currentStep, ' to ', step)
-        // var width = formBody.width()
-        // var margin = 'margin-' + direction()
-        var animateArg = {}
-        // if (forward) {
-        //   animateArg[margin] = -(currentStep * width)
-        // } else {
-        //   animateArg[margin] = -((currentStep - 2) * width)
-        // }
-        formWrapper.animate(animateArg, 500)
         var target = formWrapper.find('#step-' + step)
         debug('Target', target)
-        stepWizard.find('#step-' + currentStep).removeClass('active-selection')
-        stepWizard.find('#step-' + step).addClass('active-selection')
+        currentNav.removeClass('active-selection')
+        nextNav.addClass('active-selection')
         currentStep = step
-        current.hide()
-        target.show()
-        target.find('input:eq(0)').focus()
+        adjustSize(true)
+        location.hash = '#step-' + currentStep
       }
+    }
 
+    function adjustSize(animate) {
+      debug('Adjusting size')
+      var width = formBody.width()
+      debug('Form body size', width)
+      $(stepWrappers).each(function() {
+        $(this).css('width', width)
+      })
 
-
+      wrap(formWrapper, stepWrappers.length, width)
+      shift(formWrapper, (-(currentStep - 1) * width), animate)
     }
   }
 
@@ -192,40 +201,33 @@ function prepareISTForm(form) {
       })
   }
 
-  function adjustSize() {
-    debug('Adjusting size')
-    var width = formBody.wi
-    var isMother = $('#mother').length
-    $(stepWrappers).each(function() {
-      $(this).css('width', width)
-    })
-
-    //wrap into mother div
-    if (!isMother) {
-      $('.dit-form-wrapper').wrap('<div id="mother" />')
-    }
-    //assign height width and overflow hidden to mother
-    $('#mother').css({
-      width: function() {
-        return width
-      },
-      position: 'relative !important',
-      overflow: 'hidden'
-    })
-    //get total of image sizes and set as width for ul
-    var totalWidth = (stepWrappers.length) * width + 5
-    $('.dit-form-wrapper').css({
-      width: function() {
-        return totalWidth
-      }
-    })
-
-  }
 }
 
 
 /** OTHER FORMS **/
 function prepareForm(form) {
+  var formBody = $('.dit-form-section__body')
+  var formWrapper = form.find('div').first()
+  var width=formBody.width()
+  debug('Preparing')
+  enhanceForm()
+  form.submit(submit)
+
+  function enhanceForm() {
+    debug('Enhancing')
+    setJsSwitch(form)
+    disableNativeValidation(form)
+    wrap(formWrapper, 1, width)
+    listenInputs(form)
+  }
+
+  function submit(e) {
+    e.preventDefault()
+    if (validateInputs(form)) {
+      shift(formWrapper, -1 * width, true)
+      submitForm(form, formBody)
+    }
+  }
 
 }
 
@@ -251,6 +253,7 @@ function disableNativeValidation(form) {
 function show() {
   for (var i in arguments) {
     var arg = arguments[i]
+    debug('Showing', arg)
     arg.show()
   }
 }
@@ -266,50 +269,49 @@ function hide() {
   }
 }
 
-function validateField(field) {
-  var required=field.attr('required')
-  if(typeof required === typeof undefined || required === false) {
-    return true
-  }
-  debug('Validating ', field)
+function validateField(field, keepErrors) {
+  var required = field.attr('required')
   var formGroup = field.closest('.form-group')
-  var validationError = formGroup.find('validation_error')
+  var validationError = formGroup.find('.validation_error')
+  debug('Validating field ', field)
+  if (!keepErrors) {
+    clearErrors(formGroup)
+  }
   var value = field.val()
   var valid = true
-  if (typeof value === typeof undefined || value === '') {
+  if (required && isEmpty(value)) {
+    debug('Validation failed, missing value')
     formGroup.addClass('has-error')
     valid = false
   } else if (field.attr('type') === 'email') {
     if (!isValidEmail(value)) {
+      debug('Email validation failed')
       showValidationError()
       valid = false
     }
   } else if (field.hasClass('phone')) {
-    if (!isValidPhoneNumber(value)) {
-      showValidationError()
-      valid = false
+    if (!isEmpty(value)) {
+      if (!isValidPhoneNumber(value)) {
+        debug('Phone validation failed')
+        showValidationError()
+        valid = false
+      }
     }
   }
 
-  if (valid) {
-    clearErrors()
-  }
   return valid
 
   function showValidationError() {
+    debug('Showing validation error')
     validationError.css('display', 'block')
-  }
-
-  function clearErrors() {
-    formGroup.removeClass('has-error')
-    validationError.hide()
   }
 
 }
 
 function listenInputs(parent) {
   parent
-    .find('input')
+    .find('input:not([type=hidden])')
+    .filter(':visible')
     .each(function() {
       $(this)
         .blur(function() {
@@ -319,6 +321,7 @@ function listenInputs(parent) {
 
   parent
     .find('select')
+    .filter(':visible')
     .each(function() {
       $(this)
         .change(function() {
@@ -328,73 +331,48 @@ function listenInputs(parent) {
 }
 
 function validateInputs(parent) {
-  debug('Validating inputs')
   var valid = true
-  parent
-    .find('input select')
-    .each(function() {
-      if (!validateField($(this))) {
+  var focusOn
+  var formGroups = parent.find('.form-group')
+  var fields
+  if (formGroups.length) {
+    formGroups.each(function() {
+      var group = $(this)
+      debug('Validating form group:', group)
+      if (!validateInputs(group)) {
+        valid = false
+        if (!focusOn) {
+          focusOn = getInputs(group).first()
+          debug('Focusing on:', focusOn)
+          focusOn.focus()
+        }
+      } else {
+        clearErrors(group)
+      }
+    })
+  } else {
+    fields = parent.find('input:not([type=hidden]), select')
+    fields.each(function() {
+      if (!validateField($(this), true)) {
         valid = false
       }
     })
+  }
   return valid
 }
 
-
-
-function submitOptsForm() {
-
-  formLoading()
-
-  var base_url = '/' + document.base_url + '/'
-  var form = $('#dit-form')
-  var postUrl = form.attr('action')
-
-  $.ajax({
-    type: 'POST',
-    url: postUrl,
-    data: form.serialize(),
-    success: function() {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
-        'event': 'formSubmissionSuccess',
-        'formId': 'dit-form'
-      })
-      window.location.href = base_url + 'location-guide/confirmation'
-    },
-    error: function(xhr, textstatus, e) {
-      error('Submit failed!', e)
-      window.location.href = base_url + 'enquiries/error/?errorCode=' +
-        500
-    }
-  })
-  // e.preventDefault()
-
-  function formLoading() {
-
-    var t = $('.dit-form-section__body')
-
-    $('#loading-overlay').css({
-      opacity: 0.5,
-      display: 'block',
-    })
-
-    $('#img-load').css({
-      left: t.outerWidth() / 2 - ($('#img-load').width() / 2),
-      top: t.outerHeight() / 2,
-    })
-
-    $('#loading-overlay').fadeIn()
-
-  }
+function clearErrors(formGroup) {
+  debug('Clearing errors on form group:', formGroup)
+  formGroup.removeClass('has-error')
+  var validationError = formGroup.find('.validation_error')
+  validationError.hide()
 }
 
-function submitForm() {
+function submitForm(form, formBody) {
 
+  info('Submittin form:', form)
   formLoading()
-
   var base_url = '/' + document.base_url + '/'
-  var form = $('#dit-form')
   var postUrl = form.attr('action')
 
   $.ajax({
@@ -402,11 +380,7 @@ function submitForm() {
     url: postUrl,
     data: form.serialize(),
     success: function(data) {
-      window.dataLayer = window.dataLayer || []
-      window.dataLayer.push({
-        'event': 'formSubmissionSuccess',
-        'formId': 'dit-form'
-      })
+      info('Form submit success, response:', data)
       window.location.href = base_url +
         'enquiries/confirmation/?enquiryId=' + data.enquiryId
     },
@@ -416,25 +390,64 @@ function submitForm() {
         500
     }
   })
-  // e.preventDefault()
 
   function formLoading() {
+    debug('Show overlay')
+    var body = formBody
+    var overlay = body.find('#loading-overlay')
+    var imageLoad = body.find('#img-load')
 
-    var t = $('.dit-form-section__body')
-
-    $('#loading-overlay').css({
+    overlay.css({
       opacity: 0.5,
       display: 'block',
     })
 
-    $('#img-load').css({
-      left: t.outerWidth() / 2 - ($('#img-load').width() / 2),
-      top: t.outerHeight() / 2,
+    imageLoad.css({
+      left: body.outerWidth() / 2 - (imageLoad.width() / 2),
+      top: body.outerHeight() / 2,
     })
 
-    $('#loading-overlay').fadeIn()
+    overlay.fadeIn()
 
   }
+}
+
+function wrap(element, length, width) {
+  //wrap into mother div
+  var isMother = $('#mother').length
+  if (!isMother) {
+    element.wrap('<div id="mother" />')
+  }
+  //assign height width and overflow hidden to mother
+  $('#mother').css({
+    width: function() {
+      return width
+    },
+    position: 'relative !important',
+    overflow: 'hidden'
+  })
+  //get total of image sizes and set as width for ul
+  var totalWidth = (length) * width + 5
+  element.css({
+    width: function() {
+      return totalWidth
+    }
+  })
+
+}
+
+function shift(element, amount, animate) {
+  debug('shifting:', element, ' amount:', amount)
+  var margin = 'margin-' + direction()
+  var style = {}
+  style[margin] = amount
+  debug('Margin:', style[margin])
+  if (animate) {
+    element.animate(style, 500)
+  } else {
+    element.css(style)
+  }
+
 }
 
 function isValidEmail(email) {
@@ -443,7 +456,7 @@ function isValidEmail(email) {
 }
 
 function isValidPhoneNumber(number) {
-  if (number.length > 8) {
+  if (number.length < 8) {
     return false
   } else {
     return true
@@ -455,4 +468,12 @@ function direction() {
     return 'right'
   }
   return 'left'
+}
+
+function isEmpty(value) {
+  return typeof value === typeof undefined || $.trim(value) === ''
+}
+
+function getInputs(parent) {
+  return parent.find('input:not([type=hidden]), select').filter(':visible')
 }

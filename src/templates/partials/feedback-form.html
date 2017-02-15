@@ -36,7 +36,7 @@
         <div id="loading-overlay">
           <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
         </div>
-        <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
+        <form enctype='application/x-www-form-urlencoded' role="form"
             action="https://forms.invest.great.gov.uk/feedback"
             method="post" autocomplete="off">
             <div class="dit-form-wrapper">
@@ -56,7 +56,7 @@
                             <div class="form-group col-md-12">
                                 <label class="control-label" for="userEmail">{{ labels.feedback_email[locale.code] }}</label>
                                 <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
-                                <p class="validation_error_email">{{ labels.form_enter_valid_email[locale.code] }}</p>
+                                <p class="validation_error">{{ labels.form_enter_valid_email[locale.code] }}</p>
                                 <input type="email" name="user[email]" id="userEmail" required="required"
                                 class="form-control"
                                 placeholder=""/>
@@ -73,12 +73,7 @@
                                 value="{{ labels.form_phone[locale.code] }}"> -->
                             </div>
                             <div class="form-group__button feedback-button">
-                                <button id="ga-send-js" class="dit-btn--sm nextBtn submitBtn"
-                                type="button">
-                                {{ labels.form_submit[locale.code] }}
-                                <span class="glyphicon glyphicon-send"></span>
-                                </button>
-                                <button class="dit-btn--sm submitBtnNonjs"
+                                <button id="ga-send-js" class="dit-btn--sm submitBtn"
                                 type="submit">
                                 {{ labels.form_submit[locale.code] }}
                                 <span class="glyphicon glyphicon-send"></span>

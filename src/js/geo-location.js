@@ -1,7 +1,9 @@
-var logger=require('./logger')('GEO Location')
-var debug=logger.debug
-var info=logger.info
-module.exports=geoLocation
+require('./jquery.xdomainrequest.min')
+var logger = require('./logger')('GEO Location')
+var debug = logger.debug
+var error = logger.error
+var info = logger.info
+module.exports = geoLocation
 
 /**
  * Resolves geo location of current user and redirects to appropriate language
@@ -15,18 +17,22 @@ function geoLocation() {
   return checkGeoLocation()
 
   function checkGeoLocation() {
-    return $.getJSON('//freegeoip.net/json/', function() {})
-      .done(function(data) {
-        debug('Resolved country code as ', data.country_code)
-        return getRedirectPath(data.country_code)
-      })
+    return $.ajax({
+      url: '//freegeoip.net/json/',
+      type: 'GET',
+      dataType: 'jsonp',
+    }).then(function(data) {
+      debug('Resolved country code as ', data.country_code)
+      return getRedirectPath(data.country_code)
+    })
   }
 
   function getRedirectPath(countryCode) {
     //TODO move lookup table to more stable location
+    $.support.cors = true // this must precede $.ajax({}) configuration
     return $.getJSON(
-      'https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json'
-    )
+        'https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json'
+      )
       .done(function(data) {
         debug('Redirecting to', data.country_code)
         doRedirect(data[countryCode])
