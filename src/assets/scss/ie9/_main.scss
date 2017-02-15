@@ -1,5 +1,8 @@
-.glyphicon-play-circle {
-  font-size: 70px;
-  top: 25px;
-  padding-left: 15px;
+//main.scss
+
+.jumbotron {
+
+  &:before {
+    background-color: rgba(0,0,0,0.2);
+  }
 }
