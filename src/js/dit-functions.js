@@ -1,10 +1,10 @@
 var geoLocation = require('./geo-location')
-var form=require('./form')
+var form = require('./form')
 var equalheight = require('./equalHeight')
-var logger=require('./logger')('DIT Functions')
-var debug=logger.debug
-var error=logger.error
-var info=logger.info
+var logger = require('./logger')('DIT Functions')
+var debug = logger.debug
+var error = logger.error
+var info = logger.info
 
 main()
 
@@ -12,14 +12,14 @@ function main() {
   var isRoot = location.pathname == '/'
   if (isRoot) {
     geoLocation()
-      .done(function (redirecting) {
+      .done(function(redirecting) {
         if (redirecting) {
           return
-        }else {
+        } else {
           init()
         }
-      }).fail(function (e) {
-        error('Geo location failed!',e)
+      }).fail(function(e) {
+        error('Geo location failed!', e)
         init()
       })
   } else {
@@ -184,17 +184,17 @@ function openNav() {
     }
   })
 
-  $('#closebtn-collapse-1').click(function () {
+  $('#closebtn-collapse-1').click(function() {
     closeNav()
   })
   box.animate({
-    'margin-top': '0px',
-    'height': '110px'
-  }, 50)
+      'margin-top': '0px',
+      'height': '110px'
+    }, 50)
     .animate(animateArg, 250)
     .animate({
       'height': '100%'
-  }, 300)
+    }, 300)
 }
 
 /* Close */
@@ -210,8 +210,8 @@ function closeNav() {
   $('#search-options').empty()
 
   box.animate({
-    'height': '110px'
-  }, 500)
+      'height': '110px'
+    }, 500)
     .animate(animateArg, 900)
   $('.search-results-block').hide()
 }
@@ -320,7 +320,7 @@ function search() {
   var searchResultsSize = 10
   var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
-  //   $('.dit-search-spinner').css('z-index', 15)
+    //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
   $('#searchInput').on('input', debouncedSearch)
 }
@@ -352,7 +352,7 @@ function responsiveTable() {
 
 function selector() {
   $('.lang-link')
-    .each(function () {
+    .each(function() {
       $(this).attr('href', parallelPath($(this).attr('href')))
     })
 }
@@ -385,3 +385,4 @@ function jsEnhanceExternalLinks() {
     })
     .attr('target', '_blank')
 }
+
