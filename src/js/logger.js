@@ -14,13 +14,17 @@ function Logger(_name) {
   var DEBUG = '[DEBUG]'
   var WARN = '[WARN]'
 
-  return {
-    name: name,
-    log: log,
-    info: info,
-    error: error,
-    debug: debug,
-    warn: warn
+  if (document.iigbBuild === '') {
+    return {
+      name: name,
+      log: log,
+      info: info,
+      error: error,
+      debug: debug,
+      warn: warn
+    }
+  } else {
+    return mockConsole()
   }
 
   //set name
@@ -69,7 +73,7 @@ function Logger(_name) {
     if (!arg) {
       arr.push(arg)
     } else if (arg.html) {
-      if(arg[0]) {
+      if (arg[0]) {
         arr.push(arg[0].outerHTML)
       }
     } else if (typeof arg === 'object') {
@@ -84,18 +88,23 @@ function Logger(_name) {
   //dynamically for each call
   function cons() {
     if (typeof console === 'undefined') {
-      return {
-        log: function() {},
-        info: function() {},
-        error: function() {},
-        debug: function() {},
-        warn: function() {}
-      }
+      return mockConsole()
     } else {
       return console
     }
 
   }
+}
+
+function mockConsole() {
+  return {
+    log: function() {},
+    info: function() {},
+    error: function() {},
+    debug: function() {},
+    warn: function() {}
+  }
+
 }
 /*eslint-disable  no-console */
 function bindPollyfill() {
@@ -178,8 +187,4 @@ function isOldConsole() {
   return window.console && typeof console.log == 'object'
 }
 
-
-function isArray(obj) {
-  return Object.prototype.toString.call(obj) === '[object Array]'
-}
 /*eslint-enable  no-console */
