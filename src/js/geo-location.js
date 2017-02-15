@@ -1,7 +1,5 @@
-require('./jquery.xdomainrequest.min')
 var logger = require('./logger')('GEO Location')
 var debug = logger.debug
-var error = logger.error
 var info = logger.info
 module.exports = geoLocation
 
@@ -28,11 +26,9 @@ function geoLocation() {
   }
 
   function getRedirectPath(countryCode) {
-    //TODO move lookup table to more stable location
-    $.support.cors = true // this must precede $.ajax({}) configuration
-    return $.getJSON(
-        'https://cdn.rawgit.com/uktrade/iigb-beta-structure/develop/redirects/ip_redirects.json'
-      )
+    var build=document.build ? document.build + '/':''
+    var ipRedirectUrl='/assets/' + build+ 'ip_redirects.json'
+    return $.getJSON( ipRedirectUrl)
       .done(function(data) {
         debug('Redirecting to', data.country_code)
         doRedirect(data[countryCode])
