@@ -13,49 +13,49 @@
   &--br {
     background-image: url(../media/flags/flag-br.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-br.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-br.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--cn {
     background-image: url(../media/flags/flag-cn.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-cn.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-cn.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--de {
     background-image: url(../media/flags/flag-de.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-de.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-de.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--es {
     background-image: url(../media/flags/flag-es.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-es.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-es.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--jp {
     background-image: url(../media/flags/flag-jp.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-jp.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-jp.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--in {
     background-image: url(../media/flags/flag-in.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-in.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-in.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--us {
     background-image: url(../media/flags/flag-us.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-us.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-us.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--uk {
     background-image: url(../media/flags/flag-uk.svg);
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-uk.png', sizingMethod='scale');    //fallback for IE8
+    src= '/assets/media/flags/flag-uk.png', sizingMethod='scale');    //fallback for IE8
   }
 
   @media (max-width: $screen-xs-max) {
