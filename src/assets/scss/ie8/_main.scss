@@ -85,3 +85,26 @@
                     sizingMethod='scale');
   }
 }
+
+.dit-btn--contact {
+  margin-top: 12px;
+}
+
+.dit-selector-wrapper {
+  width: 80% !important;
+}
+
+.dit-content-section {
+  a[target=_blank]:after {
+    background-color: whitesmoke;
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-left: 4px;
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-external-link.png',
+                    sizingMethod='scale');
+    background-size: contain;
+  }
+}
