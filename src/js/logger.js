@@ -103,6 +103,7 @@ function Logger(_name) {
 
 function mockConsole() {
   return {
+    name: function() {},
     log: function() {},
     info: function() {},
     error: function() {},
