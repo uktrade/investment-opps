@@ -1,14 +1,11 @@
-var logger = require('./logger.js')('XDR Pollyfill')
-var debug = logger.debug
 module.exports = {}
 
-pollyfill()
+fill()
 
 //IE8 and IE9 is not CORS compliant, this should fix
 // taken from https://github.com/jaubourg/ajaxHooks/blob/master/src/xdr.js
-function pollyfill() {
+function fill() {
   if (window.XDomainRequest) {
-    debug('Applyin pollyfill for xdr')
     jQuery.ajaxTransport(function(s) {
       if (s.crossDomain && s.async) {
         if (s.timeout) {
