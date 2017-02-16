@@ -370,7 +370,7 @@ function clearErrors(formGroup) {
 
 function submitForm(form, formBody) {
 
-  info('Submittin form:', form)
+  info('Submitting form:', form)
   formLoading()
   var base_url = '/' + document.base_url + '/'
   var postUrl = form.attr('action')
