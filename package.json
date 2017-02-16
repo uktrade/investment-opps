@@ -6,7 +6,7 @@
   },
   "private": true,
   "browser": {
-    "respond.js": "./node_modules/respond.js/dest/respond.src.js",
+    "respond.js": "./node_modules/respond.js/dest/respond.min.js",
     "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {

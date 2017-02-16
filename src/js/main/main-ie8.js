@@ -1,3 +1,3 @@
 require('html5shiv')
 require('selectivizr')
-require('respond.js')
+// require('respond.js')
