@@ -1,6 +1,4 @@
 var oldConsole = isOldConsole()
-bindPollyfill()
-forEachPollyfill()
 consolePollyfill()
 module.exports = Logger
 
@@ -33,23 +31,28 @@ function Logger(_name) {
   }
 
   function log() {
-    cons().log.apply(null, joinMessages(null, arguments))
+    cons().log.apply(console, joinMessages(null, arguments))
   }
 
   function info() {
-    cons().info.apply(null, joinMessages(INFO, arguments))
+    cons().info.apply(console, joinMessages(INFO, arguments))
   }
 
   function error() {
-    cons().error.apply(null, joinMessages(ERROR, arguments))
+    cons().error.apply(console, joinMessages(ERROR, arguments))
   }
 
   function debug() {
-    cons().debug.apply(null, joinMessages(DEBUG, arguments))
+    var con=cons()
+    if(con.debug) {
+      cons().debug.apply(console, joinMessages(DEBUG, arguments))
+    } else (
+      cons().log.apply(console, joinMessages(DEBUG, arguments))
+    )
   }
 
   function warn() {
-    cons().debug.apply(null, joinMessages(WARN, arguments))
+    cons().debug.apply(console, joinMessages(WARN, arguments))
   }
 
   function joinMessages(level, args) {
@@ -58,12 +61,14 @@ function Logger(_name) {
       messages.push(level)
     }
     messages.push(prefix)
-    for (var i in args) {
-      var arg = args[i]
-      if (oldConsole) {
-        pushArg(messages, arg)
-      } else {
-        messages.push(arg)
+    if (args) {
+      for (var i = 0, len = args.length; i < len; i++) {
+        var arg = args[i]
+        if (oldConsole) {
+          pushArg(messages, arg)
+        } else {
+          messages.push(arg)
+        }
       }
     }
     return messages
@@ -107,64 +112,6 @@ function mockConsole() {
 
 }
 /*eslint-disable  no-console */
-function bindPollyfill() {
-  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind#Compatibility
-  if (!Function.prototype.bind) {
-    Function.prototype.bind = function(oThis) {
-      if (typeof this !== 'function') {
-        // closest thing possible to the ECMAScript 5
-        // internal IsCallable function
-        throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable')
-      }
-
-      var aArgs = Array.prototype.slice.call(arguments, 1),
-        fToBind = this,
-        fNOP = function() {},
-        fBound = function() {
-          return fToBind.apply(this instanceof fNOP ?
-            this :
-            oThis,
-            aArgs.concat(Array.prototype.slice.call(arguments)))
-        }
-
-      if (this.prototype) {
-        // Function.prototype doesn't have a prototype property
-        fNOP.prototype = this.prototype
-      }
-      fBound.prototype = new fNOP()
-      return fBound
-    }
-  }
-}
-
-function forEachPollyfill() {
-  //https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach#Polyfill
-  if (!Array.prototype.forEach) {
-    Array.prototype.forEach = function(callback /*, thisArg*/ ) {
-      var T, k
-      if (this == null) {
-        throw new TypeError('this is null or not defined')
-      }
-      var O = Object(this)
-      var len = O.length >>> 0
-      if (typeof callback !== 'function') {
-        throw new TypeError(callback + ' is not a function')
-      }
-      if (arguments.length > 1) {
-        T = arguments[1]
-      }
-      k = 0
-      while (k < len) {
-        var kValue
-        if (k in O) {
-          kValue = O[k]
-          callback.call(T, kValue, k, O)
-        }
-        k++
-      }
-    }
-  }
-}
 
 function consolePollyfill() {
   // http://stackoverflow.com/questions/5538972/console-log-apply-not-working-in-ie9
