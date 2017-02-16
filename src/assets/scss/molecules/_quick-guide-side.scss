@@ -3,7 +3,7 @@
 .dit-quick-guide-side {
   //position: absolute; //leaving this absolute creates bug in affix
   background: #1e1348;
-  padding: 0px 30px 40px 30px;
+  padding: flip-side-values(0px 30px 40px 30px);
 
   @media (max-width: $screen-sm-max) {
     display: none;
@@ -11,7 +11,7 @@
 
   h2 {
     font-size: 20px;
-    margin: 40px 0 24px 0;
+    margin: flip-side-values(40px 0 24px 0);
     // text-align: center;
   }
 
@@ -24,12 +24,12 @@
       margin-bottom: 12px;
       display: inline-block;
       position: relative;
-      padding: 0 30px 0 24px;
+      padding: flip-side-values(0 30px 0 24px);
 
       &:before {
         position: absolute;
         top: 0px;
-        left: 2px;
+        #{$left}: 2px;
         font-size: 18px;
         content: counter(dit-guide-side-counter) ".";
         counter-increment: dit-guide-side-counter;
@@ -53,6 +53,6 @@
     @extend .dit-quick-guide-side;
 
     font-size: 17px;
-    padding: 0px 0px 30px 22px;
+    padding: flip-side-values(0px 0px 30px 22px);
   }
 }

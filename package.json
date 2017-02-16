@@ -1,12 +1,12 @@
 {
   "name": "iigb-website",
-  "version": "1.6.3",
+  "version": "1.7.0",
   "engines": {
     "node": "5.6.0"
   },
   "private": true,
   "browser": {
-    "respond.js": "./node_modules/respond.js/dest/respond.src.js",
+    "respond.js": "./node_modules/respond.js/dest/respond.min.js",
     "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {

@@ -2,18 +2,17 @@
 
 .dit-home-section-anchors {
   margin-top: 140px;
-  font-size: 21px;
   font-weight: 100;
   position: absolute;
   z-index: 100;
-  left: 0;
-  right: 0;
+  #{$left}: 0;
+  #{$right}: 0;
   bottom: 24px;
   font-size: 18px;
 
   a {
     border-bottom: 1px solid $light-gray;
-    padding: 0 0 1px 0;
+    padding: flip-side-values(0 0 1px 0);
     margin: 0 10px;
 
     &:hover {
@@ -25,7 +24,7 @@
 
 .dit-video-anchor {
   border-bottom: 0;
-  padding: 0px 0px 4px 20px;
+  padding: flip-side-values(0px 0px 4px 20px);
   text-decoration: none;
 
   &:hover {

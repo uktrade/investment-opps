@@ -1,0 +1,87 @@
+//main.scss
+
+.great-flag-circle {
+  &--br {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-br.png', sizingMethod='scale');
+  }
+
+  &--cn {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-cn.png', sizingMethod='scale');
+  }
+
+  &--de {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-de.png', sizingMethod='scale');
+  }
+
+  &--es {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-es.png', sizingMethod='scale');
+  }
+
+  &--jp {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-jp.png', sizingMethod='scale');
+  }
+
+  &--in {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-in.png', sizingMethod='scale');
+  }
+
+  &--us {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-us.png', sizingMethod='scale');
+  }
+
+  &--uk {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src= '/assets/media/flags/flag-uk.png', sizingMethod='scale');
+  }
+}
+
+.dit-icon {
+  &-connections {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-connections.png',
+                    sizingMethod='scale');
+  }
+
+  &-immigration {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-immigration.png',
+                    sizingMethod='scale');
+  }
+
+  &-incentives {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-incentives.png',
+                    sizingMethod='scale');
+  }
+
+  &-talent {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-talent.png',
+                    sizingMethod='scale');
+  }
+
+  &-insight {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-insight.png',
+                    sizingMethod='scale');
+  }
+
+  &-language {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-language-icon.png',
+                    sizingMethod='scale');
+  }
+
+  &-external-link {
+    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+                    src='/assets/media/icons/dit-icon-external-link.png',
+                    sizingMethod='scale');
+  }
+}

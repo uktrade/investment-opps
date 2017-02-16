@@ -1,4 +1,5 @@
 <script>
+document.iigbBuild='{{build}}'
 document.base_url =  '{{base}}';
 document.countries = [{% for o in labels.form_headquarters.options[locale.code] %}
                     {"value": "{{o}}", "data": "{{loop.index}}"},
@@ -9,4 +10,6 @@ document.countries_en = ["zero",
                 {% endfor %}];
 document.country = '{{locale.country}}';
 document.language = '{{locale.language}}';
+document.pagePath = '{{path}}';
+document.direction = '{{direction}}'
 </script>

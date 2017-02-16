@@ -1,7 +1,7 @@
 <!-- The overlay -->
 <!-- Button to close the overlay navigation -->
 <div class="wrapper" style="height: 40px">
-    </div>
+</div>
 <div class="wrapper search-heading-wrapper">
     <div class="row">
         <div class="container">
@@ -15,29 +15,30 @@
                 <input type="text" class="form-control" id="searchInput">
             </div>
             <div class="col-xs-1 dit-search-spinner">
-              <img src="/{{assets}}/media/icons/dit-search-spinner.gif" style="height: 70px; width: auto" alt="results coming...">
+                <img src="/{{assets}}/media/icons/dit-search-spinner.gif" style="height: 70px; width: auto"
+                     alt="results coming...">
             </div>
-            <a href="#" id="closebtn-collapse-1" class="closebtn">
-                <div class="col-xs-3 col-md-2 close-btn-div">
+            <div class="col-xs-3 col-md-2 close-btn-div">
+                <a href="#" id="closebtn-collapse-1" class="closebtn">
                     <span style="font-size: 0px;">{{ labels.search_close[locale.code] }}</span>
                     <span class="glyphicon glyphicon-remove close-search-icon"></span>
                     <span class="search-error">{{ labels.search_error[locale.code] }}</span>
                     <span class="no-results">{{ labels.no_results[locale.code] }}</span>
-                </div>
-            </a>
+                </a>
+            </div>
         </div>
     </div>
 </div>
 <div class="wrapper search-main-wrapper">
-    <div class="row" style="height: inherit;">
+    <div class="row">
         <div class="container search-results-container">
-            <div class="search-results-block col-md-offset-1 col-xs-12 col-md-8">
+            <div class="search-results-block col-xs-12 col-md-offset-1 col-md-8">
                 <ol class="list-group search-list-style">
                     <li id="search-options">
                     </li>
                 </ol>
             </div>
-            <div class="col-md-offset-1 col-md-8">
+            <div class="col-xs-12 col-md-offset-1 col-md-8">
                 <ul class="pagination">
                 </ul>
             </div>

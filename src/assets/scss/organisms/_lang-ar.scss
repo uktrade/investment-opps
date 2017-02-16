@@ -1,0 +1,80 @@
+// lang-ar.scss
+//specific for Arabic. No change of direction
+
+.lang-ar {
+  font-family: 'Droid Arabic Naskh', Roboto, sans-serif;
+  font-size: 14px;
+  line-height: 2em;
+
+  @media (max-width: $screen-sm-max) {
+    font-size: 12px;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'GE SS Two Medium', sans-serif;
+    line-height: 1.6;
+  }
+
+  .dit-great-link-container {
+    border-right: none;
+    display: inline-block;
+    margin: 8px 4px 0 0;
+  }
+
+  .dit-nav-language {
+    margin: -30px 0 0 0;
+  }
+
+  .dit-language-selector-mobile {
+    margin-top: 34px;
+  }
+
+  .jumbotron {
+    p {
+      line-height: 2em;
+    }
+  }
+
+
+  .breadcrumb {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+
+    @media (max-width: $screen-md-max) {
+      font-size: 16px;
+    }
+
+    &>li+li:before {
+      content: ">\00a0";
+    }
+  }
+
+  .dit-toc__list-item:before {
+    font-size: 16px;
+
+    @media (max-width: $screen-sm-max) {
+      font-size: 14px;
+    }
+  }
+
+  .stepwizard {
+    top: 30px;
+    //todo: check for mobile
+    &-step a {
+      font-family: 'Roboto', sans-serif;
+      font-size: 18px;
+
+      @media (max-width: $screen-md-max) {
+        font-size: 16px;
+      }
+
+      &.active-selection {
+        font-size: 60px;
+      }
+    }
+  }
+
+  label.control-label {
+    width: 83.33333333%; //col-md-10
+  }
+}

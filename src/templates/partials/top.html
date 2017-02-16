@@ -6,31 +6,49 @@
     <title>{{pageTitle}} - invest.great.gov.uk</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <!--<meta name="intro" content="{{ pageHeader.content.contents | safe }}">-->
-    <link rel="icon" type="image/x-icon" href="https://gds.blog.gov.uk/wp-content/themes/gds-blogs/build/govuk_template/assets/images/favicon.ico">
+    <link rel="icon" type="image/x-icon"
+          href="https://gds.blog.gov.uk/wp-content/themes/gds-blogs/build/govuk_template/assets/images/favicon.ico">
     <meta name="url" content="{{ path }}">
     <meta name="pageTitle" content="{{pageTitle}}">
     <meta name="language" content="{{locale.language}}">
     <meta name="country" content="{{locale.country}}">
     <meta name="timestamp" content="{{timestamp}}">
+    {% if locale.language === 'ar' %}
+    <link href='https://fonts.googleapis.com/earlyaccess/droidarabicnaskh.css' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if locale.language === 'ja' %}
+    <link href='https://fonts.googleapis.com/earlyaccess/notosansjapanese.css' rel='stylesheet' type='text/css'>
+    {% endif %}
+    {% if locale.language === 'zh' %}
+    <link href='https://fonts.googleapis.com/earlyaccess/notosanssc.css' rel='stylesheet' type='text/css'>
+    {% endif %}
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,700,300' rel='stylesheet' type='text/css'>
+
     <link href="/{{assets}}/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    {% if direction === 'rtl' %}
+    <!--if for rtl language-->
+    <link rel="stylesheet" href="/{{assets}}/css/bootstrap-rtl.min.css">
+    <link href="/{{assets}}/css/main-rtl.css" rel="stylesheet" type="text/css"/>
+    {% else %}
     <link href="/{{assets}}/css/main.css" rel="stylesheet" type="text/css"/>
+    {% endif %}
     <script>(function (w, d, s, l, i) {
-        w[l] = w[l] || [];
-        w[l].push({
-            'gtm.start': new Date().getTime(), event: 'gtm.js'
-        });
-        var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
-        j.async = true;
-        j.src =
-                'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
-        f.parentNode.insertBefore(j, f);
+      w[l] = w[l] || [];
+      w[l].push({
+        'gtm.start': new Date().getTime(), event: 'gtm.js'
+      });
+      var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : '';
+      j.async = true;
+      j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+      f.parentNode.insertBefore(j, f);
     })(window, document, 'script', 'dataLayer', 'GTM-N6G2BT');</script>
     <!--[if lt IE 9]>
-      <link href="/{{assets}}/css/main-ie8.css" rel="stylesheet" type="text/css"/>
-      <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/main-jquery-old.js"> </script>
-      <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/{{'build/' if build}}main-ie8.js"> </script>
+    <link href="/{{assets}}/css/main-ie8.css" rel="stylesheet" type="text/css"/>
+    <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/main-jquery-old.js"></script>
+    <script type="text/javascript" charset="utf-8" src="/{{assets}}/js/main-ie8.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/css3pie/2.0beta1/PIE_IE678.js"></script>
     <script>
         document.createElement('header');
@@ -42,26 +60,27 @@
     </script>
     <![endif]-->
     <!--[if gte IE 9]>
-        <link href="/{{assets}}/css/main-ie9.css" rel="stylesheet" type="text/css"/>
+    <link href="/{{assets}}/css/main-ie9.css" rel="stylesheet" type="text/css"/>
     <![endif]-->
 </head>
 
-<body class="lang-{{locale.language}}">
+<!--dir to be taken from structure.direction-->
+<body class="font font-{{locale.language}} lang-{{locale.language}}" dir="{{direction}}">
 <noscript>
     <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-N6G2BT"
             height="0" width="0" style="display:none;visibility:hidden"></iframe>
     <style type="text/css" media="screen">
-      .dit-loading, .dit-loading-spinner {
-        display:none;
-      }
+        .dit-loading, .dit-loading-spinner {
+            display: none;
+        }
 
     </style>
 </noscript>
-{% if language_selector  %}
+{% if language_selector %}
 <div class="dit-loading-spinner"></div>
 {% else %}
 <div class="dit-loading"></div>
 {% endif %}
 <div class="dit-outer-wrap">
-<div id="dit-search-overlay" class="overlay">
+    <div id="dit-search-overlay" class="overlay">
 

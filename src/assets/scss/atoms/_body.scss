@@ -4,6 +4,7 @@ html {
 
 body {
   background-color: $background-colour;
+  font-family: Roboto, sans-serif;
   font-size: 18px;
   font-weight: 100;
   color: $text-colour;
@@ -47,7 +48,7 @@ body {
   z-index: 100;
   top: 0px;
   bottom: 0px;
-  left: 0px;
-  right: 0px;
+  #{$left}: 0px;
+  #{$right}: 0px;
   background: rgb(255, 255, 255);
 }

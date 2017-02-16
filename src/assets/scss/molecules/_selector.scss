@@ -8,54 +8,38 @@
   display: inline-block;
   position: absolute;
   top: -8px;
-  left: -50px;
+  #{$left}: -50px;
 
   &--br {
     background-image: url(../media/flags/flag-br.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-br.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--cn {
     background-image: url(../media/flags/flag-cn.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-cn.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--de {
     background-image: url(../media/flags/flag-de.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-de.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--es {
     background-image: url(../media/flags/flag-es.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-es.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--jp {
     background-image: url(../media/flags/flag-jp.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-jp.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--in {
     background-image: url(../media/flags/flag-in.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-in.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--us {
     background-image: url(../media/flags/flag-us.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-us.png', sizingMethod='scale');    //fallback for IE8
   }
 
   &--uk {
     background-image: url(../media/flags/flag-uk.svg);
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-    src=$assets + '/media/flags/flag-uk.png', sizingMethod='scale');    //fallback for IE8
   }
 
   @media (max-width: $screen-xs-max) {
@@ -66,71 +50,6 @@
     display: inline-block;
     position: absolute;
     top: -5px;
-    left: -36px;
-  }
-}
-
-.great-locale-selector {
-  color: $text-colour;
-
-  &__help-ext {
-    display: block;
-    font-weight: normal;
-    font-size: 14px;
-  }
-
-  ul {
-    list-style: none;
-    padding: 15px 0 0 0;
-    margin: 0;
-    overflow: hidden;
-  }
-
-  li {
-    padding: 15px 15px 15px 0;
-    margin: 0 3.5% 3.5% 0;
-    width: 31%;
-    display: block;
-    float: left;
-
-    &:nth-child(3n+0) {
-      margin-right: 0;
-    }
-
-    @media (max-width: $screen-sm-max) {
-      width: 48.25%;
-      margin-right: 3.5%;
-
-      &:nth-child(3n+0) {
-        margin-right: 3.5%;
-      }
-
-      &:nth-child(2n+0) {
-        margin-right: 0;
-      }
-    }
-
-    @media (max-width: $screen-xs-max) {
-      width: 100%;
-      margin-right: 0;
-
-      a {
-        min-height: auto;
-      }
-    }
-
-    a {
-      font-weight: bold;
-      color: $text-colour;
-      display: inline-block;
-      position: relative;
-      margin-left: 50px;
-      border-bottom: 1px solid transparent; //solves grid problem on hover
-
-      &:hover {
-        color: $link-colour;
-        border-bottom: 1px solid;
-      }
-    }
+    #{$left}: -36px;
   }
 }

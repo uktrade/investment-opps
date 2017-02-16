@@ -15,7 +15,9 @@
                     <li><a href="/{{base}}/setup-guide">{{ labels.setup_guide[locale.code] }}</a></li>
                     <li><a href="/{{base}}/privacy-policy/">{{ labels.privacy[locale.code] }}</a></li>
                     <li><a href="/{{base}}/terms-and-conditions/">{{ labels.terms[locale.code] }}</a></li>
-                    <!--<li><a href="#">{{ labels.contact[locale.code] }}</a></li>-->
+                    {% if locale.language === 'en' %}
+                    <li><a href="/{{base}}/feedback/">{{ labels.report_problem[locale.code] }}</a></li>
+                    {% endif %}
                 </ul>
             </div>
             <div class="col-xs-8 col-xs-offset-2 col-sm-4 col-sm-offset-1 col-md-3 col-md-offset-0 dit-footer--logo">
@@ -38,7 +40,7 @@
         <div class="modal-content">
             <div class="modal-body">
                 <p></p>
-                <span class="glyphicon glyphicon-remove dit-close-icon pull-right" data-dismiss="modal"></span>
+                <span class="glyphicon glyphicon-remove dit-close-icon" data-dismiss="modal"></span>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -64,6 +66,7 @@
                                             <li class="col-xs-4"><a href="/int/ja">日本語</a></li>
                                             <li class="col-xs-4"><a href="/int/es">Español</a></li>
                                             <li class="col-xs-4"><a href="/int/pt">Português</a></li>
+                                            <!-- <li class="col&#45;xs&#45; GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk GREAT.gov.uk4"><a href="/int/ar">عربى</a></li> -->
                                         </ul>
                                     </div>
                                 </div>
@@ -121,7 +124,7 @@
     <div class="modal-dialog dit-selector-wrapper" role="document">
         <div class="modal-content">
             <div class="modal-body" style="padding: 15px 40px;">
-                <span class="glyphicon glyphicon-remove dit-remove-icon pull-right" data-dismiss="modal"></span>
+                <span class="glyphicon glyphicon-remove dit-close-icon" data-dismiss="modal"></span>
                 {% include "partials/selector.html" %}
             </div>
         </div>

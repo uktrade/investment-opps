@@ -16,7 +16,7 @@
         <div class="dit-hero__content">
 
             <div class="row">
-                <div class="col-sm-10 col-md-8">
+                <div class="col-sm-10 col-md-8 dit-jumbotron-content">
                     <h1>{{ pageHeader.content.title }}</h1>
                     {{ pageHeader.content.contents | safe }}
                 </div>
@@ -36,13 +36,14 @@
                 </p>
                 <!--<![endif]-->
                 <!--[if gte IE 9]>
-
-                <p class="text-center">
+                <p>
                     <a href="#"
-                       class="bg-video-inactive bg-video-play"
-                       data-toggle="modal"
-                       data-target="#heroVideo">{{ labels.watch_video[locale.code] }}
-                        <span class="glyphicon glyphicon-play-circle dit-play" aria-hidden="true"></span>
+                       class="bg-video-inactive bg-video-play dit-text-decoration-none"
+                       id="playVid" data-toggle="modal"
+                       data-target="#heroVideo">
+                            <span class="dit-btn-home__video">{{ labels.watch_video[locale.code] }}
+                                <span class="glyphicon glyphicon-play"></span>
+                            </span>
                     </a>
                 </p>
                 <![endif]-->
