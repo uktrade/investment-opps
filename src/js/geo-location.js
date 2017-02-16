@@ -26,7 +26,7 @@ function geoLocation() {
   }
 
   function getRedirectPath(countryCode) {
-    var build=document.build ? document.build + '/':''
+    var build=document.iigbBuild ? document.iigbBuild + '/':''
     var ipRedirectUrl='/assets/' + build+ 'ip_redirects.json'
     return $.getJSON( ipRedirectUrl)
       .done(function(data) {
