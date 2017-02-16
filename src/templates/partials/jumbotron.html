@@ -47,15 +47,8 @@
                     </a>
                 </p>
                 <![endif]-->
-                <!--[if lte IE 8]>
-                <div id="player" data-video="{{pageHeader.externalVideo}}"></div>
-
-                <script>
-                    var extVid = document.getElementById("player").getAttribute("data-video");
-                    var divToAppend = document.getElementById("player");
-                    divToAppend.innerHTML = '<iframe width="480" height="270" src="'+ extVid +'" frameborder="0" allowfullscreen></iframe>'
-                </script>
-                <![endif]-->
+                <!--No videos to show in IE8.-->
+                <!--[if lte IE 8]><![endif]-->
             {% endif %}
             {% if pageHeader.externalVideoCN %}
                 <p>
