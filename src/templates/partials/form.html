@@ -216,11 +216,7 @@
               <button class="dit-btn--sm nextBtn"
                       type="button">
                 {{ labels.form_next[locale.code] }}
-                {% if direction === 'rtl' %}
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                {% else %}
                 <span class="glyphicon glyphicon-chevron-right"></span>
-                {% endif %}
               </button>
             </div>
           </div>
@@ -393,21 +389,13 @@
             <div class="form-group__button">
               <button class="dit-btn--sm prevBtn"
                       type="button">
-                {% if direction === 'rtl' %}
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                {% else %}
                 <span class="glyphicon glyphicon-chevron-left"></span>
-                {% endif %}
                 {{ labels.form_previous[locale.code] }}
               </button>
               <button class="dit-btn--sm nextBtn"
                       type="button">
                 {{ labels.form_next[locale.code] }}
-                {% if direction === 'rtl' %}
-                <span class="glyphicon glyphicon-chevron-left"></span>
-                {% else %}
                 <span class="glyphicon glyphicon-chevron-right"></span>
-                {% endif %}
               </button>
             </div>
           </div>
@@ -545,11 +533,7 @@
             <div class="form-group__button">
               <button class="dit-btn--sm prevBtn"
                       type="button">
-                {% if direction === 'rtl' %}
-                <span class="glyphicon glyphicon-chevron-right"></span>
-                {% else %}
                 <span class="glyphicon glyphicon-chevron-left"></span>
-                {% endif %}
                 {{ labels.form_previous[locale.code] }}
               </button>
               <button id="ga-send-js"

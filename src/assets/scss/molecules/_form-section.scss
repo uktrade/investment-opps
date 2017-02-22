@@ -132,6 +132,7 @@
 
 .stepwizard {
   position: absolute;
+  direction: ltr;
   #{$right}: 10px;
   top: 0;
   color: $link-colour;
@@ -170,8 +171,9 @@
   padding-#{$left}: 0;
 
   &__button {
+    direction: ltr;
     margin-bottom: 25px;
-    float: #{$right};
+    float: right;
     //position: absolute;
     //bottom: 20px;
     //#{$right}: 0;
@@ -198,12 +200,12 @@
 
 .dit-form-wrapper {
   overflow: hidden;
-  float: #{$left};
+  float: left;
   position: relative;
 }
 
 .setup-content {
-  float: #{$left};
+  float: left;
   display: inline-block;
   margin: 0;
 }
