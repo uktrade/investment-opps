@@ -10,6 +10,7 @@ describe('IIGB Search Functionality', function() {
 		var searchResult = $('.search-result')
 
 		browser.click('.navbar-toggle');
+		browser.waitForExist('#searchBtn');
 		browser.click('#searchBtn');
 		searchInput.waitForVisible(5000);
 		searchInput.setValue('finance');
@@ -17,7 +18,7 @@ describe('IIGB Search Functionality', function() {
 		searchResult.waitForVisible(5000);
 
 		browser.elements('.search-result', function(err, res) {
-			expect(res.value.length, 'redirected url').to.to.be.above(1);
+			expect(res.value.length, 'redirected url').to.be.above(1);
 		});
 	});
 });

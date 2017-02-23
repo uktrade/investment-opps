@@ -4,7 +4,8 @@ exports.config = {
 
 	updateJob: false,
 	specs: [
-		'./spec/features/search.js'
+	// './spec/features/search.js',
+	'./spec/features/form.js'
 	],
 	exclude: [],
 
@@ -19,7 +20,7 @@ exports.config = {
 	coloredLogs: true,
 	screenshotPath: './errorShots/',
 	baseUrl: '',
-	waitforTimeout: 30000,
+	waitforTimeout: 100000,
 	connectionRetryTimeout: 90000,
 	connectionRetryCount: 3,
 

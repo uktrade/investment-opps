@@ -34,6 +34,7 @@
     "rollback": "node_modules/iigb-aws-helpers/rollback.sh"
   },
   "dependencies": {
+    "async": "^2.1.5",
     "bootstrap": "^3.3.7",
     "chai": "^3.5.0",
     "html5shiv": "^3.7.3",
