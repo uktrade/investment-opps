@@ -96,15 +96,11 @@
 
 .dit-content-section {
   a[target=_blank]:after {
-    background-color: whitesmoke;
-    content: "";
-    display: inline-block;
     width: 14px;
     height: 14px;
+    background: url(../media/icons/dit-icon-external-link.png) no-repeat;
+    content: "";
+    display: inline-block;
     margin-left: 4px;
-    filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
-                    src='/assets/media/icons/dit-icon-external-link.png',
-                    sizingMethod='scale');
-    background-size: contain;
   }
 }
