@@ -25,7 +25,7 @@
     "assets": "./bin/build-assets",
     "js": "./bin/build-js",
     "media": "website-builder -t build/assets/${IIGB_BUILD}/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
-    "predeploy": "npm install && npm test && npm run build",
+    "predeploy": "npm install && npm run postinstall && npm test && npm run build",
     "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
     "test": "website-builder test",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
