@@ -78,6 +78,16 @@
     width: 83.33333333%; //col-md-10
   }
 
+  .dit-btn-home__video{
+
+    .glyphicon-play{
+      padding-top: 8px;
+      @media (max-width: $screen-md-max) {
+      padding-top: 6px;
+      }
+    }
+
+  }
   .modal-reg-selector{
 
       .lang-link{
