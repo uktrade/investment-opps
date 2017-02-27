@@ -4,8 +4,8 @@ exports.config = {
 
 	updateJob: false,
 	specs: [
-	// './spec/features/search.js',
-	'./spec/features/form.js'
+		// './spec/features/search.js',
+		'./spec/features/form.js'
 	],
 	exclude: [],
 
@@ -26,6 +26,7 @@ exports.config = {
 
 	framework: 'mocha',
 	mochaOpts: {
-		ui: 'bdd'
+		ui: 'bdd',
+		timeout: 20000
 	}
 }
