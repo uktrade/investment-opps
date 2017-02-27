@@ -8,7 +8,12 @@ describe('IIGB Search Functionality', function() {
 
 		var searchInput = $('#searchInput')
 		var searchTerm = 'xbiasbxksbkha'
-		browser.click('.navbar-toggle');
+
+		if (browser.isMobile) {
+			browser.click('.navbar-toggle');
+			browser.pause(2000);
+		}
+
 		browser.waitForExist('#searchBtn');
 		browser.click('#searchBtn');
 		searchInput.waitForVisible(5000);

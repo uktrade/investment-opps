@@ -4,6 +4,8 @@ exports.config = {
 
   updateJob: false,
   specs: [
+    './spec/features/search.js',
+    './spec/features/form.js',
     './spec/features/georedirect.js'
   ],
   exclude: [],
@@ -11,19 +13,16 @@ exports.config = {
   maxInstances: 5,
   commonCapabilities: {
     name: 'parallel_test',
-    build: 'webdriver-browserstack'
+    build: 'webdriver-browserstack',
+    'resolution': '1600x1200'
+
   },
 
-  capabilities: [{
-      browser: 'chrome'
+  capabilities: [
+  {
+      browser: 'chrome',
     }, {
       browser: 'firefox'
-    }, {
-      'browser': 'IE',
-      'browser_version': '8.0',
-    }, {
-      'browser': 'IE',
-      'browser_version': '9.0',
     }, {
       'browser': 'IE',
       'browser_version': '10.0',
@@ -34,15 +33,23 @@ exports.config = {
       'browser_version': '9.0',
     }, {
       browser: 'safari'
-    }
-    // {
-    //   'platform': 'MAC',
-    //   'browserName': 'iPhone',
-    //   'device': 'iPhone 6'
+    },
+  // {
+  //   'browserName': 'iPhone',
+  //   'platform': 'MAC',
+  //   'device': 'iPhone 6S Plus'
+  // },
+  // {
+  //   'browserName': 'android',
+  //   'platform': 'ANDROID',
+  //   'device': 'Google Nexus 5'
+  // }
+    // , {
+    //   'browser': 'IE',
+    //   'browser_version': '8.0',
     // }, {
-    //   'browserName': 'android',
-    //   'platform': 'ANDROID',
-    //   'device': 'Samsung Galaxy S5'
+    //   'browser': 'IE',
+    //   'browser_version': '9.0',
     // }
   ],
 
@@ -50,13 +57,14 @@ exports.config = {
   coloredLogs: true,
   screenshotPath: './errorShots/',
   baseUrl: '',
-  waitforTimeout: 35000,
+  waitforTimeout: 30000,
   connectionRetryTimeout: 90000,
   connectionRetryCount: 3,
 
   framework: 'mocha',
   mochaOpts: {
-    ui: 'bdd'
+    ui: 'bdd',
+    timeout: 45000
   }
 }
 

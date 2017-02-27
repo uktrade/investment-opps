@@ -9,13 +9,17 @@ describe('IIGB Search Functionality', function() {
 		var searchInput = $('#searchInput')
 		var searchResult = $('.search-result')
 
-		browser.click('.navbar-toggle');
+		if (browser.isMobile) {
+			browser.click('.navbar-toggle');
+			browser.pause(2000);
+		}
+
 		browser.waitForExist('#searchBtn');
 		browser.click('#searchBtn');
 		searchInput.waitForVisible(5000);
 		searchInput.setValue('finance');
 
-		searchResult.waitForVisible(5000);
+		searchResult.waitForVisible(10000);
 
 		browser.elements('.search-result', function(err, res) {
 			expect(res.value.length, 'redirected url').to.be.above(1);
