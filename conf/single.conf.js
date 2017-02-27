@@ -4,17 +4,28 @@ exports.config = {
 
 	updateJob: false,
 	specs: [
-		// './spec/features/search.js',
-		'./spec/features/form.js'
+		'./spec/features/search.js',
+		'./spec/features/form.js',
+		'./spec/features/georedirect.js'
 	],
 	exclude: [],
 
 	capabilities: [{
-		browser: 'chrome',
-		'resolution': '1280x1024',
-		name: 'single_test',
-		build: 'webdriver-browserstack'
-	}],
+			browser: 'chrome',
+			'resolution': '1600x1200',
+			name: 'single_test',
+			build: 'webdriver-browserstack'
+		},
+		// {
+		// 	'os': 'Windows',
+		// 	'os_version': '7',
+		// 	'browser': 'IE',
+		// 	'browser_version': '9.0',
+		// 	'resolution': '1600x1200',
+		// 	name: 'internet_explorer_9',
+		// 	build: 'webdriver-browserstack'
+		// }
+	],
 
 	logLevel: 'verbose',
 	coloredLogs: true,
@@ -27,6 +38,6 @@ exports.config = {
 	framework: 'mocha',
 	mochaOpts: {
 		ui: 'bdd',
-		timeout: 20000
+		timeout: 45000
 	}
 }
