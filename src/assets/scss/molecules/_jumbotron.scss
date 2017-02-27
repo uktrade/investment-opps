@@ -84,6 +84,10 @@
     font-size: 36px;
     cursor: pointer;
     -webkit-text-stroke: 3px #000;
+
+    @media (max-width: $screen-xs-max) {
+      #{$right}: 16px;
+    }
   }
 
   .dit-play-video {
