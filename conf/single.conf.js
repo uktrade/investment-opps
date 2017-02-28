@@ -18,20 +18,12 @@ exports.config = {
 	},
 
 	capabilities: [{
-			browser: 'chrome',
-			name: 'single_test',
-			build: 'webdriver-browserstack'
-		},
-		// {
-		// 	'os': 'Windows',
-		// 	'os_version': '7',
-		// 	'browser': 'IE',
-		// 	'browser_version': '9.0',
-		// 	'resolution': '1600x1200',
-		// 	name: 'internet_explorer_9',
-		// 	build: 'webdriver-browserstack'
-		// }
-	],
+		'os': 'Windows',
+		'os_version': '10',
+		'browser': 'Chrome',
+		name: 'single_test',
+		build: 'webdriver-browserstack'
+	}],
 
 	logLevel: 'verbose',
 	coloredLogs: true,
