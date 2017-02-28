@@ -30,7 +30,7 @@ describe('IIGB Form Functionality', function() {
 		browser
 			.click('#step-2 .nextBtn');
 
-		expect(browser.getText('.stepBigNumber')).to.eq("2");
+		expect(browser.getText('.stepBigNumber .active-selection')).to.eq("2");
 
 
 		var help = browser.elements('#step-2 .has-error');

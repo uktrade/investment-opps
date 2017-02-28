@@ -43,7 +43,7 @@ describe('IIGB Form Functionality', function() {
 		browser
 			.click('#step-3 .submitBtn');
 
-		expect(browser.getText('.stepBigNumber')).to.eq("3");
+		expect(browser.getText('.stepBigNumber .active-selection')).to.eq("3");
 
 		var help = browser.elements('#step-3 .has-error');
 		console.log(help.value.length);
