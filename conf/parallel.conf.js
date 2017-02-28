@@ -52,7 +52,7 @@ exports.config = {
 
   logLevel: 'verbose',
   coloredLogs: true,
-  screenshotPath: './errorShots/',
+  // screenshotPath: './errorShots/',
   baseUrl: '',
   waitforTimeout: 30000,
   connectionRetryTimeout: 90000,
