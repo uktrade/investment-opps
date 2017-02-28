@@ -1,3 +1,5 @@
+var base = process.env.BASE_IIGB_URL;
+
 var expect = require('chai').expect
 
 //TODO use url base from env vars in url
@@ -14,7 +16,7 @@ describe('IIGB Form Functionality', function() {
 		}
 
 		browser
-			.url('https://invest.great.gov.uk/int/contact')
+			.url(base + '/int/contact')
 			.waitForExist('form');
 
 		browser
@@ -27,9 +29,11 @@ describe('IIGB Form Functionality', function() {
 
 		expect(browser.getText('.active-selection')).to.eq("1");
 
-		var help = browser.elements('#step-1 .has-error');
-		console.log(help.value.length);
-		expect(help.value.length).to.eq(3);
+		if (!browser.isMobile) {
+			var help = browser.elements('#step-1 .has-error');
+			console.log(help.value.length);
+			expect(help.value.length).to.eq(3);
+		}
 
 		var validation = browser.elements('#step-1 .validation_error');
 		console.log(validation.value.length);

@@ -18,8 +18,7 @@ exports.config = {
 
   },
 
-  capabilities: [
-  {
+  capabilities: [{
       browser: 'chrome',
     }, {
       browser: 'firefox'
@@ -27,23 +26,21 @@ exports.config = {
       'browser': 'IE',
       'browser_version': '10.0',
     }, {
-      'browser': 'IE'
-    }, {
       'browser': 'safari',
       'browser_version': '9.0',
     }, {
       browser: 'safari'
-    },
-  // {
-  //   'browserName': 'iPhone',
-  //   'platform': 'MAC',
-  //   'device': 'iPhone 6S Plus'
-  // },
-  // {
-  //   'browserName': 'android',
-  //   'platform': 'ANDROID',
-  //   'device': 'Google Nexus 5'
-  // }
+    }
+    // {
+    //   'browserName': 'iPhone',
+    //   'platform': 'MAC',
+    //   'device': 'iPhone 6S Plus'
+    // },
+    // {
+    //   'browserName': 'android',
+    //   'platform': 'ANDROID',
+    //   'device': 'Google Nexus 5'
+    // }
     // , {
     //   'browser': 'IE',
     //   'browser_version': '8.0',

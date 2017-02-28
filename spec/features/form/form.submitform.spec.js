@@ -1,6 +1,6 @@
 var expect = require('chai').expect
+var base = process.env.BASE_IIGB_URL;
 
-//TODO use url base from env vars in url
 
 describe('IIGB Form Functionality', function() {
 	it('submits a form successfully', function() {
@@ -14,7 +14,7 @@ describe('IIGB Form Functionality', function() {
 		}
 
 		browser
-			.url('https://invest.great.gov.uk/int/contact')
+			.url(base + '/int/contact')
 			.waitForExist('form');
 
 		browser

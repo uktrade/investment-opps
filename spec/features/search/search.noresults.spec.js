@@ -1,9 +1,11 @@
 var expect = require('chai').expect
+var base = process.env.BASE_IIGB_URL;
+
 
 describe('IIGB Search Functionality', function() {
 	it('returns no results with fake search term', function() {
 		browser
-			.url('https://invest.great.gov.uk/int/industries')
+			.url(base + '/int/industries')
 			.waitForExist('body');
 
 		var searchInput = $('#searchInput')
