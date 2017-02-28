@@ -25,6 +25,8 @@ describe('IIGB Form Functionality', function() {
 			.click('.nextBtn');
 		browser.pause(2000);
 
+		expect(browser.getText('.stepBigNumber')).to.eq("1");
+
 		var help = browser.elements('#step-1 .has-error');
 		console.log(help.value.length);
 		expect(help.value.length).to.eq(3);
