@@ -2,6 +2,8 @@ env:
   browser: true
   commonjs: true
   node: true
+  jquery: true
+  jasmine: true
 extends: 'eslint:recommended'
 rules:
   indent:

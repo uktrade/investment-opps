@@ -1,6 +1,19 @@
 //form.scss
 
 .dit-form-section__step {
-  width: 580px !important;
-  height: 580px;
+  min-height: 800px;
+  height:auto !important;
+  height: 800px;
+}
+
+.dit-form-section__body {
+  overflow: hidden;
+}
+
+.stepwizard {
+  display: block;
+}
+
+.prevBtn, .nextBtn {
+  display: inline-block;
 }

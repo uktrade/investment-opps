@@ -1,13 +1,5 @@
 //main.scss
 
-.jumbotron {
-
-  &:before {
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000002', endColorstr='#00000005', GradientType=0); /* IE6-9 */
-    background-color: rgba(0,0,0,0.2);
-  }
-}
-
 .great-flag-circle {
   &--br {
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
@@ -91,5 +83,24 @@
     filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
                     src='/assets/media/icons/dit-icon-external-link.png',
                     sizingMethod='scale');
+  }
+}
+
+.dit-btn--contact {
+  margin-top: 12px;
+}
+
+.dit-selector-wrapper {
+  width: 80% !important;
+}
+
+.dit-content-section {
+  a[target=_blank]:after {
+    width: 14px;
+    height: 14px;
+    background: url(../media/icons/dit-icon-external-link.png) no-repeat;
+    content: "";
+    display: inline-block;
+    margin-left: 4px;
   }
 }

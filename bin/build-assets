@@ -11,5 +11,5 @@ DEBUG=$npm_package_config_debug website-builder -t build/assets/${IIGB_BUILD} as
 
 if [[ -n ${IIGB_BUILD} ]]; then
  echo "******Replacing /assets to /assets/${IIGB_BUILD} in css"
- sed -i -E "s/\/assets\//\/assets\/${IIGB_BUILD}\//" build/assets/${IIGB_BUILD}/css/main.css
+ sed -i -E "s/\/assets\//\/assets\/${IIGB_BUILD}\//g" build/assets/${IIGB_BUILD}/css/main-ie8.css
 fi

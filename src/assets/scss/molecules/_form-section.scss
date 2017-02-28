@@ -14,7 +14,6 @@
 
     @media (max-width: $screen-xs-max) {
       font-size: 40px;
-      // text-align: #{$left};
     }
   }
 
@@ -130,15 +129,13 @@
   margin-top: 10px;
 }
 
-.stepwizard-row {
-  //
-}
-
 .stepwizard {
   position: absolute;
+  direction: ltr;
   #{$right}: 10px;
   top: 0;
   color: $link-colour;
+  z-index:1;
 
   @media (max-width: $screen-sm-max) {
     #{$right}: 0px;
@@ -154,7 +151,9 @@
   text-align: center;
   position: relative;
 
-  button[disabled] {
+  a[disabled] {
+    pointer-events: none;
+    cursor: default;
     opacity: 1 !important;
     filter: alpha(opacity=100) !important;
   }
@@ -162,6 +161,7 @@
   a {
     color: $link-colour;
     text-decoration: none;
+    cursor: pointer;
   }
 }
 
@@ -170,8 +170,9 @@
   padding-#{$left}: 0;
 
   &__button {
+    direction: ltr;
     margin-bottom: 25px;
-    float: #{$right};
+    float: right;
     //position: absolute;
     //bottom: 20px;
     //#{$right}: 0;
@@ -186,7 +187,6 @@
     }
 
     @media (max-width: $screen-xs-max) {
-      //bottom: -70px;
     }
   }
 }
@@ -199,13 +199,13 @@
 
 .dit-form-wrapper {
   overflow: hidden;
-  float: #{$left};
+  float: left;
   position: relative;
 }
 
 .setup-content {
-  float: #{$left};
-  display: inline-block !important;
+  float: left;
+  display: inline-block;
   margin: 0;
 }
 
@@ -312,13 +312,7 @@
   margin-top: 30px;
 }
 
-.validation_error_email {
-  display: none;
-  color: #a94442;
-  font-weight: 700;
-}
-
-.validation_error_other {
+.validation_error {
   display: none;
   color: #a94442;
   font-weight: 700;

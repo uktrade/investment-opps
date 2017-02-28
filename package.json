@@ -1,12 +1,12 @@
 {
   "name": "iigb-website",
-  "version": "1.6.3",
+  "version": "1.7.2",
   "engines": {
     "node": "5.6.0"
   },
   "private": true,
   "browser": {
-    "respond.js": "./node_modules/respond.js/dest/respond.src.js",
+    "respond.js": "./node_modules/respond.js/dest/respond.min.js",
     "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {
@@ -26,11 +26,11 @@
     "js": "./bin/build-js",
     "media": "website-builder -t build/assets/${IIGB_BUILD}/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
     "predeploy": "npm install && npm run postinstall && npm test && npm run build",
-    "deploy": "npm run predeploy && node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
+    "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
     "test": "website-builder test",
     "browser-test-full": "node_modules/.bin/wdio conf/parallel.conf.js",
     "browser-test-single": "node_modules/.bin/wdio conf/single.conf.js",
-    "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\" && npm install uktrade/iigb-beta-content#\"$npm_package_config_cms_branch\"",
+    "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
     "release": "node_modules/iigb-aws-helpers/release.sh",
     "rollback": "node_modules/iigb-aws-helpers/rollback.sh"
   },
@@ -49,6 +49,7 @@
     "browserify": "^13.3.0",
     "express": "^4.14.0",
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
+    "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-cms-tags": "uktrade/iigb-cms-tags",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",

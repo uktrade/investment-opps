@@ -26,16 +26,16 @@
             {{ overview.content.contents | safe }}
         </div>
     </section>
-    <section class="dit-content-section">
+    <section class="dit-form-section">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
             <h2>{{ stayInTouch.content.title }}</h2>
             {{ stayInTouch.content.contents | safe }}
         </div>
-      <div class="col-md-8">
+      <div class="col-md-8 dit-form-section__body">
                   <div id="loading-overlay">
                     <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
                   </div>
-                  <form enctype='application/x-www-form-urlencoded' id="dit-form" role="form"
+                  <form enctype='application/x-www-form-urlencoded' role="form"
                       action="https://forms.invest.great.gov.uk/signup"
                       method="post" autocomplete="off">
                     <div>
@@ -53,7 +53,7 @@
                         <div class="form-group col-md-10">
                           <label class="control-label" for="userEmail">{{ labels.form_email[locale.code] }}</label>
                           <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
-                          <p class="validation_error_email">{{ labels.form_enter_valid_email[locale.code] }}</p>
+                          <p class="validation_error">{{ labels.form_enter_valid_email[locale.code] }}</p>
                           <input type="email" name="email" id="email" required="required"
                                                                                 class="form-control"
                                                                                 placeholder=""/>
@@ -66,12 +66,8 @@
                           </label>
                         </div>
                           <div class="form-group col-md-10">
-                          <button id="ga-send-js" class="dit-btn--sm nextBtn submitBtn optsFormSubmit"
-                                                  type="button">
-                            {{ labels.investment_opts_get_updates[locale.code] }}
-                          </button>
-                          <button id="ga-send" class="dit-btn--sm submitBtnNonjs"
-                                               type="submit">
+                          <button id="ga-send-js" class="dit-btn--sm submitBtn"
+                                                  type="submit">
                             {{ labels.investment_opts_get_updates[locale.code] }}
                           </button>
                         </div>
