@@ -2,6 +2,13 @@ var expect = require('chai').expect
 
 describe('IIGB Search Functionality', function() {
 	it('returns results for "finance"', function() {
+		if (!browser.isMobile) {
+			browser.windowHandleSize({
+				width: 1600,
+				height: 1200
+			});
+			browser.pause(2000);
+		}
 		browser
 			.url('https://invest.great.gov.uk/int/industries')
 			.waitForExist('body');

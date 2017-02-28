@@ -10,9 +10,15 @@ exports.config = {
 	],
 	exclude: [],
 
+	commonCapabilities: {
+		name: 'single_test',
+		build: 'webdriver-browserstack',
+		'resolution': '1600x1200'
+
+	},
+
 	capabilities: [{
 			browser: 'chrome',
-			'resolution': '1600x1200',
 			name: 'single_test',
 			build: 'webdriver-browserstack'
 		},
