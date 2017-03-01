@@ -21,7 +21,7 @@ fi
 #Hack to replace sass files src=/assets lines to src=/assets/$IIGB_FOLDER after build
 #which is used for IE8 and older browsers
 
-# if [[ -n ${IIGB_BUILD} ]]; then
-#  echo "******Replacing /assets to /assets/${IIGB_BUILD} in css"
-#  sed -i -E "s/\/assets\//\/assets\/${IIGB_BUILD}\//g" ${css_output}/main-ie8.css
-# fi
+if [[ -n ${IIGB_BUILD} ]]; then
+ echo "******Replacing /assets to /assets/${IIGB_BUILD} in css"
+ sed -i -E "s/\/assets\//\/assets\/${IIGB_BUILD}\//g" ${css_output}/main-ie8.css
+fi
