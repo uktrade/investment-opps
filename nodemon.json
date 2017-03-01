@@ -1,5 +1,5 @@
 {
   "events": {
-    "restart": "DIT_ENV='development' npm run build-pages"
+    "restart": "DIT_ENV='development' npm run html"
   }
 }
