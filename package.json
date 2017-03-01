@@ -10,7 +10,7 @@
     "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {
-    "debug": "metalsmith-markdown, metalsmith-page-builder",
+    "debug": "metalsmith-page-builder",
     "cms_branch": "master"
   },
   "scripts": {
