@@ -25,7 +25,7 @@
     "assets": "./lib/build-assets.sh",
     "predeploy": "npm install && npm run postinstall && npm test && npm run build",
     "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
-    "test": "website-builder test",
+    "test": "node ./lib/run-tests.js",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
     "release": "node_modules/iigb-aws-helpers/release.sh",
     "rollback": "node_modules/iigb-aws-helpers/rollback.sh"
@@ -44,6 +44,8 @@
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-cms-tags": "uktrade/iigb-cms-tags",
+    "jasmine": "^2.5.3",
+    "jasmine-console-reporter": "^1.2.7",
     "metalsmith": "^2.3.0",
     "metalsmith-html-minifier": "^2.2.0",
     "metalsmith-layouts": "^1.8.0",
