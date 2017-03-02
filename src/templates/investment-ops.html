@@ -1,82 +1,80 @@
 {% extends "base/index.html" %}
-
 {% block content %}
-    {% include "partials/header-nav.html" %}
-    {% include "partials/top-bar.html" %}
-
-<div class="jumbotron--auto">
+  {% include "partials/header-nav.html" %}
+  {% include "partials/top-bar.html" %}
+  <div class="jumbotron--auto">
     <div class="container">
-        <div class="dit-hero__content">
-            <div class="row">
-                <div class="col-sm-10 col-md-10">
-                    <h1>{{ overview.content.title }}</h1>
-                </div>
+      <div class="dit-hero__content">
+        <div class="row">
+          <div class="col-sm-10 col-md-10">
+            <h1>{{ overview.content.title }}</h1>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="dit-toc">
+    {% include "partials/breadcrumb.html" %}
+  </section>
+  <div class="container">
+   <section class="dit-content-section">
+   <h2>To use this service</h2>
+   <div class="col-md-10 col-sm-10 dit-main-content__body">
+   <p>You can search by using the dropdown menus and check boxes to find information on funding, research and development hubs and business clusters.</p>
+    <p>You can then view the information in a map or a table.</p>
+    </div>
+    </section>
+
+    <section class="dit-iopps-section">
+      <div class="col-md-12 col-sm-12 dit-iopps-section__body">
+        <div class="row industry-selection">
+          <h2 class="col-md-4 col-xs-12">{{labels.investment_opts_choose_industry[locale.code]}}</h2>
+          <select class="industry-selector col-md-5 col-xs-12" name="organisation[industry]" class="form-control" id="industry" required>
+            <option value="" disabled selected >
+              {{ labels.please_select[locale.code] }}
+            </option>
+            <option value="1">Creative</option>
+          </select>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <h3>{{labels.investment_opts_what_is_important[locale.code]}}</h3>
+          </div>
+        </div>
+        <div class="row bottom-buffer">
+          <div class="dit-iopps-section__options">
+            <label class="col-md-3 col-xs-12"><input type="checkbox" name="significant_business" value=""/>{{labels.investment_opts_significant_business[locale.code]}}</label>
+            <label class="col-md-3 col-xs-12"><input type="checkbox" name="funding" value=""/>{{labels.investment_opts_funding[locale.code]}}</label>
+            <label class="col-md-3 col-xs-12"><input type="checkbox" name="enterprise_zone" value=""/>{{labels.investment_opts_enterprise[locale.code]}}</label>
+            <label class="col-md-3 col-xs-12"><input type="checkbox" name="innovation" value=""/>{{labels.investment_opts_innovation[locale.code]}}</label>
+          </div>
+        </div>
+        <div class="row"> 
+          <ul class="nav nav-tabs">
+            <li class="active"><a href>{{labels.investment_opts_map[locale.code]}}</a></li>
+            <li><a href>{{labels.investment_opts_table[locale.code]}}</a></li>
+          </ul>
+          <div class="tab-content">
+            <div id="map" class="tab-pane fade in active">
+              <div class="container-fluid">
+              <div class="map-view">
+                <!--placeholder image-->          
+                <img src="http://www.beenthere-donethat.org.uk/maps/towns.gif"> 
+              </div>  
+              </div>
+            </div>
+            <div id="table" class="tab-pane fade">
+              <div class="container-fluid">
+              <div class="table-view">
+                <!--placeholder image-->          
+                <img src="http://www.gov.scot/Resource/0047/00479323.jpg">  
+              </div>
+              </div>  
+              </div>
             </div>
         </div>
-    </div>
-</div>
-
-<section class="dit-toc">
-  {% include "partials/breadcrumb.html" %}
-</section>
-
-<div class="container">
-    <section class="dit-content-section">
-        <div class="col-md-10 col-sm-10 dit-main-content__body">
-            {{ overview.content.contents | safe }}
-        </div>
+      </div>
     </section>
-    <section class="dit-form-section">
-        <div class="col-md-10 col-sm-10 dit-main-content__body">
-            <h2>{{ stayInTouch.content.title }}</h2>
-            {{ stayInTouch.content.contents | safe }}
-        </div>
-      <div class="col-md-8 dit-form-section__body">
-                  <div id="loading-overlay">
-                    <img src="/{{assets}}/media/spin.gif" alt="loading_spinner" id="img-load">
-                  </div>
-                  <form enctype='application/x-www-form-urlencoded' role="form"
-                      action="https://forms.invest.great.gov.uk/signup"
-                      method="post" autocomplete="off">
-                    <div>
-                      <div class="row setup-content" id="step-1">
-                        <div class="form-group col-md-10 form_top_block">
-                          <input name="js" class="js_switch" type="hidden" value="false">
-                          <input id="hidden_field" name="language" type="hidden" value="{{locale.language}}">
-                          <input id="hidden_field" name="market" type="hidden" value="{{locale.country}}">
-                          <label class="control-label" for="userName">{{ labels.form_full_name[locale.code] }}</label>
-                          <p class="error-help">{{ labels.form_enter_full_name[locale.code] }}</p>
-                          <input type="text" name="first_name" id="first_name" required="required"
-                                                                             class="form-control"
-                                                                             placeholder=""/>
-                        </div>
-                        <div class="form-group col-md-10">
-                          <label class="control-label" for="userEmail">{{ labels.form_email[locale.code] }}</label>
-                          <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
-                          <p class="validation_error">{{ labels.form_enter_valid_email[locale.code] }}</p>
-                          <input type="email" name="email" id="email" required="required"
-                                                                                class="form-control"
-                                                                                placeholder=""/>
-                        </div>
-                        <div class="form-group col-md-10">
-                          <label class="checkbox-label" for="mailing_list_checkbox">
-                            <input type="checkbox" id="mailing_list_checkbox" name="involved_in_research"
-                                                                              value="true"/>
-                            {{ labels.investment_opts_involved_in_research[locale.code] }}
-                          </label>
-                        </div>
-                          <div class="form-group col-md-10">
-                          <button id="ga-send-js" class="dit-btn--sm submitBtn"
-                                                  type="submit">
-                            {{ labels.investment_opts_get_updates[locale.code] }}
-                          </button>
-                        </div>
-                      </div>
-
-                    </div>
-              </form>
-          </div>
-    </section>
-</div>
-
+    
+  </div>
 {% endblock %}
