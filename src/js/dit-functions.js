@@ -104,13 +104,13 @@ function heroVideoReload() {
 
 function smoothScroll() {
   debug('Applying smooth scroll')
-  //smoothscrolling and positioning
+    //smoothscrolling and positioning
   $('a[href^="#"]').on('click', function(e) {
     // prevent default anchor click behavior
     e.preventDefault()
-    // store hash
+      // store hash
     var hash = this.hash
-    // animate
+      // animate
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
@@ -235,20 +235,19 @@ function ifOtherSelected() {
 
 
 
-
 function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
     // URL = $(location).attr('href'),
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val().trim(),
-    gateway = 'https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod',
+    gateway = process.env.IIGB_SEARCH,
     country = document.country,
     language = document.language
 
   /* eslint-disable quotes */
   var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
-  /* eslint-enable quotes */
+    /* eslint-enable quotes */
 
   if (searchInput === '') {
     $('.search-results-block').hide()
@@ -322,7 +321,7 @@ function search() {
   var searchResultsSize = 10
   var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
-    //   $('.dit-search-spinner').css('z-index', 15)
+      //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
   $('#searchInput').on('input', debouncedSearch)
 }
