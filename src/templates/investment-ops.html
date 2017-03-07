@@ -47,25 +47,25 @@
         </div>
         <div class="row bottom-buffer">
           <div class="dit-iopps-section__options">
-            <label class="col-md-3 col-xs-12"><input type="checkbox" name="significant_business" value=""/>Significant Businesses</label>
-            <label class="col-md-3 col-xs-12"><input type="checkbox" name="funding" value=""/>Funds</label>
-            <label class="col-md-3 col-xs-12"><input type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones</label>
-            <label class="col-md-3 col-xs-12"><input type="checkbox" name="innovation" value=""/>R&D</label>
+            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses</label>
+            <label class="col-md-3 col-xs-12"><input id="funding" type="checkbox" name="funding" value=""/>Funds</label>
+            <label class="col-md-3 col-xs-12"><input id="enterprise_zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones</label>
+            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>R&D</label>
           </div>
         </div>
         <div class="row">
           <ul class="nav nav-tabs">
-            <li class="active"><a class="map-tab" href='javascript:;'>Map</a></li>
-            <li><a class="table-tab" href='javascript:;'>Table</a></li>
+            <li class="active" data-tab-control="tab-map"><a class="map-tab" href='javascript:;'>Map</a></li>
+            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Table</a></li>
           </ul>
           <div class="tab-content">
-            <div id="map" class="tab-pane fade in active">
+            <div id="tab-map" class="tab-pane fade in active">
               <div class="container-fluid">
               <div class="map-view">
               </div>
               </div>
             </div>
-            <div id="table" class="tab-pane fade">
+            <div id="tab-table" class="tab-pane fade ">
               <div class="container-fluid">
               <div id="table-view">
                 <table id="opps-table"
