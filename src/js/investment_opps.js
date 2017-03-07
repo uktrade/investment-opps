@@ -1,6 +1,7 @@
 module.exports={init: init}
 
 require('bootstrap-table')
+var map= require('./map')
 var logger=require('./logger')('investment opps')
 var debug=logger.debug
 var error=logger.error
@@ -12,11 +13,17 @@ var filter
 var industry
 
 function init() {
+  var oppsContainer=$('#investment-opps-container')
+  if(oppsContainer.length === 0) {
+    return
+  }
+  debug('Found investment opps container, initialising')
   fetch('iopps.json')
     .done(function(list) {
+      map.init(oppsContainer.find('.map-view'))
       data=TAFFY(list)
-      table=$('#opps-table')
-      table.bootstrapTable({data: []})
+      // table=$('#opps-table')
+      // table.bootstrapTable({data: []})
       watch()
     })
     .fail(fail)
@@ -32,7 +39,8 @@ function watch() {
       industry=selected
       filter=data({industry: selected})
       debug('Selected industry', selected)
-      refreshTable(filter.get())
+      // refreshTable(filter.get())
+      map.refresh(filter.get())
     })
 }
 

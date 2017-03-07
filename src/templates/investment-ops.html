@@ -16,7 +16,7 @@
   <section class="dit-toc">
     {% include "partials/breadcrumb.html" %}
   </section>
-  <div class="container">
+  <div id="investment-opps-container" class="container">
    <section class="dit-content-section">
    <h2>To use this service</h2>
    <div class="col-md-10 col-sm-10 dit-main-content__body">
@@ -55,19 +55,17 @@
         </div>
         <div class="row">
           <ul class="nav nav-tabs">
-            <li><a class="map-tab" href='javascript:;'>Map</a></li>
-            <li class="active"><a class="table-tab" href='javascript:;'>Table</a></li>
+            <li class="active"><a class="map-tab" href='javascript:;'>Map</a></li>
+            <li><a class="table-tab" href='javascript:;'>Table</a></li>
           </ul>
           <div class="tab-content">
-            <div id="map" class="tab-pane fade">
+            <div id="map" class="tab-pane fade in active">
               <div class="container-fluid">
               <div class="map-view">
-                <!--placeholder image-->
-                <img src="http://www.beenthere-donethat.org.uk/maps/towns.gif">
               </div>
               </div>
             </div>
-            <div id="table" class="tab-pane fade in active">
+            <div id="table" class="tab-pane fade">
               <div class="container-fluid">
               <div id="table-view">
                 <table id="opps-table"
