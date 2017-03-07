@@ -31,11 +31,12 @@
     "rollback": "node_modules/iigb-aws-helpers/rollback.sh"
   },
   "dependencies": {
-    "bootstrap": "^3.3.7",
+    "bootstrap-table": "^1.11.2",
     "html5shiv": "^3.7.3",
     "jquery": "^3.1.1",
     "respond.js": "^1.4.2",
-    "selectivizr": "^1.0.3"
+    "selectivizr": "^1.0.3",
+    "taffydb": "^2.7.3"
   },
   "devDependencies": {
     "browserify": "^13.3.0",
@@ -50,6 +51,7 @@
     "metalsmith-html-minifier": "^2.2.0",
     "metalsmith-layouts": "^1.8.0",
     "metalsmith-markdown": "^0.2.1",
+    "metalsmith-metadata-directory": "^1.0.0",
     "metalsmith-page-builder": "github:uktrade/metalsmith-page-builder",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.5.0",

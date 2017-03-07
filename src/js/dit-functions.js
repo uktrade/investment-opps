@@ -1,5 +1,6 @@
 var geoLocation = require('./geo-location')
 var form = require('./form')
+var iopps= require('./investment_opps')
 var equalheight = require('./equalHeight')
 var logger = require('./logger')('DIT Functions')
 var debug = logger.debug
@@ -33,6 +34,7 @@ function init() {
     listenResize()
     onLoaded()
     form.init()
+    iopps.init()
     window.getResults = getResults
   })
 
