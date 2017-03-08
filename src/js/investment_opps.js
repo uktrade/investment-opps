@@ -1,7 +1,6 @@
 module.exports={init: init}
 
 require('bootstrap-table')
-var map= require('./map')
 var logger=require('./logger')('investment opps')
 var debug=logger.debug
 var error=logger.error
@@ -12,6 +11,7 @@ var data
 var filter={}
 var filteredData
 var currentTab='tab-map'
+var map
 
 function init() {
   var oppsContainer=$('#investment-opps-container')
@@ -21,7 +21,8 @@ function init() {
   debug('Found investment opps container, initialising')
   fetch('iopps.json')
     .done(function(list) {
-      map.init(oppsContainer.find('.map-view'))
+      map = require('./map')(oppsContainer.find('#map'))
+      map.onSelect(filterRegion)
       data=TAFFY(list)
       table=$('#opps-table')
       table.bootstrapTable({data: []})
@@ -103,11 +104,24 @@ function initTabs() {
   }
 }
 
+function filterRegion(d) {
+  debug('region: ',d)
+  if(d) {
+    filter.region=d.properties.name
+  } else {
+    delete filter.region
+  }
+  filterData()
+}
+
 function filterData() {
   debug('Filtering data by', filter)
   var _filter= {}
   if(filter.industry) {
     _filter.industry=filter.industry
+  }
+  if(filter.region) {
+    _filter.region=filter.region
   }
   if(filter.businesses) {
     _filter.businesses = {gt: 0}

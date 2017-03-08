@@ -6,34 +6,29 @@ var debug = logger.debug
 var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
 
 
-var points
-var map
 
-module.exports = {
-  init: init,
-  refresh: refresh
-}
-
+module.exports = init
 
 function init(container) {
   debug('Initialising map in: ', container)
-  map = Map(container)
+  return Map(container)
 }
 
 
 function Map(container) {
+  var points
   var width = container.width()
   var height = width * 1.21
   var responsive =  width * 6.5
   var active = d3.select(null)
-  var scaleR = d3.scaleLinear().domain([0, 10000]).range([2, 10])
+  var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 15])
   var activeRegion = {
     path: null,
     border: null
   }
+  var selectCallback
 
-
-  var svg = d3.select('.map-view')
+  var svg = d3.select('#' + container.attr('id'))
     .append('svg')
     .attr('width', width)
     .attr('height', height)
@@ -86,6 +81,10 @@ function Map(container) {
     })
   }
 
+  function onSelect(cb) {
+    debug('Registering onSelect callback', cb)
+    selectCallback=cb
+  }
 
   function clicked(d) {
 
@@ -105,6 +104,11 @@ function Map(container) {
     border.scale = .9 / Math.max(dx / width, dy / height)
     activeRegion.border = border
     zoom()
+
+    if(selectCallback) {
+      selectCallback(d)
+    }
+
   }
 
   function drawPoints() {
@@ -160,7 +164,16 @@ function Map(container) {
     var scale = activeRegion.border.scale
     var translate = [width / 2 - scale * x, height / 2 - scale * y]
 
+    g.transition()
+      .duration(750)
+      .style('stroke-width', 1.5 / scale + 'px')
+      .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
 
+    if(!points) {
+      return
+    }
+
+    //scale points
     svg.selectAll('circle')
       .transition()
       .duration(750)
@@ -184,10 +197,6 @@ function Map(container) {
         return scaleR(d.properties.centres) / (scale/2)
       })
 
-    g.transition()
-      .duration(750)
-      .style('stroke-width', 1.5 / scale + 'px')
-      .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
   }
 
   function reset() {
@@ -203,6 +212,12 @@ function Map(container) {
       .style('stroke-width', '1px')
       .attr('transform', '')
 
+
+    if(!points) {
+      return
+    }
+
+    //scale the points
     svg.selectAll('circle')
       .transition()
       .duration(750)
@@ -210,40 +225,60 @@ function Map(container) {
       .attr('r', function (d) {
         return scaleR(d.properties.business)
       })
+
+    svg.selectAll('rect')
+      .transition()
+      .duration(750)
+      .attr('transform', '')
+      .attr('width', function (d) {
+        return scaleR(d.properties.centres)
+      })
+      .attr('height', function (d) {
+        return scaleR(d.properties.centres)
+      })
+
+    if(selectCallback) {
+      selectCallback()
+    }
   }
 
   function removePoints() {
     svg.selectAll('circle').remove()
+    svg.selectAll('rect').remove()
   }
+
+  function refresh(_points) {
+    debug('Refreshing data points', _points)
+    var data = []
+    _points.map(function (d, i) {
+      data.push({
+        id: i,
+        type: 'Feature',
+        properties: {
+          name: d.local_authority,
+          industry: d.industry,
+          business: d.businesses,
+          centres: d.centres,
+          region: d.region
+        },
+        geometry: {
+          coordinates: [+d.long, +d.lat],
+          type: 'Point'
+        }
+      })
+    })
+    points = data
+    drawPoints()
+  }
+
+
 
   //expose map function
   return {
-    drawPoints: drawPoints
+    refresh: refresh,
+    onSelect: onSelect
   }
 }
 
-function refresh(_points) {
-  debug('Refreshing data points', _points)
-  var data = []
-  _points.map(function (d, i) {
-    data.push({
-      id: i,
-      type: 'Feature',
-      properties: {
-        name: d.local_authority,
-        industry: d.industry,
-        business: d.businesses,
-        centres: d.centres,
-        region: d.region
-      },
-      geometry: {
-        coordinates: [+d.long, +d.lat],
-        type: 'Point'
-      }
-    })
-  })
-  points = data
-  map.drawPoints()
-}
 
 
