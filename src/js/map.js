@@ -1,33 +1,35 @@
-var d3=require('d3')
-var topojson=require('topojson')
-var logger=require('./logger')('Map')
-var error=logger.error
-var debug=logger.debug
-var _assets=document.iigbBuild ? '/assets/' + document.iigbBuild + '/':'/assets/'
+var d3 = require('d3')
+var topojson = require('topojson')
+var logger = require('./logger')('Map')
+var error = logger.error
+var debug = logger.debug
+var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
 
 
 var points
 var map
 
-module.exports={
+module.exports = {
   init: init,
-  refresh:refresh
+  refresh: refresh
 }
 
 
 function init(container) {
   debug('Initialising map in: ', container)
-  map=Map(container)
+  map = Map(container)
 }
 
 
 function Map(container) {
-  var width=container.width()
-  var  height = 725
+  var width = container.width()
+  var height = width * 1.21
+  var responsive =  width * 7
   var active = d3.select(null)
-  var activeRegion={
+  var scaleR = d3.scaleLinear().domain([0, 10000]).range([2, 10])
+  var activeRegion = {
     path: null,
-    border:null
+    border: null
   }
 
 
@@ -39,7 +41,7 @@ function Map(container) {
   var projection = d3.geoAlbers()
     .center([0, 55.4])
     .rotate([4.5, 0])
-    .scale(4000)
+    .scale(responsive)
     .translate([width / 2, height / 2])
 
   var path = d3.geoPath()
@@ -60,7 +62,7 @@ function Map(container) {
 
     g = svg.append('g')
 
-    d3.json(_assets +'map.json', function(err, uk) {
+    d3.json(_assets + 'map.json', function (err, uk) {
       if (err) {
         error(err)
       }
@@ -69,16 +71,19 @@ function Map(container) {
         .data(topojson.feature(uk, uk.objects.collection).features)
         .enter()
         .append('path')
-        .attr('class', function(d) { return 'region ' + d.id })
+        .attr('class', function (d) {
+          return 'region ' + d.id
+        })
         .attr('d', path)
         .on('click', clicked)
 
-      g.append('path')
-        .datum(topojson.mesh(uk, uk.objects.collection, function(a, b) { return a !== b }))
-        .attr('d', path)
-        .attr('class', 'region-boundary')
+      // g.append('path')
+      //   .datum(topojson.mesh(uk, uk.objects.collection, function (a, b) {
+      //     return a !== b
+      //   }))
+      //   .attr('d', path)
+      //   .attr('class', 'region-boundary')
     })
-
   }
 
 
@@ -86,64 +91,66 @@ function Map(container) {
     //reset if active zone is clicked
     if (active.node() === this) return reset()
 
-    svg.selectAll('circle')
-      .attr('transform', '')
-      .remove()
-
     active.classed('active', false)
     active = d3.select(this).classed('active', true)
-    activeRegion.path=d
+    activeRegion.path = d
 
     var bounds = path.bounds(d)
     var dx = bounds[1][0] - bounds[0][0]
     var dy = bounds[1][1] - bounds[0][1]
-    var border={}
+    var border = {}
     border.x = (bounds[0][0] + bounds[1][0]) / 2
     border.y = (bounds[0][1] + bounds[1][1]) / 2
     border.scale = .9 / Math.max(dx / width, dy / height)
-    activeRegion.border=border
-    drawPoints()
+    activeRegion.border = border
+    zoom()
   }
 
   function drawPoints() {
-    if(activeRegion.path === null) {
-      return
-    }
-    debug('Drawing data points')
-    var list
-    if(points) {
-      list = points
-        // filter(
-        // function (el) {
-        //   return el.properties.region === activeRegion.path.properties.name
-        // })
-    } else {
-      list=[]
-    }
-
-
-
-    var x=activeRegion.border.x
-    var y=activeRegion.border.y
-    var scale=activeRegion.border.scale
-    var scaleR = d3.scaleLinear().domain([0,10000]).range([2, 10])
-    var translate = [width / 2 - scale * x, height / 2 - scale * y]
     removePoints()
+
+    var list
+    if (points) {
+      list = points
+    } else {
+      list = []
+    }
+
+    debug('Drawing data points')
     svg.selectAll('circle')
       .data(list)
       .enter()
       .append('circle')
       .attr('cx', function (d) {
-        return projection(d.geometry.coordinates)[0] })
-      .attr('cy', function (d) { return projection(d.geometry.coordinates)[1] })
-      .attr('r', '0')
+        return projection(d.geometry.coordinates)[0]
+      })
+      .attr('cy', function (d) {
+        return projection(d.geometry.coordinates)[1]
+      })
       .attr('fill', 'rgba(0,0,0,.5)')
+      .attr('r', function (d) {
+        return scaleR(d.properties.business)
+      })
+
+    if (active.node()) return zoom()
+  }
+
+  function zoom() {
+    var x = activeRegion.border.x
+    var y = activeRegion.border.y
+    var scale = activeRegion.border.scale
+    var translate = [width / 2 - scale * x, height / 2 - scale * y]
+
+
+    svg.selectAll('circle')
       .transition()
-      .delay(750)
+      .duration(750)
       .attr('transform',
         'translate(' + width / 2 + ',' + height / 2 +
         ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
-      .attr('r', function(d) {return scaleR(d.properties.business)/scale})
+      .attr('r', function (d) {
+        return scaleR(d.properties.business) / (scale/2)
+      })
 
     g.transition()
       .duration(750)
@@ -154,8 +161,8 @@ function Map(container) {
   function reset() {
     active.classed('active', false)
     active = d3.select(null)
-    activeRegion= {
-      path:null,
+    activeRegion = {
+      path: null,
       border: null
     }
 
@@ -164,24 +171,28 @@ function Map(container) {
       .style('stroke-width', '1px')
       .attr('transform', '')
 
-    removePoints()
+    svg.selectAll('circle')
+      .transition()
+      .duration(750)
+      .attr('transform', '')
+      .attr('r', function (d) {
+        return scaleR(d.properties.business)
+      })
   }
 
   function removePoints() {
-    svg.selectAll('circle')
-      .attr('transform', '')
-      .remove()
+    svg.selectAll('circle').remove()
   }
 
   //expose map function
   return {
-    drawPoints:drawPoints
+    drawPoints: drawPoints
   }
 }
 
 function refresh(_points) {
   debug('Refreshing data points', _points)
-  var data=[]
+  var data = []
   _points.map(function (d, i) {
     data.push({
       id: i,
@@ -199,7 +210,7 @@ function refresh(_points) {
       }
     })
   })
-  points=data
+  points = data
   map.drawPoints()
 }
 
