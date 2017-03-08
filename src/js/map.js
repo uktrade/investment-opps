@@ -171,6 +171,19 @@ function Map(container) {
         return scaleR(d.properties.business) / (scale/2)
       })
 
+    svg.selectAll('rect')
+      .transition()
+      .duration(750)
+      .attr('transform',
+        'translate(' + width / 2 + ',' + height / 2 +
+        ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
+      .attr('width', function (d) {
+        return scaleR(d.properties.centres) / (scale/2)
+      })
+      .attr('height', function (d) {
+        return scaleR(d.properties.centres) / (scale/2)
+      })
+
     g.transition()
       .duration(750)
       .style('stroke-width', 1.5 / scale + 'px')
