@@ -24,7 +24,7 @@ function init(container) {
 function Map(container) {
   var width = container.width()
   var height = width * 1.21
-  var responsive =  width * 7
+  var responsive =  width * 6.5
   var active = d3.select(null)
   var scaleR = d3.scaleLinear().domain([0, 10000]).range([2, 10])
   var activeRegion = {
@@ -88,6 +88,7 @@ function Map(container) {
 
 
   function clicked(d) {
+
     //reset if active zone is clicked
     if (active.node() === this) return reset()
 
@@ -130,6 +131,24 @@ function Map(container) {
       .attr('fill', 'rgba(0,0,0,.5)')
       .attr('r', function (d) {
         return scaleR(d.properties.business)
+      })
+
+    svg.selectAll('rect')
+      .data(list)
+      .enter()
+      .append('rect')
+      .attr('x', function (d) {
+        return projection(d.geometry.coordinates)[0]
+      })
+      .attr('y', function (d) {
+        return projection(d.geometry.coordinates)[1]
+      })
+      .attr('fill', 'rgba(255,0,0,.5)')
+      .attr('width', function (d) {
+        return scaleR(d.properties.centres)
+      })
+      .attr('height', function (d) {
+        return scaleR(d.properties.centres)
       })
 
     if (active.node()) return zoom()
