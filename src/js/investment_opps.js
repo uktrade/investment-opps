@@ -26,6 +26,7 @@ function init() {
       data=TAFFY(list)
       table=$('#opps-table')
       table.bootstrapTable({data: []})
+      filterData()
       watch()
     })
     .fail(fail)
