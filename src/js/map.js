@@ -111,7 +111,7 @@ function Map(container) {
 
   }
 
-  function drawPoints() {
+  function drawPoints(filter) {
     removePoints()
 
     var list
@@ -122,6 +122,7 @@ function Map(container) {
     }
 
     debug('Drawing data points')
+    if(filter.businesses || (!filter.businesses && !filter.centres)) {
     svg.selectAll('circle')
       .data(list)
       .enter()
@@ -136,7 +137,9 @@ function Map(container) {
       .attr('r', function (d) {
         return scaleR(d.properties.business)
       })
+    }
 
+    if(filter.centres || (!filter.businesses && !filter.centres)) {
     svg.selectAll('ellipse')
       .data(list)
       .enter()
@@ -154,6 +157,7 @@ function Map(container) {
       .attr('ry', function (d) {
         return scaleR(d.properties.centres)
       })
+    }
 
     if (active.node()) return zoom()
   }
@@ -247,7 +251,7 @@ function Map(container) {
     svg.selectAll('ellipse').remove()
   }
 
-  function refresh(_points) {
+  function refresh(_points, filter) {
     debug('Refreshing data points', _points)
     var data = []
     _points.map(function (d, i) {
@@ -268,7 +272,7 @@ function Map(container) {
       })
     })
     points = data
-    drawPoints()
+    drawPoints(filter)
   }
 
 

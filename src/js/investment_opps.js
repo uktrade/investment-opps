@@ -137,7 +137,7 @@ function render() {
   if(currentTab === 'tab-table') {
     refreshTable(filteredData)
   } else if (currentTab==='tab-map') {
-    map.refresh(filteredData)
+    map.refresh(filteredData,filter)
   }
 }
 
