@@ -216,6 +216,8 @@ function Map(container) {
       .style('stroke-width', '1px')
       .attr('transform', '')
 
+    debug('Resetting points: ', points)
+
 
     if(!points) {
       return
@@ -242,7 +244,9 @@ function Map(container) {
       })
 
     if(selectCallback) {
-      selectCallback()
+      window.setTimeout(function(){
+        selectCallback()
+      }, 700)
     }
   }
 
