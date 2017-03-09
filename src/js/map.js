@@ -101,7 +101,7 @@ function Map(container) {
     var border = {}
     border.x = (bounds[0][0] + bounds[1][0]) / 2
     border.y = (bounds[0][1] + bounds[1][1]) / 2
-    border.scale = .9 / Math.max(dx / width, dy / height)
+    border.scale = .7 / Math.max(dx / width, dy / height)
     activeRegion.border = border
     zoom()
 
@@ -132,26 +132,26 @@ function Map(container) {
       .attr('cy', function (d) {
         return projection(d.geometry.coordinates)[1]
       })
-      .attr('fill', 'rgba(0,0,0,.5)')
+      .attr('fill', 'rgba(0,255,0,.5)')
       .attr('r', function (d) {
         return scaleR(d.properties.business)
       })
 
-    svg.selectAll('rect')
+    svg.selectAll('ellipse')
       .data(list)
       .enter()
-      .append('rect')
-      .attr('x', function (d) {
+      .append('ellipse')
+      .attr('cx', function (d) {
         return projection(d.geometry.coordinates)[0]
       })
-      .attr('y', function (d) {
+      .attr('cy', function (d) {
         return projection(d.geometry.coordinates)[1]
       })
       .attr('fill', 'rgba(255,0,0,.5)')
-      .attr('width', function (d) {
+      .attr('rx', function (d) {
         return scaleR(d.properties.centres)
       })
-      .attr('height', function (d) {
+      .attr('ry', function (d) {
         return scaleR(d.properties.centres)
       })
 
@@ -184,16 +184,16 @@ function Map(container) {
         return scaleR(d.properties.business) / (scale/2)
       })
 
-    svg.selectAll('rect')
+    svg.selectAll('ellipse')
       .transition()
       .duration(750)
       .attr('transform',
         'translate(' + width / 2 + ',' + height / 2 +
         ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
-      .attr('width', function (d) {
+      .attr('rx', function (d) {
         return scaleR(d.properties.centres) / (scale/2)
       })
-      .attr('height', function (d) {
+      .attr('ry', function (d) {
         return scaleR(d.properties.centres) / (scale/2)
       })
 
@@ -217,7 +217,7 @@ function Map(container) {
       return
     }
 
-    //scale the points
+    //scale out the points
     svg.selectAll('circle')
       .transition()
       .duration(750)
@@ -226,14 +226,14 @@ function Map(container) {
         return scaleR(d.properties.business)
       })
 
-    svg.selectAll('rect')
+    svg.selectAll('ellipse')
       .transition()
       .duration(750)
       .attr('transform', '')
-      .attr('width', function (d) {
+      .attr('rx', function (d) {
         return scaleR(d.properties.centres)
       })
-      .attr('height', function (d) {
+      .attr('ry', function (d) {
         return scaleR(d.properties.centres)
       })
 
@@ -244,7 +244,7 @@ function Map(container) {
 
   function removePoints() {
     svg.selectAll('circle').remove()
-    svg.selectAll('rect').remove()
+    svg.selectAll('ellipse').remove()
   }
 
   function refresh(_points) {
