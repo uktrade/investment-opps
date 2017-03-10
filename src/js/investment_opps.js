@@ -19,7 +19,7 @@ function init() {
     return
   }
   debug('Found investment opps container, initialising')
-  fetch('iopps.json')
+  fetch('iopps_by_number.json')
     .done(function(list) {
       map = require('./map')(oppsContainer.find('#map'))
       map.onSelect(filterRegion)
@@ -107,11 +107,11 @@ function initTabs() {
 
 function filterRegion(d) {
   debug('region: ',d)
-  if(d) {
-    filter.region=d.properties.name
-  } else {
-    delete filter.region
-  }
+  // if(d) {
+  //   filter.region=d.properties.name
+  // } else {
+  //   delete filter.region
+  // }
   filterData()
 }
 

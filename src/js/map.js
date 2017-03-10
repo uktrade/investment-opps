@@ -21,7 +21,7 @@ function Map(container) {
   var height = width * 1.21
   var responsive =  width * 6.5
   var active = d3.select(null)
-  var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 15])
+  var scaleR = d3.scaleLinear().domain([0, 72]).range([0, 15])
   var activeRegion = {
     path: null,
     border: null
