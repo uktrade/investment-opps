@@ -11,7 +11,7 @@
   },
   "config": {
     "debug": "metalsmith-page-builder",
-    "cms_branch": "master"
+    "cms_branch": "iopps"
   },
   "scripts": {
     "dev": "npm run clean && npm run build-dev && nodemon -e html --watch src/templates lib/server.js",
