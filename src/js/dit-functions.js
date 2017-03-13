@@ -241,7 +241,7 @@ function getResults(size, start) {
     // URL = $(location).attr('href'),
     searchArea = $('#search-options'),
     searchInput = $('#searchInput').val().trim(),
-    gateway = process.env.IIGB_SEARCH,
+    gateway = process.env.IIGB_SEARCH || 'https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod',
     country = document.country,
     language = document.language
 
