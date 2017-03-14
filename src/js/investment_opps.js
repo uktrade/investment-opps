@@ -27,8 +27,6 @@ function InvestmentOpps(container) {
 
   //elements
   var subsectorBlock=container.find('#subsectors')
-  var repeat = container.find('#repeat')
-  var dataSelector=container.find('#data-selector')
   var sectorSelector=container.find('#sector-selector')
   var subsectorSelector=container.find('#subsector-selector')
   var businessFilter=container.find('#significant-businesses')
@@ -57,13 +55,7 @@ function InvestmentOpps(container) {
 
 
   function loadData() {
-    var file=dataSelector.val()
-    if(repeat.is(':checked')) {
-      file += '_repeat'
-    } else {
-      file += '_nonrepeat'
-    }
-    file+='.json'
+    var file='data_points_nonrepeat.json'
     return fetch(file)
       .then(function(list) {
         data=TAFFY(list)
@@ -87,12 +79,8 @@ function InvestmentOpps(container) {
   }
 
   function populateSubsectors() {
-    var isRepeat = repeat.is(':checked')
-    var _filter={parent: sectorSelector.val()}
+    var _filter={parent: sectorSelector.val(), priority:'YES'}
     var otherOption = opt('Other')
-    if(!isRepeat) {
-      _filter.priority = 'YES'
-    }
     debug('Filtering subsectors by', _filter)
     var subsectors = industries(_filter).get()
     populateOptions(subsectorSelector, subsectors)
@@ -125,16 +113,9 @@ function InvestmentOpps(container) {
   }
 
   function watch() {
-    repeat.change(function(){
-      populateSubsectors()
-      loadData().done(filter)
-    })
     sectorSelector.change(function(){
       populateSubsectors()
       filter()
-    })
-    dataSelector.change(function(){
-      loadData().done(filter)
     })
     subsectorSelector.change(filter)
     businessFilter.change(filter)

@@ -25,7 +25,7 @@
     display: inline-block;
     width: 14px;
     height: 14px;
-    @extend .dit-icon-external-link;
+    // @extend .dit-icon-external-link;
     margin-left: 4px;
   }
 
@@ -65,8 +65,8 @@
 		}
   	}
 
-  	.industry-selector {
-  		margin-top: 35px;
+  	#sector-selector, #susbector-selector {
+  		margin-top: 20px;
   	}
   }
 

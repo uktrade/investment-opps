@@ -26,23 +26,14 @@
     </section>
 
     <section class="dit-iopps-section">
-      <label class="col-md-3 col-xs-12"><input id="repeat" type="checkbox" value=""/>Repeat sub-sectors</label>
       <div class="col-md-12 col-sm-12 dit-iopps-section__body">
-        <div id="datapoint" class="row">
-          <h2 class="col-md-4 col-xs-12">Use</h2>
-          <select class="col-md-5 col-xs-12"  class="form-control" id="data-selector" required>
-          <option value="data_points" selected>Index</option>
-          <option value="numbers">Business numbers</option>
-          <option value="employee">Employee numbers</option>
-          </select>
-        </div>
         <div id="sectors" class="row">
-          <h2 class="col-md-4 col-xs-12">Sector</h2>
+          <h3 class="col-md-4 col-xs-12">Choose a sector</h3>
           <select class="col-md-5 col-xs-12"  class="form-control" id="sector-selector" required>
           </select>
         </div>
         <div id="subsectors" class="row">
-          <h2 class="col-md-4 col-xs-12">Sub-Sector</h2>
+          <h4 class="col-md-4 col-xs-12">Choose a subsector</h4>
           <select class="col-md-5 col-xs-12" class="form-control" id="subsector-selector" required>
           </select>
         </div>
@@ -54,16 +45,15 @@
         </div>
         <div class="row bottom-buffer">
           <div class="dit-iopps-section__options">
-            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses</label>
-            <label class="col-md-3 col-xs-12"><input id="funding" type="checkbox" name="funding" value=""/>Funds</label>
-            <label class="col-md-3 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones</label>
-            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>R&D</label>
+            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
+            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
+            <label class="col-md-3 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
           </div>
         </div>
         <div class="row">
           <ul class="nav nav-tabs">
             <li class="active" data-tab-control="tab-map"><a class="map-tab" href='javascript:;'>Map</a></li>
-            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Table</a></li>
+            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Detail</a></li>
           </ul>
           <div class="tab-content">
             <div id="tab-map" class="tab-pane fade in active">
@@ -85,10 +75,6 @@
                           data-sortable="true">Local Authority</th>
                       <th data-field="region"
                           data-sortable="true">Region</th>
-                      <th data-field="sno"
-                          data-sortable="false">SNO</th>
-                      <th data-field="businesses">Businesses Index</th>
-                      <th data-field="centres">Centres Index</th>
                     </tr>
                   </thead>
 
