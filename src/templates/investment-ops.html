@@ -27,19 +27,17 @@
 
     <section class="dit-iopps-section">
       <div class="col-md-12 col-sm-12 dit-iopps-section__body">
-        <div class="row industry-selection">
-          <h2 class="col-md-4 col-xs-12">{{labels.investment_opts_choose_industry[locale.code]}}</h2>
-          <select class="industry-selector col-md-5 col-xs-12" name="organisation[industry]" class="form-control" id="industry" required>
-            <option value="" disabled selected >
-              {{ labels.please_select[locale.code] }}
-            </option>
-            {% for industry in industries %}
-              <option value="{{industry.name}}">
-              {{industry.name}}
-              </option>
-            {% endfor %}
+        <div id="sectors" class="row">
+          <h3 class="col-md-4 col-xs-12">Choose a sector</h3>
+          <select class="col-md-5 col-xs-12"  class="form-control" id="sector-selector" required>
           </select>
         </div>
+        <div id="subsectors" class="row">
+          <h4 class="col-md-4 col-xs-12">Choose a subsector</h4>
+          <select class="col-md-5 col-xs-12" class="form-control" id="subsector-selector" required>
+          </select>
+        </div>
+
         <div class="row">
           <div class="col-md-12">
             <h3>{{labels.investment_opts_what_is_important[locale.code]}}</h3>
@@ -47,16 +45,15 @@
         </div>
         <div class="row bottom-buffer">
           <div class="dit-iopps-section__options">
-            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses</label>
-            <label class="col-md-3 col-xs-12"><input id="funding" type="checkbox" name="funding" value=""/>Funds</label>
-            <label class="col-md-3 col-xs-12"><input id="enterprise_zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones</label>
-            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>R&D</label>
+            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
+            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
+            <label class="col-md-3 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
           </div>
         </div>
         <div class="row">
           <ul class="nav nav-tabs">
             <li class="active" data-tab-control="tab-map"><a class="map-tab" href='javascript:;'>Map</a></li>
-            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Table</a></li>
+            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Detail</a></li>
           </ul>
           <div class="tab-content">
             <div id="tab-map" class="tab-pane fade in active">
@@ -74,14 +71,16 @@
                         data-page-size="50">
                   <thead>
                     <tr>
-                      <th data-field="local_authority"
-                          data-sortable="true">Local Authority</th>
+                      <th data-field="name"
+                          data-sortable="false">Local Authority</th>
                       <th data-field="region"
                           data-sortable="true">Region</th>
-                      <th data-field="sno"
-                          data-sortable="true">SNO</th>
-                      <th data-field="businesses">Businesses Index</th>
-                      <th data-field="centres">Centres Index</th>
+                      <th data-field="business_concentration"
+                          data-sortable="true" data-sort-name="businesses">Concentration of businesses</th>
+                      <th data-field="centres_concentration"
+                          data-sortable="true" data-sort-name="centres">Centres of excellence</th>
+                      <th data-field="zone_available"
+                          data-sortable="false">Enterprise zones</th>
                     </tr>
                   </thead>
 
