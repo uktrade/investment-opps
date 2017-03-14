@@ -55,7 +55,7 @@ function InvestmentOpps(container) {
 
 
   function loadData() {
-    var file='data_points_nonrepeat.json'
+    var file='data_points_nonrepeat_concenration.json'
     return fetch(file)
       .then(function(list) {
         data=TAFFY(list)
