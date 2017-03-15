@@ -5,8 +5,6 @@ var error = logger.error
 var debug = logger.debug
 var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
 
-
-
 module.exports = init
 
 function init(container) {
@@ -14,14 +12,13 @@ function init(container) {
   return Map(container)
 }
 
-
 function Map(container) {
   var points
   var width = container.width()
   var height = width * 1.21
   var responsive =  width * 6.5
   var active = d3.select(null)
-  var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 15])
+  var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 25])
   var activeRegion = {
     path: null,
     border: null
@@ -122,7 +119,7 @@ function Map(container) {
     }
 
     debug('Drawing data points')
-    if(filter.businesses || (!filter.businesses && !filter.centres)) {
+    if(filter.businesses) {
     svg.selectAll('circle')
       .data(list)
       .enter()
@@ -133,13 +130,13 @@ function Map(container) {
       .attr('cy', function (d) {
         return projection(d.geometry.coordinates)[1]
       })
-      .attr('fill', 'rgba(0,255,0,.5)')
+      .attr('fill', 'rgba(19,178,64,.6)')
       .attr('r', function (d) {
         return scaleR(d.properties.business)
       })
     }
 
-    if(filter.centres || (!filter.businesses && !filter.centres)) {
+    if(filter.centres) {
     svg.selectAll('ellipse')
       .data(list)
       .enter()
@@ -150,7 +147,7 @@ function Map(container) {
       .attr('cy', function (d) {
         return projection(d.geometry.coordinates)[1]
       })
-      .attr('fill', 'rgba(255,0,0,.5)')
+      .attr('fill', 'rgba(255,150,86,.6)')
       .attr('rx', function (d) {
         return scaleR(d.properties.centres)
       })
@@ -159,6 +156,22 @@ function Map(container) {
       })
     }
 
+    if(filter.zones) {
+    svg.selectAll('circle')
+      .data(list)
+      .enter()
+      .append('circle')
+      .attr('cx', function (d) {
+        return projection(d.geometry.coordinates)[0]
+      })
+      .attr('cy', function (d) {
+        return projection(d.geometry.coordinates)[1]
+      })
+      .attr('fill', 'rgba(255,205,0,.6)')
+      .attr('r', function (d) {
+        return scaleR(d.properties.zones)
+      })
+    }
     if (active.node()) return zoom()
   }
 
@@ -267,7 +280,8 @@ function Map(container) {
           industry: d.industry,
           business: d.businesses,
           centres: d.centres,
-          region: d.region
+          region: d.region,
+          zones: d.zones
         },
         geometry: {
           coordinates: [+d.long, +d.lat],

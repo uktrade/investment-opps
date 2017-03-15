@@ -19,28 +19,21 @@ function init() {
 function InvestmentOpps(container) {
   var map
   var table
-  var industries //list of iigb industries with hierarchy
   var data //main data
   var region // active region
   var filteredData
   var currentTab='tab-map' //options: tab-map, tab-table
 
   //elements
-  var subsectorBlock=container.find('#subsectors')
   var sectorSelector=container.find('#sector-selector')
-  var subsectorSelector=container.find('#subsector-selector')
   var businessFilter=container.find('#significant-businesses')
   var zonesFilter=container.find('#enterprise-zones')
   var centresFilter=container.find('#innovation-centres')
 
-
-  subsectorBlock.hide()
   initMap()
   initTable()
   initTabs()
-  fetchIndustries()
-    .then(loadData)
-    .then(filter)
+  loadData().then(filter)
   watch()
 
   function initMap() {
@@ -55,7 +48,7 @@ function InvestmentOpps(container) {
 
 
   function loadData() {
-    var file='data_points_nonrepeat_concenration.json'
+    var file='data_points_sector.json'
     return fetch(file)
       .then(function(list) {
         data=TAFFY(list)
@@ -63,61 +56,8 @@ function InvestmentOpps(container) {
       })
   }
 
-  function fetchIndustries() {
-    return fetch('industries.json')
-      .then(function(list) {
-        industries=TAFFY(list)
-        populateSectors()
-        return list
-      })
-  }
-
-  function populateSectors() {
-    var sectors = industries({parent: ''}).get()
-    populateOptions(sectorSelector, sectors)
-    populateSubsectors()
-  }
-
-  function populateSubsectors() {
-    var _filter={parent: sectorSelector.val(), priority:'YES'}
-    var otherOption = opt('Other')
-    debug('Filtering subsectors by', _filter)
-    var subsectors = industries(_filter).get()
-    populateOptions(subsectorSelector, subsectors)
-    subsectorSelector.append(otherOption)
-    if(subsectors.length === 0) {
-      otherOption.prop('selected', true)
-      subsectorBlock.hide()
-    } else {
-      subsectorBlock.show()
-    }
-  }
-
-
-  function populateOptions(selector, options) {
-    selector.empty()
-    debug('Populating options for', selector.attr('id'),'using options:', options)
-    $.each(options, function(index, option) {
-      debug('Option:', option.industry)
-      var o= opt(option.industry)
-      selector.append(o)
-      if(index === 0) {
-        o.prop('selected', true)
-      }
-    })
-
-  }
-
-  function opt(val) {
-    return $('<option></option>') .attr('value',val) .text(val)
-  }
-
   function watch() {
-    sectorSelector.change(function(){
-      populateSubsectors()
-      filter()
-    })
-    subsectorSelector.change(filter)
+    sectorSelector.change(filter)
     businessFilter.change(filter)
     centresFilter.change(filter)
     zonesFilter.change(filter)
@@ -170,18 +110,14 @@ function InvestmentOpps(container) {
   }
 
   function filter() {
+    var industry=sectorSelector.val()
+    if(!industry) {
+      filteredData=[]
+      render()
+      return
+    }
     var _filter={
-      parent:sectorSelector.val(),
-      industry: subsectorSelector.val()
-    }
-    if(businessFilter.is(':checked')) {
-      _filter.businesses = {gt:0}
-    }
-    if(centresFilter.is(':checked')) {
-      _filter.centres = {gt:0}
-    }
-    if(zonesFilter.is(':checked')) {
-      _filter.zones = {gt:0}
+      industry:sectorSelector.val()
     }
     if(region) {
       _filter.region=region
@@ -192,14 +128,16 @@ function InvestmentOpps(container) {
   }
 
   function render() {
+    var points={
+      businesses: businessFilter.is(':checked'),
+      centres: centresFilter.is(':checked'),
+      zones: zonesFilter.is(':checked'),
+    }
     if(currentTab === 'tab-table') {
       debug('Table', filteredData)
       table.bootstrapTable('load', filteredData)
     } else if (currentTab==='tab-map') {
-      map.refresh(filteredData,{
-        centres: centresFilter.is(':checked'),
-        businesses: businessFilter.is(':checked')
-      })
+      map.refresh(filteredData,points)
     }
   }
 
