@@ -285,8 +285,9 @@ function Map(container) {
     .on("resize", sizeChange);
 
   function sizeChange() {
-    $('svg').remove();
-    Map($('.map-view'));
+    var mapWidth = $('.map-view').width();
+    d3.select("g").attr("transform", "scale(" + mapWidth / 1050 + ")");
+    $("svg").height($(".container-fluid").width() * 1.45);
   }
 
 
