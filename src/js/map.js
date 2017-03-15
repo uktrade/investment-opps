@@ -19,7 +19,7 @@ function Map(container) {
   var points
   var width = container.width()
   var height = width * 1.21
-  var responsive =  width * 6.5
+  var responsive = width * 6.5
   var active = d3.select(null)
   var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 15])
   var activeRegion = {
@@ -45,6 +45,7 @@ function Map(container) {
 
   draw()
 
+
   function draw() {
     debug('D3:', d3)
     debug('Drawing the map,width', width)
@@ -55,9 +56,10 @@ function Map(container) {
       .attr('height', height)
       .on('click', reset)
 
-    g = svg.append('g')
+    g = svg
+      .append('g')
 
-    d3.json(_assets + 'map.json', function (err, uk) {
+    d3.json(_assets + 'map.json', function(err, uk) {
       if (err) {
         error(err)
       }
@@ -66,7 +68,7 @@ function Map(container) {
         .data(topojson.feature(uk, uk.objects.collection).features)
         .enter()
         .append('path')
-        .attr('class', function (d) {
+        .attr('class', function(d) {
           return 'region ' + d.id
         })
         .attr('d', path)
@@ -83,7 +85,7 @@ function Map(container) {
 
   function onSelect(cb) {
     debug('Registering onSelect callback', cb)
-    selectCallback=cb
+    selectCallback = cb
   }
 
   function clicked(d) {
@@ -105,7 +107,7 @@ function Map(container) {
     activeRegion.border = border
     zoom()
 
-    if(selectCallback) {
+    if (selectCallback) {
       selectCallback(d)
     }
 
@@ -122,41 +124,41 @@ function Map(container) {
     }
 
     debug('Drawing data points')
-    if(filter.businesses || (!filter.businesses && !filter.centres)) {
-    svg.selectAll('circle')
-      .data(list)
-      .enter()
-      .append('circle')
-      .attr('cx', function (d) {
-        return projection(d.geometry.coordinates)[0]
-      })
-      .attr('cy', function (d) {
-        return projection(d.geometry.coordinates)[1]
-      })
-      .attr('fill', 'rgba(0,255,0,.5)')
-      .attr('r', function (d) {
-        return scaleR(d.properties.business)
-      })
+    if (filter.businesses || (!filter.businesses && !filter.centres)) {
+      svg.selectAll('circle')
+        .data(list)
+        .enter()
+        .append('circle')
+        .attr('cx', function(d) {
+          return projection(d.geometry.coordinates)[0]
+        })
+        .attr('cy', function(d) {
+          return projection(d.geometry.coordinates)[1]
+        })
+        .attr('fill', 'rgba(0,255,0,.5)')
+        .attr('r', function(d) {
+          return scaleR(d.properties.business)
+        })
     }
 
-    if(filter.centres || (!filter.businesses && !filter.centres)) {
-    svg.selectAll('ellipse')
-      .data(list)
-      .enter()
-      .append('ellipse')
-      .attr('cx', function (d) {
-        return projection(d.geometry.coordinates)[0]
-      })
-      .attr('cy', function (d) {
-        return projection(d.geometry.coordinates)[1]
-      })
-      .attr('fill', 'rgba(255,0,0,.5)')
-      .attr('rx', function (d) {
-        return scaleR(d.properties.centres)
-      })
-      .attr('ry', function (d) {
-        return scaleR(d.properties.centres)
-      })
+    if (filter.centres || (!filter.businesses && !filter.centres)) {
+      svg.selectAll('ellipse')
+        .data(list)
+        .enter()
+        .append('ellipse')
+        .attr('cx', function(d) {
+          return projection(d.geometry.coordinates)[0]
+        })
+        .attr('cy', function(d) {
+          return projection(d.geometry.coordinates)[1]
+        })
+        .attr('fill', 'rgba(255,0,0,.5)')
+        .attr('rx', function(d) {
+          return scaleR(d.properties.centres)
+        })
+        .attr('ry', function(d) {
+          return scaleR(d.properties.centres)
+        })
     }
 
     if (active.node()) return zoom()
@@ -173,7 +175,7 @@ function Map(container) {
       .style('stroke-width', 1.5 / scale + 'px')
       .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
 
-    if(!points) {
+    if (!points) {
       return
     }
 
@@ -184,8 +186,8 @@ function Map(container) {
       .attr('transform',
         'translate(' + width / 2 + ',' + height / 2 +
         ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
-      .attr('r', function (d) {
-        return scaleR(d.properties.business) / (scale/2)
+      .attr('r', function(d) {
+        return scaleR(d.properties.business) / (scale / 2)
       })
 
     svg.selectAll('ellipse')
@@ -194,11 +196,11 @@ function Map(container) {
       .attr('transform',
         'translate(' + width / 2 + ',' + height / 2 +
         ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
-      .attr('rx', function (d) {
-        return scaleR(d.properties.centres) / (scale/2)
+      .attr('rx', function(d) {
+        return scaleR(d.properties.centres) / (scale / 2)
       })
-      .attr('ry', function (d) {
-        return scaleR(d.properties.centres) / (scale/2)
+      .attr('ry', function(d) {
+        return scaleR(d.properties.centres) / (scale / 2)
       })
 
   }
@@ -219,7 +221,7 @@ function Map(container) {
     debug('Resetting points: ', points)
 
 
-    if(!points) {
+    if (!points) {
       return
     }
 
@@ -228,7 +230,7 @@ function Map(container) {
       .transition()
       .duration(750)
       .attr('transform', '')
-      .attr('r', function (d) {
+      .attr('r', function(d) {
         return scaleR(d.properties.business)
       })
 
@@ -236,15 +238,15 @@ function Map(container) {
       .transition()
       .duration(750)
       .attr('transform', '')
-      .attr('rx', function (d) {
+      .attr('rx', function(d) {
         return scaleR(d.properties.centres)
       })
-      .attr('ry', function (d) {
+      .attr('ry', function(d) {
         return scaleR(d.properties.centres)
       })
 
-    if(selectCallback) {
-      window.setTimeout(function(){
+    if (selectCallback) {
+      window.setTimeout(function() {
         selectCallback()
       }, 700)
     }
@@ -258,7 +260,7 @@ function Map(container) {
   function refresh(_points, filter) {
     debug('Refreshing data points', _points)
     var data = []
-    _points.map(function (d, i) {
+    _points.map(function(d, i) {
       data.push({
         id: i,
         type: 'Feature',
@@ -279,6 +281,13 @@ function Map(container) {
     drawPoints(filter)
   }
 
+  d3.select(window)
+    .on("resize", sizeChange);
+
+  function sizeChange() {
+    $('svg').remove();
+    Map($('.map-view'));
+  }
 
 
   //expose map function
@@ -287,6 +296,3 @@ function Map(container) {
     onSelect: onSelect
   }
 }
-
-
-
