@@ -285,11 +285,34 @@ function Map(container) {
     .on("resize", sizeChange);
 
   function sizeChange() {
-    var mapWidth = $('.map-view').width();
-    d3.select("g").attr("transform", "scale(" + mapWidth / 1050 + ")");
+    d3.select("g")
+      .attr("transform", "scale(" + $('.map-view').width() / 1050 + ")");
     $("svg").height($(".container-fluid").width() * 1.45);
-  }
 
+    var scale = $('.map-view').width() / 1050;
+
+    // insert debouncing plot function here
+    svg.selectAll('circle')
+      .transition()
+      .duration(750)
+      .attr('transform',
+        'scale(' + scale + ')')
+      .attr('r', function(d) {
+        return scaleR(d.properties.business) / (scale / 2)
+      })
+
+    svg.selectAll('ellipse')
+      .transition()
+      .duration(750)
+      .attr('transform',
+        'scale(' + scale + ')')
+      .attr('rx', function(d) {
+        return scaleR(d.properties.centres) / (scale / 2)
+      })
+      .attr('ry', function(d) {
+        return scaleR(d.properties.centres) / (scale / 2)
+      })
+  }
 
   //expose map function
   return {
