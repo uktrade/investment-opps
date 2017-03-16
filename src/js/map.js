@@ -285,32 +285,33 @@ function Map(container) {
     .on("resize", sizeChange);
 
   function sizeChange() {
-    d3.select("g")
-      .attr("transform", "scale(" + $('.map-view').width() / 1050 + ")");
-    $("svg").height($(".container-fluid").width() * 1.45);
 
     var scale = $('.map-view').width() / 1050;
 
+    d3.select("g")
+      .attr("transform", "scale(" + scale + ")");
+    $("svg").height($(".container-fluid").width() * 1.45);
+
     // insert debouncing plot function here
     svg.selectAll('circle')
-      .transition()
-      .duration(750)
+      // .transition()
+      // .duration(750)
       .attr('transform',
         'scale(' + scale + ')')
       .attr('r', function(d) {
-        return scaleR(d.properties.business) / (scale / 2)
+        return scaleR(d.properties.business) 
       })
 
     svg.selectAll('ellipse')
-      .transition()
-      .duration(750)
+    // .transition()
+    // .duration(750)
       .attr('transform',
         'scale(' + scale + ')')
       .attr('rx', function(d) {
-        return scaleR(d.properties.centres) / (scale / 2)
+        return scaleR(d.properties.centres) 
       })
       .attr('ry', function(d) {
-        return scaleR(d.properties.centres) / (scale / 2)
+        return scaleR(d.properties.centres)
       })
   }
 
