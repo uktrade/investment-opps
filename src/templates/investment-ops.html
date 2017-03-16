@@ -30,14 +30,19 @@
         <div id="sectors" class="row">
           <h3 class="col-md-4 col-xs-12">Choose a sector</h3>
           <select class="col-md-5 col-xs-12"  class="form-control" id="sector-selector" required>
+             <option value="" disabled selected > {{ labels.please_select[locale.code] }} </option>
+             <option value='Aerospace'>{{labels.sectors.aerospace[locale.code]}}</option>
+            <option value='Advanced Manufacturing'>{{labels.sectors.advanced_manufacturing[locale.code]}}</option>
+            <option value='Automotive'>{{labels.sectors.automotive[locale.code]}}</option>
+            <option value='Creative'>{{labels.sectors.creative[locale.code]}}</option>
+            <option value='Energy Generation'>{{labels.sectors.energy[locale.code]}}</option>
+            <option value='Financial Services'>{{labels.sectors.financial_services[locale.code]}}</option>
+            <option value='Food And Drink Manufacturing'>{{labels.sectors.food_and_drink_manufacturing[locale.code]}}</option>
+            <option value='Health And Life Sciences'>{{labels.sectors.health_and_life_sciences[locale.code]}}</option>
+            <option value='Retail'>{{labels.sectors.retail[locale.code]}}</option>
+            <option value='Technology'>{{labels.sectors.technology[locale.code]}}</option>
           </select>
         </div>
-        <div id="subsectors" class="row">
-          <h4 class="col-md-4 col-xs-12">Choose a subsector</h4>
-          <select class="col-md-5 col-xs-12" class="form-control" id="subsector-selector" required>
-          </select>
-        </div>
-
         <div class="row">
           <div class="col-md-12">
             <h3>{{labels.investment_opts_what_is_important[locale.code]}}</h3>
@@ -45,7 +50,7 @@
         </div>
         <div class="row bottom-buffer">
           <div class="dit-iopps-section__options">
-            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value=""/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
+            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
             <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
             <label class="col-md-3 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
           </div>
