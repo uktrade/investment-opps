@@ -391,6 +391,6 @@ function jsEnhanceExternalLinks() {
 }
 
 function showJsEnhancements() {
-  $('.non-js').hide();
-  $('.js').show();
+  $('.non-js-display').hide();
+  $('.js-display').show();
 }

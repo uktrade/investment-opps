@@ -64,12 +64,12 @@
             <ol class="dit-big-list">
                 {% for l in list %}
                 {% if l.content.display == 'js' %}
-                    <li class="dit-big-list__item--home-guide js">
+                    <li class="dit-big-list__item--home-guide js-display">
                         <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
                         {{ l.content.contents | safe }}
                     </li>                
                     {% elif l.content.display == 'nonjs' %}
-                    <li class="dit-big-list__item--home-guide non-js">
+                    <li class="dit-big-list__item--home-guide non-js-display">
                         <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
                         {{ l.content.contents | safe }}
                     </li>
