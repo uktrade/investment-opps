@@ -65,7 +65,7 @@ function onLoaded() {
     heroVideoReload()
     playVidTest()
     jsEnhanceExternalLinks()
-    jsEnhanceIOppsLink()
+    showJsEnhancements()
   } catch (e) {
     error('On loaded failed!', e)
   }
@@ -390,6 +390,7 @@ function jsEnhanceExternalLinks() {
     .attr('target', '_blank')
 }
 
-function jsEnhanceIOppsLink() {
-  $('#iopps-link').attr('href', '/' + document.base_url + '/investment-opportunities/location-guide/')
+function showJsEnhancements() {
+  $('.non-js').hide();
+  $('.js').show();
 }
