@@ -2,12 +2,12 @@
 
 
 .dit-iopps-section {
-  padding: flip-side-values(24px 24px 16px 24px);
-  margin: 60px 0 50px;
-  background-color: $white;
-  border: 1px solid $tile-border-colour;
-  // border-bottom: 5px solid $red-line-colour;
-  overflow: hidden;
+  // padding: flip-side-values(24px 24px 16px 24px);
+  // margin: 60px 0 50px;
+  // background-color: $white;
+  // border: 1px solid $tile-border-colour;
+  // // border-bottom: 5px solid $red-line-colour;
+  // overflow: hidden;
 
   h2 {
   	margin-bottom: 0px;
@@ -56,13 +56,13 @@
 
   	&__body{
 
-		.container-fluid{
-			padding: 15px;
-			border-left: 1px solid #ddd;
-			border-bottom: 1px solid #ddd;
-			border-right: 1px solid #ddd;
-			min-height: 400px;
-		}
+		// .container-fluid{
+		// 	padding: 15px;
+		// 	border-left: 1px solid #ddd;
+		// 	border-bottom: 1px solid #ddd;
+		// 	border-right: 1px solid #ddd;
+		// 	min-height: 400px;
+		// }
   	}
 
   	#sector-selector, #susbector-selector {

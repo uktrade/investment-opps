@@ -1,7 +1,6 @@
 // filter-section.scss
 .dit-iopps-sidebar {
     // padding: flip-side-values(24px 24px 16px 24px);
-    // margin: 60px 0 50px;
     // background-color: $white;
     // border: 1px solid $tile-border-colour;
     // // border-bottom: 5px solid $red-line-colour;
@@ -9,6 +8,8 @@
     &__body {
         background-color: $background-sidebar;
         color: $white;
+        margin-top: 10px;
+
     }
 
 h2 {
@@ -33,22 +34,44 @@ hr {
     padding-left: 0;
     padding-right: 0;
 
+    &:hover{
+    cursor: pointer !important;
+    }
+    
       .arrow-right {
       position: absolute;
       top: 0px;
-      right: -28px;
+      right: -22px;
       margin: 0;
       overflow: visible;
       width: 0;
       height: 0;
-      border-top: 23px solid transparent;
-      border-bottom: 23px solid transparent;
-      border-left: 28px solid $light-gray;}
+      border-top: 24px solid transparent;
+      border-bottom: 22px solid transparent;
+      border-left: 22px solid $light-gray;}
 
       &.active{
         .arrow-right {
-        border-left: 28px solid #007fa5;}
+        border-left: 22px solid #007fa5;}
 
+        a{
+        background-color: #007fa5;
+        border: #007fa5;
+        }
+      }
+
+      a:hover{
+      &.arrow-right {
+        border-left: 22px solid #007fa5;}
+      }
+    
+    @media (max-width: $screen-sm-max) {
+       .arrow-right {
+      display: none}
+      }
+  
+
+      &.active{
         a{
         background-color: #007fa5;
         border: #007fa5;
@@ -61,13 +84,15 @@ hr {
       }
 
       a:hover{
+        cursor: pointer !important;
         background-color: #007fa5;
         border: #007fa5;
-
-      .arrow-right {
-        border-left: 28px solid #007fa5;}
       }
-  }
+
+      a:active{
+        color: white;
+      }
+}
 }
 
 
