@@ -45,9 +45,9 @@
 
   &__options{
 
-		margin-top: 30px;
   		input[type=checkbox]{
-  		margin-right: 10px;
+  		margin-right: 15px;
+      margin-bottom: 12px;
   		}
   		label{
   			font-weight: 100;
@@ -85,5 +85,20 @@
 	margin-bottom: 40px;
 }
 
+// #investment-opps-container{
+//     display: -webkit-box;  
+//   display: -webkit-flex;
+//   display: -ms-flexbox;
+  
+//   display: flex;
+//   -webkit-box-align: stretch;
+//   -webkit-align-items: stretch;
+//       -ms-flex-align: stretch;
+//           align-items: stretch;
+
+//   -webkit-flex-wrap: wrap;
+//   -ms-flex-wrap: wrap;
+//       flex-wrap: wrap;
+// }
 
 

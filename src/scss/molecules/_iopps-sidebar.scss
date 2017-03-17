@@ -1,0 +1,131 @@
+// filter-section.scss
+.dit-iopps-sidebar {
+    // padding: flip-side-values(24px 24px 16px 24px);
+    // margin: 60px 0 50px;
+    // background-color: $white;
+    // border: 1px solid $tile-border-colour;
+    // // border-bottom: 5px solid $red-line-colour;
+    // overflow: hidden;
+    &__body {
+        background-color: $background-sidebar;
+        color: $white;
+    }
+
+h2 {
+    margin: 24px 0 16px 0;
+
+    @media (max-width: $screen-md-max) {
+    padding-top: 15px;
+    }
+}
+select {
+    margin: 0px 15px;
+    color: black;
+}
+hr {
+    color: $light-gray;
+}
+
+.nav-tabs{
+  
+  li{
+    background-color: $light-gray;
+    padding-left: 0;
+    padding-right: 0;
+
+      .arrow-right {
+      position: absolute;
+      top: 0px;
+      right: -28px;
+      margin: 0;
+      overflow: visible;
+      width: 0;
+      height: 0;
+      border-top: 23px solid transparent;
+      border-bottom: 23px solid transparent;
+      border-left: 28px solid $light-gray;}
+
+      &.active{
+        .arrow-right {
+        border-left: 28px solid #007fa5;}
+
+        a{
+        background-color: #007fa5;
+        border: #007fa5;
+        }
+      }
+
+      a{
+        margin-right: 0px;
+        color: white;
+      }
+
+      a:hover{
+        background-color: #007fa5;
+        border: #007fa5;
+
+      .arrow-right {
+        border-left: 28px solid #007fa5;}
+      }
+  }
+}
+
+
+//   //Add external link icon
+//   // nice to have but would add external icon on non js without a target='_blank'
+//   //a:not( [ href*='great.gov.uk'] ):not( [href^='#'] ):not( [href^='/'] ):after {
+//   a[target=_blank]:after {
+//     content: "";
+//     display: inline-block;
+//     width: 14px;
+//     height: 14px;
+//     // @extend .dit-icon-external-link;
+//     margin-left: 4px;
+//   }
+//    &__heading {
+//     font-size: 32px;
+//     font-weight: 100;
+//     @media (max-width: $screen-xs-max) {
+//       font-size: 24px;
+//     }
+// }
+//  &__subheading {
+//     font-size: 28px;
+//     margin: flip-side-values(40px 0 0 0) !important;
+//  }
+//   &__options{
+//    margin-top: 30px;
+//      input[type=checkbox]{
+//      margin-right: 10px;
+//      }
+//      label{
+//        font-weight: 100;
+//      }
+//   }
+//    &__body{
+//    .container-fluid{
+//      padding: 15px;
+//      border-left: 1px solid #ddd;
+//      border-bottom: 1px solid #ddd;
+//      border-right: 1px solid #ddd;
+//      min-height: 400px;
+//    }
+//    }
+//    #sector-selector, #susbector-selector {
+//      margin-top: 20px;
+//    }
+//   }
+// .industry-selection{
+//     margin-bottom: 35px;
+//     @media (max-width: $screen-sm-max) {
+//     margin-bottom: 30px;
+//     }
+// }
+// //tidy css
+// //check font sizes
+// //change to utility
+// //insert pictures in place of words
+// .bottom-buffers{
+//  margin-bottom: 40px;
+// }
+}
