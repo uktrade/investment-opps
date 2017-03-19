@@ -1,6 +1,6 @@
 var geoLocation = require('./geo-location')
 var form = require('./form')
-var iopps= require('./investment_opps')
+var iopps = require('./investment_opps')
 var equalheight = require('./equalHeight')
 var logger = require('./logger')('DIT Functions')
 var debug = logger.debug
@@ -65,6 +65,7 @@ function onLoaded() {
     heroVideoReload()
     playVidTest()
     jsEnhanceExternalLinks()
+    showJsEnhancements()
   } catch (e) {
     error('On loaded failed!', e)
   }
@@ -387,4 +388,9 @@ function jsEnhanceExternalLinks() {
       return this.hostname !== document.domain
     })
     .attr('target', '_blank')
+}
+
+function showJsEnhancements() {
+  $('.non-js-display').hide();
+  $('.js-display').show();
 }
