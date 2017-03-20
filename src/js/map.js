@@ -56,6 +56,7 @@ function Map(container) {
 
     drawBackground(svg)
     drawMap(svg)
+    callOutListener()
   }
 
   function drawBackground(svg) {
@@ -222,9 +223,10 @@ function Map(container) {
         'translate(' + width / 2 + ',' + height / 2 +
         ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
       .attr('r', function(d) {
-        debug('Circle', d)
         return scaleR(d.properties[property]) / (scale / 2)
       })
+    showCallOut()
+
   }
 
   function reset() {
@@ -242,6 +244,7 @@ function Map(container) {
 
     debug('Resetting points: ', points)
 
+
     if (!points) {
       return
     }
@@ -255,6 +258,7 @@ function Map(container) {
         selectCallback()
       }, 700)
     }
+    hideCallOut()
   }
 
   function resetPoints(property) {
@@ -329,6 +333,46 @@ function Map(container) {
         return scaleR(d.properties.centres)
       })
   }
+
+  function callOutListener() {
+    $('.map-tab').click(function() {
+      hideCallOut()
+    })
+    $('.table-tab').click(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 300)
+    })
+    $('#sector-selector').change(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 50)
+    })
+  }
+
+  function callOutSwitcher() {
+    if ($('#table-view').height() > 500) {
+      hideCallOut()
+      showInlineCallOut()
+    } else {
+      showCallOut()
+    }
+  }
+
+  function showCallOut() {
+    $('.dit-iopps-sidebar__call-out').fadeIn("slow")
+  }
+
+  function showInlineCallOut() {
+    $('.dit-iopps-sidebar__call-out-inline').fadeIn("slow")
+  }
+
+  function hideCallOut() {
+    $('.dit-iopps-sidebar__call-out').fadeOut("slow")
+    $('.dit-iopps-sidebar__call-out-inline').fadeOut("slow")
+  }
+
+
 
   //expose map function
   return {

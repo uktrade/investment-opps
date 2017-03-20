@@ -17,21 +17,29 @@
     {% include "partials/breadcrumb.html" %}
   </section>
   <div id="investment-opps-container" class="container">
+
+<!--   <div class="col-md-4"></div>
    <section class="dit-content-section">
    <h2>To use this service</h2>
    <div class="col-md-10 col-sm-10 dit-main-content__body">
    <p>You can search by using the dropdown menus and check boxes to find information on funding, research and development hubs and business clusters.</p>
     <p>You can then view the information in a map or a table.</p>
     </div>
-    </section>
+    </section> -->
+    <div class="row">
 
-    <section class="dit-iopps-section">
-      <div class="col-md-12 col-sm-12 dit-iopps-section__body">
+
+    <section class="dit-iopps-sidebar col-md-4">
+      <div class="dit-iopps-sidebar__body col-md-12">
+      <header>
+        <h2>Location guide</h2>
+      </header>
+      <p>The best place to find the information you need on your industry to help you decide the most suitable locations to consider in the UK.</p>
         <div id="sectors" class="row">
-          <h3 class="col-md-4 col-xs-12">Choose a sector</h3>
-          <select class="col-md-5 col-xs-12"  class="form-control" id="sector-selector" required>
-             <option value="" disabled selected > {{ labels.please_select[locale.code] }} </option>
-             <option value='Aerospace'>{{labels.sectors.aerospace[locale.code]}}</option>
+          <p class="col-md-11 col-xs-12">Choose a sector</p>
+          <select class="col-md-11 col-xs-11"  class="form-control" id="sector-selector" required>
+            <option value="" disabled selected > {{ labels.please_select[locale.code] }} </option>
+            <option value='Aerospace'>{{labels.sectors.aerospace[locale.code]}}</option>
             <option value='Advanced Manufacturing'>{{labels.sectors.advanced_manufacturing[locale.code]}}</option>
             <option value='Automotive'>{{labels.sectors.automotive[locale.code]}}</option>
             <option value='Creative'>{{labels.sectors.creative[locale.code]}}</option>
@@ -43,23 +51,59 @@
             <option value='Technology'>{{labels.sectors.technology[locale.code]}}</option>
           </select>
         </div>
+        <hr>
         <div class="row">
           <div class="col-md-12">
-            <h3>{{labels.investment_opts_what_is_important[locale.code]}}</h3>
-          </div>
-        </div>
-        <div class="row bottom-buffer">
-          <div class="dit-iopps-section__options">
-            <label class="col-md-3 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
-            <label class="col-md-3 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
-            <label class="col-md-3 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
+            <p>{{labels.investment_opts_what_is_important[locale.code]}}</p>
           </div>
         </div>
         <div class="row">
-          <ul class="nav nav-tabs">
-            <li class="active" data-tab-control="tab-map"><a class="map-tab" href='javascript:;'>Map</a></li>
-            <li data-tab-control="tab-table"><a class="table-tab" href='javascript:;'>Detail</a></li>
-          </ul>
+          <div class="dit-iopps-section__options">
+            <label class="col-md-12 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
+            <label class="col-md-12 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
+            <label class="col-md-12 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
+          </div>
+        </div>
+          <div class="row">
+            <ul class="nav nav-tabs">
+              <li class="col-lg-12 active" data-tab-control="tab-map"><div class="arrow-right"></div><a class="map-tab" href='javascript:;'>Map view</a>
+              </li>
+              <li class="col-lg-12" data-tab-control="tab-table"><div class="arrow-right"></div><a class="table-tab" href='javascript:;'>Detail view</a>
+              </li>              
+            </ul>
+            <div class="dit-iopps-sidebar__call-out">
+            <div class="row">
+            <div class="col-md-7">
+            <header>
+              <h3>Start your investment journey</h3>
+            </header>
+            <p>We'll use this information to match you to a member of our investment team.</p>
+            </div>
+            <div class="col-md-4">
+            <button class="btn btn-primary btn-lg pull-right" type="button" >Start</button>
+            </div>
+            </div>
+          </div>
+      </div>
+      <div class="row call-out-inline">
+        <div class="dit-iopps-sidebar__call-out-inline">
+            <div class="row">
+            <div class="col-md-12">
+            <header>
+              <h3>Start your investment journey</h3>
+            </header>
+            <p>We'll use this information to match you to a member of our investment team.</p>
+            </div>
+            <div class="col-md-12">
+            <button class="btn btn-primary btn-lg pull-right" type="button" >Start</button>
+            </div>
+            </div>
+          </div>
+      </div>  
+    </section>
+
+    <section class="dit-iopps-section col-md-8">
+      <div class="col-md-12 col-sm-12 dit-iopps-section__body">
           <div class="tab-content">
             <label for="region-selector">
               Region
@@ -110,8 +154,8 @@
               </div>
             </div>
         </div>
-      </div>
     </section>
+    </div>
 
   </div>
 {% endblock %}
