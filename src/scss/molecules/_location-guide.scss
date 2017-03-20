@@ -10,84 +10,91 @@
   overflow: hidden;
 
   h2 {
-  	margin-bottom: 0px;
+    margin-bottom: 0px;
   }
 
-    h3 {
+  h3 {
     font-weight: 100;
+  }
+
+  #opps-table {
+    tbody>tr:nth-child(odd)>td {
+      background-color: #D8E9F2; // Choose your own color here
+    }
+
   }
 
   //Add external link icon
   // nice to have but would add external icon on non js without a target='_blank'
   //a:not( [ href*='great.gov.uk'] ):not( [href^='#'] ):not( [href^='/'] ):after {
-  a[target=_blank]:after {
-    content: "";
-    display: inline-block;
-    width: 14px;
-    height: 14px;
-    // @extend .dit-icon-external-link;
-    margin-left: 4px;
-  }
-
-   &__heading {
-    font-size: 32px;
-    font-weight: 100;
-
-    @media (max-width: $screen-xs-max) {
-      font-size: 24px;
+    a[target=_blank]:after {
+      content: "";
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      // @extend .dit-icon-external-link;
+      margin-left: 4px;
     }
-}
 
-	&__subheading {
-	   font-size: 28px;
-	   margin: flip-side-values(40px 0 0 0) !important;
-	}
+    &__heading {
+      font-size: 32px;
+      font-weight: 100;
 
-  &__options{
+      @media (max-width: $screen-xs-max) {
+        font-size: 24px;
+      }
+    }
 
-		margin-top: 30px;
-  		input[type=checkbox]{
-  		margin-right: 10px;
-  		}
-  		label{
-  			font-weight: 100;
-  		}
+    &__subheading {
+      font-size: 28px;
+      margin: flip-side-values(40px 0 0 0) !important;
+    }
+
+    &__options{
+
+      margin-top: 30px;
+      input[type=checkbox]{
+        margin-right: 10px;
+      }
+      label{
+        font-weight: 100;
+      }
+    }
+
+    &__body{
+
+      .container-fluid{
+        padding: 15px;
+        border-left: 1px solid #ddd;
+        border-bottom: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+        min-height: 400px;
+      }
+    }
+
+    #sector-selector, #susbector-selector {
+      margin-top: 20px;
+    }
   }
 
-  	&__body{
-
-		.container-fluid{
-			padding: 15px;
-			border-left: 1px solid #ddd;
-			border-bottom: 1px solid #ddd;
-			border-right: 1px solid #ddd;
-			min-height: 400px;
-		}
-  	}
-
-  	#sector-selector, #susbector-selector {
-  		margin-top: 20px;
-  	}
-  }
-
-.industry-selection{
+  .industry-selection{
     margin-bottom: 35px;
     @media (max-width: $screen-sm-max) {
-    margin-bottom: 30px;
+      margin-bottom: 30px;
     }
-}
+  }
 
-.js-display{
-  display: none;
-}
+  .js-display{
+    display: none;
+  }
 
-//tidy css
-//check font sizes
-//change to utility
-//insert pictures in place of words
-.bottom-buffers{
-	margin-bottom: 40px;
-}
+  //tidy css
+  //check font sizes
+  //change to utility
+  //insert pictures in place of words
+  .bottom-buffers{
+    margin-bottom: 40px;
+  }
 
 
 
