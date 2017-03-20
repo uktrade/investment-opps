@@ -1,126 +1,142 @@
 
 .background {
-    fill: #fdfdfc;
-    pointer-events: all;
+  fill: #fdfdfc;
+  pointer-events: all;
 }
 
 .region {
-    cursor: pointer;
-    fill: #00549F;
-    stroke: #fdfdfc;
-    stroke-width: 1.5px;
-    // stroke-dasharray: 2,2;
-    // stroke-linejoin: round;
+  cursor: pointer;
+  fill: #00549F;
+  stroke: #fdfdfc;
+  stroke-width: 1.5px;
+  // stroke-dasharray: 2,2;
+  // stroke-linejoin: round;
 }
 
 .active {
-    fill: #7EA8CE;
+  fill: #9B999B;
 }
 
 /*.region.SCT {*/
-    /*fill: #E2D8F4;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #E2D8F4;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.WLS {*/
-    /*fill: #E2D8F4;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #E2D8F4;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.NIR {*/
-    /*fill: #FFFBD7;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #FFFBD7;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 .region.IRL {
-    fill: none;
-    stroke: #aaa;
-    stroke-dasharray: 2,2;
-    stroke-linejoin: round;
-    stroke-width: .5px;
+  fill: none;
+  stroke: #aaa;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
+  stroke-width: .5px;
 }
 
 /*.region.UKC {*/
-    /*fill: #FFEFD9;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #FFEFD9;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKD {*/
-    /*fill: #DFF3F5;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #DFF3F5;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKE {*/
-    /*fill: #EFEAD7;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #EFEAD7;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKF {*/
-    /*fill: #9EC7F3;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #9EC7F3;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKG {*/
-    /*fill: #DFE4D6;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #DFE4D6;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKH {*/
-    /*fill: #FDDFD3;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #FDDFD3;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKI {*/
-    /*fill: #EFF9DD;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #EFF9DD;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKJ {*/
-    /*fill: #E0DFE5;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #E0DFE5;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 /*.region.UKK {*/
-    /*fill: #FFE5E5;*/
-    /*stroke: #aaa;*/
-    /*stroke-dasharray: 2,2;*/
-    /*stroke-linejoin: round;*/
+/*fill: #FFE5E5;*/
+/*stroke: #aaa;*/
+/*stroke-dasharray: 2,2;*/
+/*stroke-linejoin: round;*/
 /*}*/
 
 .region-boundary {
-    fill: none;
-    stroke: #aaa;
-    stroke-dasharray: 2,2;
-    stroke-linejoin: round;
+  fill: none;
+  stroke: #aaa;
+  stroke-dasharray: 2,2;
+  stroke-linejoin: round;
 }
 
 .region-label {
-    fill: #777;
-    fill-opacity: .5;
-    font-size: 20px;
-    font-weight: 300;
-    text-anchor: middle;
+  fill: #777;
+  fill-opacity: .5;
+  font-size: 20px;
+  font-weight: 300;
+  text-anchor: middle;
 }
 
+
+.point {
+  fill-opacity: .7;
+}
+
+.businesses {
+  fill: #13B240;
+}
+
+.centres {
+  fill: #FF9656;
+}
+
+.zones {
+  fill: #FFCD00;
+}
