@@ -155,7 +155,7 @@ function Map(container) {
   }
 
   function selectRegion(name) {
-    if(!name) {
+    if (!name) {
       return reset()
     }
     $.each(regions, function(index, r) {
@@ -355,6 +355,7 @@ function Map(container) {
       hideCallOut()
       showInlineCallOut()
     } else {
+      hideCallOut()
       showCallOut()
     }
   }
