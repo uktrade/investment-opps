@@ -87,7 +87,9 @@ function Map(container) {
           return 'region ' + d.id
         })
         .attr('d', path)
-        .on('click', toggleRegion)
+        .on('click', function(d) {
+          toggleRegion(findRegion(d.properties.name))
+        })
     })
   }
 
@@ -136,35 +138,39 @@ function Map(container) {
       .attr('r', function(d) {
         return scaleR(d.properties[property])
       })
+      .on('click', function(d){
+        toggleRegion(findRegion(d.properties.region))
+      })
   }
 
-  function toggleRegion(d) {
+  function toggleRegion(region) {
 
     //zoom out if active zone is clicked
-    if (active.node() === this) return reset()
+    if (activeRegion === region) return reset()
 
-    var region = {
-      d: d,
-      path: this
-    }
     zoom(region)
     if (selectCallback) {
-      selectCallback(d.properties.name)
+      selectCallback(region.d.properties.name)
     }
-
   }
 
   function selectRegion(name) {
     if(!name) {
       return reset()
     }
+    zoom(findRegion(name))
+  }
+
+  function findRegion(name) {
+    var region
     $.each(regions, function(index, r) {
       if (name === r.d.properties.name) {
-        debug('Found region')
-        zoom(r)
+        region=r
+        debug('Found region', r)
         return false //break loop
       }
     })
+    return region
   }
 
   function zoom(region) {
