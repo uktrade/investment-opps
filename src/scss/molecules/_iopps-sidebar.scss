@@ -29,6 +29,25 @@
     }
   }
 
+  &__call-out-inline{
+    display: none;
+    color: white;
+    background-color: #0397b3;
+    padding: 10px;
+    margin: 10px;
+
+    button{
+      margin-top: 10px;
+      border-radius: 0;
+    }
+  }
+
+  .row{
+    &.call-out-inline{
+      background-color: $white;
+    }
+  }
+
 h2 {
     margin: 24px 0 16px 0;
 

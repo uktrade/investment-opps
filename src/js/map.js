@@ -325,17 +325,40 @@ function Map(container) {
       hideCallOut()
     })
     $('.table-tab').click(function() {
-      showCallOut()
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 300)
     })
+    $('#sector-selector').change(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 50)
+    })
+  }
+
+  function callOutSwitcher() {
+    if ($('#table-view').height() > 500) {
+      hideCallOut()
+      showInlineCallOut()
+    } else {
+      showCallOut()
+    }
   }
 
   function showCallOut() {
     $('.dit-iopps-sidebar__call-out').fadeIn("slow")
   }
 
+  function showInlineCallOut() {
+    $('.dit-iopps-sidebar__call-out-inline').fadeIn("slow")
+  }
+
   function hideCallOut() {
     $('.dit-iopps-sidebar__call-out').fadeOut("slow")
+    $('.dit-iopps-sidebar__call-out-inline').fadeOut("slow")
   }
+
+
 
   //expose map function
   return {
