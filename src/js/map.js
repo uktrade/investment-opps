@@ -45,6 +45,8 @@ function Map(container) {
 
   draw()
 
+  callOutListener()
+
 
   function draw() {
     debug('D3:', d3)
@@ -203,6 +205,8 @@ function Map(container) {
         return scaleR(d.properties.centres) / (scale / 2)
       })
 
+    showCallOut()
+
   }
 
   function reset() {
@@ -250,6 +254,7 @@ function Map(container) {
         selectCallback()
       }, 700)
     }
+    hideCallOut()
   }
 
   function removePoints() {
@@ -299,21 +304,61 @@ function Map(container) {
       .attr('transform',
         'scale(' + scale + ')')
       .attr('r', function(d) {
-        return scaleR(d.properties.business) 
+        return scaleR(d.properties.business)
       })
 
     svg.selectAll('ellipse')
-    // .transition()
-    // .duration(750)
+      // .transition()
+      // .duration(750)
       .attr('transform',
         'scale(' + scale + ')')
       .attr('rx', function(d) {
-        return scaleR(d.properties.centres) 
+        return scaleR(d.properties.centres)
       })
       .attr('ry', function(d) {
         return scaleR(d.properties.centres)
       })
   }
+
+  function callOutListener() {
+    $('.map-tab').click(function() {
+      hideCallOut()
+    })
+    $('.table-tab').click(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 300)
+    })
+    $('#sector-selector').change(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 50)
+    })
+  }
+
+  function callOutSwitcher() {
+    if ($('#table-view').height() > 500) {
+      hideCallOut()
+      showInlineCallOut()
+    } else {
+      showCallOut()
+    }
+  }
+
+  function showCallOut() {
+    $('.dit-iopps-sidebar__call-out').fadeIn("slow")
+  }
+
+  function showInlineCallOut() {
+    $('.dit-iopps-sidebar__call-out-inline').fadeIn("slow")
+  }
+
+  function hideCallOut() {
+    $('.dit-iopps-sidebar__call-out').fadeOut("slow")
+    $('.dit-iopps-sidebar__call-out-inline').fadeOut("slow")
+  }
+
+
 
   //expose map function
   return {
