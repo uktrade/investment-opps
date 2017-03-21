@@ -73,7 +73,7 @@
   		}
 
       @media (min-width: $screen-md-max) {
-      margin: 15px 0px 60px 0px;    
+      margin: 15px 0px 140px 0px;    
     }
   }
 
@@ -97,5 +97,9 @@
 	margin-bottom: 40px;
 }
 
-
+@media (min-width: $screen-md-max) {
+.map-view{
+  margin-top: 10px
+  }
+}
 
