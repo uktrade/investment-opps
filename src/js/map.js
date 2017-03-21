@@ -348,6 +348,11 @@ function Map(container) {
         callOutSwitcher()
       }, 50)
     })
+    $('#region-selector').change(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 50)
+    })
   }
 
   function callOutSwitcher() {
