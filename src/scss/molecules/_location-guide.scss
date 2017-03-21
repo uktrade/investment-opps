@@ -33,10 +33,11 @@
   &__body{
     .region-selector{
     position: absolute;
-    margin: 40px 0px 0px 0px;
+    margin: 20px 0px 0px 15px;
 
     @media (max-width: $screen-xs-max) {
-    margin: 20px 0px 5px 40px;
+    position: relative;
+    margin: 20px 0px 0px 15px;
     }
 
     label{
