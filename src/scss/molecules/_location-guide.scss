@@ -1,12 +1,6 @@
-// filter-section.scss
-
+// location-guide.scss
 
 .dit-iopps-section {
-  // padding: flip-side-values(24px 24px 16px 24px);
-  // margin: 60px 0 50px;
-  // background-color: $white;
-  // border: 1px solid $tile-border-colour;
-  // // border-bottom: 5px solid $red-line-colour;
   overflow: hidden;
 
   h2 {
@@ -36,6 +30,22 @@
     margin-left: 4px;
   }
 
+  &__body{
+    .region-selector{
+    position: absolute;
+    margin: 20px 0px 0px 15px;
+
+    @media (max-width: $screen-xs-max) {
+    position: relative;
+    margin: 20px 0px 0px 15px;
+    }
+
+    label{
+      margin-right: 10px;
+    }
+  }
+}
+
    &__heading {
     font-size: 32px;
     font-weight: 100;
@@ -52,6 +62,8 @@
 
   &__options{
 
+      overflow: hidden;
+
   		input[type=checkbox]{
   		margin-right: 15px;
       margin-bottom: 12px;
@@ -59,16 +71,15 @@
   		label{
   			font-weight: 100;
   		}
+
+      @media (min-width: $screen-md-max) {
+      margin: 15px 0px 140px 0px;    
+    }
   }
-
-  	&__body{
-
-  	}
 
   	#sector-selector, #susbector-selector {
   		margin-top: 20px;
   	}
-  }
 
 .industry-selection{
     margin-bottom: 35px;
@@ -76,17 +87,19 @@
     margin-bottom: 30px;
     }
 }
+}
 
 .js-display{
   display: none;
 }
 
-//tidy css
-//check font sizes
-//change to utility
-//insert pictures in place of words
 .bottom-buffers{
 	margin-bottom: 40px;
 }
 
+@media (min-width: $screen-md-max) {
+.map-view{
+  margin-top: 10px
+  }
+}
 

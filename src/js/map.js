@@ -155,7 +155,7 @@ function Map(container) {
   }
 
   function selectRegion(name) {
-    if(!name) {
+    if (!name) {
       return reset()
     }
     zoom(findRegion(name))
@@ -354,6 +354,11 @@ function Map(container) {
         callOutSwitcher()
       }, 50)
     })
+    $('#region-selector').change(function() {
+      setTimeout(function() {
+        callOutSwitcher()
+      }, 50)
+    })
   }
 
   function callOutSwitcher() {
@@ -361,6 +366,7 @@ function Map(container) {
       hideCallOut()
       showInlineCallOut()
     } else {
+      hideCallOut()
       showCallOut()
     }
   }

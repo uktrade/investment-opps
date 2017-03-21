@@ -1,10 +1,26 @@
 // filter-section.scss
 .dit-iopps-sidebar {
-    // padding: flip-side-values(24px 24px 16px 24px);
-    // background-color: $white;
-    // border: 1px solid $tile-border-colour;
-    // // border-bottom: 5px solid $red-line-colour;
-    // overflow: hidden;
+
+  h2 {
+    margin: 24px 0 16px 0;
+
+    @media (max-width: $screen-md-max) {
+    padding-top: 15px;
+    }
+}
+  select {
+    margin: 0px 15px;
+    color: black;
+  }
+  
+  hr {
+    color: $light-gray;
+}
+
+  section{
+  height: inherit;
+  }
+
     &__body {
         background-color: $background-sidebar;
         color: $white;
@@ -34,7 +50,7 @@
     color: white;
     background-color: #0397b3;
     padding: 10px;
-    margin: 10px;
+    margin: 20px 0px;
 
     button{
       margin-top: 10px;
@@ -48,24 +64,6 @@
     }
   }
 
-h2 {
-    margin: 24px 0 16px 0;
-
-    @media (max-width: $screen-md-max) {
-    padding-top: 15px;
-    }
-}
-select {
-    margin: 0px 15px;
-    color: black;
-}
-hr {
-    color: $light-gray;
-}
-
-section{
-  height: inherit;
-}
 
 .nav-tabs{
   
@@ -113,11 +111,10 @@ section{
       }
     }
 
-    
       @media (max-width: $screen-sm-max) {
        .arrow-right {
       display: none}
       }
-}
-}
+    }
+  }
 }
