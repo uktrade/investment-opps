@@ -1,163 +1,148 @@
 {% extends "base/index.html" %}
 {% block content %}
-  {% include "partials/header-nav.html" %}
-  {% include "partials/top-bar.html" %}
-  <div class="jumbotron--auto">
-    <div class="container">
-      <div class="dit-hero__content">
-        <div class="row">
-          <div class="col-sm-10 col-md-10">
-            <h1>{{ overview.content.title }}</h1>
-          </div>
+    {% include "partials/header-nav.html" %}
+    {% include "partials/top-bar.html" %}
+    <div class="jumbotron--auto">
+        <div class="container">
+            <div class="dit-hero__content">
+                <div class="row">
+                    <div class="col-sm-10 col-md-10">
+                        <h1>{{ overview.content.title }}</h1>
+                    </div>
+                </div>
+            </div>
         </div>
-      </div>
     </div>
-  </div>
-  <section class="dit-toc">
-    {% include "partials/breadcrumb.html" %}
-  </section>
-  <div id="investment-opps-container" class="container">
-
-<!--   <div class="col-md-4"></div>
-   <section class="dit-content-section">
-   <h2>To use this service</h2>
-   <div class="col-md-10 col-sm-10 dit-main-content__body">
-   <p>You can search by using the dropdown menus and check boxes to find information on funding, research and development hubs and business clusters.</p>
-    <p>You can then view the information in a map or a table.</p>
-    </div>
-    </section> -->
-    <div class="row">
-
-
-    <section class="dit-iopps-sidebar col-md-4">
-      <div class="dit-iopps-sidebar__body col-md-12">
-      <header>
-        <h2>Location guide</h2>
-      </header>
-      <p>The best place to find the information you need on your industry to help you decide the most suitable locations to consider in the UK.</p>
-        <div id="sectors" class="row">
-          <p class="col-md-11 col-xs-12">Choose a sector</p>
-          <select class="col-md-11 col-xs-11"  class="form-control" id="sector-selector" required>
-            <option value="" disabled selected > {{ labels.please_select[locale.code] }} </option>
-            <option value='Aerospace'>{{labels.sectors.aerospace[locale.code]}}</option>
-            <option value='Advanced Manufacturing'>{{labels.sectors.advanced_manufacturing[locale.code]}}</option>
-            <option value='Automotive'>{{labels.sectors.automotive[locale.code]}}</option>
-            <option value='Creative'>{{labels.sectors.creative[locale.code]}}</option>
-            <option value='Energy Generation'>{{labels.sectors.energy[locale.code]}}</option>
-            <option value='Financial Services'>{{labels.sectors.financial_services[locale.code]}}</option>
-            <option value='Food And Drink Manufacturing'>{{labels.sectors.food_and_drink_manufacturing[locale.code]}}</option>
-            <option value='Health And Life Sciences'>{{labels.sectors.health_and_life_sciences[locale.code]}}</option>
-            <option value='Retail'>{{labels.sectors.retail[locale.code]}}</option>
-            <option value='Technology'>{{labels.sectors.technology[locale.code]}}</option>
-          </select>
-        </div>
-        <hr>
-        <div class="row">
-          <div class="col-md-12">
-            <p>{{labels.investment_opts_what_is_important[locale.code]}}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="dit-iopps-section__options">
-            <label class="col-md-12 col-xs-12"><input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>Significant Businesses <p style="font-size:12px">Businesses that have significant influence in the selected industry.</p></label>
-            <label class="col-md-12 col-xs-12"><input id="innovation-centres" type="checkbox" name="innovation" value=""/>Centres of excellence <p style="font-size:12px">Sector specific research and development centres.</p></label>
-            <label class="col-md-12 col-xs-12"><input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>Enterprise Zones<p style="font-size:12px">Assisted areas with reduced business rates, reduced rent, turnkey development packages.</p></label>
-          </div>
-        </div>
-          <div class="row">
-            <ul class="nav nav-tabs">
-              <li class="col-lg-12 active" data-tab-control="tab-map"><div class="arrow-right"></div><a class="map-tab" href='javascript:;'>Map view</a>
-              </li>
-              <li class="col-lg-12" data-tab-control="tab-table"><div class="arrow-right"></div><a class="table-tab" href='javascript:;'>Detail view</a>
-              </li>              
-            </ul>
-            <div class="dit-iopps-sidebar__call-out">
-            <div class="row">
-            <div class="col-md-7">
-            <header>
-              <h3>Start your investment journey</h3>
-            </header>
-            <p>We'll use this information to match you to a member of our investment team.</p>
-            </div>
-            <div class="col-md-4">
-            <button class="btn btn-primary btn-lg pull-right" type="button" >Start</button>
-            </div>
-            </div>
-          </div>
-      </div>
-      <div class="row call-out-inline">
-        <div class="dit-iopps-sidebar__call-out-inline">
-            <div class="row">
-            <div class="col-md-12">
-            <header>
-              <h3>Start your investment journey</h3>
-            </header>
-            <p>We'll use this information to match you to a member of our investment team.</p>
-            </div>
-            <div class="col-md-12">
-            <button class="btn btn-primary btn-lg pull-right" type="button" >Start</button>
-            </div>
-            </div>
-          </div>
-      </div>  
+    <section class="dit-toc">
+        {% include "partials/breadcrumb.html" %}
     </section>
+    <div id="investment-opps-container" class="container">
 
-    <section class="dit-iopps-section col-md-8">
-      <div class="col-md-12 col-sm-12 dit-iopps-section__body">
-          <div class="tab-content">
-            <div class="region-selector">
-            <label for="region-selector">
-              Region
-            </label>
-            <select name="regions" id="region-selector">
-              <option value="" selected>All</option>
-              <option value="Scotland">Scotland</option>
-              <option value="Northern Ireland">Northern Ireland</option>
-              <option value="North East England">North East England</option>
-              <option value="North West England">North West England</option>
-              <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
-              <option value="East Midlands">East Midlands</option>
-              <option value="West Midlands">West Midlands</option>
-              <option value="Wales">Wales</option>
-              <option value="East of England">East of England</option>
-              <option value="South East England">South East England</option>
-              <option value="South West England">South West England</option>
-            </select>
+        <!--   <div class="col-md-4"></div>
+           <section class="dit-content-section">
+           <h2>To use this service</h2>
+           <div class="col-md-10 col-sm-10 dit-main-content__body">
+           <p>You can search by using the dropdown menus and check boxes to find information on funding, research and development hubs and business clusters.</p>
+            <p>You can then view the information in a map or a table.</p>
             </div>
-            <div id="tab-map" class="tab-pane fade in active">
-              <div class="container-fluid">
-              <div id="map" class="map-view">
-              </div>
-              </div>
-            </div>
-            <div id="tab-table" class="tab-pane fade ">
-              <div class="container-fluid">
-              <div id="table-view">
-                <table id="opps-table"
-                        data-pagination="true"
-                        data-search="true"
-                        data-page-size="50">
-                  <thead>
-                    <tr>
-                      <th data-field="name"
-                          data-sortable="false">Location</th>
-                      <th data-field="business_concentration"
-                          data-sortable="true" data-sort-name="businesses">Concentration of businesses</th>
-                      <th data-field="centres_concentration"
-                          data-sortable="true" data-sort-name="centres">Centres of excellence</th>
-                      <th data-field="zone_available"
-                          data-sortable="false">Enterprise zones</th>
-                    </tr>
-                  </thead>
+            </section> -->
+        <div class="row">
 
-                </table>
-              </div>
-              </div>
-              </div>
-            </div>
+
+            <section class="dit-iopps-sidebar col-md-2">
+                <div class="dit-iopps-sidebar__body col-md-12">
+                    <header>
+                        <h2>Location guide</h2>
+                    </header>
+                    <p>The best place to find the information you need on your industry to help you decide the most
+                        suitable locations to consider in the UK.</p>
+                    <div id="sectors" class="row">
+                        <p class="col-md-11 col-xs-12">Choose a sector</p>
+                        <select class="col-md-11 col-xs-11" class="form-control" id="sector-selector" required>
+                            <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
+                            <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
+                            <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
+                            <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
+                            <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
+                            <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
+                            <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
+                            <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
+                            <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
+                            <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
+                            <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
+                        </select>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="dit-iopps-section__options">
+                            <label class="col-md-12 col-xs-12"><input id="significant-businesses" type="checkbox"
+                                                                      name="significant_business" value="" checked/>Significant
+                                Businesses <p style="font-size:12px">Businesses that have significant influence in the
+                                    selected industry.</p></label>
+                            <label class="col-md-12 col-xs-12"><input id="innovation-centres" type="checkbox"
+                                                                      name="innovation" value=""/>Centres of excellence
+                                <p style="font-size:12px">Sector specific research and development centres.</p></label>
+                            <label class="col-md-12 col-xs-12"><input id="enterprise-zones" type="checkbox"
+                                                                      name="enterprise_zone" value=""/>Enterprise Zones
+                                <p style="font-size:12px">Assisted areas with reduced business rates, reduced rent,
+                                    turnkey development packages.</p></label>
+                        </div>
+                    </div>
+            </section>
+
+            <section class="dit-iopps-sidebar col-md-2">
+                <div class="dit-iopps-sidebar__body col-md-12">
+                    <header>
+                        <h2>Region</h2>
+                    </header>
+                    <div class="row">
+                        <select class="col-md-11 col-xs-11" name="regions" id="region-selector">
+                            <option value="" selected>All</option>
+                            <option value="Scotland">Scotland</option>
+                            <option value="Northern Ireland">Northern Ireland</option>
+                            <option value="North East England">North East England</option>
+                            <option value="North West England">North West England</option>
+                            <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
+                            <option value="East Midlands">East Midlands</option>
+                            <option value="West Midlands">West Midlands</option>
+                            <option value="Wales">Wales</option>
+                            <option value="London">London</option>
+                            <option value="East of England">East of England</option>
+                            <option value="South East England">South East England</option>
+                            <option value="South West England">South West England</option>
+                        </select>
+                    </div>
+                    <h3>Notable clusters</h3>
+                    <div id="sectors" class="row">
+                        <ul>
+                            <li>Cluster 1</li>
+                            <li>Cluster 2</li>
+                            <li>Cluster 3</li>
+                        </ul>
+                    </div>
+                    <hr>
+                    <h3>Regeneration opportunities</h3>
+                    <div id="sectors" class="row">
+                        <p class="col-md-11 col-xs-12">Some file here</p>
+                    </div>
+                    <hr>
+                    <h3>Related pages</h3>
+                    <div id="sectors" class="row">
+                        <ul>
+                            <li>Pages 1</li>
+                            <li>Pages 2</li>
+                            <li>Pages 3</li>
+                        </ul>
+                    </div>
+                    <div class="row" style="background-color: #0397b3;">
+                        <div class="col-md-12">
+                            <header>
+                                <h3>Start your investment journey</h3>
+                            </header>
+{#                            <p>We'll use this information to match you to a member of our investment team.</p>#}
+                        </div>
+                        <button class="btn btn-primary btn-lg pull-right" type="button">Start</button>
+                    </div>
+            </section>
+
+            <section class="dit-iopps-section col-md-8">
+                <div class="col-md-12 col-sm-12 dit-iopps-section__body">
+                    <div class="tab-content">
+                        <div id="tab-map" class="tab-pane fade in active">
+                            <div class="container-fluid">
+                                <div id="map" class="map-view">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
-    </section>
-    </div>
 
-  </div>
+    </div>
 {% endblock %}
