@@ -20,13 +20,12 @@ function init() {
 
 function InvestmentOpps(container) {
   var map
-  var table
   var data //main data
   var region // active region
   var filteredData
-  var currentTab = 'tab-map' //options: tab-map, tab-table
 
   //elements
+  var clustersList = container.find('#notable-clusters')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var businessFilter = container.find('#significant-businesses')
@@ -34,8 +33,6 @@ function InvestmentOpps(container) {
   var centresFilter = container.find('#innovation-centres')
 
   initMap()
-  initTable()
-  initTabs()
   loadData().then(filter)
   watch()
 
@@ -43,14 +40,6 @@ function InvestmentOpps(container) {
     map = require('./map')(container.find('#map'))
     map.onSelect(filterRegion)
   }
-
-  function initTable() {
-    table = $('#opps-table')
-    table.bootstrapTable({
-      data: []
-    })
-  }
-
 
   function loadData() {
     var file = 'data_points_sector.json'
@@ -63,46 +52,10 @@ function InvestmentOpps(container) {
 
   function watch() {
     sectorSelector.change(filter)
-    businessFilter.change(filter)
-    centresFilter.change(filter)
-    zonesFilter.change(filter)
     regionSelector.change(changeRegion)
-  }
-
-  function initTabs() {
-    var controls = $('[data-tab-control]')
-    var tabs = []
-    controls.each(function() {
-      tabs.push($('#' + $(this).data('tab-control')))
-    })
-
-    controls
-      .click(function() {
-        var goto = $(this).data('tab-control')
-        if (currentTab === goto) {
-          return
-        }
-        debug('Changing tab to ', goto)
-        changeTab(goto)
-        render()
-      })
-
-
-    function changeTab(goto) {
-      currentTab = goto
-      controls.each(function(index) {
-        var control = $(this)
-        var tab = tabs[index]
-        if (control.data('tab-control') === goto) {
-          control.addClass('active')
-          tab.addClass('in active')
-        } else {
-          control.removeClass('active')
-          tab.removeClass('in active')
-        }
-
-      })
-    }
+    businessFilter.change(filterChanged)
+    centresFilter.change(filterChanged)
+    zonesFilter.change(filterChanged)
   }
 
   function changeRegion() {
@@ -122,10 +75,11 @@ function InvestmentOpps(container) {
     filter()
   }
 
+
   function filter() {
     var industry = sectorSelector.val()
     if (!industry) {
-      filteredData = []
+      filteredData = TAFFY([])()
       render()
       return
     }
@@ -136,56 +90,39 @@ function InvestmentOpps(container) {
       _filter.region = region
     }
     debug('Filtering data by', _filter)
-    filteredData = data(_filter).get()
+    filteredData = data(_filter)
     render()
+    updateNotableClusters(region)
   }
 
-  function render() {
-    var points = {
+  function getFilters() {
+    return {
       businesses: businessFilter.is(':checked'),
       centres: centresFilter.is(':checked'),
       zones: zonesFilter.is(':checked'),
     }
-    if (currentTab === 'tab-table') {
-      debug('Table', filteredData)
-      renderColumns(points)
-      table.bootstrapTable('load', filteredData)
-    } else if (currentTab === 'tab-map') {
-      map.refresh(filteredData, points)
-    }
+
   }
 
-
-  function renderColumns(points) {
-    if (points.businesses) {
-      showColumn('business_concentration')
-    } else {
-      hideColumn('business_concentration')
-    }
-
-    if (points.centres) {
-      showColumn('centres_concentration')
-    } else {
-      hideColumn('centres_concentration')
-    }
-
-    if (points.zones) {
-      showColumn('zone_available')
-    } else {
-      hideColumn('zone_available')
-    }
+  function filterChanged() {
+    map.refreshFilter(getFilters())
   }
 
-  function showColumn(field) {
-    debug('Showing column', field)
-    table.bootstrapTable('showColumn', field)
+  function render() {
+    map.refresh(filteredData.get(), getFilters())
   }
 
-  function hideColumn(field) {
-    debug('Hiding column', field)
-    table.bootstrapTable('hideColumn', field)
+  function updateNotableClusters(region) {
+    clustersList.empty()
+    if (!region) {
+      return
+    }
+    var clusters = filteredData.order('businesses desc').limit(3).get()
+    debug('Notable clusters are:', clusters)
+    $.each(clusters, function(index, cluster) {
+      clustersList.append($('<li>').html(cluster.name))
+    })
   }
-
 
   function fetch(url) {
     debug('Fetching data', url)

@@ -11,13 +11,6 @@
     font-weight: 100;
   }
 
-  #opps-table {
-    tbody>tr:nth-child(odd)>td {
-      background-color: #D8E9F2; // Choose your own color here
-    }
-
-  }
-
   //Add external link icon
   // nice to have but would add external icon on non js without a target='_blank'
   //a:not( [ href*='great.gov.uk'] ):not( [href^='#'] ):not( [href^='/'] ):after {
@@ -73,7 +66,7 @@
   		}
 
       @media (min-width: $screen-md-max) {
-      margin: 15px 0px;
+      margin: 15px 0px 140px 0px;
     }
   }
 

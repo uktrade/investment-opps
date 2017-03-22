@@ -4,6 +4,8 @@ var logger = require('./logger')('Map')
 var error = logger.error
 var debug = logger.debug
 var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
+var ratio = 1.21
+var scale = 6.5
 
 
 
@@ -17,80 +19,90 @@ function init(container) {
 
 function Map(container) {
   var points
-  var width = container.width()
-  var height = width * 1.21
-  var responsive = width * 6.5
-  var regions = []
   var BUSINESSES = 'businesses'
   var CENTRES = 'centres'
   var ZONES = 'zones'
 
-  var svg // main svg element
-  var g //map
-  var path //geo path
-  var projection
+  var svg
+  var width
+  var height
+  var map
   var active = d3.select(null)
   var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 20])
-  var activeRegion
   var selectCallback
 
   init()
 
   function init() {
+    width = container.width()
+    height = width * ratio
     debug('Drawing the map,width', width)
-
-    //create svg element
-    svg = d3.select('#' + container.attr('id'))
-      .append('svg')
-      .attr('width', width)
-      .attr('height', height)
-
-    projection = d3.geoAlbers()
-      .center([0, 55.4])
-      .rotate([4.5, 0])
-      .scale(responsive)
-      .translate([width / 2, height / 2])
-
-    path = d3.geoPath()
-      .projection(projection)
-
-    drawBackground(svg)
+    svg = createSvg()
     drawMap(svg)
-    callOutListener()
+      .then(function(_map) {
+        map = _map
+      })
+      .fail(function(err) {
+        error('Failed drawing map:', err)
+      })
   }
 
-  function drawBackground(svg) {
-    svg.append('rect')
-      .attr('class', 'background')
-      .attr('width', width)
-      .attr('height', height)
+  function createSvg() {
+    /* Using following stackoverflow answer to make svg responsive
+     * http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
+     */
+    return d3.select('#' + container.attr('id'))
+      .append('div')
+      .attr('class', 'svg-container') //container class to make it responsive
       .on('click', reset)
+      .append('svg')
+      //responsive SVG needs these 2 attributes and no width and height attr
+      .attr('preserveAspectRation', 'xMinYMin meet')
+      .attr('viewBox', '0 0 ' + width + ' ' + height)
+      //class to make it responsive
+      .attr('class', 'svg-content-responsive background')
+
+    function dragged() {
+      debug('Drag', this)
+      var translate = [d3.event.dx, d3.event.dy]
+      debug(d3.event)
+      d3.select(this)
+        .attr('transform', 'translate(' + translate + ')')
+    }
   }
 
   function drawMap(svg) {
-    g = svg.append('g')
-    d3.json(_assets + 'map.json', function(err, uk) {
-      if (err) {
-        error(err)
-      }
+    var map = {}
+    map.g = svg.append('g')
+    return $.getJSON(_assets + 'map.json')
+      .then(function(uk) {
+        map.projection = d3.geoAlbers()
+          .center([0, 55.4])
+          .rotate([4.5, 0])
+          .scale(width * scale)
+          .translate([width / 2, height / 2])
 
-      g.selectAll('path')
-        .data(topojson.feature(uk, uk.objects.collection).features)
-        .enter()
-        .append('path')
-        .attr('class', function(d) {
-          var region = {
-            d: d,
-            path: this
-          }
-          regions.push(region)
-          return 'region ' + d.id
-        })
-        .attr('d', path)
-        .on('click', function(d) {
-          toggleRegion(findRegion(d.properties.name))
-        })
-    })
+        map.path = d3.geoPath()
+          .projection(map.projection)
+
+        map.g.selectAll('g')
+          .data(topojson.feature(uk, uk.objects.collection).features)
+          .enter()
+          .append('g')
+          .attr('class', function(d) {
+            return 'region ' + d.id
+          })
+          .attr('id', function(d) {
+            return d.id
+          })
+          .attr('name', function(d) {
+            return d.properties.name.replace(/ /g, '')
+          })
+          .on('click', toggleRegion)
+          .append('path')
+          .attr('d', map.path)
+        return map
+      })
   }
 
   function onSelect(cb) {
@@ -98,103 +110,90 @@ function Map(container) {
   }
 
 
-  function drawPoints(filter) {
-    removePoints()
+  function refreshCircles(filter) {
+    var list = points ? points : []
 
-    var list
-    if (points) {
-      list = points
-    } else {
-      list = []
+    //group points by region
+    var pointsByRegion = d3
+      .nest().key(function(d) {
+        return d.properties.region
+      })
+      .object(list)
+
+    debug('Data by region', pointsByRegion)
+
+    var groups = map.g.selectAll('g')
+      .selectAll('g')
+      .data(function(d) {
+        var region = pointsByRegion[d.properties.name]
+        return region ? region : []
+      }, function(d) {
+        return d.id //unique id for point is authority name
+      })
+
+    removeGroups(groups.exit())
+    var g = groups.enter().append('g')
+    drawCircles(BUSINESSES)
+    drawCircles(CENTRES)
+    drawCircles(ZONES)
+    // if (active.node()) return zoomAllPoints()
+
+    function drawCircles(property) {
+      updateCircles()
+      appendCircles()
+
+      function updateCircles() {
+        var allPoints = groups.select('.' + property)
+        debug('Updaing circles', property, allPoints)
+        allPoints.transition().attr('r', getDiameter)
+      }
+
+      function appendCircles() {
+        //append new circles inserted with new data
+        g.append('circle')
+          .attr('class', 'point ' + property)
+          .attr('cx', function(d) {
+            return map.projection(d.geometry.coordinates)[0]
+          })
+          .attr('cy', function(d) {
+            return map.projection(d.geometry.coordinates)[1]
+          })
+          .transition()
+          .attr('r', getDiameter)
+      }
+
+      function getDiameter(d) {
+        if (filter[property]) {
+          var newDiameter = scaleR(d.properties[property])
+          return newDiameter
+        } else {
+          return 0
+        }
+      }
     }
 
-    debug('Drawing data points')
-    var canvas = svg.selectAll('circle').data(list)
-
-    if (filter.businesses) {
-      appendCircle(canvas, BUSINESSES)
+    function removeGroups(groups) {
+      debug('Removing groups', groups)
+      groups.transition()
+        .remove()
     }
-    if (filter.centres) {
-      appendCircle(canvas, CENTRES)
-    }
-
-    if (filter.zones) {
-      appendCircle(canvas, ZONES)
-    }
-
-    if (active.node()) return zoomAllPoints()
   }
 
-  function appendCircle(canvas, property) {
-    canvas.enter()
-      .append('circle')
-      .attr('cx', function(d) {
-        return projection(d.geometry.coordinates)[0]
-      })
-      .attr('cy', function(d) {
-        return projection(d.geometry.coordinates)[1]
-      })
-      .attr('class', 'point ' + property)
-      .attr('r', function(d) {
-        return scaleR(d.properties[property])
-      })
-      .on('click', function(d){
-        toggleRegion(findRegion(d.properties.region))
-      })
-  }
-
-  function toggleRegion(region) {
-
-    //zoom out if active zone is clicked
-    if (activeRegion === region) return reset()
-
+  function toggleRegion(d) {
+    d3.event.stopPropagation() // do trigger click even on background
+    if (active.node() === this) return reset()
+    var region = d3.select(this)
     zoom(region)
     if (selectCallback) {
-      selectCallback(region.d.properties.name)
+      selectCallback(d.properties.name)
     }
-  }
 
-  function selectRegion(name) {
-    if (!name) {
-      return reset()
-    }
-    zoom(findRegion(name))
-  }
-
-  function findRegion(name) {
-    var region
-    $.each(regions, function(index, r) {
-      if (name === r.d.properties.name) {
-        region=r
-        debug('Found region', r)
-        return false //break loop
-      }
-    })
-    return region
   }
 
   function zoom(region) {
-    zoomRegion(region)
-    zoomAllPoints()
-  }
-
-  function zoomAllPoints() {
-
-    if (!points) {
-      return
-    }
-    //scale points
-    zoomPoints(BUSINESSES)
-    zoomPoints(CENTRES)
-    zoomPoints(ZONES)
-  }
-
-  function zoomRegion(region) {
-    var d = region.d
     active.classed('active', false)
-    active = d3.select(region.path).classed('active', true)
-
-    var bounds = path.bounds(d)
+    active = region.classed('active', true)
+    var bounds = map.path.bounds(region.datum())
     var dx = bounds[1][0] - bounds[0][0]
     var dy = bounds[1][1] - bounds[0][1]
     var border = {}
@@ -206,91 +205,42 @@ function Map(container) {
     var y = border.y
     var scale = border.scale
     var translate = [width / 2 - scale * x, height / 2 - scale * y]
-
-    g.transition()
+    map.g.transition()
       .duration(750)
-      .style('stroke-width', 1.5 / scale + 'px')
+      .style('stroke-width', 4.5 / scale + 'px')
       .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
-
-    activeRegion = region
-    activeRegion.border = border
   }
 
-  function zoomPoints(property) {
-    debug('Zoom points:', property)
-    var x = activeRegion.border.x
-    var y = activeRegion.border.y
-    var scale = activeRegion.border.scale
-
-    svg.selectAll('.' + property)
-      .transition()
-      .duration(750)
-      .attr('transform',
-        'translate(' + width / 2 + ',' + height / 2 +
-        ')scale(' + scale + ')translate(' + -x + ',' + -y + ')')
-      .attr('r', function(d) {
-        return scaleR(d.properties[property]) / (scale / 2)
-      })
-    showCallOut()
-
+  function selectRegion(name) {
+    if (!name) {
+      return reset()
+    }
+    zoom(svg.select('g[name='+ name.replace(/ /g,'') +']'))
   }
 
   function reset() {
     active.classed('active', false)
     active = d3.select(null)
-    activeRegion = {
-      path: null,
-      border: null
-    }
-
-    g.transition()
+    map.g.transition()
       .duration(750)
       .style('stroke-width', '1px')
       .attr('transform', '')
-
-    debug('Resetting points: ', points)
-
-
-    if (!points) {
-      return
-    }
-
-    resetPoints(BUSINESSES)
-    resetPoints(CENTRES)
-    resetPoints(ZONES)
 
     if (selectCallback) {
       window.setTimeout(function() {
         selectCallback()
       }, 700)
     }
-    hideCallOut()
-  }
-
-  function resetPoints(property) {
-    //scale out the points
-    svg.selectAll('.' + property)
-      .transition()
-      .duration(750)
-      .attr('transform', '')
-      .attr('r', function(d) {
-        return scaleR(d.properties[property])
-      })
-  }
-
-  function removePoints() {
-    svg.selectAll('circle').remove()
   }
 
   function refresh(_points, filter) {
     debug('Refreshing data points', _points)
     var data = []
-    _points.map(function(d, i) {
+    _points.map(function(d) {
       data.push({
-        id: i,
+        id: d.name,
         type: 'Feature',
         properties: {
-          name: d.local_authority,
           industry: d.industry,
           businesses: d.businesses,
           centres: d.centres,
@@ -298,97 +248,23 @@ function Map(container) {
           region: d.region
         },
         geometry: {
-          coordinates: [+d.long, +d.lat],
+          coordinates: [d.long, d.lat],
           type: 'Point'
         }
       })
     })
     points = data
-    drawPoints(filter)
+    refreshCircles(filter)
   }
 
-  d3.select(window)
-    .on('resize', sizeChange)
-
-  function sizeChange() {
-    var scale = $('.map-view').width() / 1050
-
-    d3.select('g')
-      .attr('transform', 'scale(' + scale + ')')
-    $('svg').height($('.container-fluid').width() * 1.45)
-
-    // insert debouncing plot function here
-    svg.selectAll('circle')
-      // .transition()
-      // .duration(750)
-      .attr('transform',
-        'scale(' + scale + ')')
-      .attr('r', function(d) {
-        return scaleR(d.properties.businesses)
-      })
-
-    svg.selectAll('ellipse')
-      // .transition()
-      // .duration(750)
-      .attr('transform',
-        'scale(' + scale + ')')
-      .attr('rx', function(d) {
-        return scaleR(d.properties.centres)
-      })
-      .attr('ry', function(d) {
-        return scaleR(d.properties.centres)
-      })
+  function refreshFilter(filter) {
+    refreshCircles(filter)
   }
-
-  function callOutListener() {
-    $('.map-tab').click(function() {
-      hideCallOut()
-    })
-    $('.table-tab').click(function() {
-      setTimeout(function() {
-        callOutSwitcher()
-      }, 300)
-    })
-    $('#sector-selector').change(function() {
-      setTimeout(function() {
-        callOutSwitcher()
-      }, 50)
-    })
-    $('#region-selector').change(function() {
-      setTimeout(function() {
-        callOutSwitcher()
-      }, 50)
-    })
-  }
-
-  function callOutSwitcher() {
-    if ($('#table-view').height() > 500) {
-      hideCallOut()
-      showInlineCallOut()
-    } else {
-      hideCallOut()
-      showCallOut()
-    }
-  }
-
-  function showCallOut() {
-    $('.dit-iopps-sidebar__call-out').fadeIn("slow")
-  }
-
-  function showInlineCallOut() {
-    $('.dit-iopps-sidebar__call-out-inline').fadeIn("slow")
-  }
-
-  function hideCallOut() {
-    $('.dit-iopps-sidebar__call-out').fadeOut("slow")
-    $('.dit-iopps-sidebar__call-out-inline').fadeOut("slow")
-  }
-
-
 
   //expose map function
   return {
     refresh: refresh,
+    refreshFilter: refreshFilter,
     onSelect: onSelect,
     selectRegion: selectRegion
   }
