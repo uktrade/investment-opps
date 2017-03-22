@@ -27,17 +27,14 @@
             </div>
             </section> -->
         <div class="row">
-
-
             <section class="dit-iopps-sidebar col-md-2">
                 <div class="dit-iopps-sidebar__body col-md-12">
                     <header>
-                        <h2>Location guide</h2>
+                        <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
                     </header>
-                    <p>The best place to find the information you need on your industry to help you decide the most
-                        suitable locations to consider in the UK.</p>
+                    <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
                     <div id="sectors" class="row">
-                        <p class="col-md-11 col-xs-12">Choose a sector</p>
+                        <p class="col-md-11 col-xs-12">{{ labels.investment_select_industry[locale.code] }}</p>
                         <select class="col-md-11 col-xs-11" class="form-control" id="sector-selector" required>
                             <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
                             <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
@@ -60,17 +57,21 @@
                     </div>
                     <div class="row">
                         <div class="dit-iopps-section__options">
-                            <label class="col-md-12 col-xs-12"><input id="significant-businesses" type="checkbox"
-                                                                      name="significant_business" value="" checked/>Significant
-                                Businesses <p style="font-size:12px">Businesses that have significant influence in the
-                                    selected industry.</p></label>
-                            <label class="col-md-12 col-xs-12"><input id="innovation-centres" type="checkbox"
-                                                                      name="innovation" value=""/>Centres of excellence
-                                <p style="font-size:12px">Sector specific research and development centres.</p></label>
-                            <label class="col-md-12 col-xs-12"><input id="enterprise-zones" type="checkbox"
-                                                                      name="enterprise_zone" value=""/>Enterprise Zones
-                                <p style="font-size:12px">Assisted areas with reduced business rates, reduced rent,
-                                    turnkey development packages.</p></label>
+                            <label class="col-md-12 col-xs-12">
+                            <input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>
+                             {{ labels.investment_opts_businesses[locale.code] }}
+                               <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
+                            </label>
+                            <label class="col-md-12 col-xs-12">
+                                <input id="innovation-centres" type="checkbox" name="innovation" value=""/>
+                                 {{ labels.investment_opts_centres_of_excellence[locale.code] }}
+                                <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
+                            </label>
+                            <label class="col-md-12 col-xs-12">
+                                <input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>
+                                {{ labels.investment_opts_enterprise_zones[locale.code] }}
+                                <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
+                            </label>
                         </div>
                     </div>
             </section>
@@ -78,7 +79,7 @@
             <section class="dit-iopps-sidebar col-md-2">
                 <div class="dit-iopps-sidebar__body col-md-12">
                     <header>
-                        <h2>Region</h2>
+                        <h2>{{ labels.investment_opts_region[locale.code] }}</h2>
                     </header>
                     <div class="row">
                         <select class="col-md-11 col-xs-11" name="regions" id="region-selector">
@@ -124,7 +125,7 @@
                             <header>
                                 <h3>Start your investment journey</h3>
                             </header>
-{#                            <p>We'll use this information to match you to a member of our investment team.</p>#}
+                        {# <p>We'll use this information to match you to a member of our investment team.</p>#}
                         </div>
                         <button class="btn btn-primary btn-lg pull-right" type="button">Start</button>
                     </div>
