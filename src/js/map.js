@@ -8,7 +8,6 @@ var ratio = 1.21
 var scale = 6.5
 
 
-
 module.exports = init
 
 function init(container) {
@@ -45,9 +44,15 @@ function Map(container) {
       .fail(function(err) {
         error('Failed drawing map:', err)
       })
+
   }
 
   function createSvg() {
+
+    var zoom = d3.zoom()
+      .scaleExtent([0.8, 9])
+      .on('zoom', move)
+
     /* Using following stackoverflow answer to make svg responsive
      * http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
      */
@@ -55,6 +60,7 @@ function Map(container) {
       .append('div')
       .attr('class', 'svg-container') //container class to make it responsive
       .on('click', reset)
+      .call(zoom)
       .append('svg')
       //responsive SVG needs these 2 attributes and no width and height attr
       .attr('preserveAspectRation', 'xMinYMin meet')
@@ -62,13 +68,32 @@ function Map(container) {
       //class to make it responsive
       .attr('class', 'svg-content-responsive background')
 
-    function dragged() {
-      debug('Drag', this)
-      var translate = [d3.event.dx, d3.event.dy]
-      debug(d3.event)
-      d3.select(this)
-        .attr('transform', 'translate(' + translate + ')')
+
+
+    function move() {
+
+      var t = [d3.event.transform.x, d3.event.transform.y]
+      var s = d3.event.transform.k
+      var h = height / 4
+
+      t[0] = Math.min(
+        (width / height) * (s - 1),
+        Math.max(width * (1 - s), t[0])
+      )
+
+      t[1] = Math.min(
+        h * (s - 1) + h * s,
+        Math.max(height * (1 - s) - h * s, t[1])
+      )
+
+      //zoom.translateBy(t)
+      map.g.attr('transform', 'translate(' + t + ')scale(' + s + ')')
+
+      //adjust the country hover stroke width based on zoom level
+      map.g.selectAll('g').style('stroke-width', 1.5 / s)
     }
+
+
   }
 
   function drawMap(svg) {
@@ -215,7 +240,7 @@ function Map(container) {
     if (!name) {
       return reset()
     }
-    zoom(svg.select('g[name='+ name.replace(/ /g,'') +']'))
+    zoom(svg.select('g[name=' + name.replace(/ /g, '') + ']'))
   }
 
   function reset() {
