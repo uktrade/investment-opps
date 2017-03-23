@@ -8,7 +8,7 @@
   cursor: pointer;
   fill: #00549F;
   stroke: #fdfdfc;
-  stroke-width: 1.5px;
+  //stroke-width: 1.5px;
   // stroke-dasharray: 2,2;
   // stroke-linejoin: round;
 }
@@ -143,6 +143,7 @@
 .point {
   fill-opacity: .7;
   stroke-width: 0.4px;
+  stroke: #fdfdfc;
 }
 
 .businesses {

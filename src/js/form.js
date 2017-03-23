@@ -8,7 +8,7 @@
  *
  * Forms are processed on submit.
  *
- * Separating forms in this manner allows ignroing unnneccasry DOM processing
+ * Separating forms in this manner allows ignoring unnecessary DOM processing
  * if page does not have IST form on it.
  *
  **/
