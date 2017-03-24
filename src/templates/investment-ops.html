@@ -60,25 +60,25 @@
                         </div>
                         <div class="row">
                             <div class="dit-iopps-section__options">
-                                <label class="col-md-12 col-xs-12">
-                                    <input id="significant-businesses" type="checkbox" name="significant_business"
-                                           value="" checked/>
+                                <input class="input-filter" id="significant-businesses" type="checkbox" name="significant_business"
+                                       value="" checked/>
+                                <label for="significant-businesses" class="col-md-12 col-xs-12">
                                     {{ labels.investment_opts_businesses[locale.code] }}
                                     <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
                                 </label>
-                                <label class="col-md-12 col-xs-12">
-                                    <input id="innovation-centres" type="checkbox" name="innovation" value=""/>
+                                <input class="input-filter" id="innovation-centres" type="checkbox" name="innovation" value=""/>
+                                <label for="innovation-centres" class="col-md-12 col-xs-12">
                                     {{ labels.investment_opts_centres_of_excellence[locale.code] }}
                                     <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
                                 </label>
-                                <label class="col-md-12 col-xs-12">
-                                    <input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>
+                                <input class="input-filter" id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>
+                                <label for="enterprise-zones" class="col-md-12 col-xs-12">
                                     {{ labels.investment_opts_enterprise_zones[locale.code] }}
                                     <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
                                 </label>
                             </div>
-                            <p style="font-size:12px; float: right;
-    margin-right: 15px;">Click on a region to see more details</p>
+                            <p id="form-instructions" style="font-size:12px; float: right;
+    margin-right: 15px;">To start select a sector</p>
                         </div>
                     </div>
                 </div>

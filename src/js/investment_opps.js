@@ -28,6 +28,8 @@ function InvestmentOpps(container) {
   var clustersList = container.find('#notable-clusters')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
+  var filters = container.find('.dit-iopps-section__options')
+  var instructions = container.find('#form-instructions')
   var businessFilter = container.find('#significant-businesses')
   var zonesFilter = container.find('#enterprise-zones')
   var centresFilter = container.find('#innovation-centres')
@@ -42,6 +44,7 @@ function InvestmentOpps(container) {
   loadData().then(filter)
   watch()
   back()
+  filters.hide()
 
   function initMap() {
     map = require('./map')(container.find('#map'))
@@ -103,6 +106,8 @@ function InvestmentOpps(container) {
     var _filter = {
       industry: sectorSelector.val()
     }
+    filters.show(750)
+    instructions.html('Click on a region to see more details')
     if (region) {
       _filter.region = region
     }
