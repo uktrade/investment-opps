@@ -178,7 +178,6 @@ function Map(container) {
 
       function appendCircles() {
         //append new circles inserted with new data
-
         g.append('circle')
           .attr('class', 'point ' + property)
           .attr('cx', function(d) {
@@ -187,13 +186,11 @@ function Map(container) {
           .attr('cy', function(d) {
             return map.projection(d.geometry.coordinates)[1]
           })
+          .on('mouseover', handleMouseOver)
+          .on('mouseout', handleMouseOut)
           .transition()
           .attr('r', getDiameter)
       }
-
-      // function getZindex(d) {
-      //   return 'z-index:' + (1000 - Math.round(d.properties[property]))
-      // }
 
       function getDiameter(d) {
         if (filter[property]) {
