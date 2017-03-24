@@ -31,10 +31,17 @@ function InvestmentOpps(container) {
   var businessFilter = container.find('#significant-businesses')
   var zonesFilter = container.find('#enterprise-zones')
   var centresFilter = container.find('#innovation-centres')
+  var formBody = $('#sidebar')
+  var formWrapper = formBody.find('.dit-form-wrapper')
+  var stepWrappers = formBody.find('.setup-content')
+  var currentStep = 1
+  var goBack = container.find('#go-back')
 
+  adjustSize()
   initMap()
   loadData().then(filter)
   watch()
+  back()
 
   function initMap() {
     map = require('./map')(container.find('#map'))
@@ -58,8 +65,16 @@ function InvestmentOpps(container) {
     zonesFilter.change(filterChanged)
   }
 
+  function back() {
+    goBack.click(function(){
+      filterRegion()
+      map.selectRegion()
+    })
+  }
+
   function changeRegion() {
     var name = $(this).val()
+    console.log(name)
     filterRegion(name)
     map.selectRegion(name)
   }
@@ -68,8 +83,10 @@ function InvestmentOpps(container) {
     debug('region: ', name)
     if (name) {
       region = name
+      gotoStep(2)
     } else {
       region = null
+      gotoStep(1)
     }
     regionSelector.val(name)
     filter()
@@ -133,4 +150,78 @@ function InvestmentOpps(container) {
   function fail(err) {
     error('Error:', err)
   }
+
+  function gotoStep(step) {
+    if (step === currentStep) {
+      return
+    }
+    var current = formWrapper.find('#step-' + currentStep)
+    debug('Current', current)
+    // if (step > currentStep) {
+    //   nextNav.removeAttr('disabled')
+    // }
+    go()
+
+    function go() {
+      debug('Changing step from ', currentStep, ' to ', step)
+      var target = formWrapper.find('#step-' + step)
+      debug('Target', target)
+      // currentNav.removeClass('active-selection')
+      // nextNav.addClass('active-selection')
+      currentStep = step
+      adjustSize(true)
+    }
+  }
+
+
+  function adjustSize(animate) {
+    debug('Adjusting size')
+    var width = formBody.width()
+    debug('Form body size', width)
+    $(stepWrappers).each(function() {
+      $(this).css('width', width)
+    })
+
+    wrap(formWrapper, stepWrappers.length, width)
+    shift(formWrapper, (-(currentStep - 1) * width), animate)
+  }
+
+  function wrap(element, length, width) {
+    //wrap into mother div
+    var isMother = $('#mother').length
+    if (!isMother) {
+      element.wrap('<div id="mother" />')
+    }
+    //assign height width and overflow hidden to mother
+    $('#mother').css({
+      width: function() {
+        return width
+      },
+      position: 'relative !important',
+      overflow: 'hidden'
+    })
+    //get total of image sizes and set as width for ul
+    var totalWidth = (length) * width + 5
+    element.css({
+      width: function() {
+        return totalWidth
+      }
+    })
+
+  }
+
+  function shift(element, amount, animate) {
+    debug('shifting:', element, ' amount:', amount)
+    var margin = 'margin-left'
+    var style = {}
+    style[margin] = amount
+    debug('Margin:', style[margin])
+    if (animate) {
+      element.animate(style, 500)
+    } else {
+      element.css(style)
+    }
+
+  }
+
 }

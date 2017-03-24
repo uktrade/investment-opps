@@ -26,121 +26,136 @@
             <p>You can then view the information in a map or a table.</p>
             </div>
             </section> -->
-        <div class="row">
-            <section class="dit-iopps-sidebar col-md-2">
-                <div class="dit-iopps-sidebar__body col-md-12">
-                    <header>
-                        <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
-                    </header>
-                    <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
-                    <div id="sectors" class="row">
-                        <p class="col-md-11 col-xs-12">{{ labels.investment_select_industry[locale.code] }}</p>
-                        <select class="col-md-11 col-xs-11" class="form-control" id="sector-selector" required>
-                            <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
-                            <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
-                            <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
-                            <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
-                            <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
-                            <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
-                            <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
-                            <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
-                            <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
-                            <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
-                            <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
-                        </select>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="dit-iopps-section__options">
-                            <label class="col-md-12 col-xs-12">
-                            <input id="significant-businesses" type="checkbox" name="significant_business" value="" checked/>
-                             {{ labels.investment_opts_businesses[locale.code] }}
-                               <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
-                            </label>
-                            <label class="col-md-12 col-xs-12">
-                                <input id="innovation-centres" type="checkbox" name="innovation" value=""/>
-                                 {{ labels.investment_opts_centres_of_excellence[locale.code] }}
-                                <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
-                            </label>
-                            <label class="col-md-12 col-xs-12">
-                                <input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>
-                                {{ labels.investment_opts_enterprise_zones[locale.code] }}
-                                <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
-                            </label>
-                        </div>
-                    </div>
-            </section>
 
-            <section class="dit-iopps-sidebar col-md-2">
-                <div class="dit-iopps-sidebar__body col-md-12">
-                    <header>
-                        <h2>{{ labels.investment_opts_region[locale.code] }}</h2>
-                    </header>
-                    <div class="row">
-                        <select class="col-md-11 col-xs-11" name="regions" id="region-selector">
-                            <option value="" selected>All</option>
-                            <option value="Scotland">Scotland</option>
-                            <option value="Northern Ireland">Northern Ireland</option>
-                            <option value="North East England">North East England</option>
-                            <option value="North West England">North West England</option>
-                            <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
-                            <option value="East Midlands">East Midlands</option>
-                            <option value="West Midlands">West Midlands</option>
-                            <option value="Wales">Wales</option>
-                            <option value="London">London</option>
-                            <option value="East of England">East of England</option>
-                            <option value="South East England">South East England</option>
-                            <option value="South West England">South West England</option>
-                        </select>
-                    </div>
-                    <h3>Notable clusters</h3>
-                    <div id="sectors" class="row">
-                        <ul id="notable-clusters">
-                        </ul>
-                    </div>
-                    <hr>
-                    <h3>Regeneration opportunities</h3>
-                    <div id="sectors" class="row">
-                        <p class="col-md-11 col-xs-12">Some file here</p>
-                    </div>
-                    <hr>
-                    <h3>Related pages</h3>
-                    <div id="sectors" class="row">
-                        <ul>
-                            <li>Pages 1</li>
-                            <li>Pages 2</li>
-                            <li>Pages 3</li>
-                        </ul>
-                    </div>
-                    <div class="row" style="background-color: #0397b3;">
-                        <div class="col-md-12">
-                            <header>
-                                <h3>Start your investment journey</h3>
-                            </header>
-                        {# <p>We'll use this information to match you to a member of our investment team.</p>#}
+        <section id="sidebar" class="dit-iopps-sidebar col-md-4">
+            <div class="dit-form-wrapper">
+                <div class="row setup-content"
+                     id="step-1">
+                    <div class="dit-iopps-sidebar__body col-md-12">
+                        <header>
+                            <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
+                        </header>
+                        <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
+                        <div id="sectors" class="row">
+                            <p class="col-md-11 col-xs-12">{{ labels.investment_select_industry[locale.code] }}</p>
+                            <select class="col-md-11 col-xs-11" class="form-control" id="sector-selector" required>
+                                <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
+                                <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
+                                <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
+                                <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
+                                <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
+                                <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
+                                <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
+                                <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
+                                <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
+                                <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
+                                <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
+                            </select>
                         </div>
-                        <button class="btn btn-primary btn-lg pull-right" type="button">Start</button>
-                    </div>
-            </section>
-
-            <section class="dit-iopps-section col-md-8">
-                <div class="col-md-12 col-sm-12 dit-iopps-section__body">
-                    <div class="tab-content">
-                        <div id="tab-map" class="tab-pane fade in active">
-                            <div class="container-fluid">
-                                <div id="map" class="map-view">
-                                </div>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
                             </div>
+                        </div>
+                        <div class="row">
+                            <div class="dit-iopps-section__options">
+                                <label class="col-md-12 col-xs-12">
+                                    <input id="significant-businesses" type="checkbox" name="significant_business"
+                                           value="" checked/>
+                                    {{ labels.investment_opts_businesses[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
+                                </label>
+                                <label class="col-md-12 col-xs-12">
+                                    <input id="innovation-centres" type="checkbox" name="innovation" value=""/>
+                                    {{ labels.investment_opts_centres_of_excellence[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
+                                </label>
+                                <label class="col-md-12 col-xs-12">
+                                    <input id="enterprise-zones" type="checkbox" name="enterprise_zone" value=""/>
+                                    {{ labels.investment_opts_enterprise_zones[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
+                                </label>
+                            </div>
+                            <p style="font-size:12px; float: right;
+    margin-right: 15px;">Click on a region to see more details</p>
                         </div>
                     </div>
                 </div>
-            </section>
-        </div>
+
+                <div class="row setup-content"
+                     id="step-2">
+                    <div class="dit-iopps-sidebar__body col-md-12">
+                        <div id="go-back">
+                            <span class="glyphicon glyphicon-arrow-left close-search-icon"></span>
+                            Back
+                        </div>
+                        <header>
+                            <h2>{{ labels.investment_opts_region[locale.code] }}</h2>
+                        </header>
+                        <div class="row">
+                            <select class="col-md-11 col-xs-11" name="regions" id="region-selector">
+                                <option value="" selected>All</option>
+                                <option value="Scotland">Scotland</option>
+                                <option value="Northern Ireland">Northern Ireland</option>
+                                <option value="North East England">North East England</option>
+                                <option value="North West England">North West England</option>
+                                <option value="Yorkshire and The Humber">Yorkshire and The Humber</option>
+                                <option value="East Midlands">East Midlands</option>
+                                <option value="West Midlands">West Midlands</option>
+                                <option value="Wales">Wales</option>
+                                <option value="London">London</option>
+                                <option value="East of England">East of England</option>
+                                <option value="South East England">South East England</option>
+                                <option value="South West England">South West England</option>
+                            </select>
+                        </div>
+                        <h3>Notable clusters</h3>
+                        <div id="sectors" class="row">
+                            <ul id="notable-clusters">
+                            </ul>
+                        </div>
+                        <hr>
+                        <h3>Regeneration opportunities</h3>
+                        <div id="sectors" class="row">
+                            <p class="col-md-11 col-xs-12">Some file here</p>
+                        </div>
+                        <hr>
+                        <h3>Related pages</h3>
+                        <div id="sectors" class="row">
+                            <ul>
+                                <li>Pages 1</li>
+                                <li>Pages 2</li>
+                                <li>Pages 3</li>
+                            </ul>
+                        </div>
+                        <div class="row" style="background-color: #0397b3; margin-top: 20px">
+                            <div class="col-md-12">
+                                <header>
+                                    <h3>Start your investment journey</h3>
+                                </header>
+                                {# <p>We'll use this information to match you to a member of our investment team.</p>#}
+                            </div>
+                            <button style="margin: 0 15px 10px 0;" class="btn btn-primary btn-lg pull-right" type="button">Start</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="dit-iopps-section col-md-8">
+{#            <div class="col-md-12 col-sm-12 dit-iopps-section__body">#}
+{#                <div class="tab-content">#}
+{#                    <div id="tab-map" class="tab-pane fade in active">#}
+{#                        <div class="container-fluid">#}
+                            <div id="map" class="map-view">
+                            </div>
+{#                        </div>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+        </section>
+    </div>
 
     </div>
 {% endblock %}
