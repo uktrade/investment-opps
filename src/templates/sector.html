@@ -21,19 +21,4 @@
 {% endblock %}
 {% block page_content %}
 {% include "partials/sections.html" %}
-<div class="container">
-{% for industry in industries %}
-    {% if path == base+'/industries/'+industry.link %}
-        {% if industry.priority == 'YES' %}
-            <section id="iopps-callout" class="dit-content-section">
-                <div class="col-md-10 col-sm-10 dit-main-content__body">
-                    <header>
-                        <h2>Investment Opportunities</h2>
-                    </header>
-                    <p>Please click <a href="/{{base}}/location-guide/?industry={{industry.industry}}">here</a> to see investment opportunites in the UK related to {{ pageHeader.content.title }}</p></div>
-            </section>
-        {% endif %}
-    {% endif %}
-{% endfor %}
-</div>
 {% endblock %}
