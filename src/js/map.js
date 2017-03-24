@@ -23,6 +23,7 @@ function Map(container) {
   var ZONES = 'zones'
 
   var svg
+  var tooltip
   var width
   var height
   var map
@@ -48,19 +49,21 @@ function Map(container) {
   }
 
   function createSvg() {
+    var c = d3.select('#' + container.attr('id'))
+    tooltip = c.append('div').attr('class', 'tooltip hidden')
 
-    var zoom = d3.zoom()
-      .scaleExtent([0.8, 9])
-      .on('zoom', move)
+    // var zoom = d3.zoom()
+    //   .scaleExtent([0.8, 9])
+    //   .on('zoom', move)
 
     /* Using following stackoverflow answer to make svg responsive
      * http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
      */
-    return d3.select('#' + container.attr('id'))
+    return c
       .append('div')
       .attr('class', 'svg-container') //container class to make it responsive
       .on('click', reset)
-      .call(zoom)
+      // .call(zoom)
       .append('svg')
       //responsive SVG needs these 2 attributes and no width and height attr
       .attr('preserveAspectRation', 'xMinYMin meet')
@@ -175,6 +178,7 @@ function Map(container) {
 
       function appendCircles() {
         //append new circles inserted with new data
+
         g.append('circle')
           .attr('class', 'point ' + property)
           .attr('cx', function(d) {
@@ -186,6 +190,10 @@ function Map(container) {
           .transition()
           .attr('r', getDiameter)
       }
+
+      // function getZindex(d) {
+      //   return 'z-index:' + (1000 - Math.round(d.properties[property]))
+      // }
 
       function getDiameter(d) {
         if (filter[property]) {
@@ -284,6 +292,22 @@ function Map(container) {
 
   function refreshFilter(filter) {
     refreshCircles(filter)
+  }
+
+  function handleMouseOver() {
+    var mouse = d3.mouse(svg.node()).map(function(d) {
+      return parseInt(d)
+    })
+
+    var position = 'left:' + (mouse[0] + 20) + 'px;top:' + (mouse[1]) + 'px'
+    debug('Mouse', mouse)
+    tooltip.classed('hidden', false)
+      .attr('style', position)
+      .html(this.__data__.id)
+  }
+
+  function handleMouseOut() {
+    tooltip.classed('hidden', true)
   }
 
   //expose map function
