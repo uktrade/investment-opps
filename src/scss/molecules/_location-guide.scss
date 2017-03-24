@@ -4,10 +4,10 @@
   overflow: hidden;
 
   h2 {
-  	margin-bottom: 0px;
+    margin-bottom: 0px;
   }
 
-    h3 {
+  h3 {
     font-weight: 100;
   }
 
@@ -23,76 +23,73 @@
     margin-left: 4px;
   }
 
-  &__body{
-    .region-selector{
-    position: absolute;
-    margin: 20px 0px 0px 15px;
+  &__body {
+    .region-selector {
+      position: absolute;
+      margin: 20px 0px 0px 15px;
 
-    @media (max-width: $screen-xs-max) {
-    position: relative;
-    margin: 20px 0px 0px 15px;
-    }
+      @media (max-width: $screen-xs-max) {
+        position: relative;
+        margin: 20px 0px 0px 15px;
+      }
 
-    label{
-      margin-right: 10px;
+      label {
+        margin-right: 10px;
+      }
     }
   }
-}
 
-   &__heading {
+  &__heading {
     font-size: 32px;
     font-weight: 100;
 
     @media (max-width: $screen-xs-max) {
       font-size: 24px;
     }
-}
+  }
 
-	&__subheading {
-	   font-size: 28px;
-	   margin: flip-side-values(40px 0 0 0) !important;
-	}
+  &__subheading {
+    font-size: 28px;
+    margin: flip-side-values(40px 0 0 0) !important;
+  }
 
-  &__options{
+  &__options {
 
-      overflow: hidden;
+    overflow: hidden;
 
-  		input[type=checkbox]{
-  		margin-right: 15px;
-      margin-bottom: 12px;
-  		}
-  		label{
-  			font-weight: 100;
-  		}
+    label {
+      display: inline;
+      font-weight: 100;
+    }
 
-      @media (min-width: $screen-md-max) {
+    @media (min-width: $screen-md-max) {
       margin: 15px 0px 140px 0px;
     }
   }
 
-  	#sector-selector, #susbector-selector {
-  		margin-top: 20px;
-  	}
+  #sector-selector, #susbector-selector {
+    margin-top: 20px;
+  }
 
-.industry-selection{
+  .industry-selection {
     margin-bottom: 35px;
     @media (max-width: $screen-sm-max) {
-    margin-bottom: 30px;
+      margin-bottom: 30px;
     }
-}
+  }
 }
 
-.js-display{
+.js-display {
   display: none;
 }
 
-.bottom-buffers{
-	margin-bottom: 40px;
+.bottom-buffers {
+  margin-bottom: 40px;
 }
 
 @media (min-width: $screen-md-max) {
-.map-view{
-  //margin-top: 10px
+  .map-view {
+    //margin-top: 10px
   }
 }
 
@@ -103,3 +100,31 @@
   cursor: pointer;
 }
 
+.input-filter {
+  display: none;
+}
+
+.input-filter + label:before {
+  background-color: white;
+  border: 1px solid #cacece;
+  border-radius: 4px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+  display: inline-block;
+  transition-duration: 0.3s;
+  width: 16px;
+  height: 16px;
+  content: '';
+  margin-right: 15px;
+}
+
+#significant-businesses:checked + label:before {
+  background-color: #13B240;
+}
+
+#innovation-centres:checked + label:before {
+  background-color: #FF9656;
+}
+
+#enterprise-zones:checked + label:before {
+  background-color: #FFCD00;
+}
