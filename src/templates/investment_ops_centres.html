@@ -1,0 +1,62 @@
+{% extends "base/index.html" %}
+{% import "partials/markups.html" as markups %}
+
+{% block content %}
+
+{% include "partials/header-nav.html" %}
+
+{% include "partials/top-bar.html" %}
+
+{% include "partials/jumbotron-short.html" %}
+
+<section class="dit-toc">
+      {% include "partials/breadcrumb.html" %}
+</section>
+
+{% block page_content %}
+
+<div class="container">
+<div id="table-view">
+<div class="table-responsive">
+  <table id="opps-table" class="table" style="margin-top:10px;">
+    <thead style=" font-size: 16px;">
+      <tr>
+        <th>{{ labels.investment_optslocation[locale.code] }}</th>
+        <th>{{ labels.sectors.aerospace[locale.code] }}</th>        
+        <th>{{ labels.sectors.advanced_manufacturing[locale.code] }}</th>
+        <th>{{ labels.sectors.automotive[locale.code] }}</th>
+        <th>{{ labels.sectors.creative[locale.code] }}</th>
+        <th>{{ labels.sectors.energy[locale.code] }}</th>
+        <th>{{ labels.sectors.financial_services[locale.code] }}</th>
+        <th>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</th>
+        <th>{{ labels.sectors.health_and_life_sciences[locale.code] }}</th>
+        <th>{{ labels.sectors.retail[locale.code] }}</th>
+        <th>{{ labels.sectors.technology[locale.code] }}</th>
+      </tr>
+    </thead>
+    <tbody>
+    {% for s in data_points_sector_reduce | sort(attribute='name') %}
+      <tr>
+        <td>{{ s.name }}</td>
+        <td>{{ s.industry.aerospace.centres_concentration | null }}</td> 
+        <td>{{ s.industry.advanced_manufacturing.centres_concentration | null }}</td> 
+        <td>{{ s.industry.automotive.centres_concentration | null }}</td> 
+        <td>{{ s.industry.creative.centres_concentration | null }}</td> 
+        <td>{{ s.industry.energy_generation.centres_concentration | null }}</td> 
+        <td>{{ s.industry.financial_services.centres_concentration | null }}</td> 
+        <td>{{ s.industry.food_and_drink_manufacturing.centres_concentration | null }}</td> 
+        <td>{{ s.industry.health_and_life_sciences.centres_concentration | null }}</td> 
+        <td>{{ s.industry.retail.centres_concentration | null }}</td> 
+        <td>{{ s.industry.technology.centres_concentration | null }}</td> 
+        <td></td> 
+        </tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+</div>
+</div>
+{% endblock %}
+
+
+{% endblock %}
