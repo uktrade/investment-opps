@@ -1,4 +1,19 @@
 
+.hidden {
+  display: none;
+}
+
+div.tooltip {
+  color: #222;
+  background: #fff;
+  padding: .5em;
+  text-shadow: #f5f5f5 0 1px 0;
+  border-radius: 2px;
+  box-shadow: 0px 0px 2px 0px #a6a6a6;
+  opacity: 0.9;
+  position: absolute;
+}
+
 .background {
   fill: #fdfdfc;
   pointer-events: all;
@@ -8,7 +23,7 @@
   cursor: pointer;
   fill: #00549F;
   stroke: #fdfdfc;
-  stroke-width: 1.5px;
+  //stroke-width: 1.5px;
   // stroke-dasharray: 2,2;
   // stroke-linejoin: round;
 }
@@ -124,9 +139,30 @@
   text-anchor: middle;
 }
 
+.svg-container {
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  padding-bottom: 121%; /* aspect ratio */
+  vertical-align: top;
+  overflow: hidden;
+}
+
+.svg-content-responsive {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+}
 
 .point {
   fill-opacity: .7;
+  stroke: #fdfdfc;
+  stroke-width: 0.05px;
+}
+
+.point:hover {
+  stroke-width:0.1px;
 }
 
 .businesses {

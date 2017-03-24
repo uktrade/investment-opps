@@ -20,37 +20,33 @@ function init() {
 
 function InvestmentOpps(container) {
   var map
-  var table
   var data //main data
   var region // active region
   var filteredData
-  var currentTab = 'tab-map' //options: tab-map, tab-table
 
   //elements
+  var clustersList = container.find('#notable-clusters')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var businessFilter = container.find('#significant-businesses')
   var zonesFilter = container.find('#enterprise-zones')
   var centresFilter = container.find('#innovation-centres')
+  var formBody = $('#sidebar')
+  var formWrapper = formBody.find('.dit-form-wrapper')
+  var stepWrappers = formBody.find('.setup-content')
+  var currentStep = 1
+  var goBack = container.find('#go-back')
 
+  adjustSize()
   initMap()
-  initTable()
-  initTabs()
   loadData().then(filter)
   watch()
+  back()
 
   function initMap() {
     map = require('./map')(container.find('#map'))
     map.onSelect(filterRegion)
   }
-
-  function initTable() {
-    table = $('#opps-table')
-    table.bootstrapTable({
-      data: []
-    })
-  }
-
 
   function loadData() {
     var file = 'data_points_sector.json'
@@ -63,50 +59,22 @@ function InvestmentOpps(container) {
 
   function watch() {
     sectorSelector.change(filter)
-    businessFilter.change(filter)
-    centresFilter.change(filter)
-    zonesFilter.change(filter)
     regionSelector.change(changeRegion)
+    businessFilter.change(filterChanged)
+    centresFilter.change(filterChanged)
+    zonesFilter.change(filterChanged)
   }
 
-  function initTabs() {
-    var controls = $('[data-tab-control]')
-    var tabs = []
-    controls.each(function() {
-      tabs.push($('#' + $(this).data('tab-control')))
+  function back() {
+    goBack.click(function(){
+      filterRegion()
+      map.selectRegion()
     })
-
-    controls
-      .click(function() {
-        var goto = $(this).data('tab-control')
-        if (currentTab === goto) {
-          return
-        }
-        debug('Changing tab to ', goto)
-        changeTab(goto)
-        render()
-      })
-
-
-    function changeTab(goto) {
-      currentTab = goto
-      controls.each(function(index) {
-        var control = $(this)
-        var tab = tabs[index]
-        if (control.data('tab-control') === goto) {
-          control.addClass('active')
-          tab.addClass('in active')
-        } else {
-          control.removeClass('active')
-          tab.removeClass('in active')
-        }
-
-      })
-    }
   }
 
   function changeRegion() {
     var name = $(this).val()
+    console.log(name)
     filterRegion(name)
     map.selectRegion(name)
   }
@@ -115,17 +83,20 @@ function InvestmentOpps(container) {
     debug('region: ', name)
     if (name) {
       region = name
+      gotoStep(2)
     } else {
       region = null
+      gotoStep(1)
     }
     regionSelector.val(name)
     filter()
   }
 
+
   function filter() {
     var industry = sectorSelector.val()
     if (!industry) {
-      filteredData = []
+      filteredData = TAFFY([])()
       render()
       return
     }
@@ -136,56 +107,39 @@ function InvestmentOpps(container) {
       _filter.region = region
     }
     debug('Filtering data by', _filter)
-    filteredData = data(_filter).get()
+    filteredData = data(_filter)
     render()
+    updateNotableClusters(region)
   }
 
-  function render() {
-    var points = {
+  function getFilters() {
+    return {
       businesses: businessFilter.is(':checked'),
       centres: centresFilter.is(':checked'),
       zones: zonesFilter.is(':checked'),
     }
-    if (currentTab === 'tab-table') {
-      debug('Table', filteredData)
-      renderColumns(points)
-      table.bootstrapTable('load', filteredData)
-    } else if (currentTab === 'tab-map') {
-      map.refresh(filteredData, points)
-    }
+
   }
 
-
-  function renderColumns(points) {
-    if (points.businesses) {
-      showColumn('business_concentration')
-    } else {
-      hideColumn('business_concentration')
-    }
-
-    if (points.centres) {
-      showColumn('centres_concentration')
-    } else {
-      hideColumn('centres_concentration')
-    }
-
-    if (points.zones) {
-      showColumn('zone_available')
-    } else {
-      hideColumn('zone_available')
-    }
+  function filterChanged() {
+    map.refreshFilter(getFilters())
   }
 
-  function showColumn(field) {
-    debug('Showing column', field)
-    table.bootstrapTable('showColumn', field)
+  function render() {
+    map.refresh(filteredData.get(), getFilters())
   }
 
-  function hideColumn(field) {
-    debug('Hiding column', field)
-    table.bootstrapTable('hideColumn', field)
+  function updateNotableClusters(region) {
+    clustersList.empty()
+    if (!region) {
+      return
+    }
+    var clusters = filteredData.order('businesses desc').limit(3).get()
+    debug('Notable clusters are:', clusters)
+    $.each(clusters, function(index, cluster) {
+      clustersList.append($('<li>').html(cluster.name))
+    })
   }
-
 
   function fetch(url) {
     debug('Fetching data', url)
@@ -196,4 +150,78 @@ function InvestmentOpps(container) {
   function fail(err) {
     error('Error:', err)
   }
+
+  function gotoStep(step) {
+    if (step === currentStep) {
+      return
+    }
+    var current = formWrapper.find('#step-' + currentStep)
+    debug('Current', current)
+    // if (step > currentStep) {
+    //   nextNav.removeAttr('disabled')
+    // }
+    go()
+
+    function go() {
+      debug('Changing step from ', currentStep, ' to ', step)
+      var target = formWrapper.find('#step-' + step)
+      debug('Target', target)
+      // currentNav.removeClass('active-selection')
+      // nextNav.addClass('active-selection')
+      currentStep = step
+      adjustSize(true)
+    }
+  }
+
+
+  function adjustSize(animate) {
+    debug('Adjusting size')
+    var width = formBody.width()
+    debug('Form body size', width)
+    $(stepWrappers).each(function() {
+      $(this).css('width', width)
+    })
+
+    wrap(formWrapper, stepWrappers.length, width)
+    shift(formWrapper, (-(currentStep - 1) * width), animate)
+  }
+
+  function wrap(element, length, width) {
+    //wrap into mother div
+    var isMother = $('#mother').length
+    if (!isMother) {
+      element.wrap('<div id="mother" />')
+    }
+    //assign height width and overflow hidden to mother
+    $('#mother').css({
+      width: function() {
+        return width
+      },
+      position: 'relative !important',
+      overflow: 'hidden'
+    })
+    //get total of image sizes and set as width for ul
+    var totalWidth = (length) * width + 5
+    element.css({
+      width: function() {
+        return totalWidth
+      }
+    })
+
+  }
+
+  function shift(element, amount, animate) {
+    debug('shifting:', element, ' amount:', amount)
+    var margin = 'margin-left'
+    var style = {}
+    style[margin] = amount
+    debug('Margin:', style[margin])
+    if (animate) {
+      element.animate(style, 500)
+    } else {
+      element.css(style)
+    }
+
+  }
+
 }
