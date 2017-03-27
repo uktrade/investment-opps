@@ -22,7 +22,7 @@
     <thead style=" font-size: 16px;">
       <tr>
         <th>{{ labels.investment_optslocation[locale.code] }}</th>
-        <th>{{ labels.sectors.aerospace[locale.code] }}</th>        
+        <th>{{ labels.sectors.aerospace[locale.code] }}</th>
         <th>{{ labels.sectors.advanced_manufacturing[locale.code] }}</th>
         <th>{{ labels.sectors.automotive[locale.code] }}</th>
         <th>{{ labels.sectors.creative[locale.code] }}</th>
@@ -38,17 +38,17 @@
     {% for s in data_points_sector_reduce | sort(attribute='name') %}
       <tr>
         <td>{{ s.name }}</td>
-        <td>{{ s.industry.aerospace.zone_available | null }}</td> 
-        <td>{{ s.industry.advanced_manufacturing.zone_available | null }}</td> 
-        <td>{{ s.industry.automotive.zone_available | null }}</td> 
-        <td>{{ s.industry.creative.zone_available | null }}</td> 
-        <td>{{ s.industry.energy_generation.zone_available | null }}</td> 
-        <td>{{ s.industry.financial_services.zone_available | null }}</td> 
-        <td>{{ s.industry.food_and_drink_manufacturing.zone_available | null }}</td> 
-        <td>{{ s.industry.health_and_life_sciences.zone_available | null }}</td> 
-        <td>{{ s.industry.retail.zone_available | null }}</td> 
-        <td>{{ s.industry.technology.zone_available | null }}</td> 
-        <td></td> 
+        <td>{{ labels[s.industry.aerospace.zone_available | yesno ][locale.code]}}</td>
+        <td>{{ labels[s.industry.advanced_manufacturing.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.automotive.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.creative.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.energy_generation.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.financial_services.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.food_and_drink_manufacturing.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.health_and_life_sciences.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.retail.zone_available | yesno][locale.code] }}</td>
+        <td>{{ labels[s.industry.technology.zone_available | yesno][locale.code] }}</td>
+        <td></td>
         </tr>
     {% endfor %}
     </tbody>
