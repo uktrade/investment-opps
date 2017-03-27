@@ -109,13 +109,13 @@ function heroVideoReload() {
 
 function smoothScroll() {
   debug('Applying smooth scroll')
-    //smoothscrolling and positioning
+  //smoothscrolling and positioning
   $('a[href^="#"]').on('click', function(e) {
     // prevent default anchor click behavior
     e.preventDefault()
-      // store hash
+    // store hash
     var hash = this.hash
-      // animate
+    // animate
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top
@@ -136,7 +136,10 @@ function addActive() {
   } else if (url.match(/\/setup-guide\//)) {
     child = 'setup-guide/'
     debug('Adding active style to setup guide')
-  } else if (url.match('\/location-guide\/')) {
+  } else if (url.match('\/investment-opportunities\/')){
+    child = 'investment-opportunities/'
+    debug('Adding active style to setup guide')
+  }else if (url.match('\/location-guide\/')) {
     child = 'location-guide/'
     debug('Adding active style to location guide')
   } else if (url.match(/\/\w{2,3}\/$/)) {
@@ -252,7 +255,7 @@ function getResults(size, start) {
 
   /* eslint-disable quotes */
   var searchUrl = gateway + "/?q=(and field='language' '" + language + "'(and field='country' '" + country + "' (or (term boost=2 field='pagetitle' '" + searchInput + "') (term field='content' '" + searchInput + "') (prefix boost=2 field='pagetitle' '" + searchInput + "') (prefix field='content' '" + searchInput + "'))))&size=" + size + "&start=" + start + "&q.parser=structured"
-    /* eslint-enable quotes */
+  /* eslint-enable quotes */
 
   if (searchInput === '') {
     $('.search-results-block').hide()
@@ -326,7 +329,7 @@ function search() {
   var searchResultsSize = 10
   var debouncedSearch = debounce(function() {
     getResults(searchResultsSize, 0)
-      //   $('.dit-search-spinner').css('z-index', 15)
+    //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
   $('#searchInput').on('input', debouncedSearch)
 }
@@ -489,10 +492,10 @@ function modal($) {
 
       transition ?
         that.$dialog // wait for modal to slide in
-          .one('bsTransitionEnd', function () {
-            that.$element.trigger('focus').trigger(e)
-          })
-          .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+        .one('bsTransitionEnd', function () {
+          that.$element.trigger('focus').trigger(e)
+        })
+        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
         that.$element.trigger('focus').trigger(e)
     })
   }
@@ -522,8 +525,8 @@ function modal($) {
 
     $.support.transition && this.$element.hasClass('fade') ?
       this.$element
-        .one('bsTransitionEnd', $.proxy(this.hideModal, this))
-        .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
+      .one('bsTransitionEnd', $.proxy(this.hideModal, this))
+      .emulateTransitionEnd(Modal.TRANSITION_DURATION) :
       this.hideModal()
   }
 
@@ -603,8 +606,8 @@ function modal($) {
 
       doAnimate ?
         this.$backdrop
-          .one('bsTransitionEnd', callback)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        .one('bsTransitionEnd', callback)
+        .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
         callback()
 
     } else if (!this.isShown && this.$backdrop) {
@@ -616,8 +619,8 @@ function modal($) {
       }
       $.support.transition && this.$element.hasClass('fade') ?
         this.$backdrop
-          .one('bsTransitionEnd', callbackRemove)
-          .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
+        .one('bsTransitionEnd', callbackRemove)
+        .emulateTransitionEnd(Modal.BACKDROP_TRANSITION_DURATION) :
         callbackRemove()
 
     } else if (callback) {
@@ -848,7 +851,7 @@ function collapse($) {
     if (!$.support.transition) return complete.call(this)
 
     this.$element
-      [dimension](0)
+    [dimension](0)
       .one('bsTransitionEnd', $.proxy(complete, this))
       .emulateTransitionEnd(Collapse.TRANSITION_DURATION)
   }
