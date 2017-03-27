@@ -1,7 +1,17 @@
 // location-guide.scss
 
+#investment-opps-container {
+  white-space: nowrap;
+  margin-top: 40px;
+  padding-left: 0;
+
+  @media (max-width: $screen-xs-max) {
+    //
+  }
+}
+
 .dit-iopps-section {
-  overflow: hidden;
+  //overflow: hidden;
 
   h2 {
     margin-bottom: 0px;
@@ -77,6 +87,11 @@
       margin-bottom: 30px;
     }
   }
+}
+
+.dit-iopps-sidebar {
+  z-index: 10;
+  white-space: normal;
 }
 
 .js-display {

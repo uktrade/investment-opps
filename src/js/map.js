@@ -259,7 +259,7 @@ function Map(container) {
     if (selectCallback) {
       window.setTimeout(function() {
         selectCallback()
-      }, 700)
+      }, 50)
     }
   }
 

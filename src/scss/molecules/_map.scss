@@ -29,7 +29,7 @@ div.tooltip {
 }
 
 .active {
-  fill: #9B999B;
+  fill: #424242;
 }
 
 /*.region.SCT {*/
@@ -54,7 +54,7 @@ div.tooltip {
 /*}*/
 
 .region.IRL {
-  fill: none;
+  fill: none !important;
   stroke: #aaa;
   stroke-dasharray: 2,2;
   stroke-linejoin: round;
@@ -145,7 +145,7 @@ div.tooltip {
   width: 100%;
   padding-bottom: 121%; /* aspect ratio */
   vertical-align: top;
-  overflow: hidden;
+  //overflow: hidden;
 }
 
 .svg-content-responsive {
@@ -153,6 +153,10 @@ div.tooltip {
   position: absolute;
   top: 10px;
   left: 0;
+}
+
+svg:not(:root) {
+  overflow: visible;
 }
 
 .point {
