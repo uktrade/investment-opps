@@ -5,7 +5,7 @@ var error = logger.error
 var debug = logger.debug
 var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
 var ratio = 1.21
-var scale = 6.5
+var scale = 3.5
 
 
 module.exports = init
@@ -52,9 +52,9 @@ function Map(container) {
     var c = d3.select('#' + container.attr('id'))
     tooltip = c.append('div').attr('class', 'tooltip hidden')
 
-    // var zoom = d3.zoom()
-    //   .scaleExtent([0.8, 9])
-    //   .on('zoom', move)
+    var zoom = d3.zoom()
+      .scaleExtent([1,1])
+      .on('zoom', move)
 
     /* Using following stackoverflow answer to make svg responsive
      * http://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js#25978286
@@ -102,9 +102,9 @@ function Map(container) {
   function drawMap(svg) {
     var map = {}
     map.g = svg.append('g')
-    return $.getJSON(_assets + 'map.json')
+    return $.getJSON(_assets + 'regions-topo.json')
       .then(function(uk) {
-        map.projection = d3.geoAlbers()
+        map.projection = d3.geoMercator()
           .center([0, 55.4])
           .rotate([4.5, 0])
           .scale(width * scale)
@@ -114,7 +114,7 @@ function Map(container) {
           .projection(map.projection)
 
         map.g.selectAll('g')
-          .data(topojson.feature(uk, uk.objects.collection).features)
+          .data(topojson.feature(uk, uk.objects.regions).features)
           .enter()
           .append('g')
           .attr('class', function(d) {
