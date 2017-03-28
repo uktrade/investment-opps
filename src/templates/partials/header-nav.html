@@ -17,7 +17,11 @@
                     <li><a href="/{{base}}/">{{ labels.home[locale.code] }}</a></li>
                     <li><a href="/{{base}}/setup-guide/">{{ labels.setup_guide[locale.code] }}</a></li>
                     <li><a href="/{{base}}/industries/">{{ labels.industries[locale.code] }}</a></li>
+                {% if (locale.language === 'en') or (locale.language==='de') or(locale.language==='zh') %}
                     <li><a href="/{{base}}/investment-opportunities/">{{ labels.investment_opportunities[locale.code] }}</a></li>
+                {% else %}
+                    <li><a href="/{{base}}/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
+                {% endif %}
                     <li><a href="https://search.invest.great.gov.uk/{{locale.country}}/{{locale.language}}/search/"> {{ labels.search[locale.code] }}</a></li>
                 </ul>
                 <span><a href="/{{base}}/contact/" class="dit-btn--contact visible-xs-inline-block">{{ labels.contact[locale.code] }}</a></span>
@@ -28,7 +32,11 @@
                 <li><a href="/{{base}}/">{{ labels.home[locale.code] }}</a></li>
                 <li><a href="/{{base}}/setup-guide/">{{ labels.setup_guide[locale.code] }}</a></li>
                 <li><a href="/{{base}}/industries/">{{ labels.industries[locale.code] }}</a></li>
+                {% if (locale.language === 'en') or (locale.language==='de') or(locale.language==='zh') %}
                 <li><a id="iopps-link" href="/{{base}}/investment-opportunities/">{{ labels.investment_opportunities[locale.code] }}</a></li>
+                {% else %}
+                <li><a href="/{{base}}/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
+                {% endif %}
                 <li><a id="searchBtn" href="https://search.invest.great.gov.uk/{{locale.country}}/{{locale.language}}/search/"> {{ labels.search[locale.code] }}</a></li>
                 <!--<li style="cursor: pointer;"><a class="search-button" href="https://search.invest.great.gov.uk/{{base}}/search/"> {{ labels.search[locale.code] }}-->
                 <!--<span class="glyphicon glyphicon-search dit-main-search__glyph" aria-hidden="true"></span></a></li>-->
