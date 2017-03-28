@@ -22,7 +22,7 @@
     <thead style=" font-size: 16px;">
       <tr>
         <th>{{ labels.investment_optslocation[locale.code] }}</th>
-        <th>{{ labels.sectors.aerospace[locale.code] }}</th>        
+        <th>{{ labels.sectors.aerospace[locale.code] }}</th>
         <th>{{ labels.sectors.advanced_manufacturing[locale.code] }}</th>
         <th>{{ labels.sectors.automotive[locale.code] }}</th>
         <th>{{ labels.sectors.creative[locale.code] }}</th>
@@ -38,17 +38,17 @@
     {% for s in data_points_sector_reduce | sort(attribute='name') %}
       <tr>
         <td>{{ s.name }}</td>
-        <td>{{ s.industry.aerospace.business_concentration | null }}</td> 
-        <td>{{ s.industry.advanced_manufacturing.business_concentration | null }}</td> 
-        <td>{{ s.industry.automotive.business_concentration | null }}</td> 
-        <td>{{ s.industry.creative.business_concentration | null }}</td> 
-        <td>{{ s.industry.energy_generation.business_concentration | null }}</td> 
-        <td>{{ s.industry.financial_services.business_concentration | null }}</td> 
-        <td>{{ s.industry.food_and_drink_manufacturing.business_concentration | null }}</td> 
-        <td>{{ s.industry.health_and_life_sciences.business_concentration | null }}</td> 
-        <td>{{ s.industry.retail.business_concentration | null }}</td> 
-        <td>{{ s.industry.technology.business_concentration | null }}</td> 
-        <td></td> 
+        <td>{{ labels['concentration_' + s.industry.aerospace.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.advacned_manufacturing.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.automotive.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.creative.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.energy_generation.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.financial_services.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.food_and_drink_manufacturing.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.health_and_life_sciences.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.retail.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td>{{ labels['concentration_' + s.industry.technology.business_concentration | null ][locale.code] | default('-', true) }}</td>
+        <td></td>
         </tr>
     {% endfor %}
     </tbody>
