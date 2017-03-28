@@ -20,7 +20,7 @@
                 {% if (locale.language === 'en') or (locale.language==='de') or(locale.language==='zh') %}
                     <li><a href="/{{base}}/investment-opportunities/">{{ labels.investment_opportunities[locale.code] }}</a></li>
                 {% else %}
-                    <li><a href="/{{base}}/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
+                    <li><a href="/{{base}}/investment-opportunities/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
                 {% endif %}
                     <li><a href="https://search.invest.great.gov.uk/{{locale.country}}/{{locale.language}}/search/"> {{ labels.search[locale.code] }}</a></li>
                 </ul>
@@ -35,7 +35,7 @@
                 {% if (locale.language === 'en') or (locale.language==='de') or(locale.language==='zh') %}
                 <li><a id="iopps-link" href="/{{base}}/investment-opportunities/">{{ labels.investment_opportunities[locale.code] }}</a></li>
                 {% else %}
-                <li><a href="/{{base}}/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
+                <li><a href="/{{base}}/investment-opportunities/location-guide">{{ labels.location_guide[locale.code] }}</a></li>
                 {% endif %}
                 <li><a id="searchBtn" href="https://search.invest.great.gov.uk/{{locale.country}}/{{locale.language}}/search/"> {{ labels.search[locale.code] }}</a></li>
                 <!--<li style="cursor: pointer;"><a class="search-button" href="https://search.invest.great.gov.uk/{{base}}/search/"> {{ labels.search[locale.code] }}-->
