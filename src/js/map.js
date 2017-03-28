@@ -104,10 +104,10 @@ function Map(container) {
     map.g = svg.append('g')
     return $.getJSON(_assets + 'map.json')
       .then(function(uk) {
-        map.projection = d3.geoAlbers()
+        map.projection = d3.geoMercator()
           .center([0, 55.4])
-          .rotate([4.5, 0])
-          .scale(width * scale)
+          .rotate([6.5, 0])
+          .scale(width * scale * 0.45)
           .translate([width / 2, height / 2])
 
         map.path = d3.geoPath()
@@ -229,7 +229,7 @@ function Map(container) {
     var border = {}
     border.x = (bounds[0][0] + bounds[1][0]) / 2
     border.y = (bounds[0][1] + bounds[1][1]) / 2
-    border.scale = .7 / Math.max(dx / width, dy / height)
+    border.scale = .9 / Math.max(dx / width, dy / height)
 
     var x = border.x
     var y = border.y

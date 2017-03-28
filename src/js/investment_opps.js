@@ -34,17 +34,23 @@ function InvestmentOpps(container) {
   var businessFilter = container.find('#significant-businesses')
   var zonesFilter = container.find('#enterprise-zones')
   var centresFilter = container.find('#innovation-centres')
-  var formBody = $('#sidebar')
+  var closeRegion = container.find('#close')
+  var bodyWidth = $('body').width()
+  var mapContainer = container.find('#map-container')
 
   initMap()
   loadData().then(filter)
   watch()
+  close()
   filters.hide()
   details.hide()
 
   function initMap() {
     map = require('./map')(container.find('#map'))
     map.onSelect(filterRegion)
+    if (bodyWidth <= 768) {
+      mapContainer.detach().insertAfter('#sidebar')
+    }
   }
 
   function loadData() {
@@ -62,6 +68,13 @@ function InvestmentOpps(container) {
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)
     zonesFilter.change(filterChanged)
+  }
+
+  function close() {
+    closeRegion.click(function(){
+      filterRegion()
+      map.selectRegion()
+    })
   }
 
   function changeRegion() {
@@ -96,7 +109,6 @@ function InvestmentOpps(container) {
       industry: sectorSelector.val()
     }
     filters.show(750)
-    instructions.html('Click on a region to see more details')
     if (region) {
       _filter.region = region
     }

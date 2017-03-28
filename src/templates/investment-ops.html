@@ -17,17 +17,16 @@
     {#        {% include "partials/breadcrumb.html" %}#}
     {#    </section>#}
     <div id="investment-opps-container">
-        <section id="sidebar" class="dit-iopps-sidebar col-md-3">
-            {#            <div class="dit-form-wrapper">#}
+        <section id="sidebar" class="dit-iopps-sidebar col-sm-3">
             <div class="row setup-content" id="step-1">
-                <div class="dit-iopps-sidebar__body col-md-12">
+                <div class="dit-iopps-sidebar__body col-sm-12">
                     <header>
                         <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
                     </header>
                     <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
                     <div id="sectors" class="row">
-                        <p class="col-md-11 col-xs-12">{{ labels.investment_select_industry[locale.code] }}</p>
-                        <select class="col-md-11 col-xs-11" class="form-control" id="sector-selector" required>
+                        <label for="sector-selector" class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
+                        <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
                             <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
                             <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
                             <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
@@ -43,7 +42,7 @@
                     </div>
                     <hr>
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12">
                             <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
                         </div>
                     </div>
@@ -52,43 +51,42 @@
                             <input class="input-filter" id="significant-businesses" type="checkbox"
                                    name="significant_business"
                                    value="" checked/>
-                            <label for="significant-businesses" class="col-md-12 col-xs-12">
+                            <label for="significant-businesses" class="col-sm-12 col-xs-12">
                                 {{ labels.investment_opts_businesses[locale.code] }}
                                 <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
                             </label>
                             <input class="input-filter" id="innovation-centres" type="checkbox" name="innovation"
                                    value=""/>
-                            <label for="innovation-centres" class="col-md-12 col-xs-12">
+                            <label for="innovation-centres" class="col-sm-12 col-xs-12">
                                 {{ labels.investment_opts_centres_of_excellence[locale.code] }}
                                 <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
                             </label>
                             <input class="input-filter" id="enterprise-zones" type="checkbox" name="enterprise_zone"
                                    value=""/>
-                            <label for="enterprise-zones" class="col-md-12 col-xs-12">
+                            <label for="enterprise-zones" class="col-sm-12 col-xs-12">
                                 {{ labels.investment_opts_enterprise_zones[locale.code] }}
                                 <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
                             </label>
                         </div>
                         <p id="form-instructions" style="font-size:12px; float: right;
-    margin-right: 15px;">To start select a sector</p>
+    margin-right: 15px;">Click on a region to see more details</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="sidebar-details" class="dit-iopps-sidebar col-md-3">
+        <section id="sidebar-details" class="dit-iopps-sidebar col-sm-3">
             <div class="row setup-content"
                  id="step-2">
-                <div class="dit-iopps-sidebar__body col-md-12">
-{#                    <div id="go-back">#}
-{#                        <span class="glyphicon glyphicon-arrow-left close-search-icon"></span>#}
-{#                        Back#}
-{#                    </div>#}
+                <div class="dit-iopps-sidebar__body col-sm-12">
+                    <div id="close" class="pull-right">
+                        <span class="glyphicon glyphicon-remove dit-close-icon" style="margin-top: 10px;"></span>
+                    </div>
                     <header>
                         <h2>{{ labels.investment_opts_region[locale.code] }}</h2>
                     </header>
                     <div class="row">
-                        <select class="col-md-11 col-xs-11" name="regions" id="region-selector">
+                        <select class="col-sm-11 col-xs-11" name="regions" id="region-selector">
                             <option value="" selected>All</option>
                             <option value="Scotland">Scotland</option>
                             <option value="Northern Ireland">Northern Ireland</option>
@@ -105,42 +103,41 @@
                         </select>
                     </div>
                     <h3>Notable clusters</h3>
-                    <div id="sectors" class="row">
+                    <div class="row">
                         <ul id="notable-clusters">
                         </ul>
                     </div>
                     <hr>
                     <h3>Regeneration opportunities</h3>
-                    <div id="sectors" class="row">
-                        <p class="col-md-11 col-xs-12">Some file here</p>
+                    <div class="row">
+                        <p class="col-sm-11 col-xs-12">Some file here</p>
                     </div>
                     <hr>
                     <h3>Related pages</h3>
-                    <div id="sectors" class="row">
+                    <div class="row">
                         <ul>
                             <li>Pages 1</li>
                             <li>Pages 2</li>
                             <li>Pages 3</li>
                         </ul>
                     </div>
-                    <div class="row" style="background-color: #0397b3; margin-top: 20px">
-                        <div class="col-md-12">
+                    <div class="row invest-call">
+                        <div class="col-sm-12">
                             <header>
                                 <h3>Ready to invest?</h3>
                             </header>
                             <p>If you are thinking about investing in the UK, get in touch with the UK's investment
                                 services team for access to insights, connections and incentives.</p>
                         </div>
-                        <button style="margin: 0 15px 10px 0;" class="dit-btn-home__video pull-right" type="button">
+                        <button class="dit-btn--call" type="button">
                             Contact us
                         </button>
                     </div>
                 </div>
             </div>
-            {#            </div>#}
         </section>
 
-        <section class="dit-iopps-section col-md-5">
+        <section id="map-container" class="dit-iopps-section col-xs-12 col-sm-5">
             <div id="map" class="map-view"></div>
         </section>
     </div>

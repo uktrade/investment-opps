@@ -1,78 +1,51 @@
-// filter-section.scss
+// dit-iopps-sidebar.scss
 .dit-iopps-sidebar {
+
+  z-index: 5;
+  white-space: normal;
 
   h2 {
     margin: 24px 0 16px 0;
 
     @media (max-width: $screen-md-max) {
-    padding-top: 15px;
+      padding-top: 15px;
     }
-}
+  }
   select {
     margin: 0px 15px;
-    color: black;
+    color: $text-colour;
+    background-color: $white;
   }
-  
+
   hr {
     color: $light-gray;
+  }
+
+  section {
+    height: inherit;
+  }
+
+  &__body {
+    background-color: $background-sidebar;
+    color: $white;
+    margin-top: 10px;
+
+  }
+
+  & .invest-call {
+    background-color: #0397b3;
+    margin-top: 20px;
+  }
 }
 
-  section{
-  height: inherit;
-  }
+.nav-tabs {
 
-    &__body {
-        background-color: $background-sidebar;
-        color: $white;
-        margin-top: 10px;
-
-    }
-
-    &__call-out{
-    display: none;
-    right: -635px;
-    color: white;
-    bottom: -25px;
-    background-color: #0397b3;
-    width: 600px;
-    position: absolute;
-    z-index: 2;
-    padding: 10px;
-
-    button{
-      margin-top: 30px;
-      border-radius: 0;
-    }
-  }
-
-  &__call-out-inline{
-    display: none;
-    color: white;
-    background-color: #0397b3;
-    padding: 10px;
-    margin: 20px 0px;
-
-    button{
-      margin-top: 10px;
-      border-radius: 0;
-    }
-  }
-
-  .row{
-    &.call-out-inline{
-      background-color: $white;
-    }
-  }
-
-
-.nav-tabs{
-  
-  li{
+  li {
     background-color: $light-gray;
     padding-left: 0;
     padding-right: 0;
 
-      .arrow-right {
+    .arrow-right {
       position: absolute;
       top: 0px;
       right: -22px;
@@ -82,38 +55,41 @@
       height: 0;
       border-top: 24px solid transparent;
       border-bottom: 22px solid transparent;
-      border-left: 22px solid $light-gray;}
+      border-left: 22px solid $light-gray;
+    }
 
-      &:hover{
+    &:hover {
       cursor: pointer !important;
       background-color: #007fa5;
       .arrow-right {
-      border-left: 22px solid #007fa5;}
+        border-left: 22px solid #007fa5;
       }
-    
-      &.active{
-        // color: white;
-        .arrow-right {
-        border-left: 22px solid #007fa5;}
-        a{
+    }
+
+    &.active {
+      // color: white;
+      .arrow-right {
+        border-left: 22px solid #007fa5;
+      }
+      a {
         background-color: #007fa5;
         border: #007fa5;
-        }
       }
+    }
 
-      a{
-        margin-right: 0px;
-        color: white !important;
-        &:hover{
+    a {
+      margin-right: 0px;
+      color: white !important;
+      &:hover {
         cursor: pointer !important;
         background-color: #007fa5;
         border: #007fa5;
       }
     }
 
-      @media (max-width: $screen-sm-max) {
-       .arrow-right {
-      display: none}
+    @media (max-width: $screen-sm-max) {
+      .arrow-right {
+        display: none
       }
     }
   }
