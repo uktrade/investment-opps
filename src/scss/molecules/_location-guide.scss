@@ -128,13 +128,13 @@
 }
 
 #significant-businesses:checked + label:before {
-  background-color: #13B240;
+  background-color: $significant-businesses;
 }
 
 #innovation-centres:checked + label:before {
-  background-color: #FF9656;
+  background-color: $innovation-centres;
 }
 
 #enterprise-zones:checked + label:before {
-  background-color: #FFCD00;
+  background-color: $enterprise-zones;
 }

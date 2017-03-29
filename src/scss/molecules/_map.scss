@@ -170,13 +170,13 @@ svg:not(:root) {
 }
 
 .businesses {
-  fill: #13B240;
+  fill: $significant-businesses;
 }
 
 .centres {
-  fill: #FF9656;
+  fill: $innovation-centres;
 }
 
 .zones {
-  fill: #FFCD00;
+  fill: $enterprise-zones;
 }
