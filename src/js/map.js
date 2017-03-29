@@ -28,7 +28,7 @@ function Map(container) {
   var height
   var map
   var active = d3.select(null)
-  var scaleZoomout = d3.scaleLinear().domain([0, 10]).range([0, 10])
+  var scaleZoomout = d3.scaleLinear().domain([0, 11]).range([0, 11])
   var scaleZoomin = d3.scaleLinear().domain([0, 10]).range([0, 4])
   var selectCallback
 
@@ -210,7 +210,7 @@ function Map(container) {
       // scale value between 0 and 10 and round to an integer
       function round(value) {
         if (value) {
-          return Math.ceil(value / 1000)
+          return Math.ceil(value / 1000) + 1
         } else {
           return 0
         }
