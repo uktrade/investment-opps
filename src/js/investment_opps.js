@@ -48,7 +48,7 @@ function InvestmentOpps(container) {
   function initMap() {
     map = require('./map')(container.find('#map'))
     map.onSelect(filterRegion)
-    if (bodyWidth <= 768) {
+    if (bodyWidth < 768) {
       mapContainer.detach().insertAfter('#sidebar')
     }
   }
