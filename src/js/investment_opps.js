@@ -26,6 +26,7 @@ function InvestmentOpps(container) {
 
   //elements
   var clustersList = container.find('#notable-clusters')
+  var clusters = container.find('#clusters')
   var sectorName = container.find('#sector-name')
   var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
@@ -51,6 +52,7 @@ function InvestmentOpps(container) {
 
 
   regenerationOpps.hide()
+  clusters.hide()
   northernPowerhouse.hide()
   midlandsEngine.hide()
 
@@ -159,9 +161,8 @@ function InvestmentOpps(container) {
   }
 
 
-  function filter(event) {
+  function filter() {
     var industry = sectorSelector.val()
-    var sector = event.data.sector
     if (!industry) {
       filteredData = TAFFY([])()
       render()
@@ -170,7 +171,7 @@ function InvestmentOpps(container) {
     var _filter = {
       industry: sectorSelector.val()
     }
-    if (mobile && sector) {
+    if (mobile && industry) {
       filters.show(50)
       $('html, body').animate({
         scrollTop: $('#filters').offset().top
@@ -204,14 +205,20 @@ function InvestmentOpps(container) {
 
   function updateNotableClusters(region) {
     clustersList.empty()
+    clusters.hide()
     if (!region) {
       return
     }
-    var clusters = filteredData.order('businesses desc').limit(3).get()
-    debug('Notable clusters are:', clusters)
-    $.each(clusters, function (index, cluster) {
+    var list = filteredData.order('businesses desc').limit(3).get()
+    debug('Notable clusters are:', list)
+    $.each(list, function (index, cluster) {
       clustersList.append($('<li>').html(cluster.name))
     })
+
+    debug('Cluster length *****' , clustersList, clustersList.length)
+    if(clustersList.length > 0) {
+      clusters.show()
+    }
   }
 
   function fetch(url) {
