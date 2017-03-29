@@ -20,56 +20,62 @@
         <section id="sidebar" class="dit-iopps-sidebar col-sm-3">
             <div class="row setup-content" id="step-1">
                 <div class="dit-iopps-sidebar__body col-sm-12">
-                    <header>
-                        <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
-                    </header>
-                    <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
-                    <div id="sectors" class="row">
-                        <label for="sector-selector" class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
-                        <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
-                            <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
-                            <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
-                            <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
-                            <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
-                            <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
-                            <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
-                            <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
-                            <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
-                            <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
-                            <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
-                            <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
-                        </select>
+                    <div id="choose-industry">
+                        <header>
+                            <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
+                        </header>
+                        <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
+                        <div id="sectors" class="row">
+                            <label for="sector-selector"
+                                   class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
+                            <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
+                                <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
+                                <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
+                                <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
+                                <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
+                                <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
+                                <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
+                                <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
+                                <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
+                                <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
+                                <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
+                                <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
+                            </select>
+                        </div>
                     </div>
                     <hr>
-                    <div class="row">
-                        <div class="col-sm-12">
-                            <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
+                    <div id="filters">
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="dit-iopps-section__options">
-                            <input class="input-filter" id="significant-businesses" type="checkbox"
-                                   name="significant_business"
-                                   value="" checked/>
-                            <label for="significant-businesses" class="col-sm-12 col-xs-12">
-                                {{ labels.investment_opts_businesses[locale.code] }}
-                                <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
-                            </label>
-                            <input class="input-filter" id="innovation-centres" type="checkbox" name="innovation"
-                                   value=""/>
-                            <label for="innovation-centres" class="col-sm-12 col-xs-12">
-                                {{ labels.investment_opts_centres_of_excellence[locale.code] }}
-                                <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
-                            </label>
-                            <input class="input-filter" id="enterprise-zones" type="checkbox" name="enterprise_zone"
-                                   value=""/>
-                            <label for="enterprise-zones" class="col-sm-12 col-xs-12">
-                                {{ labels.investment_opts_enterprise_zones[locale.code] }}
-                                <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
-                            </label>
+                        <div class="row">
+                            <div class="dit-iopps-section__options">
+                                <input class="input-filter" id="significant-businesses" type="checkbox"
+                                       name="significant_business"
+                                       value="" checked/>
+                                <label for="significant-businesses" class="col-sm-12 col-xs-12">
+                                    {{ labels.investment_opts_businesses[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
+                                </label>
+                                <input class="input-filter" id="innovation-centres" type="checkbox" name="innovation"
+                                       value=""/>
+                                <label for="innovation-centres" class="col-sm-12 col-xs-12">
+                                    {{ labels.investment_opts_centres_of_excellence[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
+                                </label>
+                                <input class="input-filter" id="enterprise-zones" type="checkbox" name="enterprise_zone"
+                                       value=""/>
+                                <label for="enterprise-zones" class="col-sm-12 col-xs-12">
+                                    {{ labels.investment_opts_enterprise_zones[locale.code] }}
+                                    <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
+                                </label>
+                                <button id="go-btn" class="dit-btn--call visible-xs" type="button">
+                                    Go
+                                </button>
+                            </div>
                         </div>
-                        <p id="form-instructions" style="font-size:12px; float: right;
-    margin-right: 15px;">Click on a region to see more details</p>
                     </div>
                 </div>
             </div>
@@ -129,7 +135,7 @@
                             <p>If you are thinking about investing in the UK, get in touch with the UK's investment
                                 services team for access to insights, connections and incentives.</p>
                         </div>
-                        <button class="dit-btn--call" type="button">
+                        <button id="test" class="dit-btn--call" type="button">
                             Contact us
                         </button>
                     </div>

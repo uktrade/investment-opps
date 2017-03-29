@@ -28,6 +28,7 @@ function InvestmentOpps(container) {
   var clustersList = container.find('#notable-clusters')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
+  var chooseInd = container.find('#choose-industry')
   var filters = container.find('.dit-iopps-section__options')
   var details = container.find('#sidebar-details')
   var instructions = container.find('#form-instructions')
@@ -35,20 +36,25 @@ function InvestmentOpps(container) {
   var zonesFilter = container.find('#enterprise-zones')
   var centresFilter = container.find('#innovation-centres')
   var closeRegion = container.find('#close')
+  var goBtn = container.find('#go-btn')
   var bodyWidth = $('body').width()
+  var bodyHeight = $('body').height()
   var mapContainer = container.find('#map-container')
+  var mobile
 
+  checkMobile(bodyWidth)
   initMap()
   loadData().then(filter)
   watch()
   close()
+  goToMap()
   filters.hide()
   details.hide()
 
   function initMap() {
     map = require('./map')(container.find('#map'))
     map.onSelect(filterRegion)
-    if (bodyWidth < 768) {
+    if (mobile) {
       mapContainer.detach().insertAfter('#sidebar')
     }
   }
@@ -56,14 +62,14 @@ function InvestmentOpps(container) {
   function loadData() {
     var file = 'data_points_sector.json'
     return fetch(file)
-      .then(function(list) {
+      .then(function (list) {
         data = TAFFY(list)
         return list
       })
   }
 
   function watch() {
-    sectorSelector.change(filter)
+    sectorSelector.change({sector: true}, filter)
     regionSelector.change(changeRegion)
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)
@@ -71,9 +77,21 @@ function InvestmentOpps(container) {
   }
 
   function close() {
-    closeRegion.click(function(){
+    closeRegion.click(function () {
+      $('html, body').animate({
+        scrollTop: $('#map').offset().top
+      }, 500)
       filterRegion()
       map.selectRegion()
+    })
+
+  }
+
+  function goToMap() {
+    goBtn.click(function () {
+      $('html, body').animate({
+        scrollTop: $("#map").offset().top
+      }, 750)
     })
   }
 
@@ -88,18 +106,26 @@ function InvestmentOpps(container) {
     debug('region: ', name)
     if (name) {
       region = name
-      details.show(500)
+      if (mobile) {
+        details.show()
+        $('html, body').animate({
+          scrollTop: $('#close').offset().top
+        }, 500)
+      } else {
+        details.show(750)
+      }
     } else {
       details.hide(350)
       region = null
     }
     regionSelector.val(name)
-    filter()
+    filter({data:{sector:false}})
   }
 
 
-  function filter() {
+  function filter(event) {
     var industry = sectorSelector.val()
+    var sector = event.data.sector
     if (!industry) {
       filteredData = TAFFY([])()
       render()
@@ -108,10 +134,16 @@ function InvestmentOpps(container) {
     var _filter = {
       industry: sectorSelector.val()
     }
-    filters.show(750)
+    if (mobile && sector) {
+      filters.show(50)
+      $('html, body').animate({
+        scrollTop: $("#filters").offset().top
+      }, 750)
+    }
     if (region) {
       _filter.region = region
     }
+    filters.show(750)
     debug('Filtering data by', _filter)
     filteredData = data(_filter)
     render()
@@ -141,7 +173,7 @@ function InvestmentOpps(container) {
     }
     var clusters = filteredData.order('businesses desc').limit(3).get()
     debug('Notable clusters are:', clusters)
-    $.each(clusters, function(index, cluster) {
+    $.each(clusters, function (index, cluster) {
       clustersList.append($('<li>').html(cluster.name))
     })
   }
@@ -154,5 +186,15 @@ function InvestmentOpps(container) {
 
   function fail(err) {
     error('Error:', err)
+  }
+
+  function checkMobile(width) {
+    if (width < 768) {
+      chooseInd.css('min-height', bodyHeight - 20 + 'px')
+      filters.css('min-height', bodyHeight - 20 + 'px')
+      $('#map').css('min-height', bodyHeight - 20 + 'px')
+      return mobile = true
+    }
+    return mobile = false
   }
 }
