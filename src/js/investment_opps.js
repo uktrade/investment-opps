@@ -26,9 +26,14 @@ function InvestmentOpps(container) {
 
   //elements
   var clustersList = container.find('#notable-clusters')
+  var sectorName = container.find('#sector-name')
+  var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var chooseInd = container.find('#choose-industry')
+  var regenerationOpps = container.find('#regeneration-opps')
+  var northernPowerhouse = container.find('#northern-powerhouse')
+  var midlandsEngine = container.find('#midlands-engine')
   var filters = container.find('.dit-iopps-section__options')
   var details = container.find('#sidebar-details')
   var instructions = container.find('#form-instructions')
@@ -43,6 +48,12 @@ function InvestmentOpps(container) {
   var mobile
 
   checkMobile(bodyWidth)
+
+
+  regenerationOpps.hide()
+  northernPowerhouse.hide()
+  midlandsEngine.hide()
+
   initMap()
   loadData().then(filter)
   watch()
@@ -70,6 +81,12 @@ function InvestmentOpps(container) {
 
   function watch() {
     sectorSelector.change({sector: true}, filter)
+    sectorSelector.change(function() {
+      var link = $('option:selected', this).data('link')
+      sectorName.html(sectorSelector.val())
+      sectorLink.attr('href', link)
+      filter()
+    })
     regionSelector.change(changeRegion)
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)
@@ -96,13 +113,30 @@ function InvestmentOpps(container) {
   }
 
   function changeRegion() {
-    var name = $(this).val()
-    console.log(name)
+    var name = regionSelector.val()
     filterRegion(name)
     map.selectRegion(name)
   }
 
   function filterRegion(name) {
+    northernPowerhouse.hide()
+    midlandsEngine.hide()
+    if (name) {
+      if (name === 'Yorkshire and The Humber' ||
+        name === 'North West England' ||
+        name === 'North East England'
+      ) {
+        northernPowerhouse.show()
+        regenerationOpps.show()
+      } else if (name === 'East Midlands' || name === 'West Midlands') {
+        midlandsEngine.show()
+        regenerationOpps.show()
+      } else {
+        regenerationOpps.hide()
+      }
+    } else {
+      regenerationOpps.hide()
+    }
     debug('region: ', name)
     if (name) {
       region = name

@@ -22,24 +22,24 @@
                 <div class="dit-iopps-sidebar__body col-sm-12">
                     <div id="choose-industry">
                         <header>
-                            <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
+                            <h2>{{locationGuide.content.title}}</h2>
                         </header>
-                        <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
+                        <p>{{locationGuide.content.contents | safe}}</p>
                         <div id="sectors" class="row">
                             <label for="sector-selector"
                                    class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
                             <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
                                 <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
-                                <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
-                                <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
-                                <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
-                                <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
-                                <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
-                                <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
-                                <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
-                                <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
-                                <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
-                                <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
+                                <option value='Aerospace' data-link='/{{base}}/industries/aerospace/'>{{ labels.sectors.aerospace[locale.code] }}</option>
+                                <option value='Advanced Manufacturing' data-link='/{{base}}/industries/advanced-manufacturing/'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
+                                <option value='Automotive' data-link='/{{base}}/industries/automotive/'>{{ labels.sectors.automotive[locale.code] }}</option>
+                                <option value='Creative' data-link='/{{base}}/industries/creative/'>{{ labels.sectors.creative[locale.code] }}</option>
+                                <option value='Energy Generation' data-link='/{{base}}/industries/energy/'>{{ labels.sectors.energy[locale.code] }}</option>
+                                <option value='Financial Services' data-link='/{{base}}/industries/financial-services/'>{{ labels.sectors.financial_services[locale.code] }}</option>
+                                <option value='Food And Drink Manufacturing' data-link='/{{base}}/industries/food-and-drink-manufacturing/'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
+                                <option value='Health And Life Sciences' data-link='/{{base}}/industries/health-and-life/'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
+                                <option value='Retail' data-link='/{{base}}/industries/retail/'>{{ labels.sectors.retail[locale.code] }}</option>
+                                <option value='Technology' data-link='/{{base}}/industries/technology/'>{{ labels.sectors.technology[locale.code] }}</option>
                             </select>
                         </div>
                     </div>
@@ -108,34 +108,40 @@
                             <option value="South West England">South West England</option>
                         </select>
                     </div>
-                    <h3>Notable clusters</h3>
+                    <h3>{{labels.investment_opts_notable_clusters[locale.code]}}</h3>
                     <div class="row">
                         <ul id="notable-clusters">
                         </ul>
                     </div>
+                    <div id="regeneration-opps">
                     <hr>
-                    <h3>Regeneration opportunities</h3>
+                    <h3>{{labels.investment_opts_regeneration_opportunities[locale.code]}}</h3>
                     <div class="row">
-                        <p class="col-sm-11 col-xs-12">Some file here</p>
+                        <p class="col-sm-11 col-xs-12">
+                        <a id="northern-powerhouse" href="https://www.gov.uk/government/publications/northern-powerhouse-investment-opportunities" target="_blank">Northen Powerhouse investment opportunities</a>
+                        <a id="midlands-engine" href="https://www.gov.uk/government/publications/midlands-engine-investment-portfolio/midlands-engine-investment-portfolio" target="_blank">Midlands Engine investment portfolio</a>
+                        </p>
+                    </div>
+
                     </div>
                     <hr>
-                    <h3>Related pages</h3>
+                    <h3>{{labels.investment_opts_investment_advice[locale.code]}}</h3>
                     <div class="row">
-                        <ul>
-                            <li>Pages 1</li>
-                            <li>Pages 2</li>
-                            <li>Pages 3</li>
+                        <ul id="related-pages">
+                          <li><a href="/{{base}}/setup-guide" >{{labels.investment_setup_guide_for_investors[locale.code]}}</a> </li>
+                          <li><a href="/{{base}}/investment-opportunities/finance-and-incentives" >{{labels.investment_incentives_and_finance[locale.code]}}</a></li>
+                          <li><a id="sector-link" href="" >{{labels.investment_opts_invest_in[locale.code]}} <span id="sector-name"></span></a></li>
                         </ul>
                     </div>
                     <div class="row invest-call">
                         <div class="col-sm-12">
                             <header>
-                                <h3>Ready to invest?</h3>
+                                <h3>{{labels.investment_opts_ready_to_invest[locale.code]}}</h3>
                             </header>
-                            <p>If you are thinking about investing in the UK, get in touch with the UK's investment
-                                services team for access to insights, connections and incentives.</p>
+                            <p>{{labels.investment_opts_thinking[locale.code]}}
+                            </header></p>
                         </div>
-                        <button id="test" class="dit-btn--call" type="button">
+                        <button class="dit-btn--call" type="button">
                             Contact us
                         </button>
                     </div>

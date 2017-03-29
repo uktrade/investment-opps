@@ -28,7 +28,7 @@ function Map(container) {
   var height
   var map
   var active = d3.select(null)
-  var scaleZoomout = d3.scaleLinear().domain([0, 10]).range([0, 10])
+  var scaleZoomout = d3.scaleLinear().domain([0, 11]).range([0, 11])
   var scaleZoomin = d3.scaleLinear().domain([0, 10]).range([0, 4])
   var selectCallback
 
@@ -199,7 +199,11 @@ function Map(container) {
           if (active.node() == null) {
             r = scaleZoomout(round(d.properties[property]))
           } else {
-            r = scaleZoomin(round(d.properties[property]))
+            if(d.properties.region ==='Scotland') {
+              r = scaleZoomout(round(d.properties[property]))
+            } else {
+              r = scaleZoomin(round(d.properties[property]))
+            }
           }
           return r
         } else {
@@ -210,7 +214,7 @@ function Map(container) {
       // scale value between 0 and 10 and round to an integer
       function round(value) {
         if (value) {
-          return Math.ceil(value / 1000)
+          return Math.ceil(value / 1000) + 1
         } else {
           return 0
         }
@@ -308,6 +312,9 @@ function Map(container) {
   }
 
   function handleMouseOver() {
+    if(isTouch()) {
+      return
+    }
     var mouse = d3.mouse(svg.node()).map(function(d) {
       return parseInt(d)
     })
@@ -320,7 +327,15 @@ function Map(container) {
   }
 
   function handleMouseOut() {
+    if(isTouch()) {
+      return
+    }
     tooltip.classed('hidden', true)
+  }
+
+
+  function isTouch() {
+    return d3.event.sourceCapabilities.firesTouchEvents
   }
 
   //expose map function
