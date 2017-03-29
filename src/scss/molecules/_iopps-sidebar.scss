@@ -31,14 +31,17 @@
     padding-left: 30px;
   }
 
-  li {
-    a {
-      margin-right: 0px;
-      color: white !important;
-      &:hover {
-        cursor: pointer !important;
-        border-bottom: 1px solid $white;
-      }
+  a {
+    margin-right: 0px;
+    color: $white !important;
+    &:hover {
+      cursor: pointer !important;
+      border-bottom: 1px solid $white;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      color: $white !important;
+      border-bottom: 1px solid $white;
     }
   }
 
