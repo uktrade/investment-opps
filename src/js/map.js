@@ -199,7 +199,11 @@ function Map(container) {
           if (active.node() == null) {
             r = scaleZoomout(round(d.properties[property]))
           } else {
-            r = scaleZoomin(round(d.properties[property]))
+            if(d.properties.region ==='Scotland') {
+              r = scaleZoomout(round(d.properties[property]))
+            } else {
+              r = scaleZoomin(round(d.properties[property]))
+            }
           }
           return r
         } else {
