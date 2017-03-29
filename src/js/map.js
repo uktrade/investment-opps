@@ -312,6 +312,9 @@ function Map(container) {
   }
 
   function handleMouseOver() {
+    if(isTouch()) {
+      return
+    }
     var mouse = d3.mouse(svg.node()).map(function(d) {
       return parseInt(d)
     })
@@ -324,7 +327,15 @@ function Map(container) {
   }
 
   function handleMouseOut() {
+    if(isTouch()) {
+      return
+    }
     tooltip.classed('hidden', true)
+  }
+
+
+  function isTouch() {
+    return d3.event.sourceCapabilities.firesTouchEvents
   }
 
   //expose map function
