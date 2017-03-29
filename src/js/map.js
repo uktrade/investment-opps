@@ -254,7 +254,7 @@ function Map(container) {
     var x = border.x
     var y = border.y
     var scale = border.scale
-    var translate = [width / 2 - scale * x, height / 2 - scale * y]
+    var translate = [width / 2 - scale * x, height / 2 - scale * (y * .95)]
     map.g.transition()
       .duration(750)
       .style('stroke-width', 4.5 / scale + 'px')
