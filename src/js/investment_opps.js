@@ -107,7 +107,7 @@ function InvestmentOpps(container) {
   function goToMap() {
     goBtn.click(function () {
       $('html, body').animate({
-        scrollTop: $("#map").offset().top
+        scrollTop: $('#map').offset().top
       }, 750)
     })
   }
@@ -122,6 +122,7 @@ function InvestmentOpps(container) {
     northernPowerhouse.hide()
     midlandsEngine.hide()
     if (name) {
+      window.location.hash='region-'+name
       if (name === 'Yorkshire and The Humber' ||
         name === 'North West England' ||
         name === 'North East England'
@@ -135,6 +136,7 @@ function InvestmentOpps(container) {
         regenerationOpps.hide()
       }
     } else {
+      window.location.hash=''
       regenerationOpps.hide()
     }
     debug('region: ', name)
@@ -171,7 +173,7 @@ function InvestmentOpps(container) {
     if (mobile && sector) {
       filters.show(50)
       $('html, body').animate({
-        scrollTop: $("#filters").offset().top
+        scrollTop: $('#filters').offset().top
       }, 750)
     }
     if (region) {
