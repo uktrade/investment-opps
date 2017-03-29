@@ -44,10 +44,7 @@ function init() {
       checkHeight()
       setGradientHeight()
     })
-
   }
-
-
 }
 
 function onLoaded() {
@@ -241,8 +238,6 @@ function ifOtherSelected() {
   })
 }
 
-
-
 function getResults(size, start) {
   var searchResultsSize = 10,
     box = $('#dit-search-overlay'),
@@ -349,8 +344,6 @@ function debounce(func, wait, immediate) {
     if (callNow) func.apply(context, args)
   }
 }
-
-
 
 function responsiveTable() {
   var isTable = $('table').length
