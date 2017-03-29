@@ -21,9 +21,9 @@
             <div class="row setup-content" id="step-1">
                 <div class="dit-iopps-sidebar__body col-sm-12">
                     <header>
-                        <h2>{{ labels.investment_opts_location_guide[locale.code] }}</h2>
+                        <h2>{{locationGuide.content.title}}</h2>
                     </header>
-                    <p>{{ labels.investment_opts_location_guide_detail[locale.code] }}</p>
+                    <p>{{locationGuide.content.contents | safe}}</p>
                     <div id="sectors" class="row">
                         <label for="sector-selector" class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
                         <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
@@ -102,32 +102,32 @@
                             <option value="South West England">South West England</option>
                         </select>
                     </div>
-                    <h3>Notable clusters</h3>
+                    <h3>{{labels.investment_opts_notable_clusters[locale.code]}}</h3>
                     <div class="row">
                         <ul id="notable-clusters">
                         </ul>
                     </div>
                     <hr>
-                    <h3>Regeneration opportunities</h3>
+                    <h3>{{labels.investment_opts_regeneration_opportunities[locale.code]}}</h3>
                     <div class="row">
                         <p class="col-sm-11 col-xs-12">Some file here</p>
                     </div>
                     <hr>
-                    <h3>Related pages</h3>
+                    <h3>{{labels.investment_opts_investment_advice[locale.code]}}</h3>
                     <div class="row">
-                        <ul>
-                            <li>Pages 1</li>
-                            <li>Pages 2</li>
-                            <li>Pages 3</li>
+                        <ul id="related-pages">
+                          <li><a href="/{{base}}/setup-guide" >{{labels.investment_setup_guide_for_investors[locale.code]}}</a> </li>
+                          <li><a href="/{{base}}/investment-opportunities/finance-and-incentives" >{{labels.investment_incentives_and_finance[locale.code]}}</a></li>
+                          <li><a href="" >{{labels.investment_opts_invest_in}} <span id="sector_name"></span></a></li>
                         </ul>
                     </div>
                     <div class="row invest-call">
                         <div class="col-sm-12">
                             <header>
-                                <h3>Ready to invest?</h3>
+                                <h3>{{labels.investment_opts_ready_to_invest[locale.code]}}</h3>
                             </header>
-                            <p>If you are thinking about investing in the UK, get in touch with the UK's investment
-                                services team for access to insights, connections and incentives.</p>
+                            <p>{{labels.investment_opts_thinking[locale.code]}}
+                            </header></p>
                         </div>
                         <button class="dit-btn--call" type="button">
                             Contact us
