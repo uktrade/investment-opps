@@ -28,7 +28,8 @@ function Map(container) {
   var height
   var map
   var active = d3.select(null)
-  var scaleR = d3.scaleLinear().domain([0, 10000]).range([0, 20])
+  var scaleZoomout = d3.scaleLinear().domain([0, 10]).range([0, 10])
+  var scaleZoomin = d3.scaleLinear().domain([0, 10]).range([0, 4])
   var selectCallback
 
   init()
@@ -53,7 +54,7 @@ function Map(container) {
     tooltip = c.append('div').attr('class', 'tooltip hidden')
 
     var zoom = d3.zoom()
-      .scaleExtent([1,1])
+      .scaleExtent([1, 1])
       .on('zoom', move)
 
     /* Using following stackoverflow answer to make svg responsive
@@ -194,11 +195,26 @@ function Map(container) {
 
       function getDiameter(d) {
         if (filter[property]) {
-          var newDiameter = scaleR(d.properties[property])
-          return newDiameter
+          var r
+          if (active.node() == null) {
+            r = scaleZoomout(round(d.properties[property]))
+          } else {
+            r = scaleZoomin(round(d.properties[property]))
+          }
+          return r
         } else {
           return 0
         }
+      }
+
+      // scale value between 0 and 10 and round to an integer
+      function round(value) {
+        if (value) {
+          return Math.ceil(value / 1000)
+        } else {
+          return 0
+        }
+
       }
     }
 
