@@ -57,3 +57,49 @@
     margin-top: 20px;
   }
 }
+
+.alpha-legend {
+  font-size: 14px;
+  position: absolute;
+  top: 120px;
+  right: 0;
+  padding: 16px;
+  background-color: #333;
+  color: white;
+
+  a {
+    color: $white !important;
+    border-bottom: 1px solid $white;
+    &:hover {
+      cursor: pointer !important;
+    }
+
+    @media (max-width: $screen-sm-max) {
+      color: $white !important;
+      border-bottom: 1px solid $white;
+    }
+  }
+
+  span {
+    padding: 4px;
+    margin-right: 4px;
+    background-color: $alpha-orange;
+
+    @media (max-width: $screen-xs-max) {
+      display: block;
+      text-align: center;
+      margin-bottom: 8px;
+    }
+  }
+
+  @media (max-width: $screen-xs-max) {
+    position: relative;
+    top: 0;
+    overflow: hidden;
+    white-space: normal;
+  }
+
+  p {
+    display: inline;
+  }
+}

@@ -161,8 +161,9 @@ function InvestmentOpps(container) {
   }
 
 
-  function filter() {
+  function filter(events) {
     var industry = sectorSelector.val()
+    var sector = events.data.sector
     if (!industry) {
       filteredData = TAFFY([])()
       render()
@@ -171,7 +172,7 @@ function InvestmentOpps(container) {
     var _filter = {
       industry: sectorSelector.val()
     }
-    if (mobile && industry) {
+    if (mobile && sector) {
       filters.show(50)
       $('html, body').animate({
         scrollTop: $('#filters').offset().top
