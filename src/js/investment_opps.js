@@ -94,7 +94,7 @@ function InvestmentOpps(container) {
   }
 
   function changeRegion() {
-    debug('Changing region', northernPowerhouse)
+    var name = regionSelector.val()
     filterRegion(name)
     map.selectRegion(name)
   }
