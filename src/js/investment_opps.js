@@ -103,9 +103,6 @@ function InvestmentOpps(container) {
 
   function close() {
     closeRegion.click(function () {
-      $('html, body').animate({
-        scrollTop: $('#map').offset().top
-      }, 500)
       filterRegion()
       map.selectRegion()
     })
@@ -161,6 +158,11 @@ function InvestmentOpps(container) {
     } else {
       details.hide(350)
       region = null
+      if (mobile) {
+        $('html, body').animate({
+          scrollTop: $('#map').offset().top
+        }, 50)
+      }
     }
     regionSelector.val(name)
     filter({data:{sector:false}})
