@@ -26,10 +26,13 @@ function InvestmentOpps(container) {
 
   //elements
   var clustersList = container.find('#notable-clusters')
-  var sectorName= container.find('#sector-name')
-  var sectorLink= container.find('#sector-link')
+  var sectorName = container.find('#sector-name')
+  var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
+  var regenerationOpps = container.find('#regeneration-opps')
+  var northernPowerhouse = container.find('#northern-powerhouse')
+  var midlandsEngine = container.find('#midlands-engine')
   var filters = container.find('.dit-iopps-section__options')
   var details = container.find('#sidebar-details')
   var instructions = container.find('#form-instructions')
@@ -39,6 +42,12 @@ function InvestmentOpps(container) {
   var closeRegion = container.find('#close')
   var bodyWidth = $('body').width()
   var mapContainer = container.find('#map-container')
+
+
+
+  regenerationOpps.hide()
+  northernPowerhouse.hide()
+  midlandsEngine.hide()
 
   initMap()
   loadData().then(filter)
@@ -78,19 +87,37 @@ function InvestmentOpps(container) {
   }
 
   function close() {
-    closeRegion.click(function(){
+    closeRegion.click(function() {
       filterRegion()
       map.selectRegion()
     })
   }
 
   function changeRegion() {
-    var name = $(this).val()
+    debug('Changing region', northernPowerhouse)
     filterRegion(name)
     map.selectRegion(name)
   }
 
   function filterRegion(name) {
+    northernPowerhouse.hide()
+    midlandsEngine.hide()
+    if (name) {
+      if (name === 'Yorkshire and The Humber' ||
+        name === 'North West England' ||
+        name === 'North East England'
+      ) {
+        northernPowerhouse.show()
+        regenerationOpps.show()
+      } else if (name === 'East Midlands' || name === 'West Midlands') {
+        midlandsEngine.show()
+        regenerationOpps.show()
+      } else {
+        regenerationOpps.hide()
+      }
+    } else {
+      regenerationOpps.hide()
+    }
     debug('region: ', name)
     if (name) {
       region = name
