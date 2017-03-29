@@ -26,6 +26,8 @@ function InvestmentOpps(container) {
 
   //elements
   var clustersList = container.find('#notable-clusters')
+  var sectorName= container.find('#sector-name')
+  var sectorLink= container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var filters = container.find('.dit-iopps-section__options')
@@ -63,7 +65,12 @@ function InvestmentOpps(container) {
   }
 
   function watch() {
-    sectorSelector.change(filter)
+    sectorSelector.change(function() {
+      var link = $('option:selected', this).data('link')
+      sectorName.html(sectorSelector.val())
+      sectorLink.attr('href', link)
+      filter()
+    })
     regionSelector.change(changeRegion)
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)
@@ -79,7 +86,6 @@ function InvestmentOpps(container) {
 
   function changeRegion() {
     var name = $(this).val()
-    console.log(name)
     filterRegion(name)
     map.selectRegion(name)
   }

@@ -28,16 +28,16 @@
                         <label for="sector-selector" class="col-sm-11 col-xs-12">{{ labels.investment_opts_select_industry[locale.code] }}</label>
                         <select class="col-sm-11 col-xs-11" class="form-control" id="sector-selector" required>
                             <option value="" disabled selected> {{ labels.please_select[locale.code] }} </option>
-                            <option value='Aerospace'>{{ labels.sectors.aerospace[locale.code] }}</option>
-                            <option value='Advanced Manufacturing'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
-                            <option value='Automotive'>{{ labels.sectors.automotive[locale.code] }}</option>
-                            <option value='Creative'>{{ labels.sectors.creative[locale.code] }}</option>
-                            <option value='Energy Generation'>{{ labels.sectors.energy[locale.code] }}</option>
-                            <option value='Financial Services'>{{ labels.sectors.financial_services[locale.code] }}</option>
-                            <option value='Food And Drink Manufacturing'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
-                            <option value='Health And Life Sciences'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
-                            <option value='Retail'>{{ labels.sectors.retail[locale.code] }}</option>
-                            <option value='Technology'>{{ labels.sectors.technology[locale.code] }}</option>
+                            <option value='Aerospace' data-link='/{{base}}/industries/aerospace/'>{{ labels.sectors.aerospace[locale.code] }}</option>
+                            <option value='Advanced Manufacturing' data-link='/{{base}}/industries/advanced-manufacturing/'>{{ labels.sectors.advanced_manufacturing[locale.code] }}</option>
+                            <option value='Automotive' data-link='/{{base}}/industries/automotive/'>{{ labels.sectors.automotive[locale.code] }}</option>
+                            <option value='Creative' data-link='/{{base}}/industries/creative/'>{{ labels.sectors.creative[locale.code] }}</option>
+                            <option value='Energy Generation' data-link='/{{base}}/industries/energy/'>{{ labels.sectors.energy[locale.code] }}</option>
+                            <option value='Financial Services' data-link='/{{base}}/industries/financial-services/'>{{ labels.sectors.financial_services[locale.code] }}</option>
+                            <option value='Food And Drink Manufacturing' data-link='/{{base}}/industries/food-and-drink-manufacturing/'>{{ labels.sectors.food_and_drink_manufacturing[locale.code] }}</option>
+                            <option value='Health And Life Sciences' data-link='/{{base}}/industries/health-and-life/'>{{ labels.sectors.health_and_life_sciences[locale.code] }}</option>
+                            <option value='Retail' data-link='/{{base}}/industries/retail/'>{{ labels.sectors.retail[locale.code] }}</option>
+                            <option value='Technology' data-link='/{{base}}/industries/technology/'>{{ labels.sectors.technology[locale.code] }}</option>
                         </select>
                     </div>
                     <hr>
@@ -118,7 +118,7 @@
                         <ul id="related-pages">
                           <li><a href="/{{base}}/setup-guide" >{{labels.investment_setup_guide_for_investors[locale.code]}}</a> </li>
                           <li><a href="/{{base}}/investment-opportunities/finance-and-incentives" >{{labels.investment_incentives_and_finance[locale.code]}}</a></li>
-                          <li><a href="" >{{labels.investment_opts_invest_in[locale.code]}} <span id="sector_name"></span></a></li>
+                          <li><a id="sector-link" href="" >{{labels.investment_opts_invest_in[locale.code]}} <span id="sector-name"></span></a></li>
                         </ul>
                     </div>
                     <div class="row invest-call">
