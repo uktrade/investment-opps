@@ -19,10 +19,16 @@
 
   hr {
     color: $light-gray;
+    margin: 12px 0 12px;
   }
 
   section {
     height: inherit;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 30px;
   }
 
   &__body {

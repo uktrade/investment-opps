@@ -108,7 +108,7 @@ function Map(container) {
         map.projection = d3.geoMercator()
           .center([0, 55.4])
           .rotate([6.5, 0])
-          .scale(width * scale * 0.45)
+          .scale(width * scale * 0.95)
           .translate([width / 2, height / 2])
 
         map.path = d3.geoPath()
