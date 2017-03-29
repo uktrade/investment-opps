@@ -31,6 +31,17 @@
     padding-left: 30px;
   }
 
+  li {
+    a {
+      margin-right: 0px;
+      color: white !important;
+      &:hover {
+        cursor: pointer !important;
+        border-bottom: 1px solid $white;
+      }
+    }
+  }
+
   &__body {
     background-color: $background-sidebar;
     color: $white;
