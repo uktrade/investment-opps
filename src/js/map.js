@@ -187,8 +187,9 @@ function Map(container) {
           .attr('cy', function(d) {
             return map.projection(d.geometry.coordinates)[1]
           })
-          .on('mouseover', handleMouseOver)
-          .on('mouseout', handleMouseOut)
+          .on('mouseenter', showTooltip)
+          .on('mouseleave', removeTooltip)
+          .on('click', removeTooltip)
           .transition()
           .attr('r', getDiameter)
       }
@@ -199,7 +200,7 @@ function Map(container) {
           if (active.node() == null) {
             r = scaleZoomout(round(d.properties[property]))
           } else {
-            if(d.properties.region ==='Scotland') {
+            if (d.properties.region === 'Scotland') {
               r = scaleZoomout(round(d.properties[property]))
             } else {
               r = scaleZoomin(round(d.properties[property]))
@@ -311,10 +312,7 @@ function Map(container) {
     refreshCircles(filter)
   }
 
-  function handleMouseOver() {
-    if(isTouch()) {
-      return
-    }
+  function showTooltip() {
     var mouse = d3.mouse(svg.node()).map(function(d) {
       return parseInt(d)
     })
@@ -326,16 +324,8 @@ function Map(container) {
       .html(this.__data__.id)
   }
 
-  function handleMouseOut() {
-    if(isTouch()) {
-      return
-    }
+  function removeTooltip() {
     tooltip.classed('hidden', true)
-  }
-
-
-  function isTouch() {
-    return d3.event.sourceCapabilities.firesTouchEvents
   }
 
   //expose map function
