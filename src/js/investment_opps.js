@@ -56,20 +56,27 @@ function InvestmentOpps(container) {
   northernPowerhouse.hide()
   midlandsEngine.hide()
 
-  initMap()
-  loadData().then(filter)
-  watch()
-  close()
-  goToMap()
   filters.hide()
   details.hide()
+  initMap()
+    .then(function() {
+      loadData().then(function() {
+        filter({data: {sector: false}})
+      })
+      watch()
+      close()
+      goToMap()
+    })
 
   function initMap() {
-    map = require('./map')(container.find('#map'))
-    map.onSelect(filterRegion)
-    if (mobile) {
-      mapContainer.detach().insertAfter('#sidebar')
-    }
+    return require('./map')(container.find('#map'))
+      .then(function(_map) {
+        map=_map
+        map.onSelect(filterRegion)
+        if (mobile) {
+          mapContainer.detach().insertAfter('#sidebar')
+        }
+      })
   }
 
   function loadData() {
@@ -82,19 +89,19 @@ function InvestmentOpps(container) {
   }
 
   function watch() {
-    sectorSelector.change({sector: true}, filter)
-    sectorSelector.change(function() {
-      var industry=sectorSelector.val()
-      if(industry && industry !== '') {
-        var link = $('option:selected', this).data('link')
-        sectorLink.attr('href', link)
-        sectorLink.find('span').html(sectorSelector.val().toLowerCase())
-        sectorLink.show()
-      } else {
-        sectorLink.hide()
-      }
-      filter()
-    })
+    sectorSelector
+      .change({sector: true},function(event) {
+        var industry=sectorSelector.val()
+        if(industry && industry !== '') {
+          var link = $('option:selected', this).data('link')
+          sectorLink.attr('href', link)
+          sectorLink.find('span').html(sectorSelector.val().toLowerCase())
+          sectorLink.show()
+        } else {
+          sectorLink.hide()
+        }
+        filter(event)
+      })
     regionSelector.change(changeRegion)
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)

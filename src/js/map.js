@@ -32,21 +32,27 @@ function Map(container) {
   var scaleZoomin = d3.scaleLinear().domain([0, 10]).range([0, 4])
   var selectCallback
 
-  init()
+  return init()
 
   function init() {
     width = container.width()
     height = width * ratio
     debug('Drawing the map,width', width)
     svg = createSvg()
-    drawMap(svg)
+    return drawMap(svg)
       .then(function(_map) {
         map = _map
+        //expose map function
+        return {
+          refresh: refresh,
+          refreshFilter: refreshFilter,
+          onSelect: onSelect,
+          selectRegion: selectRegion
+        }
       })
       .fail(function(err) {
         error('Failed drawing map:', err)
       })
-
   }
 
   function createSvg() {
@@ -64,12 +70,12 @@ function Map(container) {
       .append('div')
       .attr('class', 'svg-container') //container class to make it responsive
       .on('click', reset)
-      // .call(zoom)
+    // .call(zoom)
       .append('svg')
-      //responsive SVG needs these 2 attributes and no width and height attr
+    //responsive SVG needs these 2 attributes and no width and height attr
       .attr('preserveAspectRation', 'xMinYMin meet')
       .attr('viewBox', '0 0 ' + width + ' ' + height)
-      //class to make it responsive
+    //class to make it responsive
       .attr('class', 'svg-content-responsive background')
 
 
@@ -328,11 +334,4 @@ function Map(container) {
     tooltip.classed('hidden', true)
   }
 
-  //expose map function
-  return {
-    refresh: refresh,
-    refreshFilter: refreshFilter,
-    onSelect: onSelect,
-    selectRegion: selectRegion
-  }
 }
