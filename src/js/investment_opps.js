@@ -27,7 +27,6 @@ function InvestmentOpps(container) {
   //elements
   var clustersList = container.find('#notable-clusters')
   var clusters = container.find('#clusters')
-  var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var chooseInd = container.find('#choose-industry')
@@ -50,7 +49,6 @@ function InvestmentOpps(container) {
   checkMobile(bodyWidth)
 
 
-  sectorLink.hide()
   regenerationOpps.hide()
   clusters.hide()
   northernPowerhouse.hide()
@@ -91,19 +89,6 @@ function InvestmentOpps(container) {
   function watch() {
     sectorSelector
       .change({sector: true},function(event) {
-        var industry=sectorSelector.val()
-        if(industry && industry !== '') {
-          var selected = $('option:selected', this)
-          sectorLink.attr('href', selected.data('link'))
-          if(document.language === 'en') {
-            sectorLink.find('span').html(selected.html().toLowerCase())
-          } else {
-            sectorLink.find('span').html(selected.html())
-          }
-          sectorLink.show()
-        } else {
-          sectorLink.hide()
-        }
         filter(event)
       })
     regionSelector.change(changeRegion)
