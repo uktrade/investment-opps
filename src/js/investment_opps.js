@@ -93,9 +93,13 @@ function InvestmentOpps(container) {
       .change({sector: true},function(event) {
         var industry=sectorSelector.val()
         if(industry && industry !== '') {
-          var link = $('option:selected', this).data('link')
-          sectorLink.attr('href', link)
-          sectorLink.find('span').html(sectorSelector.val().toLowerCase())
+          var selected = $('option:selected', this)
+          sectorLink.attr('href', selected.data('link'))
+          if(document.language === 'en') {
+            sectorLink.find('span').html(selected.html().toLowerCase())
+          } else {
+            sectorLink.find('span').html(selected.html())
+          }
           sectorLink.show()
         } else {
           sectorLink.hide()
