@@ -69,9 +69,16 @@
 
     label {
       display: block;
-      padding-left: 45px;
-      text-indent: -30px;;
+      //padding-left: 45px;
+      padding-left: 50px;
+      //text-indent: -30px;
+      text-indent: -35px;
       font-weight: 100;
+
+      p {
+        font-size: 12px;
+        margin-left: 35px;
+      }
     }
 
     @media (min-width: $screen-md-max) {
