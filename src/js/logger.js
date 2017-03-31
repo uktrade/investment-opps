@@ -12,7 +12,7 @@ function Logger(_name) {
   var DEBUG = '[DEBUG]'
   var WARN = '[WARN]'
 
-  if (document.iigbBuild === '') {
+  if (process.env.DIT_ENV === 'development') {
     return {
       name: name,
       log: log,
