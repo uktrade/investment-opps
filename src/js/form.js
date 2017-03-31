@@ -402,10 +402,17 @@ function submitForm(form, formBody) {
       display: 'block',
     })
 
-    imageLoad.css({
-      left: body.outerWidth() / 2 - (imageLoad.width() / 2),
-      top: body.outerHeight() / 2,
-    })
+    var imageCss={
+      top: body.outerHeight() / 2
+    }
+    var margin=body.outerWidth() / 2 - (imageLoad.width() / 2)
+
+    if(direction() === 'left') {
+      imageCss.left=margin
+    } else {
+      imageCss.right=margin
+    }
+    imageLoad.css(imageCss)
 
     overlay.fadeIn()
 
@@ -438,7 +445,7 @@ function wrap(element, length, width) {
 
 function shift(element, amount, animate) {
   debug('shifting:', element, ' amount:', amount)
-  var margin = 'margin-' + direction()
+  var margin = 'margin-left'
   var style = {}
   style[margin] = amount
   debug('Margin:', style[margin])
