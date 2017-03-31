@@ -6,6 +6,7 @@ var debug = logger.debug
 var _assets = document.iigbBuild ? '/assets/' + document.iigbBuild + '/' : '/assets/'
 var ratio = 1.21
 var scale = 3.5
+var mobile=false
 
 
 module.exports = init
@@ -196,6 +197,7 @@ function Map(container) {
           .on('mouseenter', showTooltip)
           .on('mouseleave', removeTooltip)
           .on('click', removeTooltip)
+          .on('touchstart', setMobile)
           .transition()
           .attr('r', getDiameter)
       }
@@ -318,7 +320,15 @@ function Map(container) {
     refreshCircles(filter)
   }
 
+
+  function setMobile() {
+    mobile=true
+  }
+
   function showTooltip() {
+    if(mobile){
+      return
+    }
     var mouse = d3.mouse(svg.node()).map(function(d) {
       return parseInt(d)
     })
@@ -331,6 +341,9 @@ function Map(container) {
   }
 
   function removeTooltip() {
+    if(mobile) {
+      return
+    }
     tooltip.classed('hidden', true)
   }
 
