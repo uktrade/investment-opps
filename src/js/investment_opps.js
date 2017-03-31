@@ -33,7 +33,7 @@ function InvestmentOpps(container) {
   var regenerationOpps = container.find('#regeneration-opps')
   var northernPowerhouse = container.find('#northern-powerhouse')
   var midlandsEngine = container.find('#midlands-engine')
-  var filters = container.find('.dit-iopps-section__options')
+  var filters = container.find('#filters')
   var details = container.find('#sidebar-details')
   var instructions = container.find('#form-instructions')
   var businessFilter = container.find('#significant-businesses')
