@@ -395,7 +395,8 @@ function jsEnhanceExternalLinks() {
 
 function showJsEnhancements() {
   $('.non-js-display').hide();
-  $('.js-display').show();
+  //Add inline-table to solve Chinese not showing properly
+  $('.js-display').show().css('display', 'inline-table');
   if (document.legacy) {
     $('.js-display').hide();
     $('.non-js-display').show();
