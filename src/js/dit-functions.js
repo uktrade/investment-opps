@@ -63,6 +63,7 @@ function onLoaded() {
     playVidTest()
     jsEnhanceExternalLinks()
     showJsEnhancements()
+    ioppsOrderCard()
     modal($)
     collapse($)
   } catch (e) {
@@ -73,8 +74,8 @@ function onLoaded() {
 
 function enhance() {
   enhance_videobg()
+  jsClass()
 }
-
 
 function removeloading() {
   debug('Removing loading overlay')
@@ -96,6 +97,10 @@ function enhance_videobg() {
   if ($('#bgVid').length > 0 || $('#bgImg').length > 0) {
     $('.jumbotron').addClass('bg--transparent')
   }
+}
+
+function jsClass() {
+  $('body').find('.dit-big-list__item--home-guide').addClass('col-sm-6').removeClass('dit-big-list__item--home-guide')
 }
 
 function heroVideoReload() {
@@ -151,7 +156,7 @@ function addActive() {
 
 function checkHeight() {
   debug('Applying equal heights')
-  var elem = $('div').find('.check-height')
+  var elem = $('body').find('.check-height')
   if (elem.length > 0) {
     equalheight(elem)
   }
@@ -391,7 +396,18 @@ function jsEnhanceExternalLinks() {
 function showJsEnhancements() {
   $('.non-js-display').hide();
   $('.js-display').show();
+  if (document.legacy) {
+    $('.js-display').hide();
+    $('.non-js-display').show();
+  }
 }
+
+function ioppsOrderCard() {
+  var $firstElem = $('ol.dit-big-list').children('.col-sm-6').first()
+  $('body').find('.js-display').detach().insertBefore($firstElem)
+}
+
+
 
 //Bootstrap v3.3.7 (http://getbootstrap.com) functions
 function modal($) {

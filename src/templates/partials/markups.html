@@ -1,15 +1,15 @@
 {% macro section(s, labels, language) %}
     <section id="{{ s.content.title|slug(language) }}" class="dit-content-section">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
-        <header>
-            <h2>{{ s.content.title }}</h2>
-        </header>
+            <header>
+                <h2>{{ s.content.title }}</h2>
+            </header>
 
-        {{ s.content.contents|safe }}
+            {{ s.content.contents|safe }}
 
-        <!--<a href="#top" class="dit-back-to-top">{{ labels.back_to_top[locale.code] }} <span class="glyphicon glyphicon-arrow-up"-->
-                                                      <!--aria-hidden="true"></span></a>-->
-            </div>
+            <!--<a href="#top" class="dit-back-to-top">{{ labels.back_to_top[locale.code] }} <span class="glyphicon glyphicon-arrow-up"-->
+            <!--aria-hidden="true"></span></a>-->
+        </div>
     </section>
 {% endmacro %}
 
@@ -26,32 +26,32 @@
 
 {% macro bullet_list(header, list, base) %}
 
-<!--
-[cms-fields]
-  listHeader:
-    type: content
-    label: List title and intro
-    fields:
-      content:
-        type: text
-        label: Content
-        help: Choose content to appear in this section
-        required: true
-  listItems:
-    type: content
-    multiple: true
-    label: Bullet list item
-    fields:
-      content:
-        type: text
-        label: Content
-        help: Choose content to appear in this section
-      link:
-        type: text
-        label: Target link for bullet item
-        help: Enter a link for this bullet list item target
-[/cms-fields]
-  -->
+    <!--
+    [cms-fields]
+      listHeader:
+        type: content
+        label: List title and intro
+        fields:
+          content:
+            type: text
+            label: Content
+            help: Choose content to appear in this section
+            required: true
+      listItems:
+        type: content
+        multiple: true
+        label: Bullet list item
+        fields:
+          content:
+            type: text
+            label: Content
+            help: Choose content to appear in this section
+          link:
+            type: text
+            label: Target link for bullet item
+            help: Enter a link for this bullet list item target
+    [/cms-fields]
+      -->
 
     <section class="dit-content-section">
         <div class="row">
@@ -61,24 +61,24 @@
                     {{ header.content.contents | safe }}
                 </div>
             {% endif %}
-            <ol class="dit-big-list">
+            <ol class="dit-big-list check-height">
                 {% for l in list %}
-                {% if l.content.display == 'js' %}
-                    <li class="dit-big-list__item--home-guide js-display">
-                        <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
-                        {{ l.content.contents | safe }}
-                    </li>                
+                    {% if l.content.display == 'js' %}
+                        <li class="dit-big-list__item--home-guide js-display">
+                            <h3><a href="/{{ base }}{{ l.link }}">{{ l.content.title }}</a></h3>
+                            {{ l.content.contents | safe }}
+                        </li>
                     {% elif l.content.display == 'nonjs' %}
-                    <li class="dit-big-list__item--home-guide non-js-display">
-                        <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
-                        {{ l.content.contents | safe }}
-                    </li>
-                {% else %}
-                    <li class="dit-big-list__item--home-guide">
-                        <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
-                        {{ l.content.contents | safe }}
-                    </li>
-                {% endif %}
+                        <li class="dit-big-list__item--home-guide non-js-display">
+                            <h3><a href="/{{ base }}{{ l.link }}">{{ l.content.title }}</a></h3>
+                            {{ l.content.contents | safe }}
+                        </li>
+                    {% else %}
+                        <li class="dit-big-list__item--home-guide">
+                            <h3><a href="/{{ base }}{{ l.link }}">{{ l.content.title }}</a></h3>
+                            {{ l.content.contents | safe }}
+                        </li>
+                    {% endif %}
                 {% endfor %}
             </ol>
         </div>
@@ -117,7 +117,8 @@
                 <a class="dit-ind-side-desc-list__item" href="/{{ base }}{{ tile.link }}">
                     <div class="row">
                         <div class="col-xs-4 dit-ind-side-desc-list__link-wrap">
-                          <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" class="dit-ind-side-desc-list__image">
+                            <img src="/{{ assets }}/media/thumbnail-4-4/{{ tile.thumbnail }}"
+                                 class="dit-ind-side-desc-list__image">
                         </div>
                         <div class="col-xs-8">
                             <div class="dit-ind-side-desc-list__title">{{ tile.content.title }}</div>
@@ -140,7 +141,8 @@
                 <a class="dit-ind-bottom-desc-list__item" href="/{{ base }}{{ tile.link }}">
                     <div class="row">
                         <div class="col-md-12 dit-ind-bottom-desc-list__link-wrap">
-                          <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" class="dit-ind-bottom-desc-list__image">
+                            <img src="/{{ assets }}/media/thumbnail-4-3/{{ tile.thumbnail }}"
+                                 class="dit-ind-bottom-desc-list__image">
                             <div class="dit-ind-bottom-desc-list__title">{{ tile.content.title }}</div>
                             {{ tile.content.contents | safe }}
                         </div>
@@ -181,7 +183,8 @@
             <li class="dit-industries-list__item col-xs-6 col-md-4">
                 <div class="dit-industries-list__link-wrap">
                     <a href="/{{ base }}{{ tile.link }}">
-                      <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" class="dit-industries-list__image">
+                        <img src="/{{ assets }}/media/thumbnail-4-3/{{ tile.thumbnail }}"
+                             class="dit-industries-list__image">
                         <span class="dit-industries-list__text">{{ tile.content.title }}</span>
                     </a>
                 </div>
@@ -200,7 +203,8 @@
             <li class="dit-sectors-list__item col-xs-6 col-md-3">
                 <div class="dit-sectors-list__link-wrap">
                     <a href="/{{ base }}{{ tile.link }}">
-                      <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" class="dit-sectors-list__image">
+                        <img src="/{{ assets }}/media/thumbnail-4-4/{{ tile.thumbnail }}"
+                             class="dit-sectors-list__image">
                         <span class="dit-sectors-list__text">{{ tile.content.title }}</span>
                     </a>
                 </div>
