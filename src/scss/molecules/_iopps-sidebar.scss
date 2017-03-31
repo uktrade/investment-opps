@@ -29,14 +29,18 @@
   ul {
     list-style: none;
     padding-left: 30px;
+
+    li {
+      margin-bottom: 8px;
+    }
   }
 
   a {
     margin-right: 0px;
     color: $white !important;
+    border-bottom: 1px solid $white;
     &:hover {
       cursor: pointer !important;
-      border-bottom: 1px solid $white;
     }
 
     @media (max-width: $screen-sm-max) {
