@@ -70,19 +70,19 @@
                                        value="" checked/>
                                 <label for="significant-businesses" class="col-sm-12 col-xs-12">
                                     {{ labels.investment_opts_businesses[locale.code] }}
-                                    <p style="font-size:12px">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
+                                    <p style="font-size:12px; margin-left: 30px;">{{ labels.investment_opts_businesses_detail[locale.code] }}</p>
                                 </label>
                                 <input class="input-filter" id="innovation-centres" type="checkbox" name="innovation"
                                        value=""/>
                                 <label for="innovation-centres" class="col-sm-12 col-xs-12">
                                     {{ labels.investment_opts_centres_of_excellence[locale.code] }}
-                                    <p style="font-size:12px">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
+                                    <p style="font-size:12px; margin-left: 30px;">{{ labels.investment_opts_centres_of_excellence_detail[locale.code] }}</p>
                                 </label>
                                 <input class="input-filter" id="enterprise-zones" type="checkbox" name="enterprise_zone"
                                        value=""/>
                                 <label for="enterprise-zones" class="col-sm-12 col-xs-12">
                                     {{ labels.investment_opts_enterprise_zones[locale.code] }}
-                                    <p style="font-size:12px; margin-left: 30px"><a href="/{{base}}/investment-opportunities/finance-and-incentives">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</a></p>
+                                    <p style="font-size:12px; margin-left: 30px;"><a target="_blank" href="/{{base}}/investment-opportunities/finance-and-incentives">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</a></p>
                                 </label>
                                 <button id="go-btn" class="dit-btn--call visible-xs" type="button">
                                     Go
@@ -148,12 +148,12 @@
                     <div class="row">
                         <ul id="related-pages">
                             <li>
-                                <a href="/{{ base }}/setup-guide">{{ labels.investment_setup_guide_for_investors[locale.code] }}</a>
+                                <a target="_blank" href="/{{ base }}/setup-guide">{{ labels.investment_setup_guide_for_investors[locale.code] }}</a>
                             </li>
                             <li>
-                                <a href="/{{ base }}/investment-opportunities/finance-and-incentives">{{ labels.investment_incentives_and_finance[locale.code] }}</a>
+                                <a target="_blank" href="/{{ base }}/investment-opportunities/finance-and-incentives">{{ labels.investment_incentives_and_finance[locale.code] }}</a>
                             </li>
-                            <li><a id="sector-link" href="">{{ labels.investment_opts_invest_in[locale.code] }}</a></li>
+                            <li><a target="_blank" id="sector-link" href="">{{ labels.investment_opts_invest_in[locale.code] }}</a></li>
                         </ul>
                     </div>
                     <div class="row invest-call">
@@ -163,7 +163,7 @@
                             </header>
                             <p>{{ labels.investment_opts_thinking[locale.code] }}</p>
                         </div>
-                        <a class="dit-btn--call" href="/{{ base }}/contact">
+                        <a target="_blank" class="dit-btn--call" href="/{{ base }}/contact">
                             {{ labels.contact[locale.code] }}
                         </a>
                     </div>
