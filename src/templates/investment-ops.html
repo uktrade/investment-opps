@@ -60,7 +60,7 @@
                     <div id="filters">
                         <div class="row">
                             <div class="col-sm-12">
-                                <p>{{ labels.investment_opts_what_is_important[locale.code] }}</p>
+                                <p>{{ labels.investment_opts_priorities[locale.code] }}</p>
                             </div>
                         </div>
                         <div class="row">
@@ -82,7 +82,7 @@
                                        value=""/>
                                 <label for="enterprise-zones" class="col-sm-12 col-xs-12">
                                     {{ labels.investment_opts_enterprise_zones[locale.code] }}
-                                    <p style="font-size:12px">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</p>
+                                    <p style="font-size:12px"><a href="/{{base}}/investment-opportunities/finance-and-incentives">{{ labels.investment_opts_enterprise_zones_detail[locale.code] }}</a></p>
                                 </label>
                                 <button id="go-btn" class="dit-btn--call visible-xs" type="button">
                                     Go
@@ -136,7 +136,7 @@
                             <p class="col-sm-11 col-xs-12">
                                 <a id="northern-powerhouse"
                                    href="https://www.gov.uk/government/publications/northern-powerhouse-investment-opportunities"
-                                   target="_blank">Northen Powerhouse investment opportunities</a>
+                                   target="_blank">Northern Powerhouse investment opportunities</a>
                                 <a id="midlands-engine"
                                    href="https://www.gov.uk/government/publications/midlands-engine-investment-portfolio/midlands-engine-investment-portfolio"
                                    target="_blank">Midlands Engine investment portfolio</a>
@@ -153,8 +153,7 @@
                             <li>
                                 <a href="/{{ base }}/investment-opportunities/finance-and-incentives">{{ labels.investment_incentives_and_finance[locale.code] }}</a>
                             </li>
-                            <li><a id="sector-link" href="">{{ labels.investment_opts_invest_in[locale.code] }} <span
-                                    id="sector-name"></span></a></li>
+                            <li><a id="sector-link" href="">{{ labels.investment_opts_invest_in[locale.code] }}</a></li>
                         </ul>
                     </div>
                     <div class="row invest-call">
