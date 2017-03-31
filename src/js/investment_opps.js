@@ -27,6 +27,7 @@ function InvestmentOpps(container) {
   //elements
   var clustersList = container.find('#notable-clusters')
   var clusters = container.find('#clusters')
+  var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
   var regionSelector = container.find('#region-selector')
   var chooseInd = container.find('#choose-industry')
@@ -49,6 +50,7 @@ function InvestmentOpps(container) {
   checkMobile(bodyWidth)
 
 
+  sectorLink.hide()
   regenerationOpps.hide()
   clusters.hide()
   northernPowerhouse.hide()
@@ -59,7 +61,11 @@ function InvestmentOpps(container) {
   initMap()
     .then(function() {
       loadData().then(function() {
-        filter({data: {sector: false}})
+        filter({
+          data: {
+            sector: false
+          }
+        })
       })
       watch()
       close()
@@ -69,7 +75,7 @@ function InvestmentOpps(container) {
   function initMap() {
     return require('./map')(container.find('#map'))
       .then(function(_map) {
-        map=_map
+        map = _map
         map.onSelect(filterRegion)
         if (mobile) {
           mapContainer.detach().insertAfter('#sidebar')
@@ -80,7 +86,7 @@ function InvestmentOpps(container) {
   function loadData() {
     var file = 'data_points_sector.json'
     return fetch(file)
-      .then(function (list) {
+      .then(function(list) {
         data = TAFFY(list)
         return list
       })
@@ -88,7 +94,17 @@ function InvestmentOpps(container) {
 
   function watch() {
     sectorSelector
-      .change({sector: true},function(event) {
+      .change({
+        sector: true
+      }, function(event) {
+        var industry = sectorSelector.val()
+        if (industry && industry !== '') {
+          var selected = $('option:selected', this)
+          sectorLink.attr('href', selected.data('link'))
+          sectorLink.show()
+        } else {
+          sectorLink.hide()
+        }
         filter(event)
       })
     regionSelector.change(changeRegion)
@@ -98,7 +114,7 @@ function InvestmentOpps(container) {
   }
 
   function close() {
-    closeRegion.click(function () {
+    closeRegion.click(function() {
       filterRegion()
       map.selectRegion()
     })
@@ -106,7 +122,7 @@ function InvestmentOpps(container) {
   }
 
   function goToMap() {
-    goBtn.click(function () {
+    goBtn.click(function() {
       $('html, body').animate({
         scrollTop: $('#map').offset().top
       }, 750)
@@ -123,7 +139,7 @@ function InvestmentOpps(container) {
     northernPowerhouse.hide()
     midlandsEngine.hide()
     if (name) {
-      window.location.hash='region-'+name
+      window.location.hash = 'region-' + name
       if (name === 'Yorkshire and The Humber' ||
         name === 'North West England' ||
         name === 'North East England'
@@ -137,7 +153,7 @@ function InvestmentOpps(container) {
         regenerationOpps.hide()
       }
     } else {
-      window.location.hash=''
+      window.location.hash = ''
       regenerationOpps.hide()
     }
     debug('region: ', name)
@@ -161,7 +177,11 @@ function InvestmentOpps(container) {
       }
     }
     regionSelector.val(name)
-    filter({data:{sector:false}})
+    filter({
+      data: {
+        sector: false
+      }
+    })
   }
 
 
@@ -216,12 +236,12 @@ function InvestmentOpps(container) {
     }
     var list = filteredData.order('businesses desc').limit(3).get()
     debug('Notable clusters are:', list)
-    $.each(list, function (index, cluster) {
+    $.each(list, function(index, cluster) {
       clustersList.append($('<li>').html(cluster.name))
     })
 
-    debug('Cluster length *****' , clustersList, clustersList.length)
-    if(clustersList.length > 0) {
+    debug('Cluster length *****', clustersList, clustersList.length)
+    if (clustersList.length > 0) {
       clusters.show()
     }
   }
