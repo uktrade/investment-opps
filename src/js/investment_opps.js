@@ -19,33 +19,34 @@ function init() {
 }
 
 function InvestmentOpps(container) {
-  var map
+
   var data //main data
-  var region // active region
   var filteredData
+  var map
+  var region // active region
 
   //elements
-  var clustersList = container.find('#notable-clusters')
+  var bodyHeight = $('body').height()
+  var bodyWidth = $('body').width()
+  var businessFilter = container.find('#significant-businesses')
+  var centresFilter = container.find('#innovation-centres')
+  var chooseInd = container.find('#choose-industry')
+  var closeRegion = container.find('#close')
   var clusters = container.find('#clusters')
+  var clustersList = container.find('#notable-clusters')
+  var details = container.find('#sidebar-details')
+  var filters = container.find('#filters')
+  var goBtn = container.find('#go-btn')
+  var instructions = container.find('#form-instructions')
+  var mapContainer = container.find('#map-container')
+  var midlandsEngine = container.find('#midlands-engine')
+  var mobile
+  var northernPowerhouse = container.find('#northern-powerhouse')
+  var regenerationOpps = container.find('#regeneration-opps')
+  var regionSelector = container.find('#region-selector')
   var sectorLink = container.find('#sector-link')
   var sectorSelector = container.find('#sector-selector')
-  var regionSelector = container.find('#region-selector')
-  var chooseInd = container.find('#choose-industry')
-  var regenerationOpps = container.find('#regeneration-opps')
-  var northernPowerhouse = container.find('#northern-powerhouse')
-  var midlandsEngine = container.find('#midlands-engine')
-  var filters = container.find('#filters')
-  var details = container.find('#sidebar-details')
-  var instructions = container.find('#form-instructions')
-  var businessFilter = container.find('#significant-businesses')
   var zonesFilter = container.find('#enterprise-zones')
-  var centresFilter = container.find('#innovation-centres')
-  var closeRegion = container.find('#close')
-  var goBtn = container.find('#go-btn')
-  var bodyWidth = $('body').width()
-  var bodyHeight = $('body').height()
-  var mapContainer = container.find('#map-container')
-  var mobile
 
   checkMobile(bodyWidth)
 
@@ -67,6 +68,7 @@ function InvestmentOpps(container) {
           }
         })
       })
+      checkHash()
       watch()
       close()
       goToMap()
@@ -92,6 +94,16 @@ function InvestmentOpps(container) {
       })
   }
 
+  function checkHash() {
+    var re = /#region-(.*)/
+    var hash = window.location.hash
+    var name = hash.replace(re, '$1')
+    if (name) {
+      map.selectRegion(name)
+      filterRegion(name)
+    }
+  }
+
   function watch() {
     sectorSelector
       .change({
@@ -100,6 +112,8 @@ function InvestmentOpps(container) {
         var industry = sectorSelector.val()
         if (industry && industry !== '') {
           var selected = $('option:selected', this)
+          // window.location.search = '?industry=' + industry
+          // debug('location: ', window.location)
           sectorLink.attr('href', selected.data('link'))
           sectorLink.show()
         } else {
@@ -118,7 +132,6 @@ function InvestmentOpps(container) {
       filterRegion()
       map.selectRegion()
     })
-
   }
 
   function goToMap() {
@@ -258,9 +271,6 @@ function InvestmentOpps(container) {
 
   function checkMobile(width) {
     if (width < 768) {
-      chooseInd.css('min-height', bodyHeight - 20 + 'px')
-      filters.css('min-height', bodyHeight - 20 + 'px')
-      $('#map').css('min-height', bodyHeight - 20 + 'px')
       return mobile = true
     }
     return mobile = false
