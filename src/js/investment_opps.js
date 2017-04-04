@@ -131,7 +131,15 @@ function InvestmentOpps(container) {
         if (industry && industry !== '') {
           var selected = $('option:selected', this)
           var indHash = industry.split(' ').join('-')
-          window.location.hash = 'industry=' + indHash
+          var hash = window.location.hash
+          var hashHasRegion = /&region/.test(hash)
+          var region
+          if (hashHasRegion) {
+            region = hash.split('&')[1]
+            window.location.hash = 'industry=' + indHash + '&' + region
+          } else {
+            window.location.hash = 'industry=' + indHash
+          }
           sectorLink.attr('href', selected.data('link'))
           sectorLink.show()
         } else {
