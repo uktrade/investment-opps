@@ -2,14 +2,23 @@
 
 .dit-form-section {
   padding: 0;
-  margin: 10px 0 50px;
   border: 1px solid $tile-border-colour;
-  border-bottom: 5px solid $red-line-colour;
   overflow: hidden;
   background: $white;
 
+  &__header-panel{
+    background-color: $teal;
+    color: $white;
+  }
+
+  &__lead{
+    padding: 7px 0px;
+    border-bottom: 1px solid #FFF;
+    margin-top: 15px;
+  }
+
   &__heading {
-    font-size: 40px;
+    font-size: 32px;
     font-weight: 100;
 
     @media (max-width: $screen-xs-max) {
@@ -43,7 +52,41 @@
   &__body {
     //min-height: 58rem;
     background-color: $white;
-    border-#{$left}: 1px solid $tile-border-colour;
+    // border-#{$left}: 1px solid $tile-border-colour;
+    input{
+      background-color: $smoke;
+    }
+  }
+
+  &__progress-bar{
+    background-color: $smoke;
+    min-height: 80px;
+
+    .progress-stages{
+      div{
+      margin: 22px 0px;
+      color: $teal;
+      }
+    }
+  }
+
+  &__inputs{
+    margin: 0;
+    padding: 0;
+  }
+
+  .number-circle {
+    border-radius: 50%;
+    behavior: url(PIE.htc); /* remove if you don't care about IE8 */
+
+    width: 46px;
+    height: 36px;
+    padding: 8px;
+    
+    background: $smoke;
+    border: 2px solid $teal;
+    color: $teal;
+    text-align: center;
   }
 
   .glyphicon-triangle-#{$left} {
@@ -70,6 +113,20 @@
     margin-#{$right}: 15px;
   }
 
+  .panel-section{
+    margin-bottom: 25px;
+
+  ul{
+    padding-left: 0;
+    margin-left: 0;
+    margin-top: 20px;
+  }
+
+  li{
+    margin-top: 10px;
+  }
+
+  }
 }
 
 .autocomplete-suggestions {
@@ -326,4 +383,12 @@
   position: relative !important;
   bottom: 0 !important;
 }
+
+.no-gutter{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+    
+
 
