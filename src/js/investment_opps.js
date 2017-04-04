@@ -20,7 +20,7 @@ function init() {
 
 function InvestmentOpps(container) {
 
-  var data //main data
+  var dataMain //main data
   var filteredData
   var map
   var region // active region
@@ -60,15 +60,15 @@ function InvestmentOpps(container) {
   filters.hide()
   details.hide()
   initMap()
-    .then(function() {
-      loadData().then(function() {
+    .then(function () {
+      loadData().then(function () {
         filter({
           data: {
             sector: false
           }
         })
+        checkHash()
       })
-      checkHash()
       watch()
       close()
       goToMap()
@@ -76,7 +76,7 @@ function InvestmentOpps(container) {
 
   function initMap() {
     return require('./map')(container.find('#map'))
-      .then(function(_map) {
+      .then(function (_map) {
         map = _map
         map.onSelect(filterRegion)
         if (mobile) {
@@ -88,19 +88,37 @@ function InvestmentOpps(container) {
   function loadData() {
     var file = 'data_points_sector.json'
     return fetch(file)
-      .then(function(list) {
-        data = TAFFY(list)
+      .then(function (list) {
+        dataMain = TAFFY(list)
         return list
       })
   }
 
   function checkHash() {
-    var re = /#region-(.*)/
-    var hash = window.location.hash
-    var name = hash.replace(re, '$1')
-    if (name) {
-      map.selectRegion(name)
-      filterRegion(name)
+    var reIndHash = /industry=(.*)/
+    var reRegHash = /&region=(.*)/
+    var hash = window.location.hash.substr(1)
+    var industryHash = hash.replace(reIndHash, '$1')
+    var region
+    var hashHasRegion = /&region/.test(hash)
+    if (hashHasRegion) {
+      region = hash.match(reRegHash, '$1')[1]
+      industryHash = hash.replace(reIndHash, '$1').split('&')[0]
+    }
+    if (industryHash) {
+      var industry = industryHash.split('-').join(' ')
+      sectorSelector.val(industry)
+      if (!region) {
+        filter({
+          data: {
+            sector: false
+          }
+        })
+      }
+    }
+    if (region) {
+      map.selectRegion(region)
+      filterRegion(region)
     }
   }
 
@@ -108,12 +126,12 @@ function InvestmentOpps(container) {
     sectorSelector
       .change({
         sector: true
-      }, function(event) {
+      }, function (event) {
         var industry = sectorSelector.val()
         if (industry && industry !== '') {
           var selected = $('option:selected', this)
-          // window.location.search = '?industry=' + industry
-          // debug('location: ', window.location)
+          var indHash = industry.split(' ').join('-')
+          window.location.hash = 'industry=' + indHash
           sectorLink.attr('href', selected.data('link'))
           sectorLink.show()
         } else {
@@ -128,14 +146,14 @@ function InvestmentOpps(container) {
   }
 
   function close() {
-    closeRegion.click(function() {
+    closeRegion.click(function () {
       filterRegion()
       map.selectRegion()
     })
   }
 
   function goToMap() {
-    goBtn.click(function() {
+    goBtn.click(function () {
       $('html, body').animate({
         scrollTop: $('#map').offset().top
       }, 750)
@@ -151,8 +169,15 @@ function InvestmentOpps(container) {
   function filterRegion(name) {
     northernPowerhouse.hide()
     midlandsEngine.hide()
+    var hash = window.location.hash
+    var hashHasRegion = /&region/.test(hash)
+    var hashEmptyRegion = hash.split('&')[0]
     if (name) {
-      window.location.hash = 'region-' + name
+      if (hashHasRegion) {
+        window.location.hash = hashEmptyRegion + '&region=' + name
+      } else {
+        window.location.hash = hash + '&region=' + name
+      }
       if (name === 'Yorkshire and The Humber' ||
         name === 'North West England' ||
         name === 'North East England'
@@ -166,7 +191,7 @@ function InvestmentOpps(container) {
         regenerationOpps.hide()
       }
     } else {
-      window.location.hash = ''
+      window.location.hash = hashEmptyRegion
       regenerationOpps.hide()
     }
     debug('region: ', name)
@@ -220,7 +245,7 @@ function InvestmentOpps(container) {
     }
     filters.show(750)
     debug('Filtering data by', _filter)
-    filteredData = data(_filter)
+    filteredData = dataMain(_filter)
     render()
     updateNotableClusters(region)
   }
@@ -249,7 +274,7 @@ function InvestmentOpps(container) {
     }
     var list = filteredData.order('businesses desc').limit(3).get()
     debug('Notable clusters are:', list)
-    $.each(list, function(index, cluster) {
+    $.each(list, function (index, cluster) {
       clustersList.append($('<li>').html(cluster.name))
     })
 
