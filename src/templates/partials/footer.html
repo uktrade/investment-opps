@@ -1,5 +1,5 @@
 <div class="container col-xs-12 issue_container">
-    <a class="issue_link" href="/{{base}}/feedback/">{{labels.report_problem[locale.code]}}</a>
+    <a class="issue_link" href="/{{base}}/feedback?pageTitle={{ pageTitle }}">{{labels.report_problem[locale.code]}}</a>
 </div>
 
 </div>
@@ -16,7 +16,7 @@
                     <li><a href="/{{base}}/privacy-policy/">{{ labels.privacy[locale.code] }}</a></li>
                     <li><a href="/{{base}}/terms-and-conditions/">{{ labels.terms[locale.code] }}</a></li>
                     {% if locale.language === 'en' %}
-                    <li><a href="/{{base}}/feedback/">{{ labels.report_problem[locale.code] }}</a></li>
+                    <li><a href="/{{base}}/feedback?pageTitle={{ pageTitle }}">{{ labels.report_problem[locale.code] }}</a></li>
                     {% endif %}
                 </ul>
             </div>
