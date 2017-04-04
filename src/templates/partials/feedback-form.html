@@ -48,11 +48,8 @@
                                 <p class="error-help">{{ labels.form_enter_full_name[locale.code] }}</p>
                                 <input id="hidden_field" name="user[language]" type="hidden" value="{{locale.language}}">
                                 <input id="hidden_field" name="user[market]" type="hidden" value="{{locale.country}}">
+                                <input type="hidden" name="user[pageTitle]" id="pageTitle" class="form-control" placeholder=""/>
                                 <input type="text" name="user[name]" id="userName" required="required" class="form-control" placeholder=""/>
-                                <!--                                 <input name="english[form_full_name]" type="hidden"
-                                value="{{ labels.form_full_name['en_US'] }}">
-                                <input name="multilingual[form_full_name]" type="hidden"
-                                value="{{ labels.form_full_name[locale.code] }}"> -->
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label" for="userEmail">{{ labels.feedback_email[locale.code] }}</label>
@@ -61,25 +58,11 @@
                                 <input type="email" name="user[email]" id="userEmail" required="required"
                                 class="form-control"
                                 placeholder=""/>
-                                <!--                                 <input name="english[form_email]" type="hidden" value="{{ labels.form_email['en_US'] }}">
-                                <input name="multilingual[form_email]" type="hidden"
-                                value="{{ labels.form_email[locale.code] }}"> -->
-                            </div>
-                            <div class="form-group col-md-12">
-                                <label class="control-label" for="pageTitle">{{ labels.feedback_page_title[locale.code] }}</label>
-                                <p class="error-help">{{ labels.form_enter_page_title[locale.code] }}</p>
-                                <!-- <p class="error-help email_help">{{ labels.form_enter_page_title[locale.code] }}</p>-->
-                                <input type="text" name="user[pageTitle]" id="pageTitle" required="required"
-                                class="form-control"
-                                placeholder=""/>
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="control-label" for="userFeedback">{{ labels.feedback_feedback[locale.code] }}</label>
                                 <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{ labels.report_problem_placeholder[locale.code] }}"></textarea>
                                 <input name="js" class="js_switch" type="hidden" value="false">
-                                <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels.form_phone['en_US'] }}">
-                                <input name="multilingual[form_phone]" type="hidden"
-                                value="{{ labels.form_phone[locale.code] }}"> -->
                             </div>
                             <div class="form-group__button feedback-button">
                                 <button id="ga-send-js" class="dit-btn--sm submitBtn"
