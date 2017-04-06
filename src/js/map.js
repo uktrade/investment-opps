@@ -258,7 +258,7 @@ function Map(container) {
     var border = {}
     border.x = (bounds[0][0] + bounds[1][0]) / 2
     border.y = (bounds[0][1] + bounds[1][1]) / 2
-    border.scale = .9 / Math.max(dx / width, dy / height)
+    border.scale = .85 / Math.max(dx / width, dy / height)
 
     var x = border.x
     var y = border.y
@@ -266,7 +266,7 @@ function Map(container) {
     var translate = [width / 2 - scale * (x * .982), height / 2 - scale * y]
     map.g.transition()
       .duration(750)
-      .style('stroke-width', 4.5 / scale + 'px')
+      .style('stroke-width', 1 / scale + 'px')
       .attr('transform', 'translate(' + translate + ')scale(' + scale + ')')
   }
 
