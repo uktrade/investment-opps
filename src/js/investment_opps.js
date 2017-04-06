@@ -60,8 +60,8 @@ function InvestmentOpps(container) {
   filters.hide()
   details.hide()
   initMap()
-    .then(function () {
-      loadData().then(function () {
+    .then(function() {
+      loadData().then(function() {
         filter({
           data: {
             sector: false
@@ -76,7 +76,7 @@ function InvestmentOpps(container) {
 
   function initMap() {
     return require('./map')(container.find('#map'))
-      .then(function (_map) {
+      .then(function(_map) {
         map = _map
         map.onSelect(filterRegion)
         if (mobile) {
@@ -88,7 +88,7 @@ function InvestmentOpps(container) {
   function loadData() {
     var file = 'data_points_sector.json'
     return fetch(file)
-      .then(function (list) {
+      .then(function(list) {
         dataMain = TAFFY(list)
         return list
       })
@@ -126,27 +126,7 @@ function InvestmentOpps(container) {
     sectorSelector
       .change({
         sector: true
-      }, function (event) {
-        var industry = sectorSelector.val()
-        if (industry && industry !== '') {
-          var selected = $('option:selected', this)
-          var indHash = industry.split(' ').join('-')
-          var hash = window.location.hash
-          var hashHasRegion = /&region/.test(hash)
-          var region
-          if (hashHasRegion) {
-            region = hash.split('&')[1]
-            window.location.hash = 'industry=' + indHash + '&' + region
-          } else {
-            window.location.hash = 'industry=' + indHash
-          }
-          sectorLink.attr('href', selected.data('link'))
-          sectorLink.show()
-        } else {
-          sectorLink.hide()
-        }
-        filter(event)
-      })
+      }, changeSector)
     regionSelector.change(changeRegion)
     businessFilter.change(filterChanged)
     centresFilter.change(filterChanged)
@@ -154,22 +134,54 @@ function InvestmentOpps(container) {
   }
 
   function close() {
-    closeRegion.click(function () {
+    closeRegion.click(function() {
       filterRegion()
       map.selectRegion()
     })
   }
 
   function goToMap() {
-    goBtn.click(function () {
+    goBtn.click(function() {
       $('html, body').animate({
         scrollTop: $('#map').offset().top
       }, 750)
     })
   }
 
+  function changeSector(event) {
+    var industry = sectorSelector.val()
+    //push to GA
+    dataLayer.push({
+      'industry': industry,
+      'event': 'industry-change'
+    })
+    if (industry && industry !== '') {
+      var selected = $('option:selected', this)
+      var indHash = industry.split(' ').join('-')
+      var hash = window.location.hash
+      var hashHasRegion = /&region/.test(hash)
+      var region
+      if (hashHasRegion) {
+        region = hash.split('&')[1]
+        window.location.hash = 'industry=' + indHash + '&' + region
+      } else {
+        window.location.hash = 'industry=' + indHash
+      }
+      sectorLink.attr('href', selected.data('link'))
+      sectorLink.show()
+    } else {
+      sectorLink.hide()
+    }
+    filter(event)
+  }
+
   function changeRegion() {
     var name = regionSelector.val()
+    //push to GA
+    dataLayer.push({
+      'region': name,
+      'event': 'region-change'
+    })
     filterRegion(name)
     map.selectRegion(name)
   }
@@ -282,7 +294,7 @@ function InvestmentOpps(container) {
     }
     var list = filteredData.order('businesses desc').limit(3).get()
     debug('Notable clusters are:', list)
-    $.each(list, function (index, cluster) {
+    $.each(list, function(index, cluster) {
       clustersList.append($('<li>').html(cluster.name))
     })
 
