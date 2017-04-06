@@ -177,16 +177,16 @@ function InvestmentOpps(container) {
 
   function changeRegion() {
     var name = regionSelector.val()
-    //push to GA
-    dataLayer.push({
-      'region': name,
-      'event': 'region-change'
-    })
     filterRegion(name)
     map.selectRegion(name)
   }
 
   function filterRegion(name) {
+    //push to GA
+    dataLayer.push({
+      'region': name,
+      'event': 'region-change'
+    })
     northernPowerhouse.hide()
     midlandsEngine.hide()
     var hash = window.location.hash
