@@ -128,9 +128,24 @@ function InvestmentOpps(container) {
         sector: true
       }, changeSector)
     regionSelector.change(changeRegion)
-    businessFilter.change(filterChanged)
-    centresFilter.change(filterChanged)
-    zonesFilter.change(filterChanged)
+    businessFilter.change(function() {
+      sendGAFilterEvent('businesses',businessFilter.is(':checked'))
+    })
+    centresFilter.change(function() {
+      sendGAFilterEvent('hubs',centresFilter.is(':checked'))
+    })
+    zonesFilter.change(function() {
+      sendGAFilterEvent('incentives',zonesFilter.is(':checked'))
+    })
+  }
+
+
+  function sendGAFilterEvent(filter, value) {
+    debug('Sending GA event', filter,value)
+    dataLayer.push({
+      'value': value,
+      'event': filter + '-filter'
+    })
   }
 
   function close() {
