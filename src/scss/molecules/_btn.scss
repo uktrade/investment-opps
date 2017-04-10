@@ -48,7 +48,7 @@
   background-color: $link-colour;
 
   &:hover {
-    color: $text-colour !important;
+    color: $link-colour !important;
     background: $white;
   }
 
@@ -112,7 +112,7 @@
 
   &:hover {
     background: $white;
-    color: $text-colour !important;
+    color: $link-colour !important;
   }
 
   @media (max-width: $screen-md-max) {

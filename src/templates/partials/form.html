@@ -17,8 +17,6 @@ global: true
                         <li>{{ o }}</li>
                         {% endfor %}
                     </ul>
-                </div>
-                <div class="panel-section">
                     <p>{{ labels.form_jumbo_content[locale.code] }}</p>
                 </div>
             </div>
@@ -63,6 +61,9 @@ global: true
                                             <h3>{{ labels.form_contact_details[locale.code] }}</h3>
                                         </div>
                                         <div class="form-group col-md-8">
+                                            <p class="error-help">
+                                                {{ labels.form_enter_full_name[locale.code] }}
+                                            </p>
                                             <input id="hidden_field"
                                                    name="language"
                                                    type="hidden"
@@ -71,9 +72,6 @@ global: true
                                                    for="userName">
                                                 {{ labels.form_full_name[locale.code] }}
                                             </label>
-                                            <p class="error-help">
-                                                {{ labels.form_enter_full_name[locale.code] }}
-                                            </p>
                                             <input type="text"
                                                    name="user[name]"
                                                    id="userName"
@@ -88,13 +86,13 @@ global: true
                                                    value="{{ labels.form_full_name[locale.code] }}">
                                         </div>
                                         <div class="form-group col-md-8">
+                                            <p class="error-help">
+                                                {{ labels.form_enter_title[locale.code] }}
+                                            </p>
                                             <label class="control-label"
                                                    for="userTitle">
                                                 {{ labels.form_title[locale.code] }}
                                             </label>
-                                            <p class="error-help">
-                                                {{ labels.form_enter_title[locale.code] }}
-                                            </p>
                                             <input type="text"
                                                    name="user[title]"
                                                    id="userTitle"
@@ -109,16 +107,13 @@ global: true
                                                    value="{{ labels.form_title[locale.code] }}">
                                         </div>
                                         <div class="form-group col-md-6">
+                                            <p class="error-help email_help">
+                                                {{ labels.form_enter_email[locale.code] }}
+                                            </p>
                                             <label class="control-label"
                                                    for="userEmail">
                                                 {{ labels.form_email[locale.code] }}
                                             </label>
-                                            <p class="error-help email_help">
-                                                {{ labels.form_enter_email[locale.code] }}
-                                            </p>
-                                            <p class="validation_error">
-                                                {{ labels.form_enter_valid_email[locale.code] }}
-                                            </p>
                                             <input type="email"
                                                    name="user[email]"
                                                    id="userEmail"
@@ -135,13 +130,13 @@ global: true
                                     </div>
                                     <div class="row">
                                         <div class="form-group-mb-0 col-md-4">
+                                            <p class="validation_error">
+                                                {{ labels.form_enter_valid_phone[locale.code] }}
+                                            </p>
                                             <label class="control-label"
                                                    for="userPhone">
                                                 {{ labels.form_phone[locale.code] }}
                                             </label>
-                                            <p class="validation_error">
-                                                {{ labels.form_enter_valid_phone[locale.code] }}
-                                            </p>
                                             <input type="text"
                                                    name="user[phone]"
                                                    id="userPhone"
@@ -153,27 +148,6 @@ global: true
                                             <input name="multilingual[form_phone]"
                                                    type="hidden"
                                                    value="{{ labels.form_phone[locale.code] }}">
-                                        </div>
-                                        <div class="form-group col-md-10">
-                                            <label class="control-label form_heading"
-                                                   for="mailing_list_checkbox">{{
-                                                labels.form_mailing_list_heading[locale.code] }}</label>
-                                            <label class="dit-not-label"
-                                                   for="mailing_list_checkbox">
-                                                <input
-                                                        type="checkbox"
-                                                        id="mailing_list_checkbox"
-                                                        name="user[mailing_list]"
-                                                        value="true"
-                                                /> {{ labels.form_mailing_list_confirmation[locale.code]
-                                                }}
-                                            </label>
-                                            <input name="english[form_mailing_list]"
-                                                   type="hidden"
-                                                   value="{{ labels.form_mailing_list['en_US'] }}">
-                                            <input name="multilingual[form_mailing_list]"
-                                                   type="hidden"
-                                                   value="{{ labels.form_mailing_list[locale.code] }}">
                                         </div>
                                     </div>
                                 </div>
@@ -190,11 +164,11 @@ global: true
                                     {{ labels.form_company_reason[locale.code] }}
                                 </p>
                                 <div class="form-group col-md-8">
+                                    <p class="error-help">{{ labels.form_enter_registered_company[locale.code]
+                                        }}</p>
                                     <label for="company_name"
                                            class="control-label">{{ labels.form_registered_company[locale.code]
                                         }}</label>
-                                    <p class="error-help">{{ labels.form_enter_registered_company[locale.code]
-                                        }}</p>
                                     <input maxlength="100"
                                            type="text"
                                            name="organisation[name]"
@@ -210,11 +184,12 @@ global: true
                                            value="{{ labels.form_registered_company[locale.code] }}">
                                 </div>
                                 <div class="form-group-mb-0 col-md-8">
+                                    <p class="error-help">{{ labels.form_enter_website[locale.code] }}</p>
                                     <label for="website"
                                            class="control-label">{{ labels.form_website[locale.code] }}</label>
-                                    <p class="error-help">{{ labels.form_enter_website[locale.code] }}</p>
                                     <input type="text"
                                            name="organisation[website]"
+                                           required="required"
                                            id="website"
                                            class="form-control"
                                            placeholder=""/>
@@ -226,9 +201,6 @@ global: true
                                            value="{{ labels.form_website[locale.code] }}">
                                 </div>
                                 <div class="form-group col-md-8">
-                                    <label class="control-label form_heading"
-                                           for="mailing_list_checkbox">{{
-                                        labels.form_mailing_list_heading[locale.code] }}</label>
                                     <label class="dit-not-label"
                                            for="mailing_list_checkbox">
                                         <input
@@ -247,15 +219,15 @@ global: true
                                            value="{{ labels.form_mailing_list[locale.code] }}">
                                 </div>
                                 <div class="form-group col-md-8">
+                                    <p class="error-help">
+                                        {{ labels.form_enter_headquarters[locale.code] }}
+                                    </p>
                                     <label for="country"
                                            class="control-label">
                                         {{ labels.form_headquarters.label[locale.code] }}
                                     </label>
                                     <p class="help-text">
                                         {{ labels.form_enter_headquarters_help[locale.code] }}
-                                    </p>
-                                    <p class="error-help">
-                                        {{ labels.form_enter_headquarters[locale.code] }}
                                     </p>
                                     <input type="text"
                                            name="organisation[headquarters_country]"
@@ -275,26 +247,26 @@ global: true
                                            value="{{ labels.form_headquarters.label[locale.code] }}">
                                 </div>
                                 <div class="form-group-mb-0 dit-label col-md-8">
-                                    {{ labels.form_staff_number.label[locale.code] }}
                                     <p class="error-help">{{ labels.form_enter_staff_number[locale.code] }}</p>
+                                    {{ labels.form_staff_number.label[locale.code] }}
+                                    {% for o in labels.form_staff_number.options[locale.code] %}
+                                    <div class="form-group-mb-0 col-md-8">
+                                        <input name="organisation[number_of_employees]"
+                                               class="dit-radio"
+                                               type="radio"
+                                               id="{{o}}"
+                                               value="{{loop.index}}-staff:{{o}}:{{ labels.form_staff_number.options['en_US'][loop.index0] }}"
+                                               required="required">
+                                        <label class="dit-not-label" for="{{o}}">{{o}}</label>
+                                    </div>
+                                    {% endfor %}
+                                    <input name="english[form_staff_number]"
+                                           type="hidden"
+                                           value="{{ labels.form_staff_number.label['en_US'] }}">
+                                    <input name="multilingual[form_staff_number]"
+                                           type="hidden"
+                                           value="{{ labels.form_staff_number.label[locale.code] }}">
                                 </div>
-                                {% for o in labels.form_staff_number.options[locale.code] %}
-                                <div class="form-group-mb-0 col-md-8">
-                                    <input name="organisation[number_of_employees]"
-                                           class="dit-radio"
-                                           type="radio"
-                                           id="{{o}}"
-                                           value="{{loop.index}}-staff:{{o}}:{{ labels.form_staff_number.options['en_US'][loop.index0] }}"
-                                           required>
-                                    <label class="dit-not-label" for="{{o}}">{{o}}</label>
-                                </div>
-                                {% endfor %}
-                                <input name="english[form_staff_number]"
-                                       type="hidden"
-                                       value="{{ labels.form_staff_number.label['en_US'] }}">
-                                <input name="multilingual[form_staff_number]"
-                                       type="hidden"
-                                       value="{{ labels.form_staff_number.label[locale.code] }}">
                             </div>
                         </div>
 
@@ -305,30 +277,22 @@ global: true
                                     <div class="form-group col-md-8">
                                         <h3>{{ labels.form_investment[locale.code] }}</h3>
                                     </div>
-                                    <p class="col-md-4 form-detail">
-                                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Accusantium dicta
-                                        dolores est, excepturi explicabo facere in iusto, laudantium libero magnam magni
-                                        officiis possimus quod soluta unde velit, voluptas! Facilis impedit maxime
-                                        neque.
-                                        <!--{{ labels.form_company_reason[locale.code] }}-->
-                                    </p>
-
                                     <div class="form-group col-md-8">
                                         <label for="industry"
                                                class="control-label">
                                             {{ labels.form_primary_industry.label[locale.code] }}
                                         </label>
-                                        <p class="error-help">
-                                            {{ labels.form_enter_primary_industry[locale.code] }}
+                                        <p class="help-text">
+                                            {{ labels.form_investment_reason[locale.code] }}
                                         </p>
                                         <textarea name="organisation[industry]"
                                                   class="form-control"
                                                   id="industry" cols="30" rows="10"
                                                   maxlength="2500"
-                                                  required></textarea>
-
+                                                  required="required"></textarea>
                                         <input name="english[form_primary_industry]"
                                                type="hidden"
+
                                                value="{{ labels.form_primary_industry.label['en_US'] }}">
                                         <input name="multilingual[form_primary_industry]"
                                                type="hidden"
