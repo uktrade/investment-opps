@@ -43,38 +43,40 @@ function resolveForms() {
 function prepareISTForm(form) {
   debug('Preparing')
   var formBody = $('.dit-form-section__body')
-  var formWrapper = formBody.find('.dit-form-wrapper')
-  var stepWrappers = form.find('.setup-content')
+  // var formWrapper = formBody.find('.dit-form-wrapper')
+  // var stepWrappers = form.find('.setup-content')
   enhanceISTForm()
 
   function enhanceISTForm() {
     debug('Enhancing')
     setJsSwitch(form)
+    setStickyPanel()
+    onScroll()
     disableNativeValidation(form)
     prepareSteps()
-    prepareLocationBlock()
+    // prepareLocationBlock()
     prepareAutocomplete()
     listenInputs(form)
   }
 
   function prepareSteps() {
     debug('Preparing steps')
-    var currentStep = 1
-    var nextBtn = form.find('.nextBtn')
-    var prevBtn = form.find('.prevBtn')
-    var stepWizard = form.find('.stepwizard')
-    show(nextBtn, prevBtn, stepWizard)
-    var steps = form.find('.dit-form-section__step')
-    steps.css('min-height', '70rem')
-    steps.removeClass('final_step')
-    prepareStep2()
-    prepareNavList()
+    // var currentStep = 1
+    // var nextBtn = form.find('.nextBtn')
+    // var prevBtn = form.find('.prevBtn')
+    // var stepWizard = form.find('.stepwizard')
+    // show(nextBtn, prevBtn, stepWizard)
+    // var steps = form.find('.dit-form-section__step')
+    // steps.css('min-height', '70rem')
+    // steps.removeClass('final_step')
+    // prepareStep2()
+    // prepareNavList()
     form.submit(submit)
-    adjustSize()
+    // adjustSize()
 
     debug('Registering resize listener')
     $(window).on('resize', function() {
-      adjustSize()
+      // adjustSize()
     })
 
 
@@ -114,11 +116,15 @@ function prepareISTForm(form) {
 
     function submit(e) {
       e.preventDefault()
-      next()
-      if (currentStep > steps.length) {
+      // next()
+      // if (currentStep > steps.length) {
+      if (!validateInputs(formBody)) {
+        return
+      }
+
         debug('Submitting form')
         submitForm(form, formBody)
-      }
+      // }
     }
 
     function next() {
@@ -483,4 +489,80 @@ function isEmpty(value) {
 
 function getInputs(parent) {
   return parent.find('input:not([type=hidden]), select').filter(':visible')
+}
+
+function setStickyPanel()  {
+  var distance = $('#top-navbar').offset().top
+  var navbarElementHeight = $('#top-navbar').height()
+  var affixElement = $('#fixed-navbar')
+  debug('navHeight', navbarElementHeight)
+  debug('distance', distance)
+// http://stackoverflow.com/questions/3410765/get-full-height-of-element
+  var affixElementHeight = $('#fixed-navbar').outerHeight(true)
+
+// https://finiteheap.com/webdev/2014/12/26/bootstrap-affix-flickering.html
+  affixElement.parent().height(affixElementHeight)
+
+// http://stackoverflow.com/questions/23797241/resetting-changing-the-offset-of-bootstrap-affix
+  $(window).off('.affix')
+  affixElement.removeData('bs.affix').removeClass('affix affix-top affix-bottom')
+
+
+  affixElement.affix({
+    offset: {
+      // Distance of between element and top page
+      top: function () {
+        // how much scrolling is done until sticking the panel
+        return (this.top = distance)
+      }
+    }
+  })
+
+  // The replacement for the css-file.
+  affixElement.on('affix.bs.affix', function (){
+    // the absolute position where the sticked panel is to be placed when the fixing event fires (e.g. the panel reached the top of the page).
+    // affixElement.css('top', navbarElementHeight + 'px')
+    affixElement.css('top', + 0 + 'px')
+    affixElement.css('z-index', 10)
+  })
+  shiftWindow()
+  $(document).on("scroll", onScroll);
+}
+
+function shiftWindow() {
+  debug('Applying smooth scroll')
+  //smoothscrolling and re-positioning to avoid navbar hiding contents
+  $('a[href^="#"]').on('click', function(e) {
+    // prevent default anchor click behaviour
+    e.preventDefault()
+    // store hash
+    var hash = this.hash
+    // animate
+    if (hash.length > 0) {
+      $('html, body').stop().animate({
+        scrollTop: $(hash).offset().top - 160
+      }, 600, 'swing', function() {
+        window.location.hash = hash
+      })
+    }
+  })
+}
+
+function onScroll() {
+  var scrollPos = $(document).scrollTop()
+  debug('scrollPos', scrollPos)
+  $('#fixed-navbar a').each(function () {
+    var currLink = $(this)
+    debug('currLink', currLink)
+    var refElement = $(currLink.attr('href'))
+    debug('currLinkPos', refElement.position().top)
+    if (refElement.position().top <= scrollPos + 100 && refElement.position().top + refElement.height() > scrollPos) {
+      debug('got into conditional')
+      currLink.addClass('active')
+    }
+    else {
+      currLink.removeClass('active')
+      debug('got into else conditional')
+    }
+  })
 }
