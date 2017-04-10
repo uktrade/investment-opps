@@ -261,7 +261,7 @@ function getResults(size, start) {
       url: searchUrl,
       success: function(results) {
         searchArea.html('')
-        if ('hits' in results) {
+        if (results && 'hits' in results) {
           $('.search-results-block').show()
           $('.dit-search-spinner').css('z-index', 1)
           box.animate({
