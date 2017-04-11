@@ -12,7 +12,7 @@
         "KeyPrefixEquals": "br/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "br/404.html"
       }
@@ -22,7 +22,7 @@
         "KeyPrefixEquals": "cn/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "cn/404.html"
       }
@@ -33,7 +33,7 @@
         "KeyPrefixEquals": "de/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "de/404.html"
       }
@@ -43,7 +43,7 @@
         "KeyPrefixEquals": "es/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "es/404.html"
       }
@@ -54,7 +54,7 @@
         "KeyPrefixEquals": "in/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "in/404.html"
       }
@@ -65,7 +65,7 @@
         "KeyPrefixEquals": "us/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "us/404.html"
       }
@@ -75,7 +75,7 @@
         "KeyPrefixEquals": "jp/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "jp/404.html"
       }
@@ -86,7 +86,7 @@
         "KeyPrefixEquals": "int/"
       },
       "Redirect": {
-        "HostName": "staging.invest.great.gov.uk",
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
         "Protocol": "https",
         "ReplaceKeyWith": "int/404.html"
       }
