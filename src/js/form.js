@@ -19,6 +19,7 @@ var error = logger.error
 module.exports = {
   init: init
 }
+window.radioButtonGroup = false
 
 function init() {
   resolveForms()
@@ -160,11 +161,7 @@ function validateField(field, keepErrors) {
   }
   var value = field.val()
   var valid = true
-  if (required && isEmpty(value)) {
-    debug('Validation failed, missing value')
-    formGroup.addClass('has-error')
-    valid = false
-  } else if (field.attr('type') === 'email') {
+  if (field.attr('type') === 'email') {
     if (!isValidEmail(value)) {
       debug('Email validation failed')
       formGroup.addClass('has-error')
@@ -179,36 +176,65 @@ function validateField(field, keepErrors) {
         valid = false
       }
     }
+  } else if (field.attr('name') === 'organisation[website]') {
+    debug('checking website', field)
+    if (!isEmpty(value)) {
+      debug('website is not empty ', value)
+      if (!isValidUrl(value)) {
+        debug('Website validation failed')
+        formGroup.addClass('has-error')
+        valid = false
+      }
+    } else if (!$('#mailing_list_checkbox').is(':checked')) {
+      debug('checking checkbox is not checked')
+      formGroup.addClass('has-error')
+      valid = false
+    }
+  } else if (field.attr('type') === 'radio') {
+    if (field.is(':checked')) {
+      debug('button checked', field)
+      window.radioButtonGroup = true
+      formGroup.removeClass('has-error')
+    } else {
+      debug('button not checked', field)
+      if (window.radioButtonGroup === false) {
+        formGroup.addClass('has-error')
+      }
+    }
+  } else if (required && isEmpty(value)) {
+    debug('Validation failed, missing value')
+    formGroup.addClass('has-error')
+    valid = false
   }
 
-  return valid
-
-  function showValidationError() {
-    debug('Showing validation error')
-    validationError.css('display', 'block')
-  }
-
+    return valid && window.radioButtonGroup
 }
 
 function listenInputs(parent) {
-  parent
-    .find('input:not([type=hidden])')
-    .filter(':visible')
-    .each(function () {
-      $(this)
-        .blur(function () {
-          validateField($(this))
-        })
-    })
-
   parent
     .find('textarea')
     .filter(':visible')
     .each(function () {
       $(this)
-        .change(function () {
+        .blur(function () {
+          debug('checking textarea')
           validateField($(this))
         })
+    })
+
+  parent
+    .find('input:not([type=hidden])')
+    .filter(':visible')
+    .each(function () {
+      if ($(this).attr('type') === 'radio') {
+        $(this).change(function () {
+          validateField($(this))
+        })
+      } else {
+        $(this).blur(function () {
+          validateField($(this))
+        })
+      }
     })
 }
 
@@ -246,8 +272,6 @@ function validateInputs(parent) {
 function clearErrors(formGroup) {
   debug('Clearing errors on form group:', formGroup)
   formGroup.removeClass('has-error')
-  var validationError = formGroup.find('.validation_error')
-  validationError.hide()
 }
 
 function submitForm(form, formBody) {
@@ -350,6 +374,14 @@ function isValidPhoneNumber(number) {
   } else {
     return true
   }
+}
+
+function isValidUrl(url) {
+  var res = url.match(/(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/)
+  if(res == null)
+    return false
+  else
+    return true
 }
 
 function direction() {

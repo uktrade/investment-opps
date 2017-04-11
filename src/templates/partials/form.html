@@ -160,9 +160,6 @@ global: true
                                 <div class="form-group col-md-8">
                                     <h3>{{ labels.form_company[locale.code] }}</h3>
                                 </div>
-                                <p class="col-md-4 form-detail">
-                                    {{ labels.form_company_reason[locale.code] }}
-                                </p>
                                 <div class="form-group col-md-8">
                                     <p class="error-help">{{ labels.form_enter_registered_company[locale.code]
                                         }}</p>
@@ -233,7 +230,7 @@ global: true
                                            class="form-control"
                                            id="country"
                                            placeholder=""
-                                           required>
+                                           required="required">
                                     <input name="organisation[headquarters_country]"
                                            id="country_en"
                                            type="hidden"
@@ -245,9 +242,10 @@ global: true
                                            type="hidden"
                                            value="{{ labels.form_headquarters.label[locale.code] }}">
                                 </div>
-                                <div class="form-group dit-label col-md-8">
-                                    <p class="error-help">{{ labels.form_enter_staff_number[locale.code] }}</p>
-                                    {{ labels.form_staff_number.label[locale.code] }}
+                                <div class="form-group col-md-8">
+                                    <p class="error-help">
+                                        {{ labels.form_enter_staff_number[locale.code] }}</p>
+                                    <p class="dit-label">{{ labels.form_staff_number.label[locale.code] }}</p>
                                     {% for o in labels.form_staff_number.options[locale.code] %}
                                     <div class="form-group-mb-0 col-md-8">
                                         <input name="organisation[number_of_employees]"
@@ -278,7 +276,7 @@ global: true
                                     </div>
                                     <div class="form-group col-md-8">
                                         <p class="error-help">{{ labels.form_enter_investment_details[locale.code] }}</p>
-                                        <label for="industry"
+                                        <label for="investment"
                                                class="control-label">
                                             {{ labels.form_investment_project[locale.code] }}
                                         </label>
@@ -287,7 +285,7 @@ global: true
                                         </p>
                                         <textarea name="investment[project]"
                                                   class="form-control"
-                                                  id="industry" cols="30" rows="10"
+                                                  id="investment" cols="30" rows="10"
                                                   maxlength="2500"
                                                   required="required"></textarea>
                                         <input name="english[form_investment_project]"
