@@ -1,0 +1,95 @@
+{
+  "IndexDocument": {
+    "Suffix": "index.html"
+  },
+  "ErrorDocument": {
+    "Key": "404.html"
+  },
+  "RoutingRules": [
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "br/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "br/404.html"
+      }
+    },{
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "cn/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "cn/404.html"
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "de/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "de/404.html"
+      }
+    },{
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "es/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "es/404.html"
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "in/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "in/404.html"
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "us/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "us/404.html"
+      }
+    }, {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "jp/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "jp/404.html"
+      }
+    },
+    {
+      "Condition": {
+        "HttpErrorCodeReturnedEquals": "404",
+        "KeyPrefixEquals": "int/"
+      },
+      "Redirect": {
+        "HostName": "${SUBDOMAIN}invest.great.gov.uk",
+        "Protocol": "https",
+        "ReplaceKeyWith": "int/404.html"
+      }
+    }
+  ]
+}
