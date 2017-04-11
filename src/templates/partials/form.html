@@ -23,7 +23,7 @@ global: true
         </div>
     </div>
     <div class="container-fluid no-gutter">
-        <nav class="col-md-12 dit-form-section__progress-bar" id="top-navbar">
+        <nav class="col-md-12 dit-form-section__progress-bar visible-md visible-lg" id="top-navbar">
             <div class="container">
                 <div class="grid-row progress-stages">
                     <a class="col-md-4 active" href="#step-1">
@@ -129,8 +129,8 @@ global: true
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="form-group-mb-0 col-md-4">
-                                            <p class="validation_error">
+                                        <div class="form-group col-md-4">
+                                            <p class="error-help">
                                                 {{ labels.form_enter_valid_phone[locale.code] }}
                                             </p>
                                             <label class="control-label"
@@ -183,7 +183,7 @@ global: true
                                            type="hidden"
                                            value="{{ labels.form_registered_company[locale.code] }}">
                                 </div>
-                                <div class="form-group-mb-0 col-md-8">
+                                <div class="form-group col-md-8">
                                     <p class="error-help">{{ labels.form_enter_website[locale.code] }}</p>
                                     <label for="website"
                                            class="control-label">{{ labels.form_website[locale.code] }}</label>
@@ -199,9 +199,8 @@ global: true
                                     <input name="multilingual[form_website]"
                                            type="hidden"
                                            value="{{ labels.form_website[locale.code] }}">
-                                </div>
-                                <div class="form-group col-md-8">
-                                    <label class="dit-not-label"
+                                    <label class="col-md-8 dit-not-label"
+                                           style="padding-left: 0;"
                                            for="mailing_list_checkbox">
                                         <input
                                                 type="checkbox"
@@ -246,7 +245,7 @@ global: true
                                            type="hidden"
                                            value="{{ labels.form_headquarters.label[locale.code] }}">
                                 </div>
-                                <div class="form-group-mb-0 dit-label col-md-8">
+                                <div class="form-group dit-label col-md-8">
                                     <p class="error-help">{{ labels.form_enter_staff_number[locale.code] }}</p>
                                     {{ labels.form_staff_number.label[locale.code] }}
                                     {% for o in labels.form_staff_number.options[locale.code] %}
@@ -278,25 +277,26 @@ global: true
                                         <h3>{{ labels.form_investment[locale.code] }}</h3>
                                     </div>
                                     <div class="form-group col-md-8">
+                                        <p class="error-help">{{ labels.form_enter_investment_details[locale.code] }}</p>
                                         <label for="industry"
                                                class="control-label">
-                                            {{ labels.form_primary_industry.label[locale.code] }}
+                                            {{ labels.form_investment_project[locale.code] }}
                                         </label>
                                         <p class="help-text">
-                                            {{ labels.form_investment_reason[locale.code] }}
+                                            {{ labels.form_investment_details[locale.code] }}
                                         </p>
-                                        <textarea name="organisation[industry]"
+                                        <textarea name="investment[project]"
                                                   class="form-control"
                                                   id="industry" cols="30" rows="10"
                                                   maxlength="2500"
                                                   required="required"></textarea>
-                                        <input name="english[form_primary_industry]"
+                                        <input name="english[form_investment_project]"
                                                type="hidden"
 
-                                               value="{{ labels.form_primary_industry.label['en_US'] }}">
-                                        <input name="multilingual[form_primary_industry]"
+                                               value="{{ labels.form_investment_project['en_US'] }}">
+                                        <input name="multilingual[form_investment_project]"
                                                type="hidden"
-                                               value="{{ labels.form_primary_industry.label[locale.code] }}">
+                                               value="{{ labels.form_investment_project[locale.code] }}">
                                     </div>
                                 </div>
                                 <div class="col-xs-12 dit-form-section__inputs" style="margin-top: 40px;">
@@ -311,7 +311,7 @@ global: true
             </div>
         </div>
     </div>
-    <div class="container-fluid no-gutter">
+    <div class="container-fluid no-gutter visible-md visible-lg">
         <nav class="col-md-12 dit-form-section__progress-bar" id="fixed-navbar">
             <div class="container">
                 <div class="grid-row progress-stages">

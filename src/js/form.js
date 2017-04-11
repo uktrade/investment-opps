@@ -25,7 +25,7 @@ function init() {
 }
 
 function resolveForms() {
-  $('form').each(function() {
+  $('form').each(function () {
     var form = $(this)
     if (form.attr('id') === 'ist-form') {
       debug('Found IST form ', form)
@@ -43,8 +43,6 @@ function resolveForms() {
 function prepareISTForm(form) {
   debug('Preparing')
   var formBody = $('.dit-form-section__body')
-  // var formWrapper = formBody.find('.dit-form-wrapper')
-  // var stepWrappers = form.find('.setup-content')
   enhanceISTForm()
 
   function enhanceISTForm() {
@@ -54,127 +52,24 @@ function prepareISTForm(form) {
     onScroll()
     disableNativeValidation(form)
     prepareSteps()
-    // prepareLocationBlock()
     prepareAutocomplete()
     listenInputs(form)
   }
 
   function prepareSteps() {
     debug('Preparing steps')
-    // var currentStep = 1
-    // var nextBtn = form.find('.nextBtn')
-    // var prevBtn = form.find('.prevBtn')
-    // var stepWizard = form.find('.stepwizard')
-    // show(nextBtn, prevBtn, stepWizard)
-    // var steps = form.find('.dit-form-section__step')
-    // steps.css('min-height', '70rem')
-    // steps.removeClass('final_step')
-    // prepareStep2()
-    // prepareNavList()
     form.submit(submit)
-    // adjustSize()
 
     debug('Registering resize listener')
-    $(window).on('resize', function() {
-      // adjustSize()
-    })
-
-
-    function prepareStep2() {
-      debug('Preparing step 2')
-      formWrapper.find('#step-2')
-        .on('click', '.radio-group a', function() {
-          debug('Location option changed to ', $(this))
-          var sel = $(this).data('title')
-          var tog = $(this).data('toggle')
-          var parent = $(this).parent()
-          parent.next('.' + tog).prop('value', sel)
-          parent
-            .find('a[data-toggle="' + tog + '"]')
-            .not('[data-title="' + sel + '"]')
-            .removeClass('active')
-            .addClass('notActive')
-          parent
-            .find('a[data-toggle="' + tog + '"][data-title="' + sel + '"]')
-            .removeClass('notActive')
-            .addClass('active')
-        })
-    }
-
-    function prepareNavList() {
-      debug('Preparing nav list items')
-      var navListItems = form.find('div.setup-panel div a')
-      navListItems.click(function(e) {
-        e.preventDefault()
-        var target = parseInt($(this).attr('id').split('-')[1])
-        debug('Nav item clicked,target:', target)
-        gotoStep(target)
-      })
-      nextBtn.click(next)
-      prevBtn.click(previous)
-    }
 
     function submit(e) {
       e.preventDefault()
-      // next()
-      // if (currentStep > steps.length) {
       if (!validateInputs(formBody)) {
         return
       }
 
-        debug('Submitting form')
-        submitForm(form, formBody)
-      // }
-    }
-
-    function next() {
-      info('Next')
-      gotoStep(currentStep + 1)
-    }
-
-    function previous() {
-      info('Previous')
-      gotoStep(currentStep - 1)
-    }
-
-    function gotoStep(step) {
-      var currentNav = stepWizard.find('#step-' + currentStep)
-      var nextNav = stepWizard.find('#step-' + step)
-      if (step === currentStep) {
-        return
-      }
-      var current = formWrapper.find('#step-' + currentStep)
-      debug('Current', current)
-      if (step > currentStep) {
-        if (!validateInputs(current)) {
-          return
-        }
-        nextNav.removeAttr('disabled')
-      }
-      go()
-
-      function go() {
-        debug('Changing step from ', currentStep, ' to ', step)
-        var target = formWrapper.find('#step-' + step)
-        debug('Target', target)
-        currentNav.removeClass('active-selection')
-        nextNav.addClass('active-selection')
-        currentStep = step
-        adjustSize(true)
-        location.hash = '#step-' + currentStep
-      }
-    }
-
-    function adjustSize(animate) {
-      debug('Adjusting size')
-      var width = formBody.width()
-      debug('Form body size', width)
-      $(stepWrappers).each(function() {
-        $(this).css('width', width)
-      })
-
-      wrap(formWrapper, stepWrappers.length, width)
-      shift(formWrapper, (-(currentStep - 1) * width), animate)
+      debug('Submitting form')
+      submitForm(form, formBody)
     }
   }
 
@@ -182,31 +77,11 @@ function prepareISTForm(form) {
     debug('Preparing form autocomplete')
     form.find('#country').autocomplete({
       lookup: document.countries,
-      onSelect: function(suggestion) {
+      onSelect: function (suggestion) {
         form.find('#country_en').val(document.countries_en[suggestion.data])
       }
     })
   }
-
-
-  function prepareLocationBlock() {
-    debug('Preparing location block')
-    var locationBlock = form.find('.location_block')
-    var locationSelectors = form.find('#location_selectors')
-    show(locationBlock)
-    hide(locationSelectors)
-    form.find('#location_radio_yes')
-      .click(function() {
-        show(locationSelectors)
-      })
-
-    form.find('#location_radio_no')
-      .click(function() {
-        form.find('#location').prop('selectedIndex', 0)
-        hide(locationSelectors)
-      })
-  }
-
 }
 
 
@@ -214,7 +89,7 @@ function prepareISTForm(form) {
 function prepareForm(form) {
   var formBody = $('.dit-form-section__body')
   var formWrapper = form.find('div').first()
-  var width=formBody.width()
+  var width = formBody.width()
   debug('Preparing')
   enhanceForm()
   form.submit(submit)
@@ -278,7 +153,7 @@ function hide() {
 function validateField(field, keepErrors) {
   var required = field.attr('required')
   var formGroup = field.closest('.form-group')
-  var validationError = formGroup.find('.validation_error')
+  // var validationError = formGroup.find('.validation_error')
   debug('Validating field ', field)
   if (!keepErrors) {
     clearErrors(formGroup)
@@ -292,14 +167,15 @@ function validateField(field, keepErrors) {
   } else if (field.attr('type') === 'email') {
     if (!isValidEmail(value)) {
       debug('Email validation failed')
-      showValidationError()
+      formGroup.addClass('has-error')
       valid = false
     }
   } else if (field.hasClass('phone')) {
     if (!isEmpty(value)) {
+      debug('phone is not empty ', value)
       if (!isValidPhoneNumber(value)) {
         debug('Phone validation failed')
-        showValidationError()
+        formGroup.addClass('has-error')
         valid = false
       }
     }
@@ -318,19 +194,19 @@ function listenInputs(parent) {
   parent
     .find('input:not([type=hidden])')
     .filter(':visible')
-    .each(function() {
+    .each(function () {
       $(this)
-        .blur(function() {
+        .blur(function () {
           validateField($(this))
         })
     })
 
   parent
-    .find('select')
+    .find('textarea')
     .filter(':visible')
-    .each(function() {
+    .each(function () {
       $(this)
-        .change(function() {
+        .change(function () {
           validateField($(this))
         })
     })
@@ -342,7 +218,7 @@ function validateInputs(parent) {
   var formGroups = parent.find('.form-group')
   var fields
   if (formGroups.length) {
-    formGroups.each(function() {
+    formGroups.each(function () {
       var group = $(this)
       debug('Validating form group:', group)
       if (!validateInputs(group)) {
@@ -357,8 +233,8 @@ function validateInputs(parent) {
       }
     })
   } else {
-    fields = parent.find('input:not([type=hidden]), select')
-    fields.each(function() {
+    fields = parent.find('input:not([type=hidden]), textarea')
+    fields.each(function () {
       if (!validateField($(this), true)) {
         valid = false
       }
@@ -385,12 +261,12 @@ function submitForm(form, formBody) {
     type: 'POST',
     url: postUrl,
     data: form.serialize(),
-    success: function(data) {
+    success: function (data) {
       info('Form submit success, response:', data)
       window.location.href = base_url +
         'enquiries/confirmation/?enquiryId=' + data.enquiryId
     },
-    error: function(xhr, textstatus, e) {
+    error: function (xhr, textstatus, e) {
       error('Submit failed!', e)
       window.location.href = base_url + 'enquiries/error/?errorCode=' +
         500
@@ -408,15 +284,15 @@ function submitForm(form, formBody) {
       display: 'block',
     })
 
-    var imageCss={
+    var imageCss = {
       top: body.outerHeight() / 2
     }
-    var margin=body.outerWidth() / 2 - (imageLoad.width() / 2)
+    var margin = body.outerWidth() / 2 - (imageLoad.width() / 2)
 
-    if(direction() === 'left') {
-      imageCss.left=margin
+    if (direction() === 'left') {
+      imageCss.left = margin
     } else {
-      imageCss.right=margin
+      imageCss.right = margin
     }
     imageLoad.css(imageCss)
 
@@ -433,7 +309,7 @@ function wrap(element, length, width) {
   }
   //assign height width and overflow hidden to mother
   $('#mother').css({
-    width: function() {
+    width: function () {
       return width
     },
     position: 'relative !important',
@@ -442,7 +318,7 @@ function wrap(element, length, width) {
   //get total of image sizes and set as width for ul
   var totalWidth = (length) * width + 5
   element.css({
-    width: function() {
+    width: function () {
       return totalWidth
     }
   })
@@ -491,7 +367,7 @@ function getInputs(parent) {
   return parent.find('input:not([type=hidden]), select').filter(':visible')
 }
 
-function setStickyPanel()  {
+function setStickyPanel() {
   var distance = $('#top-navbar').offset().top
   var navbarElementHeight = $('#top-navbar').height()
   var affixElement = $('#fixed-navbar')
@@ -519,10 +395,9 @@ function setStickyPanel()  {
   })
 
   // The replacement for the css-file.
-  affixElement.on('affix.bs.affix', function (){
+  affixElement.on('affix.bs.affix', function () {
     // the absolute position where the sticked panel is to be placed when the fixing event fires (e.g. the panel reached the top of the page).
-    // affixElement.css('top', navbarElementHeight + 'px')
-    affixElement.css('top', + 0 + 'px')
+    affixElement.css('top', +0 + 'px')
     affixElement.css('z-index', 10)
   })
   shiftWindow()
@@ -532,7 +407,7 @@ function setStickyPanel()  {
 function shiftWindow() {
   debug('Applying smooth scroll')
   //smoothscrolling and re-positioning to avoid navbar hiding contents
-  $('a[href^="#"]').on('click', function(e) {
+  $('a[href^="#"]').on('click', function (e) {
     // prevent default anchor click behaviour
     e.preventDefault()
     // store hash
@@ -541,7 +416,7 @@ function shiftWindow() {
     if (hash.length > 0) {
       $('html, body').stop().animate({
         scrollTop: $(hash).offset().top - 160
-      }, 600, 'swing', function() {
+      }, 600, 'swing', function () {
         window.location.hash = hash
       })
     }
@@ -550,19 +425,14 @@ function shiftWindow() {
 
 function onScroll() {
   var scrollPos = $(document).scrollTop()
-  debug('scrollPos', scrollPos)
   $('#fixed-navbar a').each(function () {
     var currLink = $(this)
-    debug('currLink', currLink)
     var refElement = $(currLink.attr('href'))
-    debug('currLinkPos', refElement.position().top)
     if (refElement.position().top <= scrollPos + 100 && refElement.position().top + refElement.height() > scrollPos) {
-      debug('got into conditional')
       currLink.addClass('active')
     }
     else {
       currLink.removeClass('active')
-      debug('got into else conditional')
     }
   })
 }
