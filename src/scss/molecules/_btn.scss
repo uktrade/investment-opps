@@ -139,3 +139,25 @@
     margin: flip-side-values(0 0 16px 15px);
   }
 }
+
+//old format form
+.dit-btn--radio {
+  border: 1px solid $tile-border-colour;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 100;
+  padding: 8px 30px;
+  color: $text-colour;
+  background-color: $white;
+
+  &:hover {
+    background: $toc-colour;
+    color: $text-colour;
+  }
+
+  &.active {
+    color: $text-colour;
+    background-color: $toc-colour;
+    font-weight: 700;
+  }
+}

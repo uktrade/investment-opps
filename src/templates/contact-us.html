@@ -8,7 +8,11 @@
 
 {% block page_content %}
 <div class="dit-info">
-      {% include "partials/form.html" %}
+    {% if locale.language === 'en' %}
+    {% include "partials/form-nf.html" %}
+    {% else %}
+    {% include "partials/form.html" %}
+    {% endif %}
 </div>
 
 {% endblock %}
