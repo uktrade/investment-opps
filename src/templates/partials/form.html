@@ -45,7 +45,7 @@
       </div>
       {% endfor %}
     </div>
-    <div class="col-md-8 dit-form-section__body">
+    <div class="col-md-8 dit-form-section__body" id="old-format">
       <div id="loading-overlay">
         <img src="/{{assets}}/media/spin.gif"
              alt="loading_spinner"
@@ -117,8 +117,8 @@
                 <div class="form-group col-md-10">
                   <label class="control-label"
                          for="userEmail">
-                  {{ labels.form_email[locale.code] }}
-                </label>
+                    {{ labels.form_email[locale.code] }}
+                  </label>
                   <p class="error-help email_help">
                     {{ labels.form_enter_email[locale.code] }}
                   </p>
@@ -141,8 +141,8 @@
                 <div class="form-group col-md-6">
                   <label class="control-label"
                          for="userPhone">
-                {{ labels.form_phone[locale.code] }}
-                </label>
+                    {{ labels.form_phone[locale.code] }}
+                  </label>
                   <p class="validation_error">
                     {{ labels.form_enter_valid_phone[locale.code] }}
                   </p>
@@ -230,7 +230,7 @@
                 <div class="form-group col-md-10 location_block form_top_block">
                   <label for="location_radio_yes"
                          class="control-label">
-                  {{ labels.form_location[locale.code] }}
+                    {{ labels.form_location[locale.code] }}
                   </label>
                   <div class="input-group">
                     <div class="radio-group">
@@ -267,16 +267,16 @@
                           class="form-control"
                           id="location">
                     <option
-                    value="0-potential-location"
-                    disabled
-                    selected >
+                            value="0-potential-location"
+                            disabled
+                            selected >
                       {{ labels.please_select[locale.code] }}
                     </option>
-                  {% for o in labels.form_which_part.options[locale.code] %}
-                  <option value="{{loop.index}}-potential-location:{{o}}:{{ labels.form_which_part.options['en_US'][loop.index0] }}">
-                    {{ o }}
-                  </option>
-                  {% endfor %}
+                    {% for o in labels.form_which_part.options[locale.code] %}
+                    <option value="{{loop.index}}-potential-location:{{o}}:{{ labels.form_which_part.options['en_US'][loop.index0] }}">
+                      {{ o }}
+                    </option>
+                    {% endfor %}
                   </select>
                   <input name="english[form_which_part]"
                          type="hidden"
@@ -298,30 +298,30 @@
                             class="form-control select_month"
                             id="start_date_month"
                             required="required">
-                  <option
-                    value=""
-                    disabled
-                    selected >
-                    {{ labels.form_when_month.label[locale.code] }}
-                  </option>
-                  {% for o in labels.form_when_month.options[locale.code] %}
-                  <option value="{{loop.index}}">{{ o }}</option>
-                  {% endfor %}
-                  </select>
+                      <option
+                              value=""
+                              disabled
+                              selected >
+                        {{ labels.form_when_month.label[locale.code] }}
+                      </option>
+                      {% for o in labels.form_when_month.options[locale.code] %}
+                      <option value="{{loop.index}}">{{ o }}</option>
+                      {% endfor %}
+                    </select>
                     <select name="enquiry[start_date]"
                             class="form-control"
                             id="start_date_year"
                             required="required">
                       <option
-                        value=""
-                        disabled
-                        selected >
+                              value=""
+                              disabled
+                              selected >
                         {{ labels.form_when_year.label[locale.code] }}
                       </option>
                       {% for o in labels.form_when_year.options[locale.code] %}
                       <option value="{{o}}">{{ o }}</option>
                       {% endfor %}
-                      </select>
+                    </select>
                     <input name="english[form_when]"
                            type="hidden"
                            value="{{ labels.form_when['en_US'] }}">
@@ -342,18 +342,18 @@
                           class="form-control"
                           id="industry"
                           required>
-                  <option
-                    value=""
-                    disabled
-                    selected >
+                    <option
+                            value=""
+                            disabled
+                            selected >
                       {{ labels.please_select[locale.code] }}
-                  </option>
-                {% for o in labels.form_primary_industry.options[locale.code] %}
-                <option value="{{loop.index}}-industry:{{o}}:{{ labels.form_primary_industry.options['en_US'][loop.index0] }}">
-                  {{ o }}
-                </option>
-                {% endfor %}
-                </select>
+                    </option>
+                    {% for o in labels.form_primary_industry.options[locale.code] %}
+                    <option value="{{loop.index}}-industry:{{o}}:{{ labels.form_primary_industry.options['en_US'][loop.index0] }}">
+                      {{ o }}
+                    </option>
+                    {% endfor %}
+                  </select>
                   <input name="english[form_primary_industry]"
                          type="hidden"
                          value="{{ labels.form_primary_industry.label['en_US'] }}">
@@ -446,24 +446,24 @@
                 <div class="form-group col-md-8">
                   <label for="staff"
                          class="control-label">
-          {{ labels.form_staff_number.label[locale.code] }}
-          </label>
+                    {{ labels.form_staff_number.label[locale.code] }}
+                  </label>
                   <p class="error-help">{{ labels.form_enter_staff_number[locale.code] }}</p>
                   <select name="organisation[number_of_employees]"
                           class="form-control"
                           id="staff"
                           required>
-            <option
-              value=""
-              disabled
-              selected
-            >{{ labels.please_select[locale.code] }}</option>
-              {% for o in labels.form_staff_number.options[locale.code] %}
-              <option value="{{loop.index}}-staff:{{o}}:{{ labels.form_staff_number.options['en_US'][loop.index0] }}">
-                {{ o }}
-              </option>
-              {% endfor %}
-              </select>
+                    <option
+                            value=""
+                            disabled
+                            selected
+                    >{{ labels.please_select[locale.code] }}</option>
+                    {% for o in labels.form_staff_number.options[locale.code] %}
+                    <option value="{{loop.index}}-staff:{{o}}:{{ labels.form_staff_number.options['en_US'][loop.index0] }}">
+                      {{ o }}
+                    </option>
+                    {% endfor %}
+                  </select>
                   <input name="english[form_staff_number]"
                          type="hidden"
                          value="{{ labels.form_staff_number.label['en_US'] }}">
@@ -474,23 +474,23 @@
                 <div class="form-group col-md-8 bottom-buffer">
                   <label for="turnover"
                          class="control-label">
-          {{ labels.form_annual_turnover.label[locale.code] }}</label>
+                    {{ labels.form_annual_turnover.label[locale.code] }}</label>
                   <p class="error-help">{{ labels.form_enter_annual_turnover[locale.code] }}</p>
                   <select name="organisation[annual_turnover]"
                           class="form-control"
                           id="turnover"
                           required>
-            <option
-              value=""
-              disabled
-              selected
-            >{{ labels.please_select[locale.code] }}</option>
-              {% for o in labels.form_annual_turnover.options[locale.code] %}
-              <option value="{{loop.index}}-turnover:{{o}}:{{ labels.form_annual_turnover.options['en_US'][loop.index0] }}">
-                {{ o }}
-              </option>
-              {% endfor %}
-              </select>
+                    <option
+                            value=""
+                            disabled
+                            selected
+                    >{{ labels.please_select[locale.code] }}</option>
+                    {% for o in labels.form_annual_turnover.options[locale.code] %}
+                    <option value="{{loop.index}}-turnover:{{o}}:{{ labels.form_annual_turnover.options['en_US'][loop.index0] }}">
+                      {{ o }}
+                    </option>
+                    {% endfor %}
+                  </select>
                   <input name="english[form_annual_turnover]"
                          type="hidden"
                          value="{{ labels.form_annual_turnover.label['en_US'] }}">
@@ -504,14 +504,14 @@
                   <p>{{ labels.form_mailing_list[locale.code] }}</p>
                   <label class="checkbox-label"
                          for="mailing_list_checkbox">
-            <input
-              type="checkbox"
-              id="mailing_list_checkbox"
-              name="user[mailing_list]"
-              value="true"
-            /> {{ labels.form_mailing_list_confirmation[locale.code]
-            }}
-            </label>
+                    <input
+                            type="checkbox"
+                            id="mailing_list_checkbox"
+                            name="user[mailing_list]"
+                            value="true"
+                    /> {{ labels.form_mailing_list_confirmation[locale.code]
+                    }}
+                  </label>
                   <input name="english[form_mailing_list]"
                          type="hidden"
                          value="{{ labels.form_mailing_list['en_US'] }}">
