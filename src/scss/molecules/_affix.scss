@@ -1,7 +1,8 @@
 //_affix.scss
 
 .affix {
-  top: 60px;
+  top: 0;
+  position: fixed;
 
   .dit-quick-guide-side {
     position: static;

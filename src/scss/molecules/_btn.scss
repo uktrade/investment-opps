@@ -44,13 +44,12 @@
   display: inline-block;
   padding: 2px 12px;
   margin-#{$left}: 8px;
-  color: $link-colour;
-  background-color: $white;
+  color: $white !important;
+  background-color: $link-colour;
 
   &:hover {
-    background: $link-colour;
-    color: $white;
-    font-weight: 300;
+    color: $link-colour !important;
+    background: $white;
   }
 
   @media (max-width: $screen-md-max) {
@@ -59,8 +58,8 @@
     font-size: 16px;
     font-weight: 100;
     display: inline-block;
-    color: $link-colour;
-    background-color: $white;
+    color: $white !important;
+    background-color: $link-colour;
     padding: 4px 10px;
     margin: flip-side-values(14px 15px 0 0);
     float: #{$right};
@@ -73,8 +72,8 @@
     font-weight: 100;
     display: inline-block;
     padding: 2px 12px;
-    color: $link-colour !important;
-    background-color: $white;
+    color: $white !important;
+    background-color: $link-colour;
     margin: flip-side-values(14px 0 16px 40px);
     float: #{$left};
   }
@@ -100,6 +99,57 @@
   }
 }
 
+.dit-btn--call {
+  border: 2px solid $link-colour;
+  border-radius: 3px;
+  font-size: 24px;
+  font-weight: 300;
+  display: inline-block;
+  padding: 8px 20px !important;
+  margin: flip-side-values(0 0 16px 15px);
+  color: $white !important;
+  background-color: $link-colour;
+
+  &:hover {
+    background: $white;
+    color: $link-colour !important;
+  }
+
+  @media (max-width: $screen-md-max) {
+    border: 2px solid $link-colour;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 300;
+    display: inline-block;
+    color: $white !important;
+    background-color: $link-colour;
+    padding: 4px 20px !important;
+    margin: flip-side-values(0 0 16px 15px);
+  }
+
+  @media (max-width: $screen-xs-max) {
+    border: 2px solid $link-colour !important;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 300;
+    display: inline-block;
+    padding: 4px 20px !important;
+    color: $white !important;
+    background-color: $link-colour;
+    margin: flip-side-values(0 0 16px 15px);
+  }
+
+  &--lg {
+    padding: 12px 30px !important;
+
+    @media (max-width: $screen-sm-max) {
+      padding: 10px 40px !important;
+      margin: 16px 0;
+    }
+  }
+}
+
+//old format form
 .dit-btn--radio {
   border: 1px solid $tile-border-colour;
   border-radius: 6px;

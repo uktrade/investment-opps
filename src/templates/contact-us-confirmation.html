@@ -7,12 +7,10 @@
 {% include "partials/top-bar.html" %}
 
 {% block page_content %}
-{% endblock %}
+<div class="dit-info">
+    {% include "partials/form-confirmation.html" %}
+</div>
 
-{% if locale.language === 'en' %}
-{% include "partials/contact-us-link.html" %}
-{% else %}
-{% include "partials/form.html" %}
-{% endif %}
+{% endblock %}
 
 {% endblock %}
