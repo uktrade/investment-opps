@@ -154,7 +154,6 @@ function hide() {
 function validateField(field, keepErrors) {
   var required = field.attr('required')
   var formGroup = field.closest('.form-group')
-  // var validationError = formGroup.find('.validation_error')
   debug('Validating field ', field)
   if (!keepErrors) {
     clearErrors(formGroup)
@@ -274,10 +273,9 @@ function clearErrors(formGroup) {
   formGroup.removeClass('has-error')
 }
 
-function submitForm(form, formBody) {
+function submitForm(form) {
 
   info('Submitting form:', form)
-  formLoading()
   var base_url = '/' + document.base_url + '/'
   var postUrl = form.attr('action')
 
@@ -296,71 +294,6 @@ function submitForm(form, formBody) {
         500
     }
   })
-
-  function formLoading() {
-    debug('Show overlay')
-    var body = formBody
-    var overlay = body.find('#loading-overlay')
-    var imageLoad = body.find('#img-load')
-
-    overlay.css({
-      opacity: 0.5,
-      display: 'block',
-    })
-
-    var imageCss = {
-      top: body.outerHeight() / 2
-    }
-    var margin = body.outerWidth() / 2 - (imageLoad.width() / 2)
-
-    if (direction() === 'left') {
-      imageCss.left = margin
-    } else {
-      imageCss.right = margin
-    }
-    imageLoad.css(imageCss)
-
-    overlay.fadeIn()
-
-  }
-}
-
-function wrap(element, length, width) {
-  //wrap into mother div
-  var isMother = $('#mother').length
-  if (!isMother) {
-    element.wrap('<div id="mother" />')
-  }
-  //assign height width and overflow hidden to mother
-  $('#mother').css({
-    width: function () {
-      return width
-    },
-    position: 'relative !important',
-    overflow: 'hidden'
-  })
-  //get total of image sizes and set as width for ul
-  var totalWidth = (length) * width + 5
-  element.css({
-    width: function () {
-      return totalWidth
-    }
-  })
-
-}
-
-function shift(element, amount, animate) {
-  debug('shifting:', element, ' amount:', amount)
-  var margin = 'margin-left'
-  var style = {}
-  style[margin] = amount
-  debug('Margin:', style[margin])
-  if (animate) {
-    element.animate(style, 500)
-  } else {
-    element.css(style)
-  }
-
 }
 
 function isValidEmail(email) {
@@ -382,13 +315,6 @@ function isValidUrl(url) {
     return false
   else
     return true
-}
-
-function direction() {
-  if (document.direction === 'rtl') {
-    return 'right'
-  }
-  return 'left'
 }
 
 function isEmpty(value) {
