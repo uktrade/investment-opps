@@ -2,7 +2,6 @@ module.exports = {
   init: init
 }
 
-require('bootstrap-table')
 var logger = require('./logger')('investment opps')
 var debug = logger.debug
 var error = logger.error
