@@ -130,12 +130,15 @@ function InvestmentOpps(container) {
     regionSelector.change(changeRegion)
     businessFilter.change(function() {
       sendGAFilterEvent('businesses',businessFilter.is(':checked'))
+      filterChanged()
     })
     centresFilter.change(function() {
       sendGAFilterEvent('hubs',centresFilter.is(':checked'))
+      filterChanged()
     })
     zonesFilter.change(function() {
       sendGAFilterEvent('incentives',zonesFilter.is(':checked'))
+      filterChanged()
     })
   }
 
