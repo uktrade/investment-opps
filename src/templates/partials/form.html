@@ -188,9 +188,6 @@
                     {{ labels.form_headquarters.label[locale.code] }}
                   </label>
                   <p class="help-text">
-                    {{ labels.form_use_of_info[locale.code] }}
-                  </p>
-                  <p class="help-text">
                     {{ labels.form_enter_headquarters_help[locale.code] }}
                   </p>
                   <p class="error-help">
@@ -432,8 +429,8 @@
                 </div>
                 <div class="form-group col-md-10">
                   <label for="website"
-                         class="control-label">{{ labels.form_website_nf[locale.code] }}</label>
-                  <p class="error-help">{{ labels.form_enter_website_nf[locale.code] }}</p>
+                         class="control-label">{{ labels.form_website[locale.code] }}</label>
+                  <p class="error-help">{{ labels.form_enter_website[locale.code] }}</p>
                   <input type="text"
                          name="organisation[website]"
                          id="website"
@@ -441,10 +438,10 @@
                          placeholder="" />
                   <input name="english[form_website]"
                          type="hidden"
-                         value="{{ labels.form_website_nf['en_US'] }}">
+                         value="{{ labels.form_website['en_US'] }}">
                   <input name="multilingual[form_website]"
                          type="hidden"
-                         value="{{ labels.form_website_nf[locale.code] }}">
+                         value="{{ labels.form_website[locale.code] }}">
                 </div>
                 <div class="form-group col-md-8">
                   <label for="staff"
