@@ -1,7 +1,5 @@
 var specs = [
-	'./form/form.pageone.spec.js',
-	'./form/form.pagetwo.spec.js',
-	'./form/form.pagethree.spec.js',
+	'./form/form.validations.spec.js',
 	'./form/form.submitform.spec.js'
 ];
 
