@@ -259,10 +259,10 @@ global: true
                                         <input name="organisation[number_of_employees]"
                                                class="dit-radio"
                                                type="radio"
-                                               id="{{o}}"
+                                               id="{{o|slug}}"
                                                value="{{loop.index}}-staff:{{o}}:{{ labels.form_staff_number.options['en_US'][loop.index0] }}"
                                                required="required">
-                                        <label class="dit-not-label" for="{{o}}">{{o}}</label>
+                                        <label class="dit-not-label" for="{{o|slug}}">{{o}}</label>
                                     </div>
                                     {% endfor %}
                                     <input name="english[form_staff_number]"
