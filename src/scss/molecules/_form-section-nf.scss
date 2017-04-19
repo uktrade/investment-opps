@@ -129,7 +129,54 @@
     p {
       margin: 20px 0 0 0;
     }
+  }
 
+  input[type="checkbox"] {
+    display: none;
+  }
+
+  input[type="radio"] {
+    display: none;
+  }
+
+  label {
+    cursor: pointer;
+    line-height: 36px;
+  }
+
+  input[type="checkbox"] + label:before {
+    content: "\2610";
+    display: inline-block;
+    font: 40px sans-serif;
+    height: 35px;
+    width: 35px;
+    margin: -10px 0 0 0;
+    padding: 0;
+    vertical-align: top;
+  }
+  input[type="checkbox"]:checked + label:before {
+    background: #fff;
+    color: $teal;
+    content: "\2611";
+  }
+
+  input[type="radio"] + label:before {
+    content: "\25CB";
+    display: inline-block;
+    font: 55px sans-serif;
+    height: 30px;
+    width: 30px;
+    margin: -18px 5px 0 0;
+    vertical-align: top;
+  }
+  input[type="radio"]:checked + label:before {
+    background: #fff;
+    font: 30px sans-serif;
+    margin: -5px 5px 0 0;
+    height: 30px;
+    width: 30px;
+    color: $teal;
+    content: "\25C9";
   }
 }
 
@@ -220,25 +267,33 @@
   font-size: 16px;
 }
 
-input[type="radio"] {
-  vertical-align: middle;
-  margin: 0 15px 0 7px;
-  transform: scale(2);
-  -moz-transform: scale(2);
-  -ms-transform: scale(2);
-  -webkit-transform: scale(2);
-  -o-transform: scale(2);
+.transform-wrap {
+  -webkit-transform: translateZ(0);
 }
 
-input[type="checkbox"] {
-  vertical-align: middle;
-  margin: 0 15px 0 7px;
-  transform: scale(2);
-  -moz-transform: scale(2);
-  -ms-transform: scale(2);
-  -webkit-transform: scale(2);
-  -o-transform: scale(2);
-}
+//input[type="radio"] {
+//  vertical-align: middle;
+//  height: auto;
+//  width: auto;
+//  margin: 0 15px 0 7px;
+//  transform: scale(2);
+//  -moz-transform: scale(2);
+//  -ms-transform: scale(2);
+//  -webkit-transform: scale(2);
+//  -o-transform: scale(2);
+//}
+//
+//input[type="checkbox"] {
+//  vertical-align: middle;
+//  height: auto;
+//  width: auto;
+//  margin: 0 15px 0 7px;
+//  transform: scale(2);
+//  -moz-transform: scale(2);
+//  -ms-transform: scale(2);
+//  -webkit-transform: scale(2);
+//  -o-transform: scale(2);
+//}
 
 .dit-label {
   font-weight: 500;

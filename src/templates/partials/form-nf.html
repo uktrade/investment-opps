@@ -200,15 +200,16 @@ global: true
                                     <input name="multilingual[form_website]"
                                            type="hidden"
                                            value="{{ labels.form_website[locale.code] }}">
+                                    <input
+                                            type="checkbox"
+                                            id="mailing_list_checkbox"
+                                            name="user[mailing_list]"
+                                            value="true"
+                                    />
                                     <label class="col-md-8 dit-not-label"
-                                           style="padding-left: 0;"
+                                           style="padding: 10px 0 0 0;"
                                            for="mailing_list_checkbox">
-                                        <input
-                                                type="checkbox"
-                                                id="mailing_list_checkbox"
-                                                name="user[mailing_list]"
-                                                value="true"
-                                        /> {{ labels.form_do_not_have_website[locale.code]
+                                        {{ labels.form_do_not_have_website[locale.code]
                                         }}
                                     </label>
                                     <input name="english[form_mailing_list]"
@@ -254,7 +255,7 @@ global: true
                                         {{ labels.form_enter_staff_number[locale.code] }}</p>
                                     <p class="dit-label">{{ labels.form_staff_number.label[locale.code] }}</p>
                                     {% for o in labels.form_staff_number.options[locale.code] %}
-                                    <div class="form-group-mb-0 col-md-8">
+                                    <div class="form-group-mb-0 col-md-8 transform-wrap">
                                         <input name="organisation[number_of_employees]"
                                                class="dit-radio"
                                                type="radio"
