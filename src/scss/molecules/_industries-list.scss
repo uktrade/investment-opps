@@ -50,6 +50,25 @@
           // transform: scale(1.05);
         }
       }
+
+      &:focus {
+        transform: scale(1.05);
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          #{$left}: 0;
+          #{$right}: 0;
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        img {
+          // width: 105%;
+          // transform: scale(1.05);
+        }
+      }
     }
   }
 
