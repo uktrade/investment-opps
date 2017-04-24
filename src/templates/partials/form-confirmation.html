@@ -6,23 +6,24 @@ label: Form content
 global: true
 [/cms-fields]
 -->
-<section class="dit-form-section">
+<section class="dit-form-section-nf">
     <div class="container-fluid no-gutter">
-        <div class="col-md-12 dit-form-section__header-panel">
+        <div class="col-md-12 dit-form-section-nf__header-panel">
             <div class="container">
                 <div class="row">
                     <div class="dit-form-confirmation-section__lead">
-                        <img src="/{{assets}}/media/icons/dit-icon-success.png" alt="Success"
+                        <img src="/{{assets}}/media/icons/dit-icon-success.png"
+                             alt="Success"
                              class="img-responsive center-block">
                         <h3 class="dit-form-section__heading text-center">{{ pageHeader.content.title }}</h3>
                     </div>
                 </div>
                 <div class="row">
-                    <h3 class="col-md-4 col-md-offset-4 text-center dit-form-confirmation-section__list-title">{{ pageHeader.content.contents | safe }}</h3>
+                    <h3 class="col-md-4 col-md-offset-4 text-center dit-form-confirmation-section__list-title">{{ infoBlock.content.contents | safe }}</h3>
                 </div>
                 <div class="row">
                     <div class="dit-form-confirmation-section__list">
-                        {% for l in pageHeader.content.list %}
+                        {% for l in infoBlock.content.list %}
                         <div class="col-md-4">
                             <div class="number-circle">{{ l.number }}</div>
                             <div class="dit-form-confirmation-section__list-text">{{ l.text }}</div>
@@ -32,7 +33,7 @@ global: true
                 </div>
                 <div class="row text-center hidden-xs hidden-sm">
                     <div class="dit-form-confirmation-section__footer">
-                        <a href=/{{base}}/>{{pageHeader.content.linkLabel}}</a>
+                        <a href=/{{base}}/>{{infoBlock.content.linkLabel}}</a>
                     </div>
                 </div>
             </div>
