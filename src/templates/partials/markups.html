@@ -1,5 +1,5 @@
 {% macro section(s, labels, language) %}
-    <section id="{{ s.content.title|slug(language) }}" class="dit-content-section">
+    <section id="{{ s.content.title|slug(language) }}" class="dit-content-section" tabindex="-1">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
         <header>
             <h2>{{ s.content.title }}</h2>
