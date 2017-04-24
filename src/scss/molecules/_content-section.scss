@@ -8,6 +8,10 @@
   border-bottom: 5px solid $red-line-colour;
   overflow: hidden;
 
+  &:focus {
+    outline: $white auto 1px;
+  }
+
   h2 {
     @extend .h1;
     margin: flip-side-values(24px 0 16px 0);
