@@ -14,6 +14,12 @@
     color: $white;
     font-weight: 300;
   }
+
+  &:focus {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
 }
 
 .dit-btn--sm {
@@ -26,6 +32,12 @@
   background-color: $white;
 
   &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+
+  &:focus {
     background: $link-colour;
     color: $white;
     font-weight: 300;
@@ -48,6 +60,11 @@
   background-color: $link-colour;
 
   &:hover {
+    color: $link-colour !important;
+    background: $white;
+  }
+
+  &:focus {
     color: $link-colour !important;
     background: $white;
   }
@@ -94,9 +111,9 @@
     cursor: pointer;
   }
 
-  &:focus {
-    outline: -webkit-focus-ring-color auto 0;
-  }
+  //&:focus {
+  //  outline: -webkit-focus-ring-color auto 0;
+  //}
 }
 
 .dit-btn--call {
@@ -111,6 +128,11 @@
   background-color: $link-colour;
 
   &:hover {
+    background: $white;
+    color: $link-colour !important;
+  }
+
+  &:focus {
     background: $white;
     color: $link-colour !important;
   }
@@ -160,6 +182,11 @@
   background-color: $white;
 
   &:hover {
+    background: $toc-colour;
+    color: $text-colour;
+  }
+
+  &:focus {
     background: $toc-colour;
     color: $text-colour;
   }
