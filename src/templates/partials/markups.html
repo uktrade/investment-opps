@@ -24,7 +24,7 @@
 {% endmacro %}
 
 
-{% macro bullet_list(header, list, base) %}
+{% macro bullet_list(header, list, base, sr_compatible) %}
 
     <!--
     [cms-fields]
@@ -55,6 +55,8 @@
 
     <section class="dit-content-section">
         <div class="row">
+                <div class="visuallyhidden">
+                </div>
             {% if header %}
                 <div class="col-md-10 dit-content-section__lead">
                     <h4 class="dit-content-section__heading">{{ header.content.title }}</h4>
@@ -69,7 +71,7 @@
                             {{ l.content.contents | safe }}
                         </li>
                     {% elif l.content.display == 'nonjs' %}
-                        <li class="dit-big-list__item--home-guide non-js-display">
+                        <li class="dit-big-list__item--home-guide non-js-display" aria-label="{{ sr_compatible }}">
                             <h3><a href="/{{ base }}{{ l.link }}">{{ l.content.title }}</a></h3>
                             {{ l.content.contents | safe }}
                         </li>
