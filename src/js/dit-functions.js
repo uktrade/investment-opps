@@ -175,7 +175,7 @@ function openNav() {
     box = $('#dit-search-overlay')
 
   $('.search-results-block').hide()
-  $('#searchInput').focus()
+  $('#search').focus()
   animateArg[margin] = 0
 
   $(document).keyup(function(e) {
@@ -207,7 +207,7 @@ function closeNav() {
   animateArg[margin] = '100%'
 
   $('body').removeClass('overlay-open')
-  $('#searchInput').val('')
+  $('#search').val('')
   $('#search-options').empty()
 
   box
@@ -240,7 +240,7 @@ function getResults(size, start) {
     box = $('#dit-search-overlay'),
     // URL = $(location).attr('href'),
     searchArea = $('#search-options'),
-    searchInput = $('#searchInput').val().trim(),
+    searchInput = $('#search').val().trim(),
     gateway = process.env.IIGB_SEARCH || 'https://5dle4b7qu3.execute-api.eu-west-1.amazonaws.com/prod',
     country = document.country,
     language = document.language
@@ -323,7 +323,7 @@ function search() {
     getResults(searchResultsSize, 0)
       //   $('.dit-search-spinner').css('z-index', 15)
   }, 500)
-  $('#searchInput').on('input', debouncedSearch)
+  $('#search').on('input', debouncedSearch)
 }
 
 function debounce(func, wait, immediate) {
