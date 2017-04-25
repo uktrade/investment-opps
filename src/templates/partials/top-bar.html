@@ -23,7 +23,8 @@
                data-remote="false"
                class="dit-language-selector">
                 <div class="dit-nav-language">
-                    <div class="dit-nav-language-wrapper">
+                    <div class="dit-nav-language-wrapper" aria-label="{{ labels.choose_language[locale.code] }}">
+                        <span class="visuallyhidden">{{ labels.new_window[locale.code] }}</span>
                         <div class="dit-icon-xs dit-icon-language"></div>
                         <div style="vertical-align: middle"><span class="dit-language">{{locale.language}}</span> - {{locale.countryName}}</div>
                     </div>
