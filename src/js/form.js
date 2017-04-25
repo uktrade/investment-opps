@@ -256,7 +256,6 @@ function prepareISTFormNF(form, formBody) {
 }
 
 
-
 /** OTHER FORMS **/
 function prepareForm(form) {
   var formBody = $('.dit-form-section__body')
@@ -662,6 +661,7 @@ function clearErrorsNF(formGroup) {
 
 function submitFormNF(form) {
 
+  addSpinner(form)
   info('Submitting form:', form)
   var base_url = '/' + document.base_url + '/'
   var postUrl = form.attr('action')
@@ -758,5 +758,16 @@ function onScroll() {
     else {
       currLink.removeClass('active')
     }
+  })
+}
+
+function addSpinner(form) {
+  debug('Adding loading spinner')
+  var submit = form.find('button[type="submit"]')
+  var height = submit.parent().height()
+  submit.css('height', height).addClass('dit-form-submitted-spinner')
+  //on click it will not submit again
+  submit.click(function(){
+    return false
   })
 }
