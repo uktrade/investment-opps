@@ -62,16 +62,13 @@
         </div>
     </div>
     {% if pageHeader.externalVideo %}
-        <div class="modal fade" id="heroVideo" role="dialog" data-backdrop="static" data-keyboard="false">
-            <span class="glyphicon glyphicon-remove dit-remove-icon" id="closeHeroVideo" data-dismiss="modal"></span>
+        <div class="modal fade" id="heroVideo" role="dialog" data-backdrop="static" data-toggle="modal" aria-labelledby="External video" aria-hidden="true" data-keyboard="true" tabindex="-1">
+            <a class="glyphicon glyphicon-remove dit-remove-icon" id="closeHeroVideo" data-dismiss="modal">
+                <span class="visuallyhidden">{{ labels.close_video[locale.code] }}</span>
+            </a>
             <div class="modal-dialog video-wrapper" data-video="{{pageHeader.externalVideo}}"></div>
         </div>
 
    {% endif %}
-    {% if pageHeader.heroVideo %}
-    <video autoplay loop poster="/{{assets}}/media/vid/{{pageHeader.heroVideoImage}}" class="dit-hero__video-bg">
-      <source src="/{{assets}}/media/vid/{{pageHeader.heroVideo}}" type="video/mp4">
-    </video>
-    {% endif %}
 
 </div>
