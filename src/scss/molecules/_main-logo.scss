@@ -44,6 +44,11 @@
     color: $white;
     border-bottom: 1px solid $white;
   }
+
+  &:focus {
+    color: $white;
+    border-bottom: 1px solid $white;
+  }
 }
 
 .dit-logo {
