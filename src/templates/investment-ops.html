@@ -16,17 +16,17 @@
     </div>
 </div>
 
-<section class="dit-toc">
+<div class="dit-toc">
   {% include "partials/breadcrumb.html" %}
-</section>
+</div>
 
 <div class="container">
-    <section class="dit-content-section">
+    <div class="dit-content-section">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
             {{ overview.content.contents | safe }}
         </div>
-    </section>
-    <section class="dit-form-section">
+    </div>
+    <div class="dit-form-section">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
             <h2 class="h1">{{ stayInTouch.content.title }}</h2>
             {{ stayInTouch.content.contents | safe }}
@@ -44,14 +44,14 @@
                           <input name="js" class="js_switch" type="hidden" value="false">
                           <input id="hidden_field" name="language" type="hidden" value="{{locale.language}}">
                           <input id="hidden_field" name="market" type="hidden" value="{{locale.country}}">
-                          <label class="control-label" for="userName">{{ labels.form_full_name[locale.code] }}</label>
+                          <label class="control-label" for="first_name">{{ labels.form_full_name[locale.code] }}</label>
                           <p class="error-help">{{ labels.form_enter_full_name[locale.code] }}</p>
                           <input type="text" name="first_name" id="first_name" required="required"
                                                                              class="form-control"
                                                                              placeholder=""/>
                         </div>
                         <div class="form-group col-md-10">
-                          <label class="control-label" for="userEmail">{{ labels.form_email[locale.code] }}</label>
+                          <label class="control-label" for="email">{{ labels.form_email[locale.code] }}</label>
                           <p class="error-help email_help">{{ labels.form_enter_email[locale.code] }}</p>
                           <p class="validation_error">{{ labels.form_enter_valid_email[locale.code] }}</p>
                           <input type="email" name="email" id="email" required="required"
@@ -76,7 +76,7 @@
                     </div>
               </form>
           </div>
-    </section>
+    </div>
 </div>
 
 {% endblock %}
