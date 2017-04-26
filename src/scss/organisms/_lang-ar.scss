@@ -96,7 +96,9 @@
   }
 
   .dit-nav-language {
-    margin: -30px 0 0 0;
+    @media (max-width: $screen-xs-max) {
+      margin-top: -30px;
+    }
   }
 
   .dit-language-selector-mobile {

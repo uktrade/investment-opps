@@ -13,23 +13,25 @@
         <a href="https://www.gov.uk/" target="_blank">
             <img class="navbar-brand dit-logo" src="/{{assets}}/media/logos/hmg-logo.png" alt="HMG Logo">
         </a>
-        <span class="dit-great-link-container">Part of <a href="https://great.gov.uk/" class="dit-great-link" target="_blank">great.gov.uk</a></span>
+        <span class="dit-great-link-container">Part of <a href="https://great.gov.uk/" class="dit-great-link"
+                                                          target="_blank">great.gov.uk</a></span>
 
 
-        <div class="hidden-xs" id="langsel-collapse-1">
-            <a href="/"
-               data-toggle="modal"
-               data-target="#languageSelector"
-               data-remote="false"
-               class="dit-language-selector">
-                <div class="dit-nav-language">
-                    <div class="dit-nav-language-wrapper">
-                        <div class="dit-icon-xs dit-icon-language"></div>
-                        <div style="vertical-align: middle"><span class="dit-language">{{locale.language}}</span> - {{locale.countryName}}</div>
+        <a href="/"
+           data-toggle="modal"
+           data-target="#languageSelector"
+           data-remote="false"
+           class="dit-language-selector hidden-xs">
+            <div class="dit-nav-language">
+                <div class="dit-nav-language-wrapper" aria-label="{{ labels.choose_language[locale.code] }}">
+                    <span class="visuallyhidden">{{ labels.new_window[locale.code] }}</span>
+                    <div class="dit-icon-xs dit-icon-language"></div>
+                    <div style="vertical-align: middle"><span class="dit-language">{{locale.language}}</span> -
+                        {{locale.countryName}}
                     </div>
                 </div>
-            </a>
-        </div>
+            </div>
+        </a>
     </div>
 </div>
 
