@@ -2,7 +2,7 @@
     <section id="{{ s.content.title|slug(language) }}" class="dit-content-section" tabindex="-1">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
         <header>
-            <h2>{{ s.content.title }}</h2>
+            <h2 class="h1">{{ s.content.title }}</h2>
         </header>
 
         {{ s.content.contents|safe }}
@@ -16,7 +16,7 @@
 {% macro intro(file) %}
     <section>
         <header>
-            <h2>{{ file.content.title }}</h2>
+            <h2 class="h1">{{ file.content.title }}</h2>
         </header>
 
         {{ file.content.contents|safe }}
@@ -97,7 +97,7 @@
 
 
     {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
+        <h2 class="dit-content-section__heading">{{ header }}</h2>
     {% endif %}
     <ul class="dit-ind-side-desc-list check-height">
         {% for tile in list %}
@@ -120,7 +120,7 @@
 
 {% macro tilesWithBottomDescription(header, list, base, assets) %}
     {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
+        <h2 class="dit-content-section__heading">{{ header }}</h2>
     {% endif %}
     <ul class="dit-ind-side-desc-list check-height">
         {% for tile in list %}
@@ -162,7 +162,7 @@
     [/cms-fields]
       -->
     {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
+        <h2 class="dit-content-section__heading">{{ header }}</h2>
     {% endif %}
     <ul class="dit-industries-list">
         {% for tile in list %}
@@ -181,7 +181,7 @@
 {% macro tilesSector(header, list, base, assets) %}
 
     {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
+        <h2 class="dit-content-section__heading">{{ header }}</h2>
     {% endif %}
     <ul class="dit-sectors-list">
         {% for tile in list %}
