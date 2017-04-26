@@ -39,8 +39,7 @@
     <div class="modal-dialog dit-selector-wrapper" role="document">
         <div class="modal-content">
             <div class="modal-body">
-                <p></p>
-                <span class="glyphicon glyphicon-remove dit-close-icon" data-dismiss="modal"></span>
+                <a class="dit-close-icon" data-dismiss="modal"></a>
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
@@ -50,7 +49,7 @@
                                         <a role="button" data-toggle="collapse" data-parent="#accordion"
                                            href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                                             <div>
-                                                <h1>{{ labels.language[locale.code] }}</h1>
+                                                <p class="h1">{{ labels.language[locale.code] }}</p>
                                                 <p>{{ labels.choose_language[locale.code] }}</p>
                                             </div>
                                         </a>
@@ -78,7 +77,7 @@
                                            data-parent="#accordion" href="#collapseTwo" aria-expanded="false"
                                            aria-controls="collapseTwo">
                                             <div>
-                                                <h1>{{ labels.country_region[locale.code] }}</h1>
+                                                <p class="h1">{{ labels.country_region[locale.code] }}</p>
                                                 <p>{{ labels.country_text[locale.code] }}</p>
                                             </div>
                                         </a>
@@ -124,7 +123,7 @@
     <div class="modal-dialog dit-selector-wrapper" role="document">
         <div class="modal-content">
             <div class="modal-body" style="padding: 15px 40px;">
-                <span class="glyphicon glyphicon-remove dit-close-icon" data-dismiss="modal"></span>
+                <a class="dit-close-icon" data-dismiss="modal"></a>
                 {% include "partials/selector.html" %}
             </div>
         </div>
