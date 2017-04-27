@@ -2,13 +2,17 @@
 
 {% block content %}
 
-{% include "partials/header-nav.html" %}
-
 {% include "partials/top-bar.html" %}
+
+{% include "partials/header-nav.html" %}
 
 {% block page_content %}
 {% endblock %}
 
+{% if locale.language === 'en' %}
+{% include "partials/contact-us-link.html" %}
+{% else %}
 {% include "partials/form.html" %}
+{% endif %}
 
 {% endblock %}

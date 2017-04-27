@@ -23,6 +23,10 @@
 {% block page_content %}
 {% endblock %}
 
+{% if locale.language === 'en' %}
+{% include "partials/contact-us-link.html" %}
+{% else %}
 {% include "partials/form.html" %}
+{% endif %}
 
 {% endblock %}

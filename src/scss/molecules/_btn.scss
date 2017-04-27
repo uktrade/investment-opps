@@ -14,6 +14,12 @@
     color: $white;
     font-weight: 300;
   }
+
+  &:focus {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
 }
 
 .dit-btn--sm {
@@ -26,6 +32,12 @@
   background-color: $white;
 
   &:hover {
+    background: $link-colour;
+    color: $white;
+    font-weight: 300;
+  }
+
+  &:focus {
     background: $link-colour;
     color: $white;
     font-weight: 300;
@@ -48,9 +60,13 @@
   background-color: $link-colour;
 
   &:hover {
-    color: $white !important;
-    background-color: $link-colour !important;
-    //font-weight: 700 !important;
+    color: $link-colour !important;
+    background: $white;
+  }
+
+  &:focus {
+    color: $link-colour !important;
+    background: $white;
   }
 
   @media (max-width: $screen-md-max) {
@@ -80,47 +96,6 @@
   }
 }
 
-.dit-btn--call {
-  border: 2px solid $link-colour;
-  border-radius: 3px;
-  font-size: 24px;
-  font-weight: 300;
-  display: inline-block;
-  padding: 2px 12px;
-  margin: flip-side-values(0 0 16px 15px);
-  color: $white !important;
-  background-color: $link-colour;
-
-  &:hover {
-    color: $white !important;
-    background-color: $link-colour !important;
-    //font-weight: 700 !important;
-  }
-
-  @media (max-width: $screen-md-max) {
-    border: 2px solid $link-colour;
-    border-radius: 3px;
-    font-size: 20px;
-    font-weight: 300;
-    display: inline-block;
-    color: $white !important;
-    background-color: $link-colour;
-    padding: 4px 10px;
-    margin: flip-side-values(0 0 16px 15px);
-  }
-
-  @media (max-width: $screen-xs-max) {
-    border: 2px solid $link-colour !important;
-    border-radius: 3px;
-    font-size: 20px;
-    font-weight: 300;
-    display: inline-block;
-    padding: 2px 12px;
-    color: $white !important;
-    background-color: $link-colour;
-    margin: flip-side-values(0 0 16px 15px);
-  }
-}
 
 .dit-btn-home__video {
   border: 3px solid $background-colour;
@@ -137,11 +112,13 @@
     cursor: pointer;
   }
 
-  &:focus {
-    outline: -webkit-focus-ring-color auto 0;
-  }
+  //&:focus {
+  //  outline: -webkit-focus-ring-color auto 0;
+  //}
 }
 
+
+//old format form
 .dit-btn--radio {
   border: 1px solid $tile-border-colour;
   border-radius: 6px;
@@ -156,9 +133,70 @@
     color: $text-colour;
   }
 
+  &:focus {
+    background: $toc-colour;
+    color: $text-colour;
+  }
+
   &.active {
     color: $text-colour;
     background-color: $toc-colour;
     font-weight: 700;
   }
 }
+
+.dit-btn--call {
+  border: 2px solid $link-colour;
+  border-radius: 3px;
+  font-size: 24px;
+  font-weight: 300;
+  display: inline-block;
+  padding: 8px 20px !important;
+  margin: flip-side-values(0 0 16px 15px);
+  color: $white !important;
+  background-color: $link-colour;
+
+  &:hover {
+    background: $white;
+    color: $link-colour !important;
+  }
+
+  &:focus {
+    background: $white;
+    color: $link-colour !important;
+  }
+
+  @media (max-width: $screen-md-max) {
+    border: 2px solid $link-colour;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 300;
+    display: inline-block;
+    color: $white !important;
+    background-color: $link-colour;
+    padding: 4px 20px !important;
+    margin: flip-side-values(0 0 16px 15px);
+  }
+
+  @media (max-width: $screen-xs-max) {
+    border: 2px solid $link-colour !important;
+    border-radius: 3px;
+    font-size: 20px;
+    font-weight: 300;
+    display: inline-block;
+    padding: 4px 20px !important;
+    color: $white !important;
+    background-color: $link-colour;
+    margin: flip-side-values(0 0 16px 15px);
+  }
+
+  &--lg {
+    padding: 12px 30px !important;
+
+    @media (max-width: $screen-sm-max) {
+      padding: 10px 40px !important;
+      margin: 16px 0;
+    }
+  }
+}
+

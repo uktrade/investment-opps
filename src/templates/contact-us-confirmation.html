@@ -6,11 +6,11 @@
 
 {% include "partials/header-nav.html" %}
 
-{% include "partials/jumbotron.html" %}
+{% block page_content %}
+<div class="dit-info">
+    {% include "partials/form-confirmation.html" %}
+</div>
 
-
-{% block content_inner %}
 {% endblock %}
-
 
 {% endblock %}

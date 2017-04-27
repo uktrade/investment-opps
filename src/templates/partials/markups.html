@@ -1,5 +1,5 @@
 {% macro section(s, labels, language) %}
-    <section id="{{ s.content.title|slug(language) }}" class="dit-content-section">
+    <section id="{{ s.content.title|slug(language) }}" class="dit-content-section" tabindex="-1">
         <div class="col-md-10 col-sm-10 dit-main-content__body">
             <header>
                 <h2>{{ s.content.title }}</h2>
@@ -26,32 +26,32 @@
 
 {% macro bullet_list(header, list, base) %}
 
-    <!--
-    [cms-fields]
-      listHeader:
-        type: content
-        label: List title and intro
-        fields:
-          content:
-            type: text
-            label: Content
-            help: Choose content to appear in this section
-            required: true
-      listItems:
-        type: content
-        multiple: true
-        label: Bullet list item
-        fields:
-          content:
-            type: text
-            label: Content
-            help: Choose content to appear in this section
-          link:
-            type: text
-            label: Target link for bullet item
-            help: Enter a link for this bullet list item target
-    [/cms-fields]
-      -->
+<!--
+[cms-fields]
+  listHeader:
+    type: content
+    label: List title and intro
+    fields:
+      content:
+        type: text
+        label: Content
+        help: Choose content to appear in this section
+        required: true
+  listItems:
+    type: content
+    multiple: true
+    label: Bullet list item
+    fields:
+      content:
+        type: text
+        label: Content
+        help: Choose content to appear in this section
+      link:
+        type: text
+        label: Target link for bullet item
+        help: Enter a link for this bullet list item target
+[/cms-fields]
+  -->
 
     <section class="dit-content-section">
         <div class="row">
