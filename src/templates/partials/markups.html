@@ -1,26 +1,28 @@
 {% macro section(s, labels, language) %}
-    <section id="{{ s.content.title|slug(language) }}" class="dit-content-section" tabindex="-1">
-        <div class="col-md-10 col-sm-10 dit-main-content__body">
+<div id="{{ s.content.title|slug(language) }}" class="dit-content-section" tabindex="-1">
+    <div class="col-md-10 col-sm-10 dit-main-content__body">
+        {% if s.content.title %}
         <header>
-            <h2>{{ s.content.title }}</h2>
+            <h2 class="h1">{{ s.content.title }}</h2>
         </header>
+        {% endif %}
 
         {{ s.content.contents|safe }}
 
         <!--<a href="#top" class="dit-back-to-top">{{ labels.back_to_top[locale.code] }} <span class="glyphicon glyphicon-arrow-up"-->
-                                                      <!--aria-hidden="true"></span></a>-->
-            </div>
-    </section>
+        <!--aria-hidden="true"></span></a>-->
+    </div>
+</div>
 {% endmacro %}
 
 {% macro intro(file) %}
-    <section>
-        <header>
-            <h2>{{ file.content.title }}</h2>
-        </header>
+<div>
+    <header>
+        <h2 class="h1">{{ file.content.title }}</h2>
+    </header>
 
-        {{ file.content.contents|safe }}
-    </section>
+    {{ file.content.contents|safe }}
+</div>
 {% endmacro %}
 
 
@@ -53,146 +55,149 @@
 [/cms-fields]
   -->
 
-    <section class="dit-content-section">
-        <div class="row">
-            {% if header %}
-                <div class="col-md-10 dit-content-section__lead">
-                    <h4 class="dit-content-section__heading">{{ header.content.title }}</h4>
-                    {{ header.content.contents | safe }}
-                </div>
-            {% endif %}
-            <ol class="dit-big-list">
-                {% for l in list %}
-                    <li class="dit-big-list__item--home-guide">
-                        <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
-                        {{ l.content.contents | safe }}
-                    </li>
-                {% endfor %}
-            </ol>
+<div class="dit-content-section">
+    <div class="row">
+        {% if header %}
+        <div class="col-md-10 dit-content-section__lead">
+            <h2 class="dit-content-section__heading">{{ header.content.title }}</h2>
+            {{ header.content.contents | safe }}
         </div>
-    </section>
+        {% endif %}
+        <ol class="dit-big-list">
+            {% for l in list %}
+            <li class="dit-big-list__item--home-guide">
+                <h3><a href="/{{base}}{{ l.link }}">{{ l.content.title }}</a></h3>
+                {{ l.content.contents | safe }}
+            </li>
+            {% endfor %}
+        </ol>
+    </div>
+</div>
 {% endmacro %}
 
 {% macro tilesWithSideDescription(header, list, base, assets) %}
-    <!--
-    [cms-fields]
-      tileItems:
-        type: content
-        multiple: true
-        label: Tile items
-        fields:
-          content:
-            type: text
-            label: Content
-            help: Choose content to appear in this section
-          thumbnail:
-            type: text
-            label: Thumbnail image
-            help: Choose thumbnail image for tile
-          link:
-            type: text
-            label: Link target for thumbnail
-    [/cms-fields]
-      -->
+<!--
+[cms-fields]
+  tileItems:
+    type: content
+    multiple: true
+    label: Tile items
+    fields:
+      content:
+        type: text
+        label: Content
+        help: Choose content to appear in this section
+      thumbnail:
+        type: text
+        label: Thumbnail image
+        help: Choose thumbnail image for tile
+      link:
+        type: text
+        label: Link target for thumbnail
+[/cms-fields]
+  -->
 
 
-    {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
-    {% endif %}
-    <ul class="dit-ind-side-desc-list check-height">
-        {% for tile in list %}
-            <li class="col-xs-12 col-md-6">
-                <a class="dit-ind-side-desc-list__item" href="/{{ base }}{{ tile.link }}">
-                    <div class="row">
-                        <div class="col-xs-4 dit-ind-side-desc-list__link-wrap">
-                          <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" alt="{{ tile.content.title }}" class="dit-ind-side-desc-list__image">
-                        </div>
-                        <div class="col-xs-8">
-                            <div class="dit-ind-side-desc-list__title">{{ tile.content.title }}</div>
-                            {{ tile.content.contents | safe }}
-                        </div>
-                    </div>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+{% if header %}
+<h2 class="dit-content-section__heading">{{ header }}</h2>
+{% endif %}
+<ul class="dit-ind-side-desc-list check-height">
+    {% for tile in list %}
+    <li class="col-xs-12 col-md-6">
+        <a class="dit-ind-side-desc-list__item" href="/{{ base }}{{ tile.link }}">
+            <div class="row">
+                <div class="col-xs-4 dit-ind-side-desc-list__link-wrap">
+                    <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" alt="{{ tile.content.title }}"
+                         class="dit-ind-side-desc-list__image">
+                </div>
+                <div class="col-xs-8">
+                    <h3 class="dit-ind-side-desc-list__title">{{ tile.content.title }}</h3>
+                    {{ tile.content.contents | safe }}
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endmacro %}
 
 {% macro tilesWithBottomDescription(header, list, base, assets) %}
-    {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
-    {% endif %}
-    <ul class="dit-ind-side-desc-list check-height">
-        {% for tile in list %}
-            <li class="col-xs-12 col-sm-4">
-                <a class="dit-ind-bottom-desc-list__item" href="/{{ base }}{{ tile.link }}">
-                    <div class="row">
-                        <div class="col-md-12 dit-ind-bottom-desc-list__link-wrap">
-                          <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" alt="{{ tile.content.title }}" class="dit-ind-bottom-desc-list__image">
-                            <div class="dit-ind-bottom-desc-list__title">{{ tile.content.title }}</div>
-                            {{ tile.content.contents | safe }}
-                        </div>
-                    </div>
-                </a>
-            </li>
-        {% endfor %}
-    </ul>
+{% if header %}
+<h2 class="dit-content-section__heading">{{ header }}</h2>
+{% endif %}
+<ul class="dit-ind-side-desc-list check-height">
+    {% for tile in list %}
+    <li class="col-xs-12 col-sm-4">
+        <a class="dit-ind-bottom-desc-list__item" href="/{{ base }}{{ tile.link }}">
+            <div class="row">
+                <div class="col-md-12 dit-ind-bottom-desc-list__link-wrap">
+                    <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" alt="{{ tile.content.title }}"
+                         class="dit-ind-bottom-desc-list__image">
+                    <h3 class="dit-ind-bottom-desc-list__title">{{ tile.content.title }}</h3>
+                    {{ tile.content.contents | safe }}
+                </div>
+            </div>
+        </a>
+    </li>
+    {% endfor %}
+</ul>
 {% endmacro %}
 
 {% macro tilesIndustry(header, list, base, assets) %}
 
-    <!--
-    [cms-fields]
-      tileItems:
-        type: content
-        multiple: true
-        label: Tile items
-        fields:
-          content:
-            type: text
-            label: Content
-            help: Choose content to appear in this section
-          thumbnail:
-            type: text
-            label: Thumbnail image
-            help: Choose thumbnail image for tile
-          link:
-            type: text
-            label: Link target for thumbnail
-    [/cms-fields]
-      -->
-    {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
-    {% endif %}
-    <ul class="dit-industries-list">
-        {% for tile in list %}
-            <li class="dit-industries-list__item col-xs-6 col-md-4">
-                <div class="dit-industries-list__link-wrap">
-                    <a href="/{{ base }}{{ tile.link }}">
-                      <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" alt="{{ tile.content.title }}" class="dit-industries-list__image">
-                        <span class="dit-industries-list__text">{{ tile.content.title }}</span>
-                    </a>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
+<!--
+[cms-fields]
+  tileItems:
+    type: content
+    multiple: true
+    label: Tile items
+    fields:
+      content:
+        type: text
+        label: Content
+        help: Choose content to appear in this section
+      thumbnail:
+        type: text
+        label: Thumbnail image
+        help: Choose thumbnail image for tile
+      link:
+        type: text
+        label: Link target for thumbnail
+[/cms-fields]
+  -->
+{% if header %}
+<h2 class="dit-content-section__heading">{{ header }}</h2>
+{% endif %}
+<ul class="dit-industries-list">
+    {% for tile in list %}
+    <li class="dit-industries-list__item col-xs-6 col-md-4">
+        <div class="dit-industries-list__link-wrap">
+            <a href="/{{ base }}{{ tile.link }}">
+                <img src="/{{assets}}/media/thumbnail-4-3/{{ tile.thumbnail }}" alt="{{ tile.content.title }}"
+                     class="dit-industries-list__image">
+                <h3 class="dit-industries-list__text">{{ tile.content.title }}</h3>
+            </a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 {% endmacro %}
 
 {% macro tilesSector(header, list, base, assets) %}
 
-    {% if header %}
-        <h4 class="dit-content-section__heading">{{ header }}</h4>
-    {% endif %}
-    <ul class="dit-sectors-list">
-        {% for tile in list %}
-            <li class="dit-sectors-list__item col-xs-6 col-md-3">
-                <div class="dit-sectors-list__link-wrap">
-                    <a href="/{{ base }}{{ tile.link }}">
-                      <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" alt="" class="dit-sectors-list__image">
-                        <span class="dit-sectors-list__text">{{ tile.content.title }}</span>
-                    </a>
-                </div>
-            </li>
-        {% endfor %}
-    </ul>
+{% if header %}
+<h2 class="dit-content-section__heading">{{ header }}</h2>
+{% endif %}
+<ul class="dit-sectors-list">
+    {% for tile in list %}
+    <li class="dit-sectors-list__item col-xs-6 col-md-3">
+        <div class="dit-sectors-list__link-wrap">
+            <a href="/{{ base }}{{ tile.link }}">
+                <img src="/{{assets}}/media/thumbnail-4-4/{{ tile.thumbnail }}" alt="" class="dit-sectors-list__image">
+                <h3 class="dit-sectors-list__text">{{ tile.content.title }}</h3>
+            </a>
+        </div>
+    </li>
+    {% endfor %}
+</ul>
 {% endmacro %}

@@ -1,4 +1,4 @@
-<section class="dit-form-section col-md-8">
+<div class="dit-form-section col-md-8">
     <div class="col-md-12" id="formSuccess" tabindex="1">
         <div class="grid-row">
             <div class="column-two-thirds">
@@ -65,7 +65,7 @@
                                 value="{{ labels.form_email[locale.code] }}"> -->
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label" for="userFeedback">{{ labels.feedback_feedback[locale.code] }}</label>
+                                <label class="control-label" for="comment">{{ labels.feedback_feedback[locale.code] }}</label>
                                 <textarea class="form-control" name="user[feedback]" rows="10" id="comment" placeholder="{{ labels.report_problem_placeholder[locale.code] }}"></textarea>
                                 <input name="js" class="js_switch" type="hidden" value="false">
                                 <!--                                 <input name="english[form_phone]" type="hidden" value="{{ labels.form_phone['en_US'] }}">
@@ -85,4 +85,4 @@
             </div>
         </form>
     </div>
-</section>
+</div>

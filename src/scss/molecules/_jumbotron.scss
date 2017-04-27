@@ -79,11 +79,15 @@
 
   .dit-remove-icon {
     position: absolute;
-    top: 25px;
+    top: 0;
     #{$right}: 60px;
-    font-size: 36px;
     cursor: pointer;
-    -webkit-text-stroke: 3px #000;
+
+    &:before {
+      content: '\00d7';
+      font-size: 60px;
+      font-weight: 700;
+    }
 
     @media (max-width: $screen-xs-max) {
       #{$right}: 16px;

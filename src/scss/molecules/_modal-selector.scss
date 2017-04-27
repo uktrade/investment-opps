@@ -94,7 +94,13 @@
 }
 
 .dit-close-icon {
-  margin-bottom: 12px;
   float: #{$right};
   cursor: pointer;
+  color: $text-colour;
+
+  &:before {
+    content: '\00d7';
+    font-size: 40px;
+    font-weight: 700;
+  }
 }

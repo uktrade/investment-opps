@@ -312,7 +312,7 @@ function jsSearch() {
 
   searchButton.click(function(e) {
     e.preventDefault()
-    searchButton.removeAttr('href')
+    searchButton.attr('href', '/')
     openNav()
   })
 }
