@@ -9,15 +9,15 @@ module.exports = function (container) {
     containerChildren = $(container).children()
 
   $(containerChildren).each(function () {
-    $el = $(this)
+    $el = $(this).children()
     $($el).height('auto')
     topPosition = $el.parent().position().top
 
     if (currentRowStart != topPosition) {
-      for (currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
+      for (var currentDiv = 0; currentDiv < rowDivs.length; currentDiv++) {
         rowDivs[currentDiv].height(currentTallest)
       }
-      rowDivs.length = 0; // empty the array
+      rowDivs.length = 0 // empty the array
       currentRowStart = topPosition
       currentTallest = $el.height()
       rowDivs.push($el)
