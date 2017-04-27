@@ -16,6 +16,12 @@
     overflow: hidden;
     color: $text-colour;
 
+    h3 {
+      padding: 16px 0 8px;
+      font-weight: 700;
+      margin: 0;
+    }
+
     &:hover {
       background-color: $toc-colour;
       border: 1px solid $link-colour;
@@ -26,7 +32,6 @@
   &__image {
     width: 100%;
     height: auto;
-    //border-radius: 10px;
   }
 
   &__title {
@@ -64,6 +69,12 @@
     overflow: hidden;
     color: $text-colour;
 
+    h3 {
+      padding: 16px 0 8px;
+      font-weight: 700;
+      margin: 0;
+    }
+
     &:hover {
       background-color: $toc-colour;
       border: 1px solid $link-colour;
@@ -74,13 +85,10 @@
   &__image {
     width: 100%;
     height: auto;
-    //border-radius: 10px;
   }
 
   &__title {
-    padding: 16px 0 8px;
-    font-size: 22px;
-    font-weight: 700;
+
   }
 
   &__text {

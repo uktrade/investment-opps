@@ -6,7 +6,7 @@
 {% include "partials/jumbotron-short.html" %}
 
 <div class="container">
-    <section class="dit-industries-tiles-landing">
+    <div class="dit-industries-tiles-landing">
         <div class="row">
             <div class="col-md-12 margin-top--4">
                 <!--<h2 class="dit-industries-tiles-landing__heading">{{ labels.industry_overviews[locale.code] }}</h2>-->
@@ -14,9 +14,9 @@
                 {{ markups.tilesIndustry(list = tileItems, base = base, assets = assets ) }}
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="dit-industries-tiles-landing">
+    <div class="dit-industries-tiles-landing">
         <div class="row">
             <div class="col-md-12 margin-top--4">
                 <!--<h2 class="dit-industries-tiles-landing__heading">{{ labels.industries[locale.code] }}</h2>-->
@@ -47,7 +47,7 @@
                 {{ markups.tilesSector(list = subTileItems, base = base, assets = assets ) }}
             </div>
         </div>
-    </section>
+    </div>
 </div>
 
 {% endblock %}

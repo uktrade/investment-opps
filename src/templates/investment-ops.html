@@ -3,25 +3,11 @@
 {% block content %}
     {% include "partials/top-bar.html" %}
     {% include "partials/header-nav.html" %}
-    {#    <div class="jumbotron--auto">#}
-    {#        <div class="container">#}
-    {#            <div class="dit-hero__content">#}
-    {#                <div class="row">#}
-    {#                    <div class="col-sm-10 col-md-10">#}
-    {#                        <h1>{{ overview.content.title }}</h1>#}
-    {#                    </div>#}
-    {#                </div>#}
-    {#            </div>#}
-    {#        </div>#}
-    {#    </div>#}
-    {#    <section class="dit-toc">#}
-    {#        {% include "partials/breadcrumb.html" %}#}
-    {#    </section>#}
     <div id="investment-opps-container">
         <div class="alpha-legend visible-xs">
           <span>ALPHA</span>{{ labels.investment_opts_alpha_before[locale.code] }} <a href="mailto:projectaccess1@digital.trade.gov.uk?subject=Investment Opportunities Feedback">{{ labels.investment_opts_alpha_feedback[locale.code] }}</a> {{ labels.investment_opts_alpha_after[locale.code] }}
         </div>
-        <section id="sidebar" class="dit-iopps-sidebar col-sm-3">
+        <div id="sidebar" class="dit-iopps-sidebar col-sm-3">
             <div class="row setup-content" id="step-1">
                 <div class="dit-iopps-sidebar__body col-sm-12">
                     <div id="choose-industry">
@@ -93,7 +79,7 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
         <section id="sidebar-details" class="dit-iopps-sidebar col-sm-3">
             <div class="row setup-content"
