@@ -1,6 +1,6 @@
 {
   "name": "iigb-website",
-  "version": "1.7.2",
+  "version": "1.10.0",
   "engines": {
     "node": "5.6.0"
   },
@@ -10,24 +10,22 @@
     "jquery.autocomplete": "./src/js/jquery.autocomplete.min.js"
   },
   "config": {
-    "debug": "website-builder,metalsmith-page-builder,'$DEBUG'",
-    "content_base": "node_modules",
-    "cms_branch": "master",
-    "develop": false
+    "debug": "metalsmith-page-builder",
+    "cms_branch": "develop"
   },
   "scripts": {
-    "start": "npm run build && node lib/server.js",
-    "dev": "./bin/init-dev.sh && nodemon --watch src/templates -e html lib/server.js",
-    "clean": "website-builder clean",
-    "build": "npm run clean && npm run build-pages && npm run assets && npm run js && npm run media",
-    "build-dev": "npm config set iigb-website:content_base . && npm config set iigb-website:develop true  && npm run build",
-    "build-pages": "DEBUG=$npm_package_config_debug website-builder build --layouts src/templates --content $npm_package_config_content_base/iigb-beta-content/content --structure $npm_package_config_content_base/iigb-beta-structure/structure",
-    "assets": "./bin/build-assets",
-    "js": "./bin/build-js",
-    "media": "website-builder -t build/assets/${IIGB_BUILD}/media assets --assets $npm_package_config_content_base/iigb-beta-content/media",
-    "predeploy": "npm install && npm run postinstall && npm test && npm run build",
-    "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/invalidate-cache.sh && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/",
-    "test": "website-builder test",
+    "dev": "npm run clean && npm run build-dev && nodemon -e html --watch src/templates lib/server.js",
+    "start": "export IIGB_BUILD=dev && npm run clean && npm run build && node lib/server.js",
+    "clean": "rimraf build && mkdirp build",
+    "build": "npm run html && npm run sass && npm run js && npm run assets",
+    "build-dev": "export DIT_ENV='development' && npm run assets && { npm run sass & npm run js & npm run html; }",
+    "html": "DEBUG=\"$npm_package_config_debug, $DEBUG\" node ./lib/build-pages.js",
+    "sass": "./lib/build-sass.sh",
+    "js": "./lib/build-js.sh",
+    "assets": "./lib/build-assets.sh",
+    "predeploy": "npm install && npm run postinstall && npm run build && node lib/build-redirect-rules.js",
+    "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/uploadRedirects.sh s3-redirects.json && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/ ",
+    "test": "node ./lib/run-tests.js",
     "browser-test-full": "node_modules/.bin/wdio conf/parallel.conf.js",
     "browser-test-single": "node_modules/.bin/wdio conf/single.conf.js",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
@@ -47,15 +45,26 @@
   },
   "devDependencies": {
     "browserify": "^13.3.0",
+    "envify": "^4.0.0",
     "express": "^4.14.0",
     "iigb-aws-helpers": "uktrade/iigb-aws-helpers",
     "iigb-beta-content": "uktrade/iigb-beta-content",
     "iigb-cms-tags": "uktrade/iigb-cms-tags",
+    "jasmine": "^2.5.3",
+    "jasmine-console-reporter": "^1.2.7",
+    "metalsmith": "^2.3.0",
+    "metalsmith-html-minifier": "^2.2.0",
+    "metalsmith-layouts": "^1.8.0",
+    "metalsmith-markdown": "^0.2.1",
+    "metalsmith-page-builder": "github:uktrade/metalsmith-page-builder",
+    "mkdirp": "^0.5.1",
+    "node-sass": "^4.5.0",
     "nodemon": "^1.11.0",
     "nunjucks": "^3.0.0",
+    "nunjucks-date": "^1.2.0",
+    "rimraf": "^2.6.1",
     "uglify-js": "^2.7.5",
     "underscore": "^1.8.3",
-    "watchify": "^3.8.0",
-    "website-builder": "uktrade/website-builder"
+    "watchify": "^3.8.0"
   }
 }
