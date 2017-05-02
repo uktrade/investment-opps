@@ -18,10 +18,6 @@
       padding: 0;
     }
 
-    a.dit-btn--contact {
-      padding: 2px 12px;
-    }
-
     &.active {
       > a {
         background-color: $white !important;
@@ -35,9 +31,26 @@
   }
 
   > li > a {
-    //display: inline-block;
+    color: $text-colour !important;
     font-size: 16px;
     padding: 4px 0;
+
+    //hack to make it work. Cascading not working
+    &.dit-btn--contact {
+      padding: 2px 12px;
+      color: $white !important;
+
+
+      &:hover {
+        color: $link-colour !important;
+        background: $white;
+      }
+
+      &:focus {
+        color: $link-colour !important;
+        background: $white;
+      }
+    }
   }
 
   @media (max-width: $screen-md-max) {

@@ -26,6 +26,8 @@
     "predeploy": "npm install && npm run postinstall && npm run build && node lib/build-redirect-rules.js",
     "deploy": "node_modules/iigb-aws-helpers/deploy.sh && node_modules/iigb-aws-helpers/uploadRedirects.sh s3-redirects.json && node node_modules/iigb-aws-helpers/refreshSingleSearch.js build/ ",
     "test": "node ./lib/run-tests.js",
+    "browser-test-full": "node_modules/.bin/wdio conf/parallel.conf.js",
+    "browser-test-single": "node_modules/.bin/wdio conf/single.conf.js",
     "postinstall": "npm install uktrade/iigb-beta-structure#\"$npm_package_config_cms_branch\"",
     "update-content": "npm install uktrade/iigb-beta-content",
     "release": "node_modules/iigb-aws-helpers/release.sh",
@@ -34,6 +36,9 @@
   "dependencies": {
     "d3": "^4.7.1",
     "fs": "0.0.1-security",
+    "async": "^2.1.5",
+    "bootstrap": "^3.3.7",
+    "chai": "^3.5.0",
     "html5shiv": "^3.7.3",
     "http-auth": "^3.1.3",
     "jquery": "^3.1.1",
@@ -41,6 +46,8 @@
     "selectivizr": "^1.0.3",
     "taffydb": "^2.7.3",
     "topojson": "^2.2.0"
+    "wdio-mocha-framework": "^0.5.8",
+    "webdriverio": "^4.6.2"
   },
   "devDependencies": {
     "browserify": "^13.3.0",
