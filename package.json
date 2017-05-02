@@ -45,7 +45,7 @@
     "respond.js": "^1.4.2",
     "selectivizr": "^1.0.3",
     "taffydb": "^2.7.3",
-    "topojson": "^2.2.0"
+    "topojson": "^2.2.0",
     "wdio-mocha-framework": "^0.5.8",
     "webdriverio": "^4.6.2"
   },
