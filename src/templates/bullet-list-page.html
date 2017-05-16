@@ -10,7 +10,8 @@
 {% include "partials/jumbotron-short.html" %}
 
 <div class="container">
-    {{ markups.bullet_list(list = listItems, base = base) }}
+
+    {{ markups.bullet_list(list = listItems, base = base , sr_compatible = labels.screen_reader_compatible[locale.code])}}
 </div>
 
 {% if locale.language === 'en' %}

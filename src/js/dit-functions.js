@@ -64,6 +64,7 @@ function onLoaded() {
     jsEnhanceExternalLinks()
     showJsEnhancements()
     ioppsOrderCard()
+    srOptions()
     modal($)
     collapse($)
   } catch (e) {
@@ -408,6 +409,12 @@ function ioppsOrderCard() {
   $('body').find('.js-display').detach().insertBefore($firstElem)
 }
 
+function srOptions(){
+$('.non-js-display').each(function(){
+  $('.visuallyhidden').append($(this));
+  $(this).css('display', 'block').css('height', '1px');
+  })
+}
 
 
 //Bootstrap v3.3.7 (http://getbootstrap.com) functions
