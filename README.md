@@ -1,5 +1,5 @@
 
-#Investment Opportunities Alpha
+# Investment Opportunities Alpha
 
 ### About this application
 
