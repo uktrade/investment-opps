@@ -1,6 +1,5 @@
 
-IIGB beta website
-=====================
+#Investment Opportunities Alpha
 
 ### About this application
 
@@ -8,11 +7,7 @@ This application is written using the [Node.js](https://nodejs.org/en/) JavaScri
 
 ### The purpose
 
-This application pulls together the modules which make up invest.gov.uk:
-
-- IIGB-beta-structure
-- IIGB-beta-content
-- The website layout can be found within the src folder in this project.
+The aim of this applicaiton is to provide a tool within the iigb website that will allow users to view data about business activity across the UK and compare the different regions.
 
 ### Prerequisites
 
@@ -33,9 +28,9 @@ In order to run the tool locally in development you'll need the following :
 Run the following from the command line to download the repository and change into the directory:
 
 ```bash
-git clone git@github.com:uktrade/iigb-beta-website.git
+git clone git@github.com:uktrade/investment-opps.git
 
-cd iigb-beta-website
+cd investment-opps
 ```
 
 **Running the development server**
@@ -52,8 +47,7 @@ To run the server type the following command in your terminal
 npm run dev
 ```
 
-*Note:* Upon running the development server for the first time, [iigb-beta-content](https://github.com/uktrade/iigb-beta-content) and [iigb-beta-structure](https://github.com/uktrade/iigb-beta-structure) repositories will be cloned into project's root directory for easier development requiring changes on structure and content. 
-
+*Note:*  
 Content and structure changes are ignored in this repoository, changes and updates must be managed seperately in these folders using `git`. Make sure to push changes and pull updates for structure and content.
 
 Changes made to layout via the src folder are reflected automatically when dev server is running.
@@ -80,27 +74,6 @@ The following prefixes are used for special branches:
 
 [http://danielkummer.github.io/git-flow-cheatsheet](http://danielkummer.github.io/git-flow-cheatsheet/)
 
-### Deployment & Release
+### Deployment
 
-`develop` branch is continuously deployed to [staging environment](https://staging.invest.great.gov.uk/) for QA purposes. All new features are available on staging soon after the pull request is approved by a team member and feature is finished.
-
-**Approve a pull request**
-To approve a team member's pull request for a feature or hotfix please finish the feature using a git flow tool of your choice or apply [git flow finish](http://danielkummer.github.io/git-flow-cheatsheet/) feature steps manually using `git` rather than merging on Github to ensure cleanup and necessary branch changes.
-
-**Release**
-
-To take a cut for releasing from `develop` follow [git flow steps](http://danielkummer.github.io/git-flow-cheatsheet/) to create a release branch with intended release version name.
-
-**Deployment**
-
-A release that should be deployed as [invest.great.gov.uk](https://invest.great.gov.uk/) must be tagged as `stable`; continous integration tool in use should be watching this tag for changes to deploy production environment. 
-
-Any version can be marked as stable to be deployed as [invest.great.gov.uk](https://invest.great.gov.uk/).
-
-Use following commands to mark a release for deployment.
-
-```bash
-git tag -f stable v1.1.0
-
-git push --tags -f
-```
+The current version of this project is deployed to a second staging environment [staging2.invest.great.gov.uk](https://staging2.invest.great.gov.uk).
